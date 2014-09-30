@@ -1,5 +1,13 @@
 package bagage;
 
+import bagage.database.DatabaseHelper;
+import java.sql.Connection;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
 
 /**
  * The MIT License (MIT)
@@ -29,13 +37,27 @@ package bagage;
  *
  * @author Tijme Gommers
  */
-public class MainActivity {
+public class MainActivity extends Application {
+    
+    public static Connection oDatabase = new DatabaseHelper().getConnection();
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("/bagage/views/users/Login.fxml"));
+        Scene scene = new Scene(root);
+        
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Login");
+        primaryStage.setResizable(false);
+        primaryStage.show();
+    }
     
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-     
+    
+        launch(args);
     }
     
 }
