@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="bagage.controllers.LoginController">
+    <center>
+        <GridPane alignment="TOP_CENTER" hgap="8" vgap="8">
+            <children>
+                
+                <ImageView id="boxImage" fitHeight="150.0" fitWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="0">    
+                    <image>
+                       <Image url="@/resources/logo_red.png" />
+                    </image>
+                    <GridPane.margin>
+                        <Insets bottom="10.0" left="20.0" right="20.0" top="80.0" />
+                    </GridPane.margin>
+                </ImageView>
+                
+                <Label fx:id="error" alignment="CENTER_LEFT" maxWidth="60.0" minWidth="200.0" text="" textAlignment="RIGHT" textFill="#FF0000" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                
+                <Label alignment="CENTER_RIGHT" maxWidth="60.0" minWidth="60.0" text="" textAlignment="RIGHT" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+
+                <Label alignment="CENTER_LEFT" maxWidth="60.0" minWidth="60.0" text="Username" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <TextField fx:id="username" onAction="#login" onKeyPressed="#onKeyPress" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+                <Label alignment="CENTER_LEFT" maxWidth="60.0" minWidth="60.0" text="Password" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                <PasswordField fx:id="password" onAction="#login" onKeyPressed="#onKeyPress" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+                <Button onAction="#login" text="Sign In" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+                    
+            </children>
+        </GridPane>
+    </center>
+</BorderPane>

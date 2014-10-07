@@ -1,50 +1,115 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2014 FastenYourSeatbelts
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *
  */
-
 package bagage.database.models;
 
+import java.util.HashMap;
+
 /**
+ * User Model
  *
+ * A class that maps the users table
+ *
+ * @package bagage.database.models
  * @author Tijme Gommers
  */
-	
-public class UserModel  {
+public class UserModel extends Model {
     
-    private int id;
-    private String email;
-    private String password;
-  
-    public UserModel(int id, String name, String password) {
-        this.id = id;
-        this.email = name;
-        this.password = password;
+    private HashMap<String, String> rowData = new HashMap<>();
+
+    /**
+     * Return the current row data
+     * 
+     * @return
+     */
+    @Override
+    protected HashMap<String, String> getRowData() {
+        return rowData;
     }
-    
+
+    /**
+     * Set the current row data
+     * 
+     * @param rowData
+     */
+    @Override
+    protected void setRowData(HashMap<String, String> rowData) {
+        this.rowData = rowData;
+    }
+   
+    /**
+     * Return the id of the current row
+     * 
+     * @return 
+     */
     public int getId() {
-        return id;
+        return Integer.parseInt(rowData.get("id"));
     }
-    
-    public void setId(int id) {
-        this.id = id;
+   
+    /**
+     * Return the first name of the current row
+     * 
+     * @return 
+     */
+    public String getFirstname() {
+        return rowData.get("firstname");
     }
-    
-    public void setEmail(String email) {
-        this.email = email;
+   
+    /**
+     * Return the middle name of the current row
+     * 
+     * @return 
+     */
+    public String getMiddlename() {
+        return rowData.get("middlename");
     }
-    
+   
+    /**
+     * Return the last name of the current row
+     * 
+     * @return 
+     */
+    public String getLastname() {
+        return rowData.get("lastname");
+    }
+   
+    /**
+     * Return the email of the current row
+     * 
+     * @return 
+     */
     public String getEmail() {
-        return email;
+        return rowData.get("email");
     }
-    
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    
+   
+    /**
+     * Return the (hash) password of the current row
+     * 
+     * @return 
+     */
     public String getPassword() {
-        return password;
+        return rowData.get("password");
     }
     
 }

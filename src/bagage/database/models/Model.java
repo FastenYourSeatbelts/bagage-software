@@ -22,21 +22,34 @@
  * SOFTWARE.
  *
  */
-package bagage.database;
+package bagage.database.models;
+
+import java.util.HashMap;
 
 /**
- * DatabaseConfiguration
+ * Model
  *
- * Containing all the settings to create
- * a database connection
+ * A super class for all the models containing
+ * default model functions
  *
- * @package bagage.database
+ * @package bagage.database.models
  * @author Tijme Gommers
  */
-public class DatabaseConfiguration {
+abstract public class Model {
+ 
+    abstract protected HashMap<String, String> getRowData();
+    abstract protected void setRowData(HashMap<String, String> rowData);
     
-    public static final String name = "jdbc:mysql://localhost/bagage-software";
-    public static final String user = "root";
-    public static final String pass = "";
+    /**
+     * Set data for the current model
+     * 
+     * @param key the key or index you want to set
+     * @param value the value for the key or index
+     */
+    public void set(String key, String value) {
+        HashMap<String, String> rowData = getRowData();
+        rowData.put(key, value);
+        setRowData(rowData);
+    }
     
 }

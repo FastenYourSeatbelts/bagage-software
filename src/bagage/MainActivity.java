@@ -1,14 +1,3 @@
-package bagage;
-
-import bagage.database.DatabaseHelper;
-import java.sql.Connection;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-
-
 /**
  * The MIT License (MIT)
  *
@@ -31,32 +20,52 @@ import javafx.stage.Stage;
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
-**/
+ */
+package bagage;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
 /**
+ * MainActivity
  *
+ * Main activity for the application
+ *
+ * @package bagage
  * @author Tijme Gommers
  */
 public class MainActivity extends Application {
-    
-    public static Connection oDatabase = new DatabaseHelper().getConnection();
 
+    /**
+     * Called on application run
+     * 
+     * @param primaryStage
+     * @throws Exception 
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/bagage/views/users/Login.fxml"));
-        Scene scene = new Scene(root);
+        primaryStage.getIcons().add(new Image("/resources/logo_red.png"));
         
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("Login");
-        primaryStage.setResizable(false);
+        Parent root = FXMLLoader.load(getClass().getResource("/bagage/views/Login.fxml"));
+        Scene loginScene = new Scene(root);
+    
+        primaryStage.setScene(loginScene);
+        primaryStage.setTitle("Corendon Bagage Systeem");
+        primaryStage.setMinHeight(600);
+        primaryStage.setMinWidth(900);
         primaryStage.show();
     }
     
     /**
+     * Called on application run
+     * 
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-    
         launch(args);
     }
     

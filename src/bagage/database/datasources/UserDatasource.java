@@ -1,50 +1,82 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2014 FastenYourSeatbelts
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *
  */
-
 package bagage.database.datasources;
 
-import bagage.MainActivity;
+import bagage.database.models.Model;
 import bagage.database.models.UserModel;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
+ * UserDatasource
  *
+ * This class contains all user specific
+ * queries
+ *
+ * @package bagage.database.data sources
  * @author Tijme Gommers
  */
-public class UserDatasource {
+public class UserDatasource extends Datasource {
     
-    public static final String TABLE_NAME = "users";
+    private final String sTable = "users";
     
-    public static final String TABLE_COLUMN_ID = "id";
-    public static final String TABLE_COLUMN_EMAIL = "email";
-    public static final String TABLE_COLUMN_PASSWORD = "password";
-    
-    public UserModel findById(int id) {
-        try {
-            Statement stmt = MainActivity.oDatabase.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            ResultSet rs = stmt.executeQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + TABLE_COLUMN_ID + " = " + id);
-            
-            rs.first();
-            
-            int row_id = rs.getInt(TABLE_COLUMN_ID);
-            String row_email = rs.getString(TABLE_COLUMN_EMAIL);
-            String row_password = rs.getString(TABLE_COLUMN_PASSWORD);
-            
-            UserModel user = new UserModel(row_id, row_email, row_password);
-            
-            return user;
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDatasource.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        return null;
+    private final String[] sColumns = {
+        "id", 
+        "firstname",
+        "middlename",
+        "lastname",
+        "email", 
+        "password"
+    };
+
+    /**
+     * Return the columns of the current data source
+     * 
+     * @return String[] sColumns
+     */
+    @Override
+    public String[] getColumns() {
+        return sColumns;
+    }
+
+    /**
+     * Return the table name of the current data source
+     * 
+     * @return String sTable
+     */
+    @Override
+    public String getTable() {
+        return sTable;
+    }
+
+    /**
+     * Return the model of the current data source
+     * 
+     * @return new Model
+     */
+    @Override
+    public Model getModel() {
+        return new UserModel();
     }
     
 }
