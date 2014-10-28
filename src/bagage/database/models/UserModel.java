@@ -24,8 +24,6 @@
  */
 package bagage.database.models;
 
-import java.util.HashMap;
-
 /**
  * User Model
  *
@@ -35,36 +33,22 @@ import java.util.HashMap;
  * @author Tijme Gommers
  */
 public class UserModel extends Model {
+
+    public UserModel() {
+        
+    }
     
-    private HashMap<String, String> rowData = new HashMap<>();
-
-    /**
-     * Return the current row data
-     * 
-     * @return
-     */
-    @Override
-    protected HashMap<String, String> getRowData() {
-        return rowData;
+    public UserModel(int id) {
+        super(id);
+    }
+    
+    public UserModel(String where, String... params) {
+        super(where, params);
     }
 
-    /**
-     * Set the current row data
-     * 
-     * @param rowData
-     */
     @Override
-    protected void setRowData(HashMap<String, String> rowData) {
-        this.rowData = rowData;
-    }
-   
-    /**
-     * Return the id of the current row
-     * 
-     * @return 
-     */
-    public int getId() {
-        return Integer.parseInt(rowData.get("id"));
+    protected String getTable() {
+        return "users";
     }
    
     /**
@@ -73,7 +57,16 @@ public class UserModel extends Model {
      * @return 
      */
     public String getFirstname() {
-        return rowData.get("firstname");
+        return row.get("firstname");
+    }
+   
+    /**
+     * Set the first name of the current row
+     * 
+     * @return 
+     */
+    public void setFirstname(String firstname) {
+        row.put("firstname", firstname);
     }
    
     /**
@@ -82,7 +75,16 @@ public class UserModel extends Model {
      * @return 
      */
     public String getMiddlename() {
-        return rowData.get("middlename");
+        return row.get("middlename");
+    }
+   
+    /**
+     * Set the middle name of the current row
+     * 
+     * @return 
+     */
+    public void setMiddlename(String middlename) {
+        row.put("middlename", middlename);
     }
    
     /**
@@ -91,7 +93,16 @@ public class UserModel extends Model {
      * @return 
      */
     public String getLastname() {
-        return rowData.get("lastname");
+        return row.get("lastname");
+    }
+   
+    /**
+     * Set the last name of the current row
+     * 
+     * @return 
+     */
+    public void setLastname(String lastname) {
+        row.put("lastname", lastname);
     }
    
     /**
@@ -100,7 +111,16 @@ public class UserModel extends Model {
      * @return 
      */
     public String getEmail() {
-        return rowData.get("email");
+        return row.get("email");
+    }
+   
+    /**
+     * Set the email of the current row
+     * 
+     * @return 
+     */
+    public void setEmail(String email) {
+        row.put("email", email);
     }
    
     /**
@@ -109,7 +129,16 @@ public class UserModel extends Model {
      * @return 
      */
     public String getPassword() {
-        return rowData.get("password");
+        return row.get("password");
+    }
+   
+    /**
+     * Set the password of the current row
+     * 
+     * @return 
+     */
+    public void setPassword(String password) {
+        row.put("password", password);
     }
     
 }

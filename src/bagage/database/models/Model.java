@@ -24,7 +24,14 @@
  */
 package bagage.database.models;
 
+import bagage.database.DatabaseHelper;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 /**
  * Model
@@ -36,20 +43,164 @@ import java.util.HashMap;
  * @author Tijme Gommers
  */
 abstract public class Model {
- 
-    abstract protected HashMap<String, String> getRowData();
-    abstract protected void setRowData(HashMap<String, String> rowData);
     
+    protected abstract String getTable();
+    
+    protected HashMap<String, String> row = new HashMap<String, String>();
+ 
+    public Model() {
+        
+    }
+    
+    public Model(int id) {
+        try {
+            Statement stmt = DatabaseHelper.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            
+            ResultSet rs = stmt.executeQuery("SELECT * FROM " + getTable() + " WHERE id = " + id);
+            ResultSetMetaData rsmd = rs.getMetaData();
+            
+            rs.first();
+            
+            for(int i = 0; i < rsmd.getColumnCount(); i ++)
+            {
+                String column = rsmd.getColumnName((i+1));
+                row.put(column, rs.getString(column));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    public Model(String where, String... params) {
+        try {
+            PreparedStatement statement = DatabaseHelper.getConnection().prepareStatement("SELECT * FROM " + getTable() + " WHERE " + where);
+            
+            for(int i = 0; i < params.length; i ++) {
+                statement.setString((i + 1), params[i]);
+            }
+            
+            ResultSet rs = statement.executeQuery();
+            ResultSetMetaData rsmd = rs.getMetaData();
+            
+            rs.first();
+            
+            for(int i = 0; i < rsmd.getColumnCount(); i ++)
+            {
+                String column = rsmd.getColumnName((i+1));
+                row.put(column, rs.getString(column));
+            }
+           
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
     /**
-     * Set data for the current model
+     * Return the id of the current row
      * 
-     * @param key the key or index you want to set
-     * @param value the value for the key or index
+     * @return 
      */
-    public void set(String key, String value) {
-        HashMap<String, String> rowData = getRowData();
-        rowData.put(key, value);
-        setRowData(rowData);
+    public int getId() {
+        if(row.get("id") == null) {
+            return 0;
+        }
+        
+        return Integer.parseInt(row.get("id"));
+    }
+    
+    public boolean save() {
+        if(getId() == 0) {
+            return create();
+        }
+        
+        return update();
+    }
+    
+    private boolean create() {
+        try {
+            String sQuery = "INSERT INTO " + getTable() + " (";
+            
+            boolean firstColumn = true;
+            for (Entry<String, String> column  : row.entrySet()) {
+                if(firstColumn) {
+                    firstColumn = false;
+                    sQuery = sQuery + column.getKey();
+                } else {
+                    sQuery = sQuery + ", " + column.getKey();
+                }
+            }
+            
+            sQuery = sQuery + ") VALUES (";
+            
+            firstColumn = true;
+            for (Entry<String, String> column  : row.entrySet()) {
+                if(firstColumn) {
+                    firstColumn = false;
+                    sQuery = sQuery + "?";
+                } else {
+                    sQuery = sQuery + ", ?";
+                }
+            }
+            
+            sQuery = sQuery + ")";
+            
+            PreparedStatement statement = DatabaseHelper.getConnection().prepareStatement(sQuery);
+            
+            int currentColumn = 1;
+            for (Entry<String, String> column  : row.entrySet()) {
+                statement.setString(currentColumn, column.getValue());
+                currentColumn = currentColumn + 1;
+            }
+            
+            return statement.execute();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
+    
+    private boolean update() {
+        try {
+            String sQuery = "UPDATE " + getTable() + " SET ";
+            
+            boolean firstColumn = true;
+            for (Entry<String, String> column  : row.entrySet()) {
+                if(firstColumn) {
+                    firstColumn = false;
+                    sQuery = sQuery + column.getKey() + " = ?";
+                } else {
+                    sQuery = sQuery + ", " + column.getKey() + " = ?";
+                }
+            }
+            
+            sQuery = sQuery + " WHERE id = " + getId();
+            
+            PreparedStatement statement = DatabaseHelper.getConnection().prepareStatement(sQuery);
+            
+            int currentColumn = 1;
+            for (Entry<String, String> column  : row.entrySet()) {
+                statement.setString(currentColumn, column.getValue());
+                currentColumn = currentColumn + 1;
+            }
+            
+            return statement.execute();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
+    
+    public boolean delete() {
+        String sQuery = "DELETE FROM " + getTable() + " WHERE id = ?";
+        PreparedStatement preparedStmt;
+        try {
+            preparedStmt = DatabaseHelper.getConnection().prepareStatement(sQuery);
+            preparedStmt.setInt(1, getId());
+            return preparedStmt.execute();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
     }
     
 }

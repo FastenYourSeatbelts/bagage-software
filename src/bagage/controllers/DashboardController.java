@@ -22,61 +22,31 @@
  * SOFTWARE.
  *
  */
-package bagage.database.datasources;
+package bagage.controllers;
 
-import bagage.database.models.Model;
-import bagage.database.models.UserModel;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.fxml.Initializable;
 
 /**
- * UserDatasource
+ * LoginController
  *
- * This class contains all user specific
- * queries
+ * Controller for Dashboard.fxml
  *
- * @package bagage.database.data sources
+ * @package bagage.controllers
  * @author Tijme Gommers
  */
-public class UserDatasource extends Datasource {
-    
-    private final String sTable = "users";
-    
-    private final String[] sColumns = {
-        "id", 
-        "firstname",
-        "middlename",
-        "lastname",
-        "email", 
-        "password"
-    };
-
+public class DashboardController implements Initializable {
+ 
     /**
-     * Return the columns of the current data source
+     * Called on controller start
      * 
-     * @return String[] sColumns
+     * @param url
+     * @param rb 
      */
     @Override
-    public String[] getColumns() {
-        return sColumns;
-    }
+    public void initialize(URL url, ResourceBundle rb) {
 
-    /**
-     * Return the table name of the current data source
-     * 
-     * @return String sTable
-     */
-    @Override
-    public String getTable() {
-        return sTable;
-    }
-
-    /**
-     * Return the model of the current data source
-     * 
-     * @return new Model
-     */
-    @Override
-    public Model getModel() {
-        return new UserModel();
     }
     
 }

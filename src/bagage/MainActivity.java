@@ -23,6 +23,7 @@
  */
 package bagage;
 
+import bagage.database.models.UserModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -58,6 +59,21 @@ public class MainActivity extends Application {
         primaryStage.setMinHeight(600);
         primaryStage.setMinWidth(900);
         primaryStage.show();
+       
+        /*
+        UserModel tijme = new UserModel();
+        tijme.setFirstname("Tijme");
+        tijme.setMiddlename("");
+        tijme.setLastname("Gommers");
+        tijme.save();
+        
+        UserModel tijme = new UserModel(1);
+        tijme.setFirstname("Tijme");
+        tijme.save();
+        
+        UserModel tijme = new UserModel(1);
+        tijme.delete();
+        */
     }
     
     /**

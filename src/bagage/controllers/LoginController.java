@@ -24,6 +24,7 @@
  */
 package bagage.controllers;
 
+import bagage.database.models.UserModel;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -65,29 +66,41 @@ public class LoginController implements Initializable {
     }
 
     /**
-     * Called on enter in username or password field or when the user clics on the login button
+     * Called on enter in username or password field or when the user clicks on the login button
      * Handles the login for the user
      * 
      * @param event 
      */
     @FXML
     private void login(ActionEvent event) {
-        if(!username.getText().equals("admin") || !password.getText().equals("admin")) {
+        
+        String[] params = new String[2];
+        params[0] = username.getText();
+        params[1] = password.getText();
+
+        UserModel user = new UserModel("username = ? AND password = ?", params);
+        
+        if(user.getId() == 0)
+        {
             error.setText("Wrong login, please try again!");
             return;
         }
-        
+      
         Stage currentStage = (Stage) username.getScene().getWindow();
         
         Parent root = null;
         try {
-            root = FXMLLoader.load(this.getClass().getResource("/bagage/views/users/Login.fxml"));
+            root = FXMLLoader.load(this.getClass().getResource("/bagage/views/Dashboard.fxml"));
         } catch (IOException ex) {
+            System.out.println(ex.getMessage());
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        Scene mainScene = new Scene(root);
-        currentStage.setScene(mainScene);
+        Stage newStage = new Stage();
+        newStage.setScene(new Scene(root));
+        
+        currentStage.hide();
+        newStage.show();
     }
 
     /**
