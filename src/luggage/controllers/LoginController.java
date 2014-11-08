@@ -42,7 +42,7 @@ import javafx.stage.Stage;
 /**
  * LoginController
  *
- * Controller for Login.fxml
+ * Controller for login.fxml
  *
  * @package luggage.controllers
  * @author Tijme Gommers
@@ -85,9 +85,9 @@ public class LoginController implements Initializable {
             return;
         }
 
-        Authentication.setUser(user);
+        Authentication.setCurrentUser(user);
         Stage loginStage = (Stage) username.getScene().getWindow();
-        StageHelper.replaceStage(loginStage, "Dashboard", this.getClass());
+        StageHelper.replaceStage(loginStage, "dashboard", this.getClass());
     }
 
     /**

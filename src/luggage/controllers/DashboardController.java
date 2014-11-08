@@ -25,18 +25,37 @@
 package luggage.controllers;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.stage.Stage;
+import luggage.helpers.StageHelper;
+import luggage.security.Authentication;
 
 /**
  * DashboardController
  *
- * Controller for Dashboard.fxml
+ * Controller for dashboard.fxml
  *
  * @package luggage.controllers
  * @author Tijme Gommers
  */
 public class DashboardController implements Initializable {
+
+    @FXML
+    private TabPane tabs;
+    
+    @FXML
+    private Button logout;
+    
+    @FXML
+    private Label fullname;
 
     /**
      * Called on controller start
@@ -46,7 +65,40 @@ public class DashboardController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       
+        fullname.setText(Authentication.getCurrentUser().getFullname());
+          
+        removeForbiddenTabs();   
     }
+    
+    /**
+     * Remove all the tabs the current user doesn't have permissions on
+     */
+    public void removeForbiddenTabs()
+    {
+        ArrayList<Tab> tabsToRemove = new ArrayList<Tab>();
+        for(int i = 0; i < tabs.getTabs().size(); i ++) {
+            if(!Authentication.getCurrentUser().hasPermissionsOn(tabs.getTabs().get(i).getId()))
+            {
+                tabsToRemove.add(tabs.getTabs().get(i));
+            }
+        }
+        
+        for(Tab tabToRemove : tabsToRemove) {
+            tabs.getTabs().remove(tabToRemove);
+        }
+    }
+    
+    /**
+     * Called on logout button click Handles the logout for the user
+     *
+     * @param event
+     */
+    @FXML
+    private void logout(ActionEvent event) {
+        Authentication.logout();
+        Stage currentStage = (Stage) logout.getScene().getWindow();
+        StageHelper.replaceStage(currentStage, "login", this.getClass());
+    }
+    
 
 }

@@ -20,37 +20,33 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
+ *
  */
-package luggage.security;
+package luggage.controllers;
 
-import luggage.database.models.UserModel;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.fxml.Initializable;
 
 /**
- * Authentication
+ * UsersController
  *
- * Authentication class for the current user
+ * Controller for luggage/total.fxml
  *
- * @package luggage.security
+ * @package luggage.controllers
  * @author Tijme Gommers
  */
-public class Authentication {
-    
-    public static UserModel currentUser;
-    
-    public static void setCurrentUser(UserModel user) {
-        Authentication.currentUser = user;
+public class TotalLuggageListController implements Initializable {
+
+    /**
+     * Called on controller start
+     * 
+     * @param url
+     * @param rb 
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        
     }
-    
-    public static UserModel getCurrentUser() {
-        return Authentication.currentUser;
-    }
-    
-    public static boolean loggedIn() {
-        return Authentication.currentUser.exists();
-    }
-    
-    public static void logout() {
-        Authentication.currentUser = new UserModel();
-    }
-    
+   
 }

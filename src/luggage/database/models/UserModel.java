@@ -25,6 +25,7 @@
 package luggage.database.models;
 
 import com.mysql.jdbc.StringUtils;
+import luggage.security.Permissions;
 
 /**
  * User Model
@@ -35,6 +36,10 @@ import com.mysql.jdbc.StringUtils;
  * @author Tijme Gommers
  */
 public class UserModel extends Model {
+    
+    public static final String ROLE_EMPLOYEE = "employee";
+    public static final String ROLE_MODERATOR = "moderator";
+    public static final String ROLE_MANAGER = "manager";
 
     public UserModel() {
         
@@ -142,6 +147,24 @@ public class UserModel extends Model {
     public void setPassword(String password) {
         row.put("password", password);
     }
+   
+    /**
+     * Return the role of the current row
+     * 
+     * @return 
+     */
+    public String getRole() {
+        return row.get("role");
+    }
+   
+    /**
+     * Set the role of the current row
+     * 
+     * @return 
+     */
+    public void setRole(String role) {
+        row.put("role", role);
+    }
     
     /**
      * Return the fullname of a user
@@ -164,4 +187,21 @@ public class UserModel extends Model {
         return fullname;
     }
     
+    /**
+     * Check if a user has permissions on the given operation
+     * 
+     * @param true if the user has permissions
+     */
+    public boolean hasPermissionsOn(String operation) {
+        switch(getRole()) {
+            case ROLE_EMPLOYEE:
+                return Permissions.EMPLOYEE_PERMISSIONS.contains(operation);
+            case ROLE_MODERATOR:
+                return Permissions.MODERATOR_PERMISSIONS.contains(operation);
+            case ROLE_MANAGER:
+                return Permissions.MANAGER_PERMISSIONS.contains(operation);
+        }
+        
+        return false;
+    }
 }

@@ -24,53 +24,29 @@
  */
 package luggage.controllers;
 
-import luggage.helpers.StageHelper;
-import luggage.security.Authentication;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
 
 /**
- * HeaderController
+ * UsersController
  *
- * Controller for Header.fxml
+ * Controller for luggage/resolved.fxml
  *
  * @package luggage.controllers
  * @author Tijme Gommers
  */
-public class HeaderController implements Initializable {
-    
-    @FXML
-    private Button logout;
-    
-    @FXML
-    private Label fullname;
+public class ResolvedLuggageList implements Initializable {
 
     /**
      * Called on controller start
-     *
+     * 
      * @param url
-     * @param rb
+     * @param rb 
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        fullname.setText(Authentication.getUser().getFullname());
+        
     }
-
-    /**
-     * Called on logout button click Handles the logout for the user
-     *
-     * @param event
-     */
-    @FXML
-    private void logout(ActionEvent event) {
-        Stage currentStage = (Stage) logout.getScene().getWindow();
-        StageHelper.replaceStage(currentStage, "Login", this.getClass());
-    }
-    
+   
 }

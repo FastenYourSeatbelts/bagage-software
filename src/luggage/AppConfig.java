@@ -61,4 +61,9 @@ public class AppConfig {
      */
     public static final String databasePass = "";
     
+    /**
+     * The salt for passwords
+     */
+    public static final String passwordSalt = "asdfp9384thSIDfhO2IU3RHlskdFH-93w48thSdufhP3498HSOD9F7H23lifuhSDLkfjhW3LKJH";
+    
 }

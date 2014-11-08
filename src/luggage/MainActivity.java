@@ -46,7 +46,7 @@ public class MainActivity extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
-        StageHelper.addStage("Login", this.getClass());
+        StageHelper.addStage("login", this.getClass());
         
         (new Thread(() -> {
             DatabaseHelper.openConnection();
