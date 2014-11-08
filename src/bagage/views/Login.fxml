@@ -1,41 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="bagage.controllers.LoginController">
-    <center>
-        <GridPane alignment="TOP_CENTER" hgap="8" vgap="8">
+<GridPane style="-fx-background-image: url(/resources/login_background.jpg); -fx-background-size: cover;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bagage.controllers.LoginController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="300.0" percentWidth="0.0" prefWidth="200.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="200.0" minHeight="200.0" percentHeight="0.0" prefHeight="200.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <children>
+        <AnchorPane maxHeight="250.0" maxWidth="300.0" minHeight="250.0" minWidth="300.0" prefHeight="250.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
             <children>
-                
-                <ImageView id="boxImage" fitHeight="150.0" fitWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="0">    
+             
+                <ImageView id="boxImage" AnchorPane.bottomAnchor="163.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">    
                     <image>
-                       <Image url="@/resources/logo_red.png" />
+                        <Image url="@/resources/brand_white.png" />
                     </image>
-                    <GridPane.margin>
-                        <Insets bottom="10.0" left="20.0" right="20.0" top="80.0" />
-                    </GridPane.margin>
                 </ImageView>
-                
-                <Label fx:id="error" alignment="CENTER_LEFT" maxWidth="60.0" minWidth="200.0" text="" textAlignment="RIGHT" textFill="#FF0000" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                
-                <Label alignment="CENTER_RIGHT" maxWidth="60.0" minWidth="60.0" text="" textAlignment="RIGHT" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-
-                <Label alignment="CENTER_LEFT" maxWidth="60.0" minWidth="60.0" text="Username" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                <TextField fx:id="username" onAction="#login" onKeyPressed="#onKeyPress" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-
-                <Label alignment="CENTER_LEFT" maxWidth="60.0" minWidth="60.0" text="Password" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-                <PasswordField fx:id="password" onAction="#login" onKeyPressed="#onKeyPress" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-
-                <Button onAction="#login" text="Sign In" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
-                    
+            
+                <Label fx:id="userlabel" text="Username" textFill="WHITE" AnchorPane.bottomAnchor="132.0" AnchorPane.leftAnchor="14.0">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="username" promptText="Enter your username..." onAction="#login" onKeyPressed="#onKeyPress" AnchorPane.bottomAnchor="105.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+            
+                <Label fx:id="passlabel" layoutX="14.0" layoutY="100.0" prefHeight="18.0" text="Password" textFill="WHITE" AnchorPane.bottomAnchor="80.0">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Label>
+                <PasswordField fx:id="password" promptText="Enter your password..." onAction="#login" onKeyPressed="#onKeyPress" prefHeight="25.0" prefWidth="276.0" AnchorPane.bottomAnchor="53.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+            
+                <Label fx:id="error" text="" textFill="WHITE" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="14.0">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Label>
+                <Button fx:id="login" contentDisplay="CENTER" mnemonicParsing="false" onAction="#login" prefHeight="25.0" prefWidth="80.0" text="Sign in" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+        
             </children>
-        </GridPane>
-    </center>
-</BorderPane>
+        </AnchorPane>
+    </children>
+</GridPane>

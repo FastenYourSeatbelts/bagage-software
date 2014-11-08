@@ -20,62 +20,57 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
+ *
  */
-package bagage;
+package bagage.controllers;
 
-import bagage.database.DatabaseHelper;
 import bagage.helpers.StageHelper;
-import javafx.application.Application;
-import javafx.application.Platform;
+import bagage.security.Authentication;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 /**
- * MainActivity
+ * HeaderController
  *
- * Main activity for the application
+ * Controller for Header.fxml
  *
- * @package bagage
+ * @package bagage.controllers
  * @author Tijme Gommers
  */
-public class MainActivity extends Application {
+public class HeaderController implements Initializable {
+    
+    @FXML
+    private Button logout;
+    
+    @FXML
+    private Label fullname;
 
     /**
-     * Called on application run
-     * 
-     * @param primaryStage
-     * @throws Exception 
+     * Called on controller start
+     *
+     * @param url
+     * @param rb
      */
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        StageHelper.addStage("Login", this.getClass());
-        
-        (new Thread(() -> {
-            DatabaseHelper.openConnection();
-        })).start();
-        
-        /*
-        UserModel tijme = new UserModel();
-        tijme.setFirstname("Tijme");
-        tijme.setMiddlename("");
-        tijme.setLastname("Gommers");
-        tijme.save();
-        
-        UserModel tijme = new UserModel(1);
-        tijme.setFirstname("Tijme");
-        tijme.save();
-        
-        UserModel tijme = new UserModel(1);
-        tijme.delete();
-        */
+    public void initialize(URL url, ResourceBundle rb) {
+        fullname.setText(Authentication.getUser().getFullname());
     }
-    
+
     /**
-     * Called on application run
-     * 
-     * @param args the command line arguments
+     * Called on logout button click Handles the logout for the user
+     *
+     * @param event
      */
-    public static void main(String[] args) {
-        launch(args);
+    @FXML
+    private void logout(ActionEvent event) {
+        Stage currentStage = (Stage) logout.getScene().getWindow();
+        StageHelper.replaceStage(currentStage, "Login", this.getClass());
     }
     
 }

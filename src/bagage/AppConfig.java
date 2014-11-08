@@ -20,23 +20,45 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
- *
  */
-package bagage.database;
+package bagage;
 
 /**
- * DatabaseConfiguration
+ * Application configuration
  *
- * Containing all the settings to create
- * a database connection
- *
- * @package bagage.database
+ * @package bagage
  * @author Tijme Gommers
  */
-public class DatabaseConfiguration {
+public class AppConfig {
     
-    public static final String name = "jdbc:mysql://localhost/bagage-software";
-    public static final String user = "root";
-    public static final String pass = "";
+    /**
+     * Application wide title
+     */
+    public static final String ApplicationName = "Corendon Bagage";
+    
+    /**
+     * Minimum application height
+     */
+    public static final int MinHeight = 500;
+    
+    /**
+     * Minimum application width
+     */
+    public static final int MinWidth = 800;
+    
+    /**
+     * Database host & driver
+     */
+    public static final String databaseName = "jdbc:mysql://localhost/bagage-software";
+    
+    /**
+     * Database user
+     */
+    public static final String databaseUser = "root";
+    
+    /**
+     * Database password
+     */
+    public static final String databasePass = "";
     
 }

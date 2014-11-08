@@ -94,7 +94,7 @@ abstract public class Model {
             System.out.println(ex.getMessage());
         }
     }
-
+    
     /**
      * Return the id of the current row
      * 
@@ -106,6 +106,20 @@ abstract public class Model {
         }
         
         return Integer.parseInt(row.get("id"));
+    }
+    
+    /**
+     * Check if the current row exists in the database
+     * 
+     * @return boolean true if exists
+     */
+    public boolean exists() {
+        if(getId() != 0)
+        {
+            return true;
+        }
+        
+        return false;
     }
     
     public boolean save() {

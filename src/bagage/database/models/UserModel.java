@@ -24,6 +24,8 @@
  */
 package bagage.database.models;
 
+import com.mysql.jdbc.StringUtils;
+
 /**
  * User Model
  *
@@ -106,21 +108,21 @@ public class UserModel extends Model {
     }
    
     /**
-     * Return the email of the current row
+     * Return the username of the current row
      * 
      * @return 
      */
-    public String getEmail() {
-        return row.get("email");
+    public String getUsername() {
+        return row.get("username");
     }
    
     /**
-     * Set the email of the current row
+     * Set the username of the current row
      * 
      * @return 
      */
-    public void setEmail(String email) {
-        row.put("email", email);
+    public void setUsername(String username) {
+        row.put("username", username);
     }
    
     /**
@@ -139,6 +141,27 @@ public class UserModel extends Model {
      */
     public void setPassword(String password) {
         row.put("password", password);
+    }
+    
+    /**
+     * Return the fullname of a user
+     * 
+     * @return;
+     */
+    public String getFullname() {
+        String firstname = getFirstname();
+        String middlename = getMiddlename();
+        String lastname = getLastname();
+        
+        String fullname = firstname;
+        
+        if(!StringUtils.isNullOrEmpty(middlename)) {
+            fullname += " " + middlename;
+        }
+        
+        fullname += " " + lastname;
+        
+        return fullname;
     }
     
 }

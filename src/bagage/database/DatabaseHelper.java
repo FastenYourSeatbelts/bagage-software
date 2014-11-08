@@ -24,6 +24,7 @@
  */
 package bagage.database;
 
+import bagage.AppConfig;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -62,7 +63,7 @@ public class DatabaseHelper {
      */
     public static void openConnection() {
         try {
-            oConnection = DriverManager.getConnection(DatabaseConfiguration.name, DatabaseConfiguration.user, DatabaseConfiguration.pass);
+            oConnection = DriverManager.getConnection(AppConfig.databaseName, AppConfig.databaseUser, AppConfig.databasePass);
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
         }

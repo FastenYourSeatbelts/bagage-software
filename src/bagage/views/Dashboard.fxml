@@ -1,57 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.scene.paint.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
 
-<AnchorPane prefHeight="542.0" prefWidth="792.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bagage.controllers.DashboardController">
-   <children>
-      <Button layoutX="77.0" layoutY="511.0" mnemonicParsing="false" text="Register" />
-      <Button layoutX="689.0" layoutY="511.0" mnemonicParsing="false" text="Delete" />
-      <Button layoutX="14.0" layoutY="511.0" mnemonicParsing="false" text="Edit" />
-      <TitledPane alignment="TOP_LEFT" text="Dashboard desk employee">
-         <content>
-            <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="471.0" prefWidth="783.0" tabClosingPolicy="UNAVAILABLE">
-              <tabs>
-                <Tab text="Luggage">
-                     <content>
-                        <TableView prefHeight="200.0" prefWidth="200.0">
-                          <columns>
-                            <TableColumn prefWidth="75.0" text="ID" />
-                            <TableColumn prefWidth="92.0" text="Customer" />
-                              <TableColumn prefWidth="79.0" text="Tags" />
-                              <TableColumn prefWidth="77.0" text="Status" />
-                              <TableColumn text="DateAdded" />
-                              <TableColumn prefWidth="99.0" text="Location" />
-                              <TableColumn prefWidth="97.0" text="Notes" />
-                          </columns>
-                        </TableView>
-                     </content>
-                  </Tab>
-                <Tab text="Customers">
-                     <content>
-                        <TableView prefHeight="371.0" prefWidth="767.0">
-                          <columns>
-                            <TableColumn prefWidth="75.0" text="ID" />
-                            <TableColumn prefWidth="75.0" text="Surname" />
-                              <TableColumn prefWidth="75.0" text="Prefix" />
-                              <TableColumn prefWidth="75.0" text="Initials" />
-                              <TableColumn prefWidth="75.0" text="Gender" />
-                              <TableColumn prefWidth="75.0" text="Address" />
-                              <TableColumn prefWidth="75.0" text="PostalCode" />
-                              <TableColumn prefWidth="75.0" text="Residence" />
-                              <TableColumn prefWidth="94.0" text="PhoneNumber" />
-                              <TableColumn prefWidth="94.0" text="E-Mail" />
-                          </columns>
-                        </TableView>
-                     </content>
-                  </Tab>
-              </tabs>
-            </TabPane>
-         </content>
-         <graphic>
-            <Button alignment="TOP_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" pickOnBounds="false" prefHeight="25.0" prefWidth="64.0" text="Log Out" />
-         </graphic>
-      </TitledPane>
-   </children>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="500" prefWidth="800" xmlns="http://javafx.com/javafx/8" fx:controller="bagage.controllers.DashboardController">
+    <children>
+        <fx:include fx:id="title" source="/bagage/views/Header.fxml" />
+        <AnchorPane fx:id="dashboardWrapper" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="75.0">
+          
+        </AnchorPane>
+    </children>
 </AnchorPane>

@@ -20,33 +20,33 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
- *
  */
-package bagage.controllers;
+package bagage.security;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.fxml.Initializable;
+import bagage.database.models.UserModel;
 
 /**
- * DashboardController
+ * Authentication
  *
- * Controller for Dashboard.fxml
+ * Authentication class for the current user
  *
- * @package bagage.controllers
+ * @package bagage.security
  * @author Tijme Gommers
  */
-public class DashboardController implements Initializable {
-
-    /**
-     * Called on controller start
-     * 
-     * @param url
-     * @param rb 
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-       
+public class Authentication {
+    
+    public static UserModel currentUser;
+    
+    public static void setUser(UserModel user) {
+        Authentication.currentUser = user;
     }
-
+    
+    public static UserModel getUser() {
+        return Authentication.currentUser;
+    }
+    
+    public static boolean loggedIn() {
+        return Authentication.currentUser.exists();
+    }
+    
 }
