@@ -1,4 +1,4 @@
-Bagage Software
+Luggage System
 ===============
 
-Een systeem om bagage te beheren.
+A system Corendon employees can manage luggage with.
