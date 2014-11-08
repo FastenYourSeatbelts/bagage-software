@@ -20,45 +20,33 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
+ *
  */
-package bagage;
+package luggage.controllers;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.fxml.Initializable;
 
 /**
- * Application configuration
+ * DashboardController
  *
- * @package bagage
+ * Controller for Dashboard.fxml
+ *
+ * @package luggage.controllers
  * @author Tijme Gommers
  */
-public class AppConfig {
-    
+public class DashboardController implements Initializable {
+
     /**
-     * Application wide title
+     * Called on controller start
+     * 
+     * @param url
+     * @param rb 
      */
-    public static final String ApplicationName = "Corendon Bagage";
-    
-    /**
-     * Minimum application height
-     */
-    public static final int MinHeight = 500;
-    
-    /**
-     * Minimum application width
-     */
-    public static final int MinWidth = 800;
-    
-    /**
-     * Database host & driver
-     */
-    public static final String databaseName = "jdbc:mysql://localhost/bagage-software";
-    
-    /**
-     * Database user
-     */
-    public static final String databaseUser = "root";
-    
-    /**
-     * Database password
-     */
-    public static final String databasePass = "";
-    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+       
+    }
+
 }

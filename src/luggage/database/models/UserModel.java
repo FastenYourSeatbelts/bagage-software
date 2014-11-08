@@ -22,7 +22,7 @@
  * SOFTWARE.
  *
  */
-package bagage.database.models;
+package luggage.database.models;
 
 import com.mysql.jdbc.StringUtils;
 
@@ -31,7 +31,7 @@ import com.mysql.jdbc.StringUtils;
  *
  * A class that maps the users table
  *
- * @package bagage.database.models
+ * @package luggage.database.models
  * @author Tijme Gommers
  */
 public class UserModel extends Model {

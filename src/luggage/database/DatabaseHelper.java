@@ -22,9 +22,9 @@
  * SOFTWARE.
  *
  */
-package bagage.database;
+package luggage.database;
 
-import bagage.AppConfig;
+import luggage.AppConfig;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -37,7 +37,7 @@ import java.util.logging.Logger;
  * This class manages the database
  * connection
  *
- * @package bagage.database
+ * @package luggage.database
  * @author Tijme Gommers
  */
 public class DatabaseHelper {

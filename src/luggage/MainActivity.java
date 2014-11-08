@@ -21,26 +21,60 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package bagage.security;
+package luggage;
+
+import luggage.database.DatabaseHelper;
+import luggage.helpers.StageHelper;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
 /**
- * Encryption
+ * MainActivity
  *
- * Helps encryptingp passwords
+ * Main activity for the application
  *
- * @package bagage.security
+ * @package luggage
  * @author Tijme Gommers
  */
-public class Encryption {
+public class MainActivity extends Application {
+
+    /**
+     * Called on application run
+     * 
+     * @param primaryStage
+     * @throws Exception 
+     */
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        StageHelper.addStage("Login", this.getClass());
+        
+        (new Thread(() -> {
+            DatabaseHelper.openConnection();
+        })).start();
+        
+        /*
+        UserModel tijme = new UserModel();
+        tijme.setFirstname("Tijme");
+        tijme.setMiddlename("");
+        tijme.setLastname("Gommers");
+        tijme.save();
+        
+        UserModel tijme = new UserModel(1);
+        tijme.setFirstname("Tijme");
+        tijme.save();
+        
+        UserModel tijme = new UserModel(1);
+        tijme.delete();
+        */
+    }
     
     /**
-     * Hash a string 
+     * Called on application run
      * 
-     * @param plainText
-     * @return hashed text
+     * @param args the command line arguments
      */
-    public static String hash(String plainText) {
-        return plainText;
+    public static void main(String[] args) {
+        launch(args);
     }
     
 }

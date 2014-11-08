@@ -21,32 +21,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package bagage.security;
-
-import bagage.database.models.UserModel;
+package luggage;
 
 /**
- * Authentication
+ * Application configuration
  *
- * Authentication class for the current user
- *
- * @package bagage.security
+ * @package luggage
  * @author Tijme Gommers
  */
-public class Authentication {
+public class AppConfig {
     
-    public static UserModel currentUser;
+    /**
+     * Application wide title
+     */
+    public static final String ApplicationName = "Corendon Bagage";
     
-    public static void setUser(UserModel user) {
-        Authentication.currentUser = user;
-    }
+    /**
+     * Minimum application height
+     */
+    public static final int MinHeight = 500;
     
-    public static UserModel getUser() {
-        return Authentication.currentUser;
-    }
+    /**
+     * Minimum application width
+     */
+    public static final int MinWidth = 800;
     
-    public static boolean loggedIn() {
-        return Authentication.currentUser.exists();
-    }
+    /**
+     * Database host & driver
+     */
+    public static final String databaseName = "jdbc:mysql://localhost/bagage-software";
+    
+    /**
+     * Database user
+     */
+    public static final String databaseUser = "root";
+    
+    /**
+     * Database password
+     */
+    public static final String databasePass = "";
     
 }

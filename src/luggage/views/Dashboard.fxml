@@ -10,9 +10,9 @@
 <?import java.util.*?>
 <?import javafx.scene.*?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="500" prefWidth="800" xmlns="http://javafx.com/javafx/8" fx:controller="bagage.controllers.DashboardController">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="500" prefWidth="800" xmlns="http://javafx.com/javafx/8" fx:controller="luggage.controllers.DashboardController">
     <children>
-        <fx:include fx:id="title" source="/bagage/views/Header.fxml" />
+        <fx:include fx:id="title" source="/luggage/views/Header.fxml" />
         <AnchorPane fx:id="dashboardWrapper" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="75.0">
           
         </AnchorPane>

@@ -21,10 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package bagage.helpers;
+package luggage.helpers;
 
-import bagage.AppConfig;
-import bagage.controllers.LoginController;
+import luggage.AppConfig;
+import luggage.controllers.LoginController;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,7 +39,7 @@ import javafx.stage.Stage;
  *
  * Makes creating and updating stages & scenes easier
  *
- * @package bagage.helpers
+ * @package luggage.helpers
  * @author Tijme Gommers
  */
 public class StageHelper {
@@ -51,7 +51,7 @@ public class StageHelper {
     public static void addStage(String sNewStage, Class oCurrentClass, boolean bMaximized) {
         Parent root = null;
         try {
-            root = FXMLLoader.load(oCurrentClass.getResource("/bagage/views/" + sNewStage + ".fxml"));
+            root = FXMLLoader.load(oCurrentClass.getResource("/luggage/views/" + sNewStage + ".fxml"));
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);

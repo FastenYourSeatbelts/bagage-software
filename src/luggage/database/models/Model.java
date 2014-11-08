@@ -22,9 +22,9 @@
  * SOFTWARE.
  *
  */
-package bagage.database.models;
+package luggage.database.models;
 
-import bagage.database.DatabaseHelper;
+import luggage.database.DatabaseHelper;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -39,7 +39,7 @@ import java.util.Map.Entry;
  * A super class for all the models containing
  * default model functions
  *
- * @package bagage.database.models
+ * @package luggage.database.models
  * @author Tijme Gommers
  */
 abstract public class Model {

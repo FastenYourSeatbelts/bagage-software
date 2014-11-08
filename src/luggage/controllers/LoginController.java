@@ -22,10 +22,12 @@
  * SOFTWARE.
  *
  */
-package bagage.controllers;
+package luggage.controllers;
 
-import bagage.helpers.StageHelper;
-import bagage.security.Authentication;
+import luggage.database.models.UserModel;
+import luggage.helpers.StageHelper;
+import luggage.security.Authentication;
+import luggage.security.Encryption;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -33,23 +35,60 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
- * HeaderController
+ * LoginController
  *
- * Controller for Header.fxml
+ * Controller for Login.fxml
  *
- * @package bagage.controllers
+ * @package luggage.controllers
  * @author Tijme Gommers
  */
-public class HeaderController implements Initializable {
-    
+public class LoginController implements Initializable {
+
     @FXML
-    private Button logout;
-    
+    private TextField username;
+
     @FXML
-    private Label fullname;
+    private PasswordField password;
+
+    @FXML
+    private Label error;
+
+    @FXML
+    private Button login;
+
+    @FXML
+    private void onKeyPress() {
+        error.setText("");
+    }
+
+    /**
+     * Called on enter in username or password field or when the user clicks on
+     * the login button Handles the login for the user
+     *
+     * @param event
+     */
+    @FXML
+    private void login(ActionEvent event) {
+        String[] params = new String[2];
+        params[0] = username.getText();
+        params[1] = Encryption.hash(password.getText());
+
+        UserModel user = new UserModel("username = ? AND password = ?", params);
+        if (!user.exists()) {
+            error.setText("Wrong login, please try again!");
+            username.requestFocus();
+            return;
+        }
+
+        Authentication.setUser(user);
+        Stage loginStage = (Stage) username.getScene().getWindow();
+        StageHelper.replaceStage(loginStage, "Dashboard", this.getClass());
+    }
 
     /**
      * Called on controller start
@@ -59,18 +98,7 @@ public class HeaderController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        fullname.setText(Authentication.getUser().getFullname());
+
     }
 
-    /**
-     * Called on logout button click Handles the logout for the user
-     *
-     * @param event
-     */
-    @FXML
-    private void logout(ActionEvent event) {
-        Stage currentStage = (Stage) logout.getScene().getWindow();
-        StageHelper.replaceStage(currentStage, "Login", this.getClass());
-    }
-    
 }
