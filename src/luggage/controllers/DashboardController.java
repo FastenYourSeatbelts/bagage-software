@@ -99,6 +99,5 @@ public class DashboardController implements Initializable {
         Stage currentStage = (Stage) logout.getScene().getWindow();
         StageHelper.replaceStage(currentStage, "login", this.getClass());
     }
-    
 
 }

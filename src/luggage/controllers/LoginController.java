@@ -38,6 +38,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import luggage.AppConfig;
 
 /**
  * LoginController
@@ -57,6 +58,9 @@ public class LoginController implements Initializable {
 
     @FXML
     private Label error;
+    
+    @FXML
+    private Label copyright;
 
     @FXML
     private Button login;
@@ -98,7 +102,7 @@ public class LoginController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        copyright.setText(AppConfig.ApplicationCopyRight);
     }
 
 }

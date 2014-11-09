@@ -11,7 +11,7 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.image.*?>
 
-<GridPane style="-fx-background-image: url(/resources/login_background.jpg); -fx-background-size: cover;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="luggage.controllers.LoginController">
+<GridPane style="-fx-background-image: url(/resources/images/login_background.jpg); -fx-background-size: cover;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="luggage.controllers.LoginController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="300.0" percentWidth="0.0" prefWidth="200.0" />
@@ -28,7 +28,7 @@
              
                 <ImageView id="boxImage" AnchorPane.bottomAnchor="163.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">    
                     <image>
-                        <Image url="@/resources/brand_white.png" />
+                        <Image url="@/resources/images/brand_white.png" />
                     </image>
                 </ImageView>
             
@@ -37,14 +37,14 @@
                         <Font name="System Bold" size="12.0" />
                     </font>
                 </Label>
-                <TextField fx:id="username" promptText="Enter your username..." onAction="#login" onKeyPressed="#onKeyPress" AnchorPane.bottomAnchor="105.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+                <TextField fx:id="username" onAction="#login" onKeyPressed="#onKeyPress" promptText="Enter your username..." AnchorPane.bottomAnchor="105.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
             
                 <Label fx:id="passlabel" layoutX="14.0" layoutY="100.0" prefHeight="18.0" text="Password" textFill="WHITE" AnchorPane.bottomAnchor="80.0">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>
                 </Label>
-                <PasswordField fx:id="password" promptText="Enter your password..." onAction="#login" onKeyPressed="#onKeyPress" prefHeight="25.0" prefWidth="276.0" AnchorPane.bottomAnchor="53.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+                <PasswordField fx:id="password" onAction="#login" onKeyPressed="#onKeyPress" prefHeight="25.0" prefWidth="276.0" promptText="Enter your password..." AnchorPane.bottomAnchor="53.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
             
                 <Label fx:id="error" text="" textFill="WHITE" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="14.0">
                     <font>
@@ -55,5 +55,13 @@
         
             </children>
         </AnchorPane>
+		<Label fx:id="copyright" text="Loading..." textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+			<font>
+				<Font name="System Bold" size="12.0" />
+			</font>
+			<GridPane.margin>
+				<Insets bottom="14.0" />
+			</GridPane.margin>
+		</Label>
     </children>
 </GridPane>

@@ -37,6 +37,11 @@ public class AppConfig {
     public static final String ApplicationName = "Corendon Bagage";
     
     /**
+     * Application copyright
+     */
+    public static final String ApplicationCopyRight = "Copyright 2014 Itopia B.V.";
+    
+    /**
      * Minimum application height
      */
     public static final int MinHeight = 500;

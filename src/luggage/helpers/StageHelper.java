@@ -58,9 +58,12 @@ public class StageHelper {
             return;
         }
         
+        Scene newScene = new Scene(root);
+        newScene.getStylesheets().add("/resources/stylesheets/header.css");
+        
         Stage oNewStage = new Stage();
-        oNewStage.setScene(new Scene(root));
-        oNewStage.getIcons().add(new Image("/resources/logo_red.png"));
+        oNewStage.setScene(newScene);
+        oNewStage.getIcons().add(new Image("/resources/images/logo_red.png"));
         oNewStage.setTitle(AppConfig.ApplicationName + " " + sNewStage);
         oNewStage.setMinHeight(AppConfig.MinHeight);
         oNewStage.setMinWidth(AppConfig.MinWidth);

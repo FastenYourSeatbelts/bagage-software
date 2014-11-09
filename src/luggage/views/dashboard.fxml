@@ -29,7 +29,7 @@
 						<children>
 							<ImageView AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
 								<image>
-									<Image url="@/resources/brand_white.png" />
+									<Image url="@/resources/images/brand_white.png" />
 								</image>
 							</ImageView>
 						</children>
