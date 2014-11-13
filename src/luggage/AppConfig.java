@@ -54,7 +54,7 @@ public class AppConfig {
     /**
      * Database host & driver
      */
-    public static final String databaseName = "jdbc:mysql://localhost/bagage-software";
+    public static final String databaseName = "jdbc:mysql://localhost/luggage-system";
     
     /**
      * Database user
