@@ -33,6 +33,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import luggage.database.models.UserModel;
 import luggage.database.models.Model;
@@ -61,8 +62,44 @@ public class UsersController implements Initializable {
     
     @FXML
     private TableColumn tableViewRole;
+    @FXML
+    private TextField searchbox;
     
-    private final ObservableList<UserModel> data = FXCollections.observableArrayList();   
+    @FXML
+    protected void onKeyReleased()  {
+        
+        String[] keywords = searchbox.getText().split("\\s+");
+        
+        String[] params = new String[4 * keywords.length];
+        boolean firstColumn = true;
+        String query = "";
+        
+        for(int i = 0; i < keywords.length; i ++)
+        {
+            if(firstColumn) {
+                params[0 + i] = "%" + keywords[i] + "%";
+                query += "username LIKE ?";
+            } else {
+                params[0 + i] = "%" + keywords[i] + "%";
+                query += " OR username LIKE ?";
+            }
+            
+            params[1 + i] = "%" + keywords[i] + "%";
+            query += " OR firstname LIKE ?";
+            
+            params[2 + i] = "%" + keywords[i] + "%";
+            query += " OR lastname LIKE ?";
+ 
+            params[3 + i] = "%" + keywords[i] + "%";
+            query += " OR residence LIKE ?";
+            
+            firstColumn = false;
+        }
+        
+        resetTableView(query, params);
+    }
+    
+    private ObservableList<UserModel> data = FXCollections.observableArrayList();   
 
     
     /**
@@ -73,13 +110,14 @@ public class UsersController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        resetTableView();
+        resetTableView("", new String[0]);
     }
     
-    public void resetTableView() {
+    public void resetTableView(String where, String... params) {
         UserModel users = new UserModel();
-        List<Model> allUsers = users.findAll();
-        
+        List<Model> allUsers = users.findAll(where, params);
+       
+        data = FXCollections.observableArrayList(); 
         for(int i = 0; i < allUsers.size(); i ++)
         {
             UserModel user = (UserModel) allUsers.get(i);
