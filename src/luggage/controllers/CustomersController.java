@@ -84,6 +84,8 @@ public class CustomersController implements Initializable {
                 + "or residence LIKE ? or postalcode LIKE ?", params);
     }
     
+    
+    
     private ObservableList<CustomerModel> data = FXCollections.observableArrayList();   
 
     
