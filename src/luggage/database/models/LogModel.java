@@ -48,14 +48,20 @@ public class LogModel extends Model {
         super(id);
     }
     
-    public LogModel(String where, boolean bFirst, String... params) {
-        super(where, bFirst, params);
+    public LogModel(String where, String... params) {
+        super(where, params);
     }
 
     @Override
     protected String getTable() {
         return "log";
     }
+
+    @Override
+    protected Model getModel(int id) {
+        return new LogModel(id);
+    }
+    
    
     /**
      * Return the type of the current row
@@ -110,5 +116,5 @@ public class LogModel extends Model {
     public void setMessage(String message) {
         row.put("message", message);
     }
- 
+    
 }

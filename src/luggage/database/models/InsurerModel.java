@@ -42,8 +42,13 @@ public class InsurerModel extends Model {
         super(id);
     }
     
-    public InsurerModel(String where, boolean bFirst, String... params) {
-        super(where, bFirst, params);
+    public InsurerModel(String where, String... params) {
+        super(where, params);
+    }
+
+    @Override
+    protected Model getModel(int id) {
+        return new InsurerModel(id);
     }
 
     @Override

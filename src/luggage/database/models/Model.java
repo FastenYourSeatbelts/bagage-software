@@ -30,7 +30,9 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map.Entry;
 
 /**
@@ -45,6 +47,8 @@ import java.util.Map.Entry;
 abstract public class Model {
     
     protected abstract String getTable();
+    
+    protected abstract Model getModel(int id);
     
     protected HashMap<String, String> row = new HashMap<String, String>();
  
@@ -71,30 +75,60 @@ abstract public class Model {
         }
     }
     
-    public Model(String where, boolean bFirst, String... params) {
+    public Model(String where, String... params) {
         try {
             PreparedStatement statement = DatabaseHelper.getConnection().prepareStatement("SELECT * FROM " + getTable() + " WHERE " + where);
-            
+
             for(int i = 0; i < params.length; i ++) {
                 statement.setString((i + 1), params[i]);
             }
-            
+
             ResultSet rs = statement.executeQuery();
             ResultSetMetaData rsmd = rs.getMetaData();
-            
+
             rs.first();
-            
+
             for(int i = 0; i < rsmd.getColumnCount(); i ++)
             {
                 String column = rsmd.getColumnName((i+1));
                 row.put(column, rs.getString(column));
-            }
-           
+            } 
+
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
     }
     
+    public List<Model> findAll(String where, String... params) {
+        try {
+            PreparedStatement statement = DatabaseHelper.getConnection().prepareStatement("SELECT * FROM " + getTable() + " WHERE " + where);
+
+            for(int i = 0; i < params.length; i ++) {
+                statement.setString((i + 1), params[i]);
+            }
+
+            ResultSet rs = statement.executeQuery();
+            ResultSetMetaData rsmd = rs.getMetaData();
+
+            rs.first();
+            
+            
+            ArrayList<Model> rowList = new ArrayList<>();
+            
+            while (rs.next())
+            {
+                Model model = getModel(1);
+                rowList.add(model);
+            }
+            
+            return rowList;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        return null;
+    }
+  
     /**
      * Return the id of the current row
      * 

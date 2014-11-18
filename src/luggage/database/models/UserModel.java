@@ -49,8 +49,13 @@ public class UserModel extends Model {
         super(id);
     }
     
-    public UserModel(String where, boolean bFirst, String... params) {
-        super(where, bFirst, params);
+    public UserModel(String where, String... params) {
+        super(where, params);
+    }
+
+    @Override
+    protected Model getModel(int id) {
+        return new UserModel(id);
     }
 
     @Override

@@ -42,13 +42,18 @@ public class CityModel extends Model {
         super(id);
     }
     
-    public CityModel(String where, boolean bFirst, String... params) {
-        super(where, bFirst, params);
+    public CityModel(String where, String... params) {
+        super(where, params);
     }
 
     @Override
     protected String getTable() {
         return "cities";
+    }
+
+    @Override
+    protected Model getModel(int id) {
+        return new CityModel(id);
     }
    
     /**

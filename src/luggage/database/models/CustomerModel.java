@@ -44,13 +44,18 @@ public class CustomerModel extends Model {
         super(id);
     }
     
-    public CustomerModel(String where, boolean bFirst, String... params) {
-        super(where, bFirst, params);
+    public CustomerModel(String where, String... params) {
+        super(where, params);
     }
 
     @Override
     protected String getTable() {
         return "customers";
+    }
+
+    @Override
+    protected Model getModel(int id) {
+        return new CustomerModel(id);
     }
    
     /**

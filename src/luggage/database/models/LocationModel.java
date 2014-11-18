@@ -42,13 +42,18 @@ public class LocationModel extends Model {
         super(id);
     }
     
-    public LocationModel(String where, boolean bFirst, String... params) {
-        super(where, bFirst, params);
+    public LocationModel(String where, String... params) {
+        super(where, params);
     }
 
     @Override
     protected String getTable() {
         return "locations";
+    }
+
+    @Override
+    protected Model getModel(int id) {
+        return new LocationModel(id);
     }
    
     /**

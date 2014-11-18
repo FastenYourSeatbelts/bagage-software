@@ -42,13 +42,18 @@ public class LuggageModel extends Model {
         super(id);
     }
     
-    public LuggageModel(String where, boolean bFirst, String... params) {
-        super(where, bFirst, params);
+    public LuggageModel(String where, String... params) {
+        super(where, params);
     }
 
     @Override
     protected String getTable() {
         return "luggage";
+    }
+
+    @Override
+    protected Model getModel(int id) {
+        return new LuggageModel(id);
     }
    
     /**
