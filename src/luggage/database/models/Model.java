@@ -71,7 +71,7 @@ abstract public class Model {
         }
     }
     
-    public Model(String where, String... params) {
+    public Model(String where, boolean bFirst, String... params) {
         try {
             PreparedStatement statement = DatabaseHelper.getConnection().prepareStatement("SELECT * FROM " + getTable() + " WHERE " + where);
             

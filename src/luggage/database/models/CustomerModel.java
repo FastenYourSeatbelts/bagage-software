@@ -25,37 +25,50 @@
 package luggage.database.models;
 
 import com.mysql.jdbc.StringUtils;
-import luggage.security.Permissions;
 
 /**
- * User Model
+ * Customer Model
  *
- * A class that maps the users table
+ * A class that maps the customers table
  *
  * @package luggage.database.models
  * @author Tijme Gommers
  */
-public class UserModel extends Model {
-    
-    public static final String ROLE_EMPLOYEE = "employee";
-    public static final String ROLE_MODERATOR = "moderator";
-    public static final String ROLE_MANAGER = "manager";
-
-    public UserModel() {
+public class CustomerModel extends Model {
+ 
+    public CustomerModel() {
         
     }
     
-    public UserModel(int id) {
+    public CustomerModel(int id) {
         super(id);
     }
     
-    public UserModel(String where, boolean bFirst, String... params) {
+    public CustomerModel(String where, boolean bFirst, String... params) {
         super(where, bFirst, params);
     }
 
     @Override
     protected String getTable() {
-        return "users";
+        return "customers";
+    }
+   
+    /**
+     * Return the insurer_id of the current row
+     * 
+     * @return 
+     */
+    public int getInsurerId() {
+        return Integer.parseInt(row.get("insurer_id"));
+    }
+   
+    /**
+     * Set the insurer_id of the current row
+     * 
+     * @param insurer_id 
+     */
+    public void setInsurerId(String insurer_id) {
+        row.put("insurer_id", insurer_id);
     }
    
     /**
@@ -113,61 +126,7 @@ public class UserModel extends Model {
     }
    
     /**
-     * Return the username of the current row
-     * 
-     * @return 
-     */
-    public String getUsername() {
-        return row.get("username");
-    }
-   
-    /**
-     * Set the username of the current row
-     * 
-     * @param username 
-     */
-    public void setUsername(String username) {
-        row.put("username", username);
-    }
-   
-    /**
-     * Return the (hash) password of the current row
-     * 
-     * @return 
-     */
-    public String getPassword() {
-        return row.get("password");
-    }
-   
-    /**
-     * Set the password of the current row
-     * 
-     * @param password 
-     */
-    public void setPassword(String password) {
-        row.put("password", password);
-    }
-   
-    /**
-     * Return the role of the current row
-     * 
-     * @return 
-     */
-    public String getRole() {
-        return row.get("role");
-    }
-   
-    /**
-     * Set the role of the current row
-     * 
-     * @param role 
-     */
-    public void setRole(String role) {
-        row.put("role", role);
-    }
-    
-    /**
-     * Return the fullname of a user
+     * Return the customer of a user
      * 
      * @return;
      */
@@ -188,22 +147,13 @@ public class UserModel extends Model {
     }
     
     /**
-     * Check if a user has permissions on the given operation
+     * Return the insurer of a customer
      * 
-     * @param operation
-     * 
-     * @return true if the user has permissions
+     * @return InsurerModel
      */
-    public boolean hasPermissionsOn(String operation) {
-        switch(getRole()) {
-            case ROLE_EMPLOYEE:
-                return Permissions.EMPLOYEE_PERMISSIONS.contains(operation);
-            case ROLE_MODERATOR:
-                return Permissions.MODERATOR_PERMISSIONS.contains(operation);
-            case ROLE_MANAGER:
-                return Permissions.MANAGER_PERMISSIONS.contains(operation);
-        }
-        
-        return false;
+    public InsurerModel getInsurer()
+    {
+        return new InsurerModel(getInsurerId());
     }
+    
 }
