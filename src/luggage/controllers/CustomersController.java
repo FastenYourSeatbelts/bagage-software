@@ -24,6 +24,7 @@
  */
 package luggage.controllers;
 
+import java.awt.event.KeyEvent;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -33,6 +34,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import luggage.database.models.CustomerModel;
 import luggage.database.models.Model;
@@ -65,7 +67,23 @@ public class CustomersController implements Initializable {
     @FXML
     private TableColumn tableViewEmail;
     
-    private final ObservableList<CustomerModel> data = FXCollections.observableArrayList();   
+    @FXML
+    private TextField searchbox;
+    
+    @FXML
+    protected void onKeyTyped(){ 
+        String[] params = new String[6];
+        params[0] = "%" + searchbox.getText() + "%";
+        params[1] = "%" + searchbox.getText() + "%";
+        params[2] = "%" + searchbox.getText() + "%";
+        params[3] = "%" + searchbox.getText() + "%";
+        params[4] = "%" + searchbox.getText() + "%";
+        params[5] = "%" + searchbox.getText() + "%";
+        
+        resetTableView("firstname LIKE ? OR lastname LIKE ? OR address LIKE ? OR residence LIKE ? or postalcode LIKE ? OR email LIKE ?", params);
+    }
+    
+    private ObservableList<CustomerModel> data = FXCollections.observableArrayList();   
 
     
     /**
@@ -76,13 +94,14 @@ public class CustomersController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        resetTableView();
+        resetTableView("", new String[0]);
     }
     
-    public void resetTableView() {
+    public void resetTableView(String where, String... params) {
         CustomerModel customers = new CustomerModel();
-        List<Model> allCustomers = customers.findAll();
-        
+        List<Model> allCustomers = customers.findAll(where, params);
+       
+        data = FXCollections.observableArrayList(); 
         for(int i = 0; i < allCustomers.size(); i ++)
         {
             CustomerModel customer = (CustomerModel) allCustomers.get(i);
@@ -95,6 +114,7 @@ public class CustomersController implements Initializable {
         tableViewPhone.setCellValueFactory(new PropertyValueFactory("telephone"));
         tableViewEmail.setCellValueFactory(new PropertyValueFactory("email"));
                     
+        
         customerTableView.setItems(data);
     }
    
