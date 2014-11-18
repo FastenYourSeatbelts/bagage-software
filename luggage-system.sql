@@ -147,6 +147,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `firstname`, `middlename`, `lastname`, `role`, `gender`, `address`, `postalcode`, `residence`, `telephone`, `mobile`) VALUES
 (1, 'admin', '7a8d0e81b9e73f3e39cbaccfac16097a8c88e6bddf068160946115bfc31ff59e81533b292f5cafd3be42f6980aced7b8791f0738a91717f62f3f542a535c2e51', 'Tijme', '', 'Gommers', 'employee', 'male', '', '', '', '', '');
+(2, 'moderator', '7a8d0e81b9e73f3e39cbaccfac16097a8c88e6bddf068160946115bfc31ff59e81533b292f5cafd3be42f6980aced7b8791f0738a91717f62f3f542a535c2e51', 'Moderator', '', 'Nick', 'moderator', 'male', '', '', '', '', '');
+(3, 'manager', '7a8d0e81b9e73f3e39cbaccfac16097a8c88e6bddf068160946115bfc31ff59e81533b292f5cafd3be42f6980aced7b8791f0738a91717f62f3f542a535c2e51', 'Manager', '', '', 'manager', 'male', '', '', '', '', '');
+(4, 'employee', '7a8d0e81b9e73f3e39cbaccfac16097a8c88e6bddf068160946115bfc31ff59e81533b292f5cafd3be42f6980aced7b8791f0738a91717f62f3f542a535c2e51', 'Employee', '', '', 'employee', 'male', '', '', '', '', '');
 
 --
 -- Constraints for dumped tables
