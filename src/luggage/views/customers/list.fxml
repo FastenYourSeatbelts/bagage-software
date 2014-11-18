@@ -20,7 +20,7 @@
             <TableColumn fx:id="tableViewEmail" prefWidth="171.0" text="Email" />
         </columns>
       </TableView>
-      <TextField fx:id="searchbox" maxWidth="-Infinity" onKeyTyped="#onKeyTyped" prefHeight="26.0" prefWidth="150.0" promptText="Search…" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+      <TextField fx:id="searchbox" maxWidth="-Infinity" onKeyReleased="#onKeyReleased" prefHeight="26.0" prefWidth="150.0" promptText="Search…" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
          <font>
             <Font size="12.0" />
          </font>

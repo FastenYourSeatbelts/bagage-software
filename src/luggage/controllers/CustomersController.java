@@ -71,16 +71,37 @@ public class CustomersController implements Initializable {
     private TextField searchbox;
     
     @FXML
-    protected void onKeyTyped(){ 
-        String[] params = new String[6];
-        params[0] = "%" + searchbox.getText() + "%";
-        params[1] = "%" + searchbox.getText() + "%";
-        params[2] = "%" + searchbox.getText() + "%";
-        params[3] = "%" + searchbox.getText() + "%";
-        params[4] = "%" + searchbox.getText() + "%";
-        params[5] = "%" + searchbox.getText() + "%";
+    protected void onKeyReleased()  {
         
-        resetTableView("firstname LIKE ? OR lastname LIKE ? OR address LIKE ? OR residence LIKE ? or postalcode LIKE ? OR email LIKE ?", params);
+        String[] keywords = searchbox.getText().split("\\s+");
+        
+        String[] params = new String[4 * keywords.length];
+        boolean firstColumn = true;
+        String query = "";
+        
+        for(int i = 0; i < keywords.length; i ++)
+        {
+            if(firstColumn) {
+                params[0 + i] = "%" + keywords[i] + "%";
+                query += "firstname LIKE ?";
+            } else {
+                params[0 + i] = "%" + keywords[i] + "%";
+                query += " OR firstname LIKE ?";
+            }
+            
+            params[1 + i] = "%" + keywords[i] + "%";
+            query += " OR lastname LIKE ?";
+            
+            params[2 + i] = "%" + keywords[i] + "%";
+            query += " OR address LIKE ?";
+ 
+            params[3 + i] = "%" + keywords[i] + "%";
+            query += " OR email LIKE ?";
+            
+            firstColumn = false;
+        }
+        
+        resetTableView(query, params);
     }
     
     private ObservableList<CustomerModel> data = FXCollections.observableArrayList();   
