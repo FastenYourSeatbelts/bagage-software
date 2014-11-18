@@ -80,12 +80,8 @@ public class CustomersController implements Initializable {
         params[4] = "%" + searchbox.getText() + "%";
         params[5] = "%" + searchbox.getText() + "%";
         
-        
-        resetTableView("firstname LIKE ? or lastname LIKE ? or address LIKE ? "
-                + "or residence LIKE ? or postalcode LIKE ? or email LIKE ?", params);
+        resetTableView("firstname LIKE ? OR lastname LIKE ? OR address LIKE ? OR residence LIKE ? or postalcode LIKE ? OR email LIKE ?", params);
     }
-    
-    
     
     private ObservableList<CustomerModel> data = FXCollections.observableArrayList();   
 
