@@ -82,18 +82,5 @@ public class LocationModel extends Model {
     public int getCityId() {
         return Integer.parseInt(row.get("city_id"));
     }
-   
-    /**
-     * Set the city_id of the current row
-     * 
-     * @param city_id 
-     */
-    public void setCityId(String city_id) {
-        row.put("city_id", city_id);
-    }
-    
-    public CityModel getCity() {
-        return new CityModel(getCityId());
-    }
  
 }

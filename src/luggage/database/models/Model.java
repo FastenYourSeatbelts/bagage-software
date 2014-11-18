@@ -99,9 +99,21 @@ abstract public class Model {
         }
     }
     
+    public List<Model> findAll() {
+        return findAll("", new String[0]);
+    }
+    
     public List<Model> findAll(String where, String... params) {
         try {
-            PreparedStatement statement = DatabaseHelper.getConnection().prepareStatement("SELECT * FROM " + getTable() + " WHERE " + where);
+            
+            String query = "SELECT * FROM " + getTable();
+                    
+            if(!where.equals(""))
+            {
+                query += " WHERE " + where;
+            }
+            
+            PreparedStatement statement = DatabaseHelper.getConnection().prepareStatement(query);
 
             for(int i = 0; i < params.length; i ++) {
                 statement.setString((i + 1), params[i]);
@@ -110,14 +122,12 @@ abstract public class Model {
             ResultSet rs = statement.executeQuery();
             ResultSetMetaData rsmd = rs.getMetaData();
 
-            rs.first();
-            
             
             ArrayList<Model> rowList = new ArrayList<>();
             
-            while (rs.next())
+            while(rs.next())
             {
-                Model model = getModel(1);
+                Model model = getModel(Integer.parseInt(rs.getString("id")));
                 rowList.add(model);
             }
             

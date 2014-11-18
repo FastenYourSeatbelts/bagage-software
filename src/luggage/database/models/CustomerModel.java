@@ -161,4 +161,14 @@ public class CustomerModel extends Model {
         return new InsurerModel(getInsurerId());
     }
     
+    /**
+     * Return the insurer name of a customer
+     * 
+     * @return
+     */
+    public String getInsurerName()
+    {
+        return new InsurerModel(getInsurerId()).getName();
+    }
+    
 }

@@ -25,8 +25,17 @@
 package luggage.controllers;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import luggage.database.models.CustomerModel;
+import luggage.database.models.Model;
 
 /**
  * CustomersController
@@ -38,6 +47,27 @@ import javafx.fxml.Initializable;
  */
 public class CustomersController implements Initializable {
 
+    @FXML
+    private TableView customerTableView;
+    
+    @FXML
+    private TableColumn tableViewName;
+    
+    @FXML
+    private TableColumn tableViewInsurer;
+    
+    @FXML
+    private TableColumn tableViewAddress;
+    
+    @FXML
+    private TableColumn tableViewPhone;
+    
+    @FXML
+    private TableColumn tableViewEmail;
+    
+    private final ObservableList<CustomerModel> data = FXCollections.observableArrayList();   
+
+    
     /**
      * Called on controller start
      * 
@@ -46,6 +76,23 @@ public class CustomersController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        CustomerModel customers = new CustomerModel();
+        List<Model> allCustomers = customers.findAll();
+        
+        for(int i = 0; i < allCustomers.size(); i ++)
+        {
+            CustomerModel customer = (CustomerModel) allCustomers.get(i);
+            data.add(customer);
+        }
+        
+        tableViewName.setCellValueFactory(new PropertyValueFactory("fullname"));
+        tableViewInsurer.setCellValueFactory(new PropertyValueFactory("insurerName"));
+        tableViewAddress.setCellValueFactory(new PropertyValueFactory("fullname"));
+        tableViewPhone.setCellValueFactory(new PropertyValueFactory("fullname"));
+        tableViewEmail.setCellValueFactory(new PropertyValueFactory("fullname"));
+                    
+        customerTableView.setItems(data);
         
     }
    
