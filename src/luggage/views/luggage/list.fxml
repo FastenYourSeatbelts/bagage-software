@@ -1,11 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
 <?import java.lang.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="luggage.controllers.LuggageController">
-   <children>
-      <Label text="Luggage Controller" />
-   </children>
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="luggage.controllers.LuggageController" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <children>
+        <TableView fx:id="luggageTableView" layoutY="50.0" maxWidth="-Infinity" prefWidth="800.0" AnchorPane.bottomAnchor="53.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="53.0">
+            <columns>
+                <TableColumn fx:id="tableViewId" prefWidth="202.0" text="ID" />
+                <TableColumn fx:id="tableViewStatus" prefWidth="202.0" text="Status" />
+                <TableColumn fx:id="tableViewLocation" minWidth="0.0" prefWidth="253.0" text="Location" />
+                <TableColumn fx:id="tableViewTags" prefWidth="173.0" text="Tags" />
+                <TableColumn fx:id="tableViewDate" prefWidth="171.0" text="Date" />
+            </columns>
+        </TableView>
+        <TextField fx:id="searchbox" layoutX="636.0" layoutY="14.0" promptText="Search…" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="14.0">
+            <font>
+                <Font size="12.0" />
+            </font>
+        </TextField>
+        <Button layoutX="14.0" layoutY="461.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="26.0" prefWidth="65.0" text="New" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="14.0">
+
+    
+            <font>
+                <Font size="12.0" />
+            </font>
+        </Button>
+        <Button layoutX="99.0" layoutY="460.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="26.0" prefWidth="65.0" text="Edit" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="90.0">
+
+    
+            <font>
+                <Font size="12.0" />
+            </font>
+        </Button>
+        <Button layoutX="721.0" layoutY="460.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="26.0" prefWidth="65.0" style="-fx-background-color: #BB1A1D;" text="Remove" textFill="WHITE" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
+
+    
+            <font>
+                <Font size="12.0" />
+            </font>
+            <effect>
+                <ColorAdjust />
+            </effect>
+        </Button>
+        <Button layoutX="168.0" layoutY="461.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="26.0" prefWidth="63.0" text="View" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="168.0" />
+
+    
+    </children>
 </AnchorPane>

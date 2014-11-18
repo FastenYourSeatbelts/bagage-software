@@ -63,33 +63,6 @@ public class LuggageModel extends Model {
     }
    
     /**
-     * Return the customer_id of the current row
-     * 
-     * @return 
-     */
-    public int getCustomerId() {
-        return Integer.parseInt(row.get("customer_id"));
-    }
-    
-    /**
-     * Return the CustomerModel of the current row
-     * 
-     * @return LocationModel
-     */
-    public CustomerModel getCustomer() {
-        return new CustomerModel(getCustomerId());
-    }
-   
-    /**
-     * Set the customer_id of the current row
-     * 
-     * @param customer_id
-     */
-    public void setCustomerId(String customer_id) {
-        row.put("customer_id", customer_id);
-    }
-   
-    /**
      * Return the location_id of the current row
      * 
      * @return 
@@ -105,6 +78,15 @@ public class LuggageModel extends Model {
      */
     public LocationModel getLocation() {
         return new LocationModel(getLocationId());
+    }
+    
+    /**
+     * Return the location name of the current row
+     * 
+     * @return locaiton
+     */
+    public String getLocationName() {
+        return getLocation().getName();
     }
    
     /**
