@@ -72,16 +72,17 @@ public class CustomersController implements Initializable {
     
     @FXML
     protected void onKeyTyped(){ 
-        String[] params = new String[5];
+        String[] params = new String[6];
         params[0] = "%" + searchbox.getText() + "%";
         params[1] = "%" + searchbox.getText() + "%";
         params[2] = "%" + searchbox.getText() + "%";
         params[3] = "%" + searchbox.getText() + "%";
         params[4] = "%" + searchbox.getText() + "%";
+        params[5] = "%" + searchbox.getText() + "%";
         
         
         resetTableView("firstname LIKE ? or lastname LIKE ? or address LIKE ? "
-                + "or residence LIKE ? or postalcode LIKE ?", params);
+                + "or residence LIKE ? or postalcode LIKE ? or email LIKE ?", params);
     }
     
     
