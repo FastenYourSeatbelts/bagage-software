@@ -10,52 +10,52 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="luggage.controllers.CustomersController" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-   <children>
-      <TableView fx:id="customerTableView" layoutY="50.0" AnchorPane.bottomAnchor="53.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="53.0">
-        <columns>
-            <TableColumn fx:id="tableViewName" prefWidth="202.0" text="Name" />
-            <TableColumn fx:id="tableViewInsurer" prefWidth="253.0" text="Insurer" />
-            <TableColumn fx:id="tableViewAddress" prefWidth="253.0" text="Address" />
-            <TableColumn fx:id="tableViewPhone" prefWidth="173.0" text="Phone" />
-            <TableColumn fx:id="tableViewEmail" prefWidth="171.0" text="Email" />
-        </columns>
-      </TableView>
-      <TextField fx:id="searchbox" maxWidth="-Infinity" prefHeight="26.0" prefWidth="150.0" promptText="Search…" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
-         <font>
-            <Font size="12.0" />
-         </font>
-      </TextField>
-      <Button layoutX="14.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" text="New" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
-         <font>
-            <Font size="12.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button layoutX="14.0" layoutY="460.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" text="Edit" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0">
-         <font>
-            <Font size="12.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button layoutX="716.0" layoutY="460.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #BB1A1D;" text="Remove" textFill="WHITE" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
-         <font>
-            <Font size="12.0" />
-         </font>
-         <effect>
-            <ColorAdjust />
-         </effect>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button layoutX="93.0" layoutY="460.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" text="View" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="91.0">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-   </children>
+    <children>
+        <TableView fx:id="customerTableView" layoutY="50.0" AnchorPane.bottomAnchor="53.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="53.0">
+            <columns>
+                <TableColumn fx:id="tableViewName" prefWidth="202.0" text="Name" />
+                <TableColumn fx:id="tableViewInsurer" prefWidth="253.0" text="Insurer" />
+                <TableColumn fx:id="tableViewAddress" prefWidth="253.0" text="Address" />
+                <TableColumn fx:id="tableViewPhone" prefWidth="173.0" text="Phone" />
+                <TableColumn fx:id="tableViewEmail" prefWidth="171.0" text="Email" />
+            </columns>
+        </TableView>
+        <TextField fx:id="searchbox" maxWidth="-Infinity" prefHeight="26.0" prefWidth="150.0" promptText="Search…" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+            <font>
+                <Font size="12.0" />
+            </font>
+        </TextField>
+        <Button layoutX="14.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" text="New" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+            <font>
+                <Font size="12.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+        <Button layoutX="14.0" layoutY="460.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" text="Edit" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0">
+            <font>
+                <Font size="12.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+        <Button layoutX="716.0" layoutY="460.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #BB1A1D;" text="Remove" textFill="WHITE" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
+            <font>
+                <Font size="12.0" />
+            </font>
+            <effect>
+                <ColorAdjust />
+            </effect>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+        <Button layoutX="93.0" layoutY="460.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" text="View" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="91.0">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+    </children>
 </AnchorPane>

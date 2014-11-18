@@ -25,8 +25,17 @@
 package luggage.controllers;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import luggage.database.models.UserModel;
+import luggage.database.models.Model;
 
 /**
  * UsersController
@@ -34,10 +43,28 @@ import javafx.fxml.Initializable;
  * Controller for users/list.fxml
  *
  * @package luggage.controllers
- * @author Tijme Gommers
+ * @author Alexander + Nick
  */
 public class UsersController implements Initializable {
 
+    @FXML
+    private TableView userTableView;
+    
+    @FXML
+    private TableColumn tableViewUsername;
+    
+    @FXML
+    private TableColumn tableViewName;
+    
+    @FXML
+    private TableColumn tableViewWorkplace;
+    
+    @FXML
+    private TableColumn tableViewRole;
+    
+    private final ObservableList<UserModel> data = FXCollections.observableArrayList();   
+
+    
     /**
      * Called on controller start
      * 
@@ -46,7 +73,25 @@ public class UsersController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        resetTableView();
+    }
+    
+    public void resetTableView() {
+        UserModel users = new UserModel();
+        List<Model> allUsers = users.findAll();
         
+        for(int i = 0; i < allUsers.size(); i ++)
+        {
+            UserModel user = (UserModel) allUsers.get(i);
+            data.add(user);
+        }
+        
+        tableViewUsername.setCellValueFactory(new PropertyValueFactory("username"));
+        tableViewName.setCellValueFactory(new PropertyValueFactory("fullname"));
+        tableViewWorkplace.setCellValueFactory(new PropertyValueFactory("workplace"));
+        tableViewRole.setCellValueFactory(new PropertyValueFactory("role"));
+                    
+        userTableView.setItems(data);
     }
    
 }
