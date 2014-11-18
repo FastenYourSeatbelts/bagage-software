@@ -171,4 +171,130 @@ public class CustomerModel extends Model {
         return new InsurerModel(getInsurerId()).getName();
     }
     
+    /**
+     * Return the gender of the current row
+     * 
+     * @return 
+     */
+    public String getGender() {
+        return row.get("gender");
+    }
+   
+    /**
+     * Set the gender of the current row
+     * 
+     * @param gender 
+     */
+    public void setGender(String gender) {
+        row.put("gender", gender);
+    }
+    
+    /**
+     * Return the address of the current row
+     * 
+     * @return 
+     */
+    public String getAddress() {
+        return row.get("address");
+    }
+   
+    /**
+     * Set the address of the current row
+     * 
+     * @param address 
+     */
+    public void setAddress(String address) {
+        row.put("address", address);
+    }
+    
+    /**
+     * Return the postal code of the current row
+     * 
+     * @return 
+     */
+    public String getPostalCode() {
+        return row.get("postalCode");
+    }
+   
+    /**
+     * Set the postal code of the current row
+     * 
+     * @param postalCode 
+     */
+    public void setPostalCode(String postalCode) {
+        row.put("postalCode", postalCode);
+    }
+    
+    /**
+     * Return the residence of the current row
+     * 
+     * @return 
+     */
+    public String getResidence() {
+        return row.get("residence");
+    }
+   
+    /**
+     * Set the residence of the current row
+     * 
+     * @param residence 
+     */
+    public void setResidence(String residence) {
+        row.put("residence", residence);
+    }
+    
+    /**
+     * Return the email address of the current row
+     * 
+     * @return 
+     */
+    public String getEmail() {
+        return row.get("email");
+    }
+   
+    /**
+     * Set the email address of the current row
+     * 
+     * @param email 
+     */
+    public void setEmail(String email) {
+        row.put("email", email);
+    }
+    
+    /**
+     * Return the telephone number of the current row
+     * 
+     * @return 
+     */
+    public String getTelephone() {
+        return row.get("telephone");
+    }
+   
+    /**
+     * Set the telephone number of the current row
+     * 
+     * @param telephone 
+     */
+    public void setTelephone(String telephone) {
+        row.put("telephone", telephone);
+    }
+    
+    /**
+     * Return the mobile number of the current row
+     * 
+     * @return 
+     */
+    public String getMobile() {
+        return row.get("mobile");
+    }
+   
+    /**
+     * Set the mobile of the current row
+     * 
+     * @param mobile 
+     */
+    public void setMobile(String mobile) {
+        row.put("mobile", mobile);
+    }
+    
 }
