@@ -48,9 +48,12 @@ public class MainActivity extends Application {
     public void start(Stage primaryStage) throws Exception {
         StageHelper.addStage("login", this.getClass());
         
-        (new Thread(() -> {
-            DatabaseHelper.openConnection();
-        })).start();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                  DatabaseHelper.openConnection();
+            }
+        }).start();
         
         /*
         UserModel tijme = new UserModel();
