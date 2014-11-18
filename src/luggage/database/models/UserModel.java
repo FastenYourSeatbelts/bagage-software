@@ -211,4 +211,112 @@ public class UserModel extends Model {
         
         return false;
     }
+   
+    /**
+     * Return the gender of the current row
+     * 
+     * @return 
+     */
+    public String getGender() {
+        return row.get("gender");
+    }
+   
+    /**
+     * Set the gender of the current row
+     * 
+     * @param gender 
+     */
+    public void setGender(String gender) {
+        row.put("gender", gender);
+    }
+   
+    /**
+     * Return the address of the current row
+     * 
+     * @return 
+     */
+    public String getAddress() {
+        return row.get("address");
+    }
+   
+    /**
+     * Set the address of the current row
+     * 
+     * @param address 
+     */
+    public void setAddress(String address) {
+        row.put("address", address);
+    }
+   
+    /**
+     * Return the postalcode of the current row
+     * 
+     * @return 
+     */
+    public String getPostalcode() {
+        return row.get("postalcode");
+    }
+   
+    /**
+     * Set the postalcode of the current row
+     * 
+     * @param postalcode 
+     */
+    public void setPostalcode(String postalcode) {
+        row.put("postalcode", postalcode);
+    }
+   
+    /**
+     * Return the residence of the current row
+     * 
+     * @return 
+     */
+    public String getResidence() {
+        return row.get("residence");
+    }
+   
+    /**
+     * Set the residence of the current row
+     * 
+     * @param residence 
+     */
+    public void setResidence(String residence) {
+        row.put("residence", residence);
+    }
+   
+    /**
+     * Return the telephone of the current row
+     * 
+     * @return 
+     */
+    public String getTelephone() {
+        return row.get("telephone");
+    }
+   
+    /**
+     * Set the telephone of the current row
+     * 
+     * @param telephone 
+     */
+    public void setTelephone(String telephone) {
+        row.put("telephone", telephone);
+    }
+   
+    /**
+     * Return the mobile of the current row
+     * 
+     * @return 
+     */
+    public String getMobile() {
+        return row.get("mobile");
+    }
+   
+    /**
+     * Set the mobile of the current row
+     * 
+     * @param mobile 
+     */
+    public void setMobile(String mobile) {
+        row.put("mobile", mobile);
+    }
 }

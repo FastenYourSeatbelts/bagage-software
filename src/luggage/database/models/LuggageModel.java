@@ -33,6 +33,12 @@ package luggage.database.models;
  * @author Tijme Gommers
  */
 public class LuggageModel extends Model {
+    
+    public static final String STATUS_LOST = "lost";
+    
+    public static final String STATUS_FOUND = "found";
+    
+    public static final String STATUS_RESOLVED = "resolved";
 
     public LuggageModel() {
         
@@ -126,6 +132,60 @@ public class LuggageModel extends Model {
      */
     public void setStatus(String status) {
         row.put("status", status);
+    }
+   
+    /**
+     * Return the tags of the current row
+     * 
+     * @return 
+     */
+    public String getTags() {
+        return row.get("tags");
+    }
+   
+    /**
+     * Set the tags of the current row
+     * 
+     * @param tags
+     */
+    public void setTags(String tags) {
+        row.put("tags", tags);
+    }
+   
+    /**
+     * Return the notes of the current row
+     * 
+     * @return 
+     */
+    public String getNotes() {
+        return row.get("notes");
+    }
+   
+    /**
+     * Set the notes of the current row
+     * 
+     * @param notes
+     */
+    public void setNotes(String notes) {
+        row.put("notes", notes);
+    }
+   
+    /**
+     * Return the datetime of the current row
+     * 
+     * @return 
+     */
+    public String getDatetime() {
+        return row.get("datetime");
+    }
+   
+    /**
+     * Set the datetime of the current row
+     * 
+     * @param datetime
+     */
+    public void setDatetime(String datetime) {
+        row.put("datetime", datetime);
     }
  
 }
