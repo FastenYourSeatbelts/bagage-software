@@ -76,7 +76,10 @@ public class CustomersController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        resetTableView();
+    }
+    
+    public void resetTableView() {
         CustomerModel customers = new CustomerModel();
         List<Model> allCustomers = customers.findAll();
         
@@ -88,12 +91,11 @@ public class CustomersController implements Initializable {
         
         tableViewName.setCellValueFactory(new PropertyValueFactory("fullname"));
         tableViewInsurer.setCellValueFactory(new PropertyValueFactory("insurerName"));
-        tableViewAddress.setCellValueFactory(new PropertyValueFactory("fullname"));
-        tableViewPhone.setCellValueFactory(new PropertyValueFactory("fullname"));
-        tableViewEmail.setCellValueFactory(new PropertyValueFactory("fullname"));
+        tableViewAddress.setCellValueFactory(new PropertyValueFactory("address"));
+        tableViewPhone.setCellValueFactory(new PropertyValueFactory("telephone"));
+        tableViewEmail.setCellValueFactory(new PropertyValueFactory("email"));
                     
         customerTableView.setItems(data);
-        
     }
    
 }
