@@ -45,10 +45,10 @@ import javafx.stage.Stage;
 public class StageHelper {
     
     public static void addStage(String sNewStage, Class oCurrentClass) {
-        StageHelper.addStage(sNewStage, oCurrentClass, true);
+        StageHelper.addStage(sNewStage, oCurrentClass, true, false);
     }
     
-    public static void addStage(String sNewStage, Class oCurrentClass, boolean bMaximized) {
+    public static void addStage(String sNewStage, Class oCurrentClass, boolean bMaximized, boolean bLocked) {
         Parent root = null;
         try {
             root = FXMLLoader.load(oCurrentClass.getResource("/luggage/views/" + sNewStage + ".fxml"));
@@ -67,6 +67,13 @@ public class StageHelper {
         oNewStage.setTitle(AppConfig.ApplicationName + " " + sNewStage);
         oNewStage.setMinHeight(AppConfig.MinHeight);
         oNewStage.setMinWidth(AppConfig.MinWidth);
+        
+        if(bLocked)
+        {
+            oNewStage.setMaxHeight(AppConfig.MinHeight);
+            oNewStage.setMaxWidth(AppConfig.MinWidth);
+        }
+        
         oNewStage.setMaximized(bMaximized);
         
         oNewStage.show();
@@ -74,6 +81,10 @@ public class StageHelper {
 
     public static void replaceStage(Stage oCurrentStage, String sNewStage, Class oCurrentClass) {
         StageHelper.addStage(sNewStage, oCurrentClass);
+        oCurrentStage.close();
+    }
+
+    public static void closeStage(Stage oCurrentStage) {
         oCurrentStage.close();
     }
 

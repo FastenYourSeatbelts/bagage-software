@@ -24,7 +24,6 @@
  */
 package luggage.controllers;
 
-import java.awt.event.KeyEvent;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -32,17 +31,23 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import luggage.database.models.CustomerModel;
 import luggage.database.models.Model;
+import luggage.helpers.StageHelper;
 
 /**
  * CustomersController
  *
  * Controller for customers/list.fxml
+ * Controller for customers/add.fxml
+ * Controller for customers/edit.fxml
  *
  * @package luggage.controllers
  * @author Tijme Gommers
@@ -50,30 +55,106 @@ import luggage.database.models.Model;
 public class CustomersController implements Initializable {
 
     @FXML
-    private TableView customerTableView;
+    private TableView listTableView;
     
     @FXML
-    private TableColumn tableViewName;
+    private TableColumn listTableViewName;
     
     @FXML
-    private TableColumn tableViewInsurer;
+    private TableColumn listTableViewInsurer;
     
     @FXML
-    private TableColumn tableViewAddress;
+    private TableColumn listTableViewAddress;
     
     @FXML
-    private TableColumn tableViewPhone;
+    private TableColumn listTableViewPhone;
     
     @FXML
-    private TableColumn tableViewEmail;
+    private TableColumn listTableViewEmail;
     
     @FXML
-    private TextField searchbox;
+    private TextField listSearchField;
     
     @FXML
-    protected void onKeyReleased()  {
+    private Button newAdd;
+    
+    @FXML
+    private Button newReset;
+    
+    @FXML
+    private Button newCancel;
+    
+    @FXML
+    private TextField addFirstname;
+    
+    @FXML
+    private TextField addMiddlename;
+    
+    @FXML
+    private TextField addLastname;
+    
+    @FXML
+    private ChoiceBox addGender;
+    
+    @FXML
+    private TextField addAddress;
+    
+    @FXML
+    private TextField addPostalcode;
+    
+    @FXML
+    private TextField addResidence;
+    
+    @FXML
+    private TextField addEmail;
+    
+    @FXML
+    private TextField addTelephone;
+    
+    @FXML
+    private TextField addMobile;
+    
+    private ObservableList<CustomerModel> listData = FXCollections.observableArrayList();
+    
+    /**
+     * Called on controller start
+     * 
+     * @param url
+     * @param rb 
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
         
-        String[] keywords = searchbox.getText().split("\\s+");
+        // ListView
+        if(listTableView != null)
+        {
+            listResetTableView("", new String[0]);
+        }
+    }
+    
+    public void listResetTableView(String where, String... params) {
+        CustomerModel customers = new CustomerModel();
+        List<Model> allCustomers = customers.findAll(where, params);
+       
+        listData = FXCollections.observableArrayList(); 
+        for(Model allCustomer : allCustomers) {
+            CustomerModel customer = (CustomerModel) allCustomer;
+            listData.add(customer);
+        }
+        
+        listTableViewName.setCellValueFactory(new PropertyValueFactory("fullname"));
+        listTableViewInsurer.setCellValueFactory(new PropertyValueFactory("insurerName"));
+        listTableViewAddress.setCellValueFactory(new PropertyValueFactory("address"));
+        listTableViewPhone.setCellValueFactory(new PropertyValueFactory("telephone"));
+        listTableViewEmail.setCellValueFactory(new PropertyValueFactory("email"));
+                    
+        listTableView.setItems(listData);
+    }
+    
+    @FXML
+    protected void listOnSearch()  {
+        
+        String[] keywords = listSearchField.getText().split("\\s+");
         
         String[] params = new String[4 * keywords.length];
         boolean firstColumn = true;
@@ -101,42 +182,33 @@ public class CustomersController implements Initializable {
             firstColumn = false;
         }
         
-        resetTableView(query, params);
+        listResetTableView(query, params);
     }
     
-    private ObservableList<CustomerModel> data = FXCollections.observableArrayList();   
-
-    
-    /**
-     * Called on controller start
-     * 
-     * @param url
-     * @param rb 
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        resetTableView("", new String[0]);
+    @FXML
+    public void listNew() {
+        StageHelper.addStage("customers/add", this.getClass(), false, true);
     }
     
-    public void resetTableView(String where, String... params) {
-        CustomerModel customers = new CustomerModel();
-        List<Model> allCustomers = customers.findAll(where, params);
-       
-        data = FXCollections.observableArrayList(); 
-        for(int i = 0; i < allCustomers.size(); i ++)
-        {
-            CustomerModel customer = (CustomerModel) allCustomers.get(i);
-            data.add(customer);
-        }
+    public void newCancel() {
+        Stage addStage = (Stage) newCancel.getScene().getWindow();
+        StageHelper.closeStage(addStage);
+    }
+    
+    public void newReset() {
+        addFirstname.setText("");
+        addMiddlename.setText("");
+        addLastname.setText("");
+        addAddress.setText("");
+        addPostalcode.setText("");
+        addResidence.setText("");
+        addEmail.setText("");
+        addTelephone.setText("");
+        addMobile.setText("");
+    }
+    
+    public void newSave() {
         
-        tableViewName.setCellValueFactory(new PropertyValueFactory("fullname"));
-        tableViewInsurer.setCellValueFactory(new PropertyValueFactory("insurerName"));
-        tableViewAddress.setCellValueFactory(new PropertyValueFactory("address"));
-        tableViewPhone.setCellValueFactory(new PropertyValueFactory("telephone"));
-        tableViewEmail.setCellValueFactory(new PropertyValueFactory("email"));
-                    
-        
-        customerTableView.setItems(data);
     }
    
 }
