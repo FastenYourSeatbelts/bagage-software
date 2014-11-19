@@ -192,8 +192,8 @@ public class UsersController extends BaseController implements Initializable {
         List<Model> allUsers = users.findAll(where, params);
 
         data = FXCollections.observableArrayList();
-        for (int i = 0; i < allUsers.size(); i++) {
-            UserModel user = (UserModel) allUsers.get(i);
+        for (Model allUser : allUsers) {
+            UserModel user = (UserModel) allUser;
             data.add(user);
         }
 
