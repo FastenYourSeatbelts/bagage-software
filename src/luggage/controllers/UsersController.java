@@ -116,7 +116,8 @@ public class UsersController extends BaseController  implements Initializable {
     @FXML
     private TextField addLastname;
 
-    
+    @FXML
+    private ChoiceBox addGender;
 
     @FXML
     protected void listOnSearch() {
