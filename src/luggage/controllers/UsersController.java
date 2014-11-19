@@ -112,7 +112,7 @@ public class UsersController extends BaseController implements Initializable {
     private TextField addFirstname;
 
     @FXML
-    private TextField addMiddlename;
+    private TextField addPrefix;
 
     @FXML
     private TextField addLastname;
@@ -220,7 +220,7 @@ public class UsersController extends BaseController implements Initializable {
 
     public void newReset() {
         addFirstname.setText("");
-        addMiddlename.setText("");
+        addPrefix.setText("");
         addLastname.setText("");
         addAddress.setText("");
         addPostalcode.setText("");
@@ -240,7 +240,7 @@ public class UsersController extends BaseController implements Initializable {
 
         UserModel users = new UserModel();
         users.setFirstname(addFirstname.getText());
-        users.setMiddlename(addMiddlename.getText());
+        users.setPrefix(addPrefix.getText());
         users.setLastname(addLastname.getText());
         users.setGender(addGender.getSelectionModel().getSelectedItem().toString());
         users.setAddress(addAddress.getText());

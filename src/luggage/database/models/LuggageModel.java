@@ -36,11 +36,11 @@ import com.mysql.jdbc.StringUtils;
  */
 public class LuggageModel extends Model {
     
-    public static final String STATUS_LOST = "lost";
+    public static final String STATUS_MISSING = "Missing";
     
-    public static final String STATUS_FOUND = "found";
+    public static final String STATUS_FOUND = "Found";
     
-    public static final String STATUS_RESOLVED = "resolved";
+    public static final String STATUS_RESOLVED = "Resolved";
 
     public LuggageModel() {
         
@@ -85,7 +85,7 @@ public class LuggageModel extends Model {
     /**
      * Return the location name of the current row
      * 
-     * @return locaiton
+     * @return location
      */
     public String getLocationName() {
         return getLocation().getName();

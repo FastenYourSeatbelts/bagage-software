@@ -99,17 +99,17 @@ public class CustomerModel extends Model {
      * 
      * @return 
      */
-    public String getMiddlename() {
-        return row.get("middlename");
+    public String getPrefix() {
+        return row.get("prefix");
     }
    
     /**
      * Set the middle name of the current row
      * 
-     * @param middlename 
+     * @param prefix 
      */
-    public void setMiddlename(String middlename) {
-        row.put("middlename", middlename);
+    public void setPrefix(String prefix) {
+        row.put("prefix", prefix);
     }
    
     /**
@@ -137,13 +137,13 @@ public class CustomerModel extends Model {
      */
     public String getFullname() {
         String firstname = getFirstname();
-        String middlename = getMiddlename();
+        String prefix = getPrefix();
         String lastname = getLastname();
         
         String fullname = firstname;
         
-        if(!StringUtils.isNullOrEmpty(middlename)) {
-            fullname += " " + middlename;
+        if(!StringUtils.isNullOrEmpty(prefix)) {
+            fullname += " " + prefix;
         }
         
         fullname += " " + lastname;
