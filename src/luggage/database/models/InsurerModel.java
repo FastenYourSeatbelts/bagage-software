@@ -55,6 +55,11 @@ public class InsurerModel extends Model {
     protected String getTable() {
         return "insurers";
     }
+    
+    @Override
+    public String toString() {
+        return getName();
+    }
    
     /**
      * Return the name of the current row

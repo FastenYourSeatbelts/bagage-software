@@ -36,7 +36,7 @@ import javafx.fxml.Initializable;
  * @package luggage.controllers
  * @author Tijme Gommers
  */
-public class MissingLuggageList implements Initializable {
+public class MissingLuggageList extends BaseController  implements Initializable {
 
     /**
      * Called on controller start
