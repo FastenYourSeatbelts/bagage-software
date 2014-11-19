@@ -32,6 +32,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -114,7 +115,12 @@ public class UsersController implements Initializable {
 
     @FXML
     private TextField addLastname;
+    
+    @FXML
+    private ChoiceBox addGender;
 
+    @FXML
+    private ChoiceBox addRole;
     @FXML
     protected void listOnSearch() {
 
