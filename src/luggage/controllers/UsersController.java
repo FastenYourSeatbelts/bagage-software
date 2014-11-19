@@ -52,25 +52,42 @@ import luggage.helpers.StageHelper;
 public class UsersController implements Initializable {
 
     @FXML
-    private TableView userTableView;
+    private TableView listTableView;
 
     @FXML
-    private TableColumn tableViewUsername;
+    private TableColumn listTableViewUsername;
 
     @FXML
-    private TableColumn tableViewName;
+    private TableColumn listTableViewName;
+
+    @FXML
+    private TableColumn listTableViewInsurer;
+
+    @FXML
+    private TableColumn listTableViewAddress;
+
+    @FXML
+    private TableColumn listTableViewPhone;
+
+    @FXML
+    private TableColumn listTableViewEmail;
+
+    @FXML
+    private TableColumn listTableViewWorkplace;
+
+    @FXML
+    private TableColumn listTableViewRole;
+    @FXML
+    private TextField listSearchField;
+
+    @FXML
+    private Button newAdd;
+
+    @FXML
+    private Button newReset;
 
     @FXML
     private Button newCancel;
-
-    @FXML
-    private TableColumn tableViewWorkplace;
-
-    @FXML
-    private TableColumn tableViewRole;
-    @FXML
-    private TextField searchbox;
-
     @FXML
     private TextField addAddress;
 
@@ -101,7 +118,7 @@ public class UsersController implements Initializable {
     @FXML
     protected void listOnSearch() {
 
-        String[] keywords = searchbox.getText().split("\\s+");
+        String[] keywords = listSearchField.getText().split("\\s+");
 
         String[] params = new String[4 * keywords.length];
         boolean firstColumn = true;
@@ -154,12 +171,12 @@ public class UsersController implements Initializable {
             data.add(user);
         }
 
-        tableViewUsername.setCellValueFactory(new PropertyValueFactory("username"));
-        tableViewName.setCellValueFactory(new PropertyValueFactory("fullname"));
-        tableViewWorkplace.setCellValueFactory(new PropertyValueFactory("workplace"));
-        tableViewRole.setCellValueFactory(new PropertyValueFactory("role"));
+        listTableViewUsername.setCellValueFactory(new PropertyValueFactory("username"));
+        listTableViewName.setCellValueFactory(new PropertyValueFactory("fullname"));
+        listTableViewWorkplace.setCellValueFactory(new PropertyValueFactory("workplace"));
+        listTableViewRole.setCellValueFactory(new PropertyValueFactory("role"));
 
-        userTableView.setItems(data);
+        listTableView.setItems(data);
     }
 
     @FXML
