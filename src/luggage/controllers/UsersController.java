@@ -115,6 +115,11 @@ public class UsersController extends BaseController  implements Initializable {
 
     @FXML
     private TextField addLastname;
+    @FXML
+    private ChoiceBox addGender;
+    
+    @FXML
+    private ChoiceBox addRole;
 
     @FXML
     protected void listOnSearch() {
@@ -182,7 +187,7 @@ public class UsersController extends BaseController  implements Initializable {
 
     @FXML
     public void listNew() {
-        StageHelper.addStage("users/add", this.getClass(), false, true);
+        StageHelper.addStage("users/add", this, false, true);
     }
 
     public void newCancel() {
