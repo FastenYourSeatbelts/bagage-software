@@ -125,11 +125,10 @@ public class MissingLuggageController extends BaseController  implements Initial
         List<Model> allLuggage = luggage.findAll(where, params);
         
         data = FXCollections.observableArrayList(); 
-        for(int i = 0; i < allLuggage.size(); i ++){
-            LuggageModel luggage2 = (LuggageModel) allLuggage.get(i);
-            data.add(luggage2);
+        for (Model singleModel : allLuggage) {
+            LuggageModel singleLuggage = (LuggageModel) singleModel;
+            data.add(singleLuggage);
         }
-        
         
         tableViewId.setCellValueFactory(new PropertyValueFactory("id"));
         tableViewStatus.setCellValueFactory(new PropertyValueFactory("status"));

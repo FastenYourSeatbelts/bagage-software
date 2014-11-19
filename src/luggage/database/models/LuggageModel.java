@@ -181,7 +181,7 @@ public class LuggageModel extends Model {
         return row.get("customer_id");
     }
     
-        /**
+    /**
      * Set the customer_id of the current row
      * 
      * @param customer_id
@@ -190,12 +190,12 @@ public class LuggageModel extends Model {
         row.put("customer_id", customer_id);
     }
     
-            /**
+    /**
      * Return the customer_id of the current row
      * 
      * @return 
      */
     public String getCustomerName() {
-        return new CustomerModel(row.get("customer_id")).getFullname()+"xdfdfgdfg";
+        return new CustomerModel(row.get("customer_id")).getFullname();
     }
 }
