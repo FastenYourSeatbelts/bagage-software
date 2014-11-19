@@ -181,7 +181,7 @@ public class UsersController extends BaseController  implements Initializable {
 
     @FXML
     public void listNew() {
-        StageHelper.addStage("users/add", this.getClass(), false, true);
+        StageHelper.addStage("users/add", this, false, true);
     }
 
     public void newCancel() {
