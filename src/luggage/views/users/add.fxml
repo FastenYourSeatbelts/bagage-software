@@ -124,7 +124,7 @@
                   </Button>
                </children>
             </AnchorPane>
-            <ChoiceBox prefWidth="150.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2">
+            <ChoiceBox fx:id="addGender" prefWidth="150.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -139,7 +139,7 @@
                   <Insets left="7.0" />
                </GridPane.margin>
             </TextField>
-            <ChoiceBox prefWidth="150.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="6">
+            <ChoiceBox fx:id="addRole" prefWidth="150.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="6">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

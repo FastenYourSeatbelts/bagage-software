@@ -39,6 +39,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import luggage.database.models.UserModel;
+
 import luggage.database.models.Model;
 import luggage.helpers.StageHelper;
 
@@ -50,7 +51,7 @@ import luggage.helpers.StageHelper;
  * @package luggage.controllers
  * @author Alexander + Nick
  */
-public class UsersController extends BaseController  implements Initializable {
+public class UsersController extends BaseController implements Initializable {
 
     @FXML
     private TableView listTableView;
@@ -120,7 +121,10 @@ public class UsersController extends BaseController  implements Initializable {
     private ChoiceBox addGender;
 
     @FXML
-    public void listOnSearch() {
+    private ObservableList<UserModel> listData = FXCollections.observableArrayList();
+
+    @FXML
+    protected void listOnSearch() {
 
         String[] keywords = listSearchField.getText().split("\\s+");
 
@@ -162,12 +166,25 @@ public class UsersController extends BaseController  implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         // List
-        if(listTableView != null)
-        {
+        if (listTableView != null) {
             listResetTableView("", new String[0]);
         }
+
+    }
+
+    public void setAddChoiceBox() {
+        addGender.setItems(FXCollections.observableArrayList(
+                "MALE",
+                "FEMALE"
+        ));
+
+        addRole.setItems(FXCollections.observableArrayList(
+                "MANAGER",
+                "MODERATOR",
+                "EMPLOYEE"
+        ));
     }
 
     public void listResetTableView(String where, String... params) {
@@ -210,6 +227,30 @@ public class UsersController extends BaseController  implements Initializable {
     }
 
     public void newSave() {
+        if (addGender.getSelectionModel().getSelectedItem() == null) {
+            return;
+        }
 
+        if (addRole.getSelectionModel().getSelectedItem() == null) {
+            return;
+        }
+
+        UserModel Users = new UserModel();
+        Users.setFirstname(addFirstname.getText());
+        Users.setMiddlename(addMiddlename.getText());
+        Users.setLastname(addLastname.getText());
+        Users.setGender(addGender.getSelectionModel().getSelectedItem().toString());
+        Users.setAddress(addAddress.getText());
+        Users.setPostalcode(addPostalcode.getText());
+        Users.setResidence(addResidence.getText());
+        Users.setRole(addRole.getSelectionModel().getSelectedItem().toString());
+        Users.setTelephone(addTelephone.getText());
+        Users.setMobile(addMobile.getText());
+        Users.save();
+
+        CustomersController customersController = (CustomersController) StageHelper.callbackController;
+        customersController.listOnSearch();
+
+        newCancel();
     }
 }
