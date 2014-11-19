@@ -33,6 +33,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import luggage.database.models.LuggageModel;
 import luggage.database.models.Model;
@@ -65,7 +66,41 @@ public class LuggageController extends BaseController  implements Initializable 
     @FXML
     private TableColumn tableViewDate;
     
-    private final ObservableList<LuggageModel> data = FXCollections.observableArrayList();   
+    @FXML
+    private TextField searchbox;
+    
+    @FXML
+    protected void onKeyReleased()  {
+        
+        String[] keywords = searchbox.getText().split("\\s+");
+        
+        String[] params = new String[3 * keywords.length];
+        boolean firstColumn = true;
+        String query = "";
+        
+        for(int i = 0; i < keywords.length; i ++)
+        {
+            if(firstColumn) {
+                params[0 + i] = "%" + keywords[i] + "%";
+                query += "id LIKE ?";
+            } else {
+                params[0 + i] = "%" + keywords[i] + "%";
+                query += " OR id LIKE ?";
+            }
+            
+            params[1 + i] = "%" + keywords[i] + "%";
+            query += " OR tags LIKE ?";
+ 
+            params[2 + i] = "%" + keywords[i] + "%";
+            query += " OR datetime LIKE ?";
+            
+            firstColumn = false;
+        }
+        
+        resetTableView(query, params);
+    }
+    
+    private ObservableList<LuggageModel> data = FXCollections.observableArrayList();   
 
     
     /**
@@ -76,15 +111,15 @@ public class LuggageController extends BaseController  implements Initializable 
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        resetTableView();
+        resetTableView("", new String[0]);
     }
     
-    public void resetTableView() {
+    public void resetTableView(String where, String... params) {
         LuggageModel luggage = new LuggageModel();
-        List<Model> allLuggage = luggage.findAll();
+        List<Model> allLuggage = luggage.findAll(where, params);
         
-        for(int i = 0; i < allLuggage.size(); i ++)
-        {
+        data = FXCollections.observableArrayList(); 
+        for(int i = 0; i < allLuggage.size(); i ++){
             LuggageModel luggage2 = (LuggageModel) allLuggage.get(i);
             data.add(luggage2);
         }
@@ -98,5 +133,5 @@ public class LuggageController extends BaseController  implements Initializable 
                     
         luggageTableView.setItems(data);
     }
-   
+    
 }
