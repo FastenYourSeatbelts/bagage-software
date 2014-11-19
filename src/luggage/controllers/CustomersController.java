@@ -24,13 +24,18 @@
  */
 package luggage.controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
@@ -152,7 +157,7 @@ public class CustomersController implements Initializable {
     }
     
     @FXML
-    protected void listOnSearch()  {
+    public void listOnSearch()  {
         
         String[] keywords = listSearchField.getText().split("\\s+");
         
@@ -208,7 +213,29 @@ public class CustomersController implements Initializable {
     }
     
     public void newSave() {
+        CustomerModel customer = new CustomerModel();
+        customer.setFirstname(addFirstname.getText());
+        customer.setMiddlename(addMiddlename.getText());
+        customer.setLastname(addLastname.getText());
+        customer.setAddress(addAddress.getText());
+        customer.setPostalCode(addPostalcode.getText());
+        customer.setResidence(addResidence.getText());
+        customer.setEmail(addEmail.getText());
+        customer.setTelephone(addTelephone.getText());
+        customer.setMobile(addMobile.getText());
+        customer.save();
         
+        FXMLLoader primaryLoader = new FXMLLoader(getClass().getResource("/luggage/views/customers/list.fxml"));  
+        try {
+            Parent root = (Parent) primaryLoader.load();
+            
+            CustomersController customersController = (CustomersController) primaryLoader.getController();
+            customersController.listOnSearch();
+        } catch (IOException ex) {
+            Logger.getLogger(CustomersController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        newCancel();
     }
    
 }

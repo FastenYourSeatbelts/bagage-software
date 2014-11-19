@@ -27,6 +27,7 @@ import luggage.database.DatabaseHelper;
 import luggage.helpers.StageHelper;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import luggage.controllers.DashboardController;
 
 /**
  * MainActivity
