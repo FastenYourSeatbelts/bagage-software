@@ -116,11 +116,7 @@ public class UsersController extends BaseController  implements Initializable {
     @FXML
     private TextField addLastname;
 
-    @FXML
-    private Button newAdd;
-
-    @FXML
-    private Button newReset;
+    
 
     @FXML
     protected void listOnSearch() {
@@ -165,7 +161,12 @@ public class UsersController extends BaseController  implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        listResetTableView("", new String[0]);
+        
+        // List
+        if(listTableView != null)
+        {
+            listResetTableView("", new String[0]);
+        }
     }
 
     public void listResetTableView(String where, String... params) {
@@ -188,7 +189,7 @@ public class UsersController extends BaseController  implements Initializable {
 
     @FXML
     public void listNew() {
-        StageHelper.addStage("users/add", this.getClass(), false, true);
+        StageHelper.addStage("users/add", this, false, true);
     }
 
     public void newCancel() {
