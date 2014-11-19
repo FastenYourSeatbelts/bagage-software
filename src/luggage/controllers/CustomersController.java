@@ -38,6 +38,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import luggage.MainActivity;
 import luggage.database.models.CustomerModel;
 import luggage.database.models.InsurerModel;
 import luggage.database.models.Model;
@@ -208,8 +209,7 @@ public class CustomersController extends BaseController implements Initializable
     }
     
     public void setEditFields() {
-        System.out.println("2: " + this.EDIT_ID);
-        CustomerModel customer = new CustomerModel(this.EDIT_ID);
+        CustomerModel customer = new CustomerModel(MainActivity.editId);
         
         editFirstname.setText(customer.getFirstname());
         editMiddlename.setText(customer.getMiddlename());
@@ -221,7 +221,10 @@ public class CustomersController extends BaseController implements Initializable
         editTelephone.setText(customer.getTelephone());
         editMobile.setText(customer.getMobile());
         
-        editInsurerId.getSelectionModel().select(new InsurerModel(customer.getInsurerId()));
+        
+        //new InsurerModel(customer.getInsurerId())
+        
+        editInsurerId.getSelectionModel().select(selectedInsurer);
         editGender.getSelectionModel().select("MALE");
     }
     
@@ -241,6 +244,8 @@ public class CustomersController extends BaseController implements Initializable
         addInsurerId.setItems(insurerData);
     }
     
+    public InsurerModel selectedInsurer;
+    
     public void setEditChoiceBoxes() {
         editGender.setItems(FXCollections.observableArrayList(
             "MALE", 
@@ -251,6 +256,10 @@ public class CustomersController extends BaseController implements Initializable
         List<Model> allInsurers = insurers.findAll("", new String[0]);
         for(Model allInsurer : allInsurers) {
             InsurerModel insurer = (InsurerModel) allInsurer;
+            if(insurer.getId() == new CustomerModel(MainActivity.editId).getInsurerId())
+            {
+                selectedInsurer = insurer;
+            }
             insurerData.add(insurer);
         }
         
@@ -321,9 +330,7 @@ public class CustomersController extends BaseController implements Initializable
         if(customer == null)
             return;
         
-        System.out.println("1: " + customer.getId());
-        
-        this.EDIT_ID = customer.getId();
+        MainActivity.editId = customer.getId();
         
         StageHelper.addStage("customers/edit", this, false, true);
     }
@@ -393,8 +400,8 @@ public class CustomersController extends BaseController implements Initializable
     }
     
     public void editCancel() {
-        Stage addStage = (Stage) editCancel.getScene().getWindow();
-        StageHelper.closeStage(addStage);
+        Stage cancelStage = (Stage) editCancel.getScene().getWindow();
+        StageHelper.closeStage(cancelStage);
     }
     
     public void editReset() {
@@ -410,34 +417,34 @@ public class CustomersController extends BaseController implements Initializable
     }
     
     public void editSave() {
-        if(addGender.getSelectionModel().getSelectedItem() == null)
+        if(editGender.getSelectionModel().getSelectedItem() == null)
         {
             return;
         }
         
-        if(addInsurerId.getSelectionModel().getSelectedItem() == null)
+        if(editInsurerId.getSelectionModel().getSelectedItem() == null)
         {
             return;
         }
         
-        CustomerModel customer = new CustomerModel();
-        customer.setFirstname(addFirstname.getText());
-        customer.setMiddlename(addMiddlename.getText());
-        customer.setLastname(addLastname.getText());
-        customer.setGender(addGender.getSelectionModel().getSelectedItem().toString());
-        customer.setInsurerId(Integer.toString(addInsurerId.getSelectionModel().getSelectedItem().getId()));
-        customer.setAddress(addAddress.getText());
-        customer.setPostalCode(addPostalcode.getText());
-        customer.setResidence(addResidence.getText());
-        customer.setEmail(addEmail.getText());
-        customer.setTelephone(addTelephone.getText());
-        customer.setMobile(addMobile.getText());
+        CustomerModel customer = new CustomerModel(MainActivity.editId);
+        customer.setFirstname(editFirstname.getText());
+        customer.setMiddlename(editMiddlename.getText());
+        customer.setLastname(editLastname.getText());
+        customer.setGender(editGender.getSelectionModel().getSelectedItem().toString());
+        customer.setInsurerId(Integer.toString(editInsurerId.getSelectionModel().getSelectedItem().getId()));
+        customer.setAddress(editAddress.getText());
+        customer.setPostalCode(editPostalcode.getText());
+        customer.setResidence(editResidence.getText());
+        customer.setEmail(editEmail.getText());
+        customer.setTelephone(editTelephone.getText());
+        customer.setMobile(editMobile.getText());
         customer.save();
         
         CustomersController customersController = (CustomersController) StageHelper.callbackController;
         customersController.listOnSearch();
       
-        newCancel();
+        editCancel();
     }
    
 }

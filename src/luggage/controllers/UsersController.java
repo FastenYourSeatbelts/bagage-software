@@ -238,18 +238,18 @@ public class UsersController extends BaseController implements Initializable {
             return;
         }
 
-        UserModel Users = new UserModel();
-        Users.setFirstname(addFirstname.getText());
-        Users.setMiddlename(addMiddlename.getText());
-        Users.setLastname(addLastname.getText());
-        Users.setGender(addGender.getSelectionModel().getSelectedItem().toString());
-        Users.setAddress(addAddress.getText());
-        Users.setPostalcode(addPostalcode.getText());
-        Users.setResidence(addResidence.getText());
-        Users.setRole(addRole.getSelectionModel().getSelectedItem().toString());
-        Users.setTelephone(addTelephone.getText());
-        Users.setMobile(addMobile.getText());
-        Users.save();
+        UserModel users = new UserModel();
+        users.setFirstname(addFirstname.getText());
+        users.setMiddlename(addMiddlename.getText());
+        users.setLastname(addLastname.getText());
+        users.setGender(addGender.getSelectionModel().getSelectedItem().toString());
+        users.setAddress(addAddress.getText());
+        users.setPostalcode(addPostalcode.getText());
+        users.setResidence(addResidence.getText());
+        users.setRole(addRole.getSelectionModel().getSelectedItem().toString());
+        users.setTelephone(addTelephone.getText());
+        users.setMobile(addMobile.getText());
+        users.save();
 
         UsersController usersController = (UsersController) StageHelper.callbackController;
         usersController.listOnSearch();
