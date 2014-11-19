@@ -99,7 +99,7 @@ public class UsersController extends BaseController  implements Initializable {
     private TextField addResidence;
 
     @FXML
-    private TextField addEmail;
+    private ChoiceBox addRole;
 
     @FXML
     private TextField addTelephone;
@@ -115,11 +115,9 @@ public class UsersController extends BaseController  implements Initializable {
 
     @FXML
     private TextField addLastname;
+
     @FXML
     private ChoiceBox addGender;
-    
-    @FXML
-    private ChoiceBox addRole;
 
     @FXML
     protected void listOnSearch() {
@@ -164,7 +162,12 @@ public class UsersController extends BaseController  implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        listResetTableView("", new String[0]);
+        
+        // List
+        if(listTableView != null)
+        {
+            listResetTableView("", new String[0]);
+        }
     }
 
     public void listResetTableView(String where, String... params) {
@@ -202,7 +205,6 @@ public class UsersController extends BaseController  implements Initializable {
         addAddress.setText("");
         addPostalcode.setText("");
         addResidence.setText("");
-        addEmail.setText("");
         addTelephone.setText("");
         addMobile.setText("");
     }

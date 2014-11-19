@@ -7,7 +7,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane minWidth="600.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #BB1D14;" GridPane.columnSpan="2147483647" GridPane.rowSpan="2147483647" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane minWidth="600.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #BB1D14;" GridPane.columnSpan="2147483647" GridPane.rowSpan="2147483647" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="luggage.controllers.UsersController">
    <children>
       <GridPane minWidth="600.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -112,7 +112,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button alignment="CENTER" layoutX="110.0" layoutY="8.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="60.0" text="Reset" AnchorPane.rightAnchor="74.0">
+                  <Button fx:id="newReset" alignment="CENTER" layoutX="110.0" layoutY="8.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#newReset" prefWidth="60.0" text="Reset" AnchorPane.rightAnchor="74.0">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -129,7 +129,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ChoiceBox>
-            <TextField fx:id="addMiddlename" prefHeight="25.0" prefWidth="312.0" promptText="Middle name" GridPane.columnIndex="3" GridPane.rowIndex="1">
+            <TextField fx:id="addMiddlename" prefHeight="25.0" prefWidth="312.0" promptText="prefix" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="7.0" right="7.0" />
                </GridPane.margin>
