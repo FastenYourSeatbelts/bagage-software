@@ -32,6 +32,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -81,7 +82,7 @@ public class UsersController implements Initializable {
     private TextField addResidence;
 
     @FXML
-    private TextField addEmail;
+    private ChoiceBox addRole;
 
     @FXML
     private TextField addTelephone;
@@ -97,6 +98,12 @@ public class UsersController implements Initializable {
 
     @FXML
     private TextField addLastname;
+
+    @FXML
+    private Button newAdd;
+
+    @FXML
+    private Button newReset;
 
     @FXML
     protected void listOnSearch() {
@@ -179,7 +186,6 @@ public class UsersController implements Initializable {
         addAddress.setText("");
         addPostalcode.setText("");
         addResidence.setText("");
-        addEmail.setText("");
         addTelephone.setText("");
         addMobile.setText("");
     }
