@@ -28,5 +28,5 @@ package luggage.controllers;
  * @author tijme
  */
 public abstract class BaseController {
-    
+
 }

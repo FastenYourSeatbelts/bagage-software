@@ -24,9 +24,7 @@
 package luggage.helpers;
 
 import luggage.AppConfig;
-import luggage.controllers.LoginController;
 import java.io.IOException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
@@ -35,7 +33,6 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import luggage.controllers.BaseController;
-import luggage.controllers.CustomersController;
 
 /**
  * StageHelper
@@ -56,8 +53,7 @@ public class StageHelper {
     public static void addStage(String sNewStage, BaseController oCurrentClass, boolean bMaximized, boolean bLocked) {
         try {
             FXMLLoader primaryLoader = new FXMLLoader(oCurrentClass.getClass().getResource("/luggage/views/" + sNewStage + ".fxml"));
-            Parent root = null;
-            root = (Parent) primaryLoader.load();
+            Parent root = (Parent) primaryLoader.load();
             
             BaseController baseController = (BaseController) primaryLoader.getController();
             callbackController = oCurrentClass;
