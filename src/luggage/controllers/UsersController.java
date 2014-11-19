@@ -120,7 +120,6 @@ public class UsersController extends BaseController implements Initializable {
     @FXML
     private ChoiceBox addGender;
 
-    @FXML
     private ObservableList<UserModel> listData = FXCollections.observableArrayList();
 
     @FXML
@@ -172,18 +171,22 @@ public class UsersController extends BaseController implements Initializable {
             listResetTableView("", new String[0]);
         }
 
+        // Add
+        if (addGender != null && addRole != null) {
+            setAddChoiceBox();
+        }
     }
 
     public void setAddChoiceBox() {
         addGender.setItems(FXCollections.observableArrayList(
-                "MALE",
-                "FEMALE"
+                "Male",
+                "Female"
         ));
 
         addRole.setItems(FXCollections.observableArrayList(
-                "MANAGER",
-                "MODERATOR",
-                "EMPLOYEE"
+                "Manager",
+                "Moderator",
+                "Employee"
         ));
     }
 
@@ -248,8 +251,8 @@ public class UsersController extends BaseController implements Initializable {
         Users.setMobile(addMobile.getText());
         Users.save();
 
-        CustomersController customersController = (CustomersController) StageHelper.callbackController;
-        customersController.listOnSearch();
+        UsersController usersController = (UsersController) StageHelper.callbackController;
+        usersController.listOnSearch();
 
         newCancel();
     }
