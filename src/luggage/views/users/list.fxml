@@ -9,17 +9,17 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="luggage.controllers.UsersController" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="luggage.controllers.UsersController">
     <children>
         <TableView fx:id="listTableView" layoutY="50.0" maxWidth="-Infinity" prefWidth="800.0" AnchorPane.bottomAnchor="53.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="53.0">
             <columns>
                 <TableColumn fx:id="listTableViewUsername" prefWidth="202.0" text="Username" />
-                <TableColumn fx:id="listTableViewName"  minWidth="0.0" prefWidth="253.0" text="Name" />
+                <TableColumn fx:id="listTableViewName" minWidth="0.0" prefWidth="253.0" text="Name" />
                 <TableColumn fx:id="listTableViewWorkplace" prefWidth="173.0" text="Workplace" />
                 <TableColumn fx:id="listTableViewRole" prefWidth="171.0" text="Role" />
             </columns>
         </TableView>
-        <TextField onKeyReleased="#listOnSearch" fx:id="listSearchField" maxWidth="-Infinity" prefHeight="26.0" prefWidth="150.0" promptText="Search…" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+        <TextField fx:id="listSearchField" maxWidth="-Infinity" onKeyReleased="#listOnSearch" prefHeight="26.0" prefWidth="150.0" promptText="Search…" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
             <font>
                 <Font size="12.0" />
             </font>
@@ -55,6 +55,9 @@
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
+         <font>
+            <Font size="12.0" />
+         </font>
         </Button>
     </children>
 </AnchorPane>
