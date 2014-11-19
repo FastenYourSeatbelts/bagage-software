@@ -213,7 +213,7 @@ public class CustomerModel extends Model {
      * @return 
      */
     public String getPostalCode() {
-        return row.get("postalCode");
+        return row.get("postalcode");
     }
    
     /**
@@ -222,7 +222,7 @@ public class CustomerModel extends Model {
      * @param postalCode 
      */
     public void setPostalCode(String postalCode) {
-        row.put("postalCode", postalCode);
+        row.put("postalcode", postalCode);
     }
     
     /**
