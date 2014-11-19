@@ -46,7 +46,7 @@ import luggage.database.models.Model;
  * @package luggage.controllers
  * @author Tijme Gommers
  */
-public class MissingLuggageController extends BaseController  implements Initializable {
+public class TotalLuggageController extends BaseController  implements Initializable {
 
     @FXML
     private TableView luggageTableView;
@@ -72,6 +72,7 @@ public class MissingLuggageController extends BaseController  implements Initial
     @FXML
     private TableColumn tableViewNotes;
     
+    
     private ObservableList<LuggageModel> data = FXCollections.observableArrayList();   
 
     
@@ -83,10 +84,7 @@ public class MissingLuggageController extends BaseController  implements Initial
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        String[] params = new String[1];
-        params[0] = "lost";
-        
-        resetTableView("status = ?", params);
+        resetTableView("", new String[0]);
     }
     
     public void resetTableView(String where, String... params) {
