@@ -48,7 +48,7 @@ import luggage.AppConfig;
  * @package luggage.controllers
  * @author Tijme Gommers
  */
-public class LoginController implements Initializable {
+public class LoginController extends BaseController  implements Initializable {
 
     @FXML
     private TextField username;
@@ -91,7 +91,7 @@ public class LoginController implements Initializable {
     
         Authentication.setCurrentUser(user);
         Stage loginStage = (Stage) username.getScene().getWindow();
-        StageHelper.replaceStage(loginStage, "dashboard", this.getClass());
+        StageHelper.replaceStage(loginStage, "dashboard", this);
     }
 
     /**

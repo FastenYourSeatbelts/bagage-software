@@ -23,11 +23,17 @@
  */
 package luggage;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import luggage.database.DatabaseHelper;
 import luggage.helpers.StageHelper;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import luggage.controllers.DashboardController;
 
 /**
  * MainActivity
@@ -46,15 +52,15 @@ public class MainActivity extends Application {
      * @throws Exception 
      */
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        StageHelper.addStage("login", this.getClass());
-        
+    public void start(Stage primaryStage) throws Exception {        
         new Thread(new Runnable() {
             @Override
             public void run() {
                   DatabaseHelper.openConnection();
             }
         }).start();
+        
+        startMainStage();
         
         /*
         UserModel tijme = new UserModel();
@@ -79,6 +85,30 @@ public class MainActivity extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+    }
+    
+    public void startMainStage() {
+        try {
+            FXMLLoader primaryLoader = new FXMLLoader(this.getClass().getResource("/luggage/views/login.fxml"));
+            Parent root = null;
+            root = (Parent) primaryLoader.load();
+           
+            Scene newScene = new Scene(root);
+            newScene.getStylesheets().add("/resources/stylesheets/header.css");
+            
+            Stage oNewStage = new Stage();
+            oNewStage.setScene(newScene);
+            oNewStage.getIcons().add(new Image("/resources/images/logo_red.png"));
+            oNewStage.setTitle(AppConfig.ApplicationName + " " + "login");
+            oNewStage.setMinHeight(AppConfig.MinHeight);
+            oNewStage.setMinWidth(AppConfig.MinWidth);
+            
+            oNewStage.setMaximized(true);
+            
+            oNewStage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(StageHelper.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

@@ -28,8 +28,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -44,6 +42,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import luggage.database.models.CustomerModel;
+import luggage.database.models.InsurerModel;
 import luggage.database.models.Model;
 import luggage.helpers.StageHelper;
 
@@ -57,7 +56,7 @@ import luggage.helpers.StageHelper;
  * @package luggage.controllers
  * @author Tijme Gommers
  */
-public class CustomersController implements Initializable {
+public class CustomersController extends BaseController implements Initializable {
 
     @FXML
     private TableView listTableView;
@@ -102,6 +101,9 @@ public class CustomersController implements Initializable {
     private ChoiceBox addGender;
     
     @FXML
+    private ChoiceBox<InsurerModel> addInsurerId;
+    
+    @FXML
     private TextField addAddress;
     
     @FXML
@@ -121,6 +123,8 @@ public class CustomersController implements Initializable {
     
     private ObservableList<CustomerModel> listData = FXCollections.observableArrayList();
     
+    private ObservableList<InsurerModel> insurerData = FXCollections.observableArrayList();
+
     /**
      * Called on controller start
      * 
@@ -130,11 +134,33 @@ public class CustomersController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        // ListView
+        // List
         if(listTableView != null)
         {
             listResetTableView("", new String[0]);
         }
+        
+        // Add
+        if(addGender != null && addInsurerId != null)
+        {
+            setAddChoiceBoxes();
+        }
+    }
+    
+    public void setAddChoiceBoxes() {
+        addGender.setItems(FXCollections.observableArrayList(
+            "MALE", 
+            "FEMALE"
+        ));
+        
+        InsurerModel insurers = new InsurerModel();
+        List<Model> allInsurers = insurers.findAll("", new String[0]);
+        for(Model allInsurer : allInsurers) {
+            InsurerModel insurer = (InsurerModel) allInsurer;
+            insurerData.add(insurer);
+        }
+        
+        addInsurerId.setItems(insurerData);
     }
     
     public void listResetTableView(String where, String... params) {
@@ -158,7 +184,6 @@ public class CustomersController implements Initializable {
     
     @FXML
     public void listOnSearch()  {
-        
         String[] keywords = listSearchField.getText().split("\\s+");
         
         String[] params = new String[4 * keywords.length];
@@ -192,7 +217,7 @@ public class CustomersController implements Initializable {
     
     @FXML
     public void listNew() {
-        StageHelper.addStage("customers/add", this.getClass(), false, true);
+        StageHelper.addStage("customers/add", this, false, true);
     }
     
     public void newCancel() {
@@ -213,10 +238,22 @@ public class CustomersController implements Initializable {
     }
     
     public void newSave() {
+        if(addGender.getSelectionModel().getSelectedItem() == null)
+        {
+            return;
+        }
+        
+        if(addInsurerId.getSelectionModel().getSelectedItem() == null)
+        {
+            return;
+        }
+        
         CustomerModel customer = new CustomerModel();
         customer.setFirstname(addFirstname.getText());
         customer.setMiddlename(addMiddlename.getText());
         customer.setLastname(addLastname.getText());
+        customer.setGender(addGender.getSelectionModel().getSelectedItem().toString());
+        customer.setInsurerId(Integer.toString(addInsurerId.getSelectionModel().getSelectedItem().getId()));
         customer.setAddress(addAddress.getText());
         customer.setPostalCode(addPostalcode.getText());
         customer.setResidence(addResidence.getText());
@@ -225,16 +262,9 @@ public class CustomersController implements Initializable {
         customer.setMobile(addMobile.getText());
         customer.save();
         
-        FXMLLoader primaryLoader = new FXMLLoader(getClass().getResource("/luggage/views/customers/list.fxml"));  
-        try {
-            Parent root = (Parent) primaryLoader.load();
-            
-            CustomersController customersController = (CustomersController) primaryLoader.getController();
-            customersController.listOnSearch();
-        } catch (IOException ex) {
-            Logger.getLogger(CustomersController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        CustomersController customersController = (CustomersController) StageHelper.callbackController;
+        customersController.listOnSearch();
+      
         newCancel();
     }
    

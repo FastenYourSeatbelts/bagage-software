@@ -46,7 +46,7 @@ import luggage.database.models.Model;
  * @package luggage.controllers
  * @author Alexander + Nick
  */
-public class UsersController implements Initializable {
+public class UsersController extends BaseController  implements Initializable {
 
     @FXML
     private TableView userTableView;
