@@ -50,7 +50,7 @@ import luggage.helpers.StageHelper;
  * @package luggage.controllers
  * @author Alexander + Nick
  */
-public class UsersController implements Initializable {
+public class UsersController extends BaseController  implements Initializable {
 
     @FXML
     private TableView listTableView;

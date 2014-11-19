@@ -26,6 +26,7 @@ package luggage.helpers;
 import luggage.AppConfig;
 import luggage.controllers.LoginController;
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
@@ -33,6 +34,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import luggage.controllers.BaseController;
+import luggage.controllers.CustomersController;
 
 /**
  * StageHelper
@@ -44,42 +47,46 @@ import javafx.stage.Stage;
  */
 public class StageHelper {
     
-    public static void addStage(String sNewStage, Class oCurrentClass) {
+    public static BaseController callbackController;
+    
+    public static void addStage(String sNewStage, BaseController oCurrentClass) {
         StageHelper.addStage(sNewStage, oCurrentClass, true, false);
     }
     
-    public static void addStage(String sNewStage, Class oCurrentClass, boolean bMaximized, boolean bLocked) {
-        Parent root = null;
+    public static void addStage(String sNewStage, BaseController oCurrentClass, boolean bMaximized, boolean bLocked) {
         try {
-            root = FXMLLoader.load(oCurrentClass.getResource("/luggage/views/" + sNewStage + ".fxml"));
+            FXMLLoader primaryLoader = new FXMLLoader(oCurrentClass.getClass().getResource("/luggage/views/" + sNewStage + ".fxml"));
+            Parent root = null;
+            root = (Parent) primaryLoader.load();
+            
+            BaseController baseController = (BaseController) primaryLoader.getController();
+            callbackController = oCurrentClass;
+        
+            Scene newScene = new Scene(root);
+            newScene.getStylesheets().add("/resources/stylesheets/header.css");
+            
+            Stage oNewStage = new Stage();
+            oNewStage.setScene(newScene);
+            oNewStage.getIcons().add(new Image("/resources/images/logo_red.png"));
+            oNewStage.setTitle(AppConfig.ApplicationName + " " + sNewStage);
+            oNewStage.setMinHeight(AppConfig.MinHeight);
+            oNewStage.setMinWidth(AppConfig.MinWidth);
+            
+            if(bLocked)
+            {
+                oNewStage.setMaxHeight(AppConfig.MinHeight);
+                oNewStage.setMaxWidth(AppConfig.MinWidth);
+            }
+            
+            oNewStage.setMaximized(bMaximized);
+            
+            oNewStage.show();
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-            return;
+            Logger.getLogger(StageHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        Scene newScene = new Scene(root);
-        newScene.getStylesheets().add("/resources/stylesheets/header.css");
-        
-        Stage oNewStage = new Stage();
-        oNewStage.setScene(newScene);
-        oNewStage.getIcons().add(new Image("/resources/images/logo_red.png"));
-        oNewStage.setTitle(AppConfig.ApplicationName + " " + sNewStage);
-        oNewStage.setMinHeight(AppConfig.MinHeight);
-        oNewStage.setMinWidth(AppConfig.MinWidth);
-        
-        if(bLocked)
-        {
-            oNewStage.setMaxHeight(AppConfig.MinHeight);
-            oNewStage.setMaxWidth(AppConfig.MinWidth);
-        }
-        
-        oNewStage.setMaximized(bMaximized);
-        
-        oNewStage.show();
     }
 
-    public static void replaceStage(Stage oCurrentStage, String sNewStage, Class oCurrentClass) {
+    public static void replaceStage(Stage oCurrentStage, String sNewStage, BaseController oCurrentClass) {
         StageHelper.addStage(sNewStage, oCurrentClass);
         oCurrentStage.close();
     }

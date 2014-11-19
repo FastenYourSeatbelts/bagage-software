@@ -46,7 +46,7 @@ import luggage.security.Authentication;
  * @package luggage.controllers
  * @author Tijme Gommers
  */
-public class DashboardController implements Initializable {
+public class DashboardController extends BaseController  implements Initializable {
 
     @FXML
     private TabPane tabs;
@@ -97,7 +97,7 @@ public class DashboardController implements Initializable {
     private void logout(ActionEvent event) {
         Authentication.logout();
         Stage currentStage = (Stage) logout.getScene().getWindow();
-        StageHelper.replaceStage(currentStage, "login", this.getClass());
+        StageHelper.replaceStage(currentStage, "login", this);
     }
 
 }
