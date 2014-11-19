@@ -66,7 +66,7 @@ public class UsersController implements Initializable {
     private TextField searchbox;
     
     @FXML
-    protected void onKeyReleased()  {
+    protected void listOnSearch()  {
         
         String[] keywords = searchbox.getText().split("\\s+");
         
