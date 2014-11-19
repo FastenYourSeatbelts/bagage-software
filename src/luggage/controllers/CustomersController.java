@@ -24,16 +24,13 @@
  */
 package luggage.controllers;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
@@ -58,6 +55,10 @@ import luggage.helpers.StageHelper;
  */
 public class CustomersController extends BaseController implements Initializable {
 
+    /**
+     * LIST ELEMENTS
+     */
+    
     @FXML
     private TableView listTableView;
     
@@ -78,6 +79,10 @@ public class CustomersController extends BaseController implements Initializable
     
     @FXML
     private TextField listSearchField;
+    
+    /**
+     * ADD ELEMENTS
+     */
     
     @FXML
     private Button newAdd;
@@ -121,9 +126,58 @@ public class CustomersController extends BaseController implements Initializable
     @FXML
     private TextField addMobile;
     
+    /**
+     * EDIT ELEMENTS
+     */
+    
+    @FXML
+    private Button editAdd;
+    
+    @FXML
+    private Button editReset;
+    
+    @FXML
+    private Button editCancel;
+    
+    @FXML
+    private TextField editFirstname;
+    
+    @FXML
+    private TextField editMiddlename;
+    
+    @FXML
+    private TextField editLastname;
+    
+    @FXML
+    private ChoiceBox editGender;
+    
+    @FXML
+    private ChoiceBox<InsurerModel> editInsurerId;
+    
+    @FXML
+    private TextField editAddress;
+    
+    @FXML
+    private TextField editPostalcode;
+    
+    @FXML
+    private TextField editResidence;
+    
+    @FXML
+    private TextField editEmail;
+    
+    @FXML
+    private TextField editTelephone;
+    
+    @FXML
+    private TextField editMobile;
+    
+ 
     private ObservableList<CustomerModel> listData = FXCollections.observableArrayList();
     
-    private ObservableList<InsurerModel> insurerData = FXCollections.observableArrayList();
+    private final ObservableList<InsurerModel> insurerData = FXCollections.observableArrayList();
+    
+    public int EDIT_ID;
 
     /**
      * Called on controller start
@@ -133,7 +187,6 @@ public class CustomersController extends BaseController implements Initializable
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
         // List
         if(listTableView != null)
         {
@@ -145,6 +198,31 @@ public class CustomersController extends BaseController implements Initializable
         {
             setAddChoiceBoxes();
         }
+        
+        // Edit
+        if(editGender != null && editInsurerId != null)
+        {
+            setEditChoiceBoxes();
+            setEditFields();
+        }
+    }
+    
+    public void setEditFields() {
+        System.out.println("2: " + this.EDIT_ID);
+        CustomerModel customer = new CustomerModel(this.EDIT_ID);
+        
+        editFirstname.setText(customer.getFirstname());
+        editMiddlename.setText(customer.getMiddlename());
+        editLastname.setText(customer.getLastname());
+        editAddress.setText(customer.getAddress());
+        editPostalcode.setText(customer.getPostalCode());
+        editResidence.setText(customer.getResidence());
+        editEmail.setText(customer.getEmail());
+        editTelephone.setText(customer.getTelephone());
+        editMobile.setText(customer.getMobile());
+        
+        editInsurerId.getSelectionModel().select(new InsurerModel(customer.getInsurerId()));
+        editGender.getSelectionModel().select("MALE");
     }
     
     public void setAddChoiceBoxes() {
@@ -161,6 +239,22 @@ public class CustomersController extends BaseController implements Initializable
         }
         
         addInsurerId.setItems(insurerData);
+    }
+    
+    public void setEditChoiceBoxes() {
+        editGender.setItems(FXCollections.observableArrayList(
+            "MALE", 
+            "FEMALE"
+        ));
+        
+        InsurerModel insurers = new InsurerModel();
+        List<Model> allInsurers = insurers.findAll("", new String[0]);
+        for(Model allInsurer : allInsurers) {
+            InsurerModel insurer = (InsurerModel) allInsurer;
+            insurerData.add(insurer);
+        }
+        
+        editInsurerId.setItems(insurerData);
     }
     
     public void listResetTableView(String where, String... params) {
@@ -220,6 +314,36 @@ public class CustomersController extends BaseController implements Initializable
         StageHelper.addStage("customers/add", this, false, true);
     }
     
+    @FXML
+    public void listEdit() {
+        CustomerModel customer = (CustomerModel) listTableView.getSelectionModel().getSelectedItem();
+        
+        if(customer == null)
+            return;
+        
+        System.out.println("1: " + customer.getId());
+        
+        this.EDIT_ID = customer.getId();
+        
+        StageHelper.addStage("customers/edit", this, false, true);
+    }
+    
+    @FXML
+    public void listRemove() {
+        CustomerModel customer = (CustomerModel) listTableView.getSelectionModel().getSelectedItem();
+        
+        if(customer == null)
+            return;
+        
+        customer.delete();
+        listOnSearch();
+    }
+    
+    @FXML
+    public void listView() {
+        
+    }
+    
     public void newCancel() {
         Stage addStage = (Stage) newCancel.getScene().getWindow();
         StageHelper.closeStage(addStage);
@@ -238,6 +362,54 @@ public class CustomersController extends BaseController implements Initializable
     }
     
     public void newSave() {
+        if(addGender.getSelectionModel().getSelectedItem() == null)
+        {
+            return;
+        }
+        
+        if(addInsurerId.getSelectionModel().getSelectedItem() == null)
+        {
+            return;
+        }
+        
+        CustomerModel customer = new CustomerModel();
+        customer.setFirstname(addFirstname.getText());
+        customer.setMiddlename(addMiddlename.getText());
+        customer.setLastname(addLastname.getText());
+        customer.setGender(addGender.getSelectionModel().getSelectedItem().toString());
+        customer.setInsurerId(Integer.toString(addInsurerId.getSelectionModel().getSelectedItem().getId()));
+        customer.setAddress(addAddress.getText());
+        customer.setPostalCode(addPostalcode.getText());
+        customer.setResidence(addResidence.getText());
+        customer.setEmail(addEmail.getText());
+        customer.setTelephone(addTelephone.getText());
+        customer.setMobile(addMobile.getText());
+        customer.save();
+        
+        CustomersController customersController = (CustomersController) StageHelper.callbackController;
+        customersController.listOnSearch();
+      
+        newCancel();
+    }
+    
+    public void editCancel() {
+        Stage addStage = (Stage) editCancel.getScene().getWindow();
+        StageHelper.closeStage(addStage);
+    }
+    
+    public void editReset() {
+        editFirstname.setText("");
+        editMiddlename.setText("");
+        editLastname.setText("");
+        editAddress.setText("");
+        editPostalcode.setText("");
+        editResidence.setText("");
+        editEmail.setText("");
+        editTelephone.setText("");
+        editMobile.setText("");
+    }
+    
+    public void editSave() {
         if(addGender.getSelectionModel().getSelectedItem() == null)
         {
             return;

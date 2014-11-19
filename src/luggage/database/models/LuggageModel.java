@@ -24,6 +24,8 @@
  */
 package luggage.database.models;
 
+import com.mysql.jdbc.StringUtils;
+
 /**
  * City Model
  *
@@ -169,5 +171,31 @@ public class LuggageModel extends Model {
     public void setDatetime(String datetime) {
         row.put("datetime", datetime);
     }
- 
+    
+        /**
+     * Return the customer_id of the current row
+     * 
+     * @return 
+     */
+    public String getCustomerId() {
+        return row.get("customer_id");
+    }
+    
+    /**
+     * Set the customer_id of the current row
+     * 
+     * @param customer_id
+     */
+    public void setCustomerId(String customer_id) {
+        row.put("customer_id", customer_id);
+    }
+    
+    /**
+     * Return the customer_id of the current row
+     * 
+     * @return 
+     */
+    public String getCustomerName() {
+        return new CustomerModel(row.get("customer_id")).getFullname();
+    }
 }
