@@ -38,8 +38,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import luggage.MainActivity;
 import luggage.database.models.UserModel;
-
 import luggage.database.models.Model;
 import luggage.helpers.StageHelper;
 
@@ -90,6 +90,10 @@ public class UsersController extends BaseController implements Initializable {
 
     @FXML
     private Button newCancel;
+
+    /*
+     *all ADD fields
+     */
     @FXML
     private TextField addAddress;
 
@@ -119,10 +123,60 @@ public class UsersController extends BaseController implements Initializable {
 
     @FXML
     private ChoiceBox addGender;
+
+    @FXML
+    TextField addUsername;
+
+    @FXML
+    TextField addPassword;
+
+    /*
+     * all EDIT fields
+     */
+    @FXML
+    TextField editFirstname;
+
+    @FXML
+    TextField editPrefix;
+
+    @FXML
+    TextField editLastname;
+
+    @FXML
+    TextField editUsername;
+
+    @FXML
+    TextField editPassword;
+
+    @FXML
+    TextField editAddress;
+
+    @FXML
+    TextField editPostalcode;
+
+    @FXML
+    TextField editResidence;
+
+    @FXML
+    TextField editTelephone;
+
+    @FXML
+    TextField editMobile;
+
+    @FXML
+    ChoiceBox editGender;
+
+    @FXML
+    ChoiceBox editRole;
     
-    @FXML TextField addUsername;
+    @FXML
+    Button editReset;
     
-    @FXML TextField addPassword;
+    @FXML
+    Button editSave;
+    
+    @FXML
+    Button editCancel;
 
     private ObservableList<UserModel> listData = FXCollections.observableArrayList();
 
@@ -179,6 +233,13 @@ public class UsersController extends BaseController implements Initializable {
         if (addGender != null && addRole != null) {
             setAddChoiceBox();
         }
+        
+        if(editGender != null && editRole != null)
+        {
+            
+            setEditFields();
+            setEditChoiceBoxes();
+        }
     }
 
     public void setAddChoiceBox() {
@@ -191,6 +252,35 @@ public class UsersController extends BaseController implements Initializable {
                 "Manager",
                 "Moderator",
                 "Employee"
+        ));
+    }
+
+    public void setEditFields() {
+        UserModel user = new UserModel(MainActivity.editId);
+
+        editUsername.setText(user.getFirstname());
+        editPassword.setText(user.getPassword());
+        editFirstname.setText(user.getFirstname());
+        editPrefix.setText(user.getPrefix());
+        editLastname.setText(user.getLastname());
+        editAddress.setText(user.getAddress());
+        editPostalcode.setText(user.getPostalcode());
+        editResidence.setText(user.getResidence());
+        editTelephone.setText(user.getTelephone());
+        editMobile.setText(user.getTelephone());
+
+    }
+    
+    public void setEditChoiceBoxes() {
+        editGender.setItems(FXCollections.observableArrayList(
+            "MALE", 
+            "FEMALE"
+        ));
+        
+        editRole.setItems(FXCollections.observableArrayList(
+            "Manager",
+            "Moderator",
+            "Employee"
         ));
     }
 
@@ -216,6 +306,21 @@ public class UsersController extends BaseController implements Initializable {
     public void listNew() {
         StageHelper.addStage("users/add", this, false, true);
     }
+
+    @FXML
+    public void listEdit() {
+        UserModel user = (UserModel) listTableView.getSelectionModel().getSelectedItem();
+
+        if (user == null) {
+            return;
+        }
+
+        MainActivity.editId = user.getId();
+
+        StageHelper.addStage("users/edit", this, false, true);
+    }
+    
+    
 
     public void newCancel() {
         Stage addStage = (Stage) newCancel.getScene().getWindow();
@@ -263,5 +368,51 @@ public class UsersController extends BaseController implements Initializable {
         usersController.listOnSearch();
 
         newCancel();
+    }
+    
+    public void editReset() {
+        editUsername.setText("");
+        editPassword.setText("");
+        editFirstname.setText("");
+        editPrefix.setText("");
+        editLastname.setText("");
+        editPostalcode.setText("");
+        editAddress.setText("");
+        editResidence.setText("");
+        editTelephone.setText("");
+        editMobile.setText("");
+    }
+    
+    public void editSave() {
+        if(editGender.getSelectionModel().getSelectedItem() == null)
+        {
+            return;
+        }
+        
+        if(editRole.getSelectionModel().getSelectedItem() == null)
+        {
+            return;
+        }
+        
+        UserModel user = new UserModel(MainActivity.editId);
+        user.setUsername(editUsername.getText());
+        user.setPassword(editPassword.getText());
+        user.setFirstname(editFirstname.getText());
+        user.setPrefix(editPrefix.getText());
+        user.setLastname(editLastname.getText());
+        user.setPostalcode(editPostalcode.getText());
+        user.setAddress(editAddress.getText());
+        user.setResidence(editResidence.getText());
+        user.setTelephone(editTelephone.getText());
+        user.setMobile(editMobile.getText());
+        user.save();
+        
+        UsersController userController = (UsersController) StageHelper.callbackController;
+        userController.listOnSearch();
+    }
+    
+    public void editCancel() {
+        Stage cancelStage = (Stage) editCancel.getScene().getWindow();
+        StageHelper.closeStage(cancelStage);
     }
 }
