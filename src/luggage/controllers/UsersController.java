@@ -119,6 +119,10 @@ public class UsersController extends BaseController implements Initializable {
 
     @FXML
     private ChoiceBox addGender;
+    
+    @FXML TextField addUsername;
+    
+    @FXML TextField addPassword;
 
     private ObservableList<UserModel> listData = FXCollections.observableArrayList();
 
@@ -219,6 +223,8 @@ public class UsersController extends BaseController implements Initializable {
     }
 
     public void newReset() {
+        addPassword.setText("");
+        addUsername.setText("");
         addFirstname.setText("");
         addPrefix.setText("");
         addLastname.setText("");
@@ -239,6 +245,8 @@ public class UsersController extends BaseController implements Initializable {
         }
 
         UserModel users = new UserModel();
+        users.setPassword(addPassword.getText());
+        users.setUsername(addUsername.getText());
         users.setFirstname(addFirstname.getText());
         users.setPrefix(addPrefix.getText());
         users.setLastname(addLastname.getText());

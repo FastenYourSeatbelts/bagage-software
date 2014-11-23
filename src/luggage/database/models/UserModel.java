@@ -82,7 +82,7 @@ public class UserModel extends Model {
     }
    
     /**
-     * Return the middle name of the current row
+     * Return the prefix of the current row
      * 
      * @return 
      */
@@ -91,7 +91,7 @@ public class UserModel extends Model {
     }
    
     /**
-     * Set the middle name of the current row
+     * Set the prefix of the current row
      * 
      * @param prefix 
      */
