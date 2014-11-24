@@ -34,15 +34,15 @@
             <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TextField fx:id="addFirstname" prefHeight="25.0" prefWidth="125.0" promptText="First name" GridPane.columnIndex="2" GridPane.rowIndex="3">
+            <TextField fx:id="editFirstname" prefHeight="25.0" prefWidth="125.0" promptText="First name" GridPane.columnIndex="2" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets right="7.0" />
                </GridPane.margin></TextField>
-            <TextField fx:id="addResidence" promptText="e.g. Amsterdam" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="7" />
-            <TextField fx:id="addAddress" promptText="e.g. Amsterdamseweg 90" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="5" />
-            <TextField fx:id="addPostalcode" promptText="e.g. 3892PB" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="6" />
-            <TextField fx:id="addMobile" promptText="e.g. +31629887377" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="10" />
-            <TextField fx:id="addTelephone" promptText="e.g. 0297-293919" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="9" />
+            <TextField fx:id="editResidence" promptText="e.g. Amsterdam" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="7" />
+            <TextField fx:id="editAddress" promptText="e.g. Amsterdamseweg 90" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="5" />
+            <TextField fx:id="editPostalcode" promptText="e.g. 3892PB" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="6" />
+            <TextField fx:id="editMobile" promptText="e.g. +31629887377" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="10" />
+            <TextField fx:id="editTelephone" promptText="e.g. 0297-293919" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="9" />
             <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Username" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font size="14.0" />
@@ -109,39 +109,39 @@
             </Label>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="11">
                <children>
-                  <Button alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="8.0" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#newSave" prefWidth="60.0" text="Save" AnchorPane.rightAnchor="151.0">
+                  <Button fx:id="editSave" alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="8.0" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#editSave" prefWidth="60.0" text="Save" AnchorPane.rightAnchor="151.0">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="newReset" alignment="CENTER" layoutX="110.0" layoutY="8.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#newReset" prefWidth="60.0" text="Reset" AnchorPane.rightAnchor="74.0">
+                  <Button fx:id="editReset" alignment="CENTER" layoutX="110.0" layoutY="8.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#editReset" prefWidth="60.0" text="Reset" AnchorPane.rightAnchor="74.0">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="newCancel" alignment="CENTER_RIGHT" cancelButton="true" layoutX="206.0" layoutY="8.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#newCancel" prefWidth="60.0" text="Cancel" AnchorPane.rightAnchor="0.0">
+                  <Button fx:id="editCancel" alignment="CENTER_RIGHT" cancelButton="true" layoutX="206.0" layoutY="8.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#editCancel" prefWidth="60.0" text="Cancel" AnchorPane.rightAnchor="0.0">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
                </children>
             </AnchorPane>
-            <ChoiceBox fx:id="addGender" prefWidth="150.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="4">
+            <ChoiceBox fx:id="editGender" prefWidth="150.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="4">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ChoiceBox>
-            <TextField fx:id="addPrefix" prefHeight="25.0" prefWidth="312.0" promptText="prefix" GridPane.columnIndex="3" GridPane.rowIndex="3">
+            <TextField fx:id="editPrefix" prefHeight="25.0" prefWidth="312.0" promptText="prefix" GridPane.columnIndex="3" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets left="7.0" right="7.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="addLastname" prefHeight="25.0" prefWidth="312.0" promptText="Last name" GridPane.columnIndex="4" GridPane.rowIndex="3">
+            <TextField fx:id="editLastname" prefHeight="25.0" prefWidth="312.0" promptText="Last name" GridPane.columnIndex="4" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets left="7.0" />
                </GridPane.margin>
             </TextField>
-            <ChoiceBox fx:id="addRole" prefWidth="150.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="8">
+            <ChoiceBox fx:id="editRole" prefWidth="150.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="8">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -151,8 +151,8 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="addUsername" prefHeight="25.0" prefWidth="125.0" promptText="Username" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="1" />
-            <TextField fx:id="addPassword" prefHeight="25.0" prefWidth="125.0" promptText="Password" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="2" />
+            <TextField fx:id="editUsername" prefHeight="25.0" prefWidth="125.0" promptText="Username" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="1" />
+            <TextField fx:id="editPassword" prefHeight="25.0" prefWidth="125.0" promptText="Password" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="2" />
             <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Password" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font size="14.0" />

@@ -324,6 +324,15 @@ public class UsersController extends BaseController implements Initializable {
         StageHelper.addStage("users/edit", this, false, true);
     }
     
+    public void listRemove() {
+        UserModel user = (UserModel) listTableView.getSelectionModel().getSelectedItem();
+        
+        if(user == null)
+            return;
+        
+        user.delete();
+        listOnSearch();
+    }
     
 
     public void newCancel() {
@@ -415,6 +424,8 @@ public class UsersController extends BaseController implements Initializable {
         
         UsersController userController = (UsersController) StageHelper.callbackController;
         userController.listOnSearch();
+        
+        editCancel();
     }
     
     public void editCancel() {
