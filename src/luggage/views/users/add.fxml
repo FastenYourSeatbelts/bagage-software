@@ -107,7 +107,7 @@
             </Label>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="9">
                <children>
-                  <Button alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="8.0" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="60.0" text="Save" AnchorPane.rightAnchor="151.0">
+                  <Button alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="8.0" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#newSave" prefWidth="60.0" text="Save" AnchorPane.rightAnchor="151.0">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -117,7 +117,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button alignment="CENTER_RIGHT" cancelButton="true" layoutX="206.0" layoutY="8.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="60.0" text="Cancel" AnchorPane.rightAnchor="0.0">
+                  <Button fx:id="newCancel" alignment="CENTER_RIGHT" cancelButton="true" layoutX="206.0" layoutY="8.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="60.0" text="Cancel" AnchorPane.rightAnchor="0.0">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -129,7 +129,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ChoiceBox>
-            <TextField fx:id="addMiddlename" prefHeight="25.0" prefWidth="312.0" promptText="prefix" GridPane.columnIndex="3" GridPane.rowIndex="1">
+            <TextField fx:id="addPrefix" prefHeight="25.0" prefWidth="312.0" promptText="prefix" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="7.0" right="7.0" />
                </GridPane.margin>

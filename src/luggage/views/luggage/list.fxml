@@ -10,21 +10,21 @@
 
 <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="luggage.controllers.LuggageController">
     <children>
-        <TableView fx:id="luggageTableView" layoutY="50.0" maxWidth="-Infinity" prefWidth="800.0" AnchorPane.bottomAnchor="53.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="53.0">
+        <TableView fx:id="listTableView" layoutY="50.0" maxWidth="-Infinity" prefWidth="800.0" AnchorPane.bottomAnchor="53.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="53.0">
             <columns>
-                <TableColumn fx:id="tableViewId" prefWidth="202.0" text="ID" />
-                <TableColumn fx:id="tableViewStatus" prefWidth="202.0" text="Status" />
-                <TableColumn fx:id="tableViewLocation" minWidth="0.0" prefWidth="253.0" text="Location" />
-                <TableColumn fx:id="tableViewTags" prefWidth="173.0" text="Tags" />
-                <TableColumn fx:id="tableViewDate" prefWidth="171.0" text="Date" />
+                <TableColumn fx:id="listTableViewId" prefWidth="160.0" text="ID" />
+                <TableColumn fx:id="listTableViewStatus" prefWidth="160.0" text="Status" />
+                <TableColumn fx:id="listTableViewLocation" minWidth="0.0" prefWidth="160.0" text="Location" />
+                <TableColumn fx:id="listTableViewTags" prefWidth="160.0" text="Tags" />
+                <TableColumn fx:id="listTableViewDate" prefWidth="160.0" text="Date" />
             </columns>
         </TableView>
-        <TextField fx:id="searchbox" maxWidth="-Infinity" onKeyReleased="#onKeyReleased" prefHeight="26.0" prefWidth="150.0" promptText="Search…" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+        <TextField fx:id="listSearchField" maxWidth="-Infinity" onKeyReleased="#listOnSearch" prefHeight="26.0" prefWidth="150.0" promptText="Search…" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
             <font>
                 <Font size="12.0" />
             </font>
         </TextField>
-        <Button layoutX="14.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" text="New" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+        <Button onMouseClicked="#listNew" layoutX="14.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" text="New" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
 
     
             <font>

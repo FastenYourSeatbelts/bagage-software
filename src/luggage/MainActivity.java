@@ -67,7 +67,7 @@ public class MainActivity extends Application {
         /*
         UserModel tijme = new UserModel();
         tijme.setFirstname("Tijme");
-        tijme.setMiddlename("");
+        tijme.setPrefix("");
         tijme.setLastname("Gommers");
         tijme.save();
         

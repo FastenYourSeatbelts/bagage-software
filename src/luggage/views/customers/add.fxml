@@ -39,7 +39,7 @@
                   <Insets right="7.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="addMiddlename" prefHeight="25.0" prefWidth="312.0" promptText="Middle name" GridPane.columnIndex="3" GridPane.rowIndex="1">
+            <TextField fx:id="addPrefix" prefHeight="25.0" prefWidth="312.0" promptText="Middle name" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="7.0" right="7.0" />
                </GridPane.margin>

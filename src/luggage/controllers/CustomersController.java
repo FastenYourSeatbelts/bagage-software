@@ -98,7 +98,7 @@ public class CustomersController extends BaseController implements Initializable
     private TextField addFirstname;
     
     @FXML
-    private TextField addMiddlename;
+    private TextField addPrefix;
     
     @FXML
     private TextField addLastname;
@@ -144,7 +144,7 @@ public class CustomersController extends BaseController implements Initializable
     private TextField editFirstname;
     
     @FXML
-    private TextField editMiddlename;
+    private TextField editPrefix;
     
     @FXML
     private TextField editLastname;
@@ -212,7 +212,7 @@ public class CustomersController extends BaseController implements Initializable
         CustomerModel customer = new CustomerModel(MainActivity.editId);
         
         editFirstname.setText(customer.getFirstname());
-        editMiddlename.setText(customer.getMiddlename());
+        editPrefix.setText(customer.getPrefix());
         editLastname.setText(customer.getLastname());
         editAddress.setText(customer.getAddress());
         editPostalcode.setText(customer.getPostalCode());
@@ -358,7 +358,7 @@ public class CustomersController extends BaseController implements Initializable
     
     public void newReset() {
         addFirstname.setText("");
-        addMiddlename.setText("");
+        addPrefix.setText("");
         addLastname.setText("");
         addAddress.setText("");
         addPostalcode.setText("");
@@ -381,7 +381,7 @@ public class CustomersController extends BaseController implements Initializable
         
         CustomerModel customer = new CustomerModel();
         customer.setFirstname(addFirstname.getText());
-        customer.setMiddlename(addMiddlename.getText());
+        customer.setPrefix(addPrefix.getText());
         customer.setLastname(addLastname.getText());
         customer.setGender(addGender.getSelectionModel().getSelectedItem().toString());
         customer.setInsurerId(Integer.toString(addInsurerId.getSelectionModel().getSelectedItem().getId()));
@@ -406,7 +406,7 @@ public class CustomersController extends BaseController implements Initializable
     
     public void editReset() {
         editFirstname.setText("");
-        editMiddlename.setText("");
+        editPrefix.setText("");
         editLastname.setText("");
         editAddress.setText("");
         editPostalcode.setText("");
@@ -429,7 +429,7 @@ public class CustomersController extends BaseController implements Initializable
         
         CustomerModel customer = new CustomerModel(MainActivity.editId);
         customer.setFirstname(editFirstname.getText());
-        customer.setMiddlename(editMiddlename.getText());
+        customer.setPrefix(editPrefix.getText());
         customer.setLastname(editLastname.getText());
         customer.setGender(editGender.getSelectionModel().getSelectedItem().toString());
         customer.setInsurerId(Integer.toString(editInsurerId.getSelectionModel().getSelectedItem().getId()));
