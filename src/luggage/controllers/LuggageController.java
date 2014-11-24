@@ -180,8 +180,8 @@ public class LuggageController extends BaseController implements Initializable {
         List<Model> allLuggage = luggage.findAll(where, params);
 
         listData = FXCollections.observableArrayList();
-        for (int i = 0; i < allLuggage.size(); i++) {
-            LuggageModel luggage2 = (LuggageModel) allLuggage;
+        for (Model allLuggage1 : allLuggage) {
+            LuggageModel luggage2 = (LuggageModel) allLuggage1;
             listData.add(luggage2);
         }
 
