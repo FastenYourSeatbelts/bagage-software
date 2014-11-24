@@ -14,12 +14,12 @@
         <TableView fx:id="listTableView" layoutY="50.0" maxWidth="-Infinity" prefWidth="800.0" AnchorPane.bottomAnchor="53.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="53.0">
             <columns>
                 <TableColumn fx:id="listTableViewUsername" prefWidth="202.0" text="Username" />
-                <TableColumn fx:id="listTableViewName"  minWidth="0.0" prefWidth="253.0" text="Name" />
+                <TableColumn fx:id="listTableViewName" minWidth="0.0" prefWidth="253.0" text="Name" />
                 <TableColumn fx:id="listTableViewWorkplace" prefWidth="173.0" text="Workplace" />
                 <TableColumn fx:id="listTableViewRole" prefWidth="171.0" text="Role" />
             </columns>
         </TableView>
-        <TextField onKeyReleased="#listOnSearch" fx:id="listSearchField" maxWidth="-Infinity" prefHeight="26.0" prefWidth="150.0" promptText="Search…" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+        <TextField fx:id="listSearchField" maxWidth="-Infinity" onKeyReleased="#listOnSearch" prefHeight="26.0" prefWidth="150.0" promptText="Search…" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
             <font>
                 <Font size="12.0" />
             </font>
@@ -29,7 +29,7 @@
                 <Font size="12.0" />
             </font>
         </Button>
-        <Button layoutX="14.0" layoutY="460.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" text="Edit" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0">
+        <Button layoutX="14.0" layoutY="460.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#listEdit" prefHeight="26.0" prefWidth="70.0" text="Edit" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0">
             <font>
                 <Font size="12.0" />
             </font>
