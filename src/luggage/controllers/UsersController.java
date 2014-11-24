@@ -125,63 +125,63 @@ public class UsersController extends BaseController implements Initializable {
     private ChoiceBox addGender;
 
     @FXML
-    TextField addUsername;
+    private TextField addUsername;
 
     @FXML
-    TextField addPassword;
+    private TextField addPassword;
 
     /*
      * all EDIT fields
      */
     @FXML
-    TextField editFirstname;
+    private TextField editFirstname;
 
     @FXML
-    TextField editPrefix;
+    private TextField editPrefix;
 
     @FXML
-    TextField editLastname;
+    private TextField editLastname;
 
     @FXML
-    TextField editUsername;
+    private TextField editUsername;
 
     @FXML
-    TextField editPassword;
+    private TextField editPassword;
 
     @FXML
-    TextField editAddress;
+    private TextField editAddress;
 
     @FXML
-    TextField editPostalcode;
+    private TextField editPostalcode;
 
     @FXML
-    TextField editResidence;
+    private TextField editResidence;
 
     @FXML
-    TextField editTelephone;
+    private TextField editTelephone;
 
     @FXML
-    TextField editMobile;
+    private TextField editMobile;
 
     @FXML
-    ChoiceBox editGender;
+    private ChoiceBox editGender;
 
     @FXML
-    ChoiceBox editRole;
+    private ChoiceBox editRole;
     
     @FXML
-    Button editReset;
+    private Button editReset;
     
     @FXML
-    Button editSave;
+    private Button editSave;
     
     @FXML
-    Button editCancel;
+    private Button editCancel;
 
     private ObservableList<UserModel> listData = FXCollections.observableArrayList();
 
     @FXML
-    protected void listOnSearch() {
+    public void listOnSearch() {
 
         String[] keywords = listSearchField.getText().split("\\s+");
 
@@ -234,6 +234,7 @@ public class UsersController extends BaseController implements Initializable {
             setAddChoiceBox();
         }
         
+        //Edit
         if(editGender != null && editRole != null)
         {
             
@@ -268,13 +269,16 @@ public class UsersController extends BaseController implements Initializable {
         editResidence.setText(user.getResidence());
         editTelephone.setText(user.getTelephone());
         editMobile.setText(user.getTelephone());
+        
+        editGender.getSelectionModel().select("Male");
+        editRole.getSelectionModel().select("Employee");
 
     }
     
     public void setEditChoiceBoxes() {
         editGender.setItems(FXCollections.observableArrayList(
-            "MALE", 
-            "FEMALE"
+            "Male", 
+            "Female"
         ));
         
         editRole.setItems(FXCollections.observableArrayList(
@@ -341,11 +345,13 @@ public class UsersController extends BaseController implements Initializable {
     }
 
     public void newSave() {
-        if (addGender.getSelectionModel().getSelectedItem() == null) {
+        if(addGender.getSelectionModel().getSelectedItem() == null) 
+        {
             return;
         }
 
-        if (addRole.getSelectionModel().getSelectedItem() == null) {
+        if(addRole.getSelectionModel().getSelectedItem() == null) 
+        {
             return;
         }
 
