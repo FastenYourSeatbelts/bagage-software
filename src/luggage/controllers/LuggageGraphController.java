@@ -24,9 +24,11 @@
  */
 package luggage.controllers;
 
+import java.awt.Paint;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
+
 
 /**
  * UsersController
@@ -48,5 +50,9 @@ public class LuggageGraphController extends BaseController  implements Initializ
     public void initialize(URL url, ResourceBundle rb) {
         
     }
+    
+    
+        
+    
    
 }
