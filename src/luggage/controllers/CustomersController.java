@@ -299,7 +299,7 @@ public class CustomersController extends BaseController implements Initializable
         viewMobile.setText(customer.getMobile());
         
         viewInsurerId.getSelectionModel().select(selectedInsurer);
-        viewGender.getSelectionModel().select("MALE");
+        viewGender.getSelectionModel().select(customer.getGender().toUpperCase());
     }
     
     public void setViewChoiceBoxes() {

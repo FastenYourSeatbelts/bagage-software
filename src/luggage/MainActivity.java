@@ -56,7 +56,8 @@ public class MainActivity extends Application {
      * @throws Exception 
      */
     @Override
-    public void start(Stage primaryStage) throws Exception {        
+    public void start(Stage primaryStage) throws Exception {
+        
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -65,7 +66,6 @@ public class MainActivity extends Application {
         }).start();
         
         startMainStage();
-        
         /*
         UserModel tijme = new UserModel();
         tijme.setFirstname("Tijme");
