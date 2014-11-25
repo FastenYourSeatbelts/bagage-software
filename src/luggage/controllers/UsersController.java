@@ -515,17 +515,22 @@ public class UsersController extends BaseController implements Initializable {
     public void setViewFields() {
         UserModel user = new UserModel(MainActivity.editId);        
        
-        user.setUsername(editUsername.getText());
-        user.setPassword(Encryption.hash(editPassword.getText()));
-        user.setFirstname(editFirstname.getText());
-        user.setPrefix(editPrefix.getText());
-        user.setLastname(editLastname.getText());
-        user.setPostalcode(editPostalcode.getText());
-        user.setAddress(editAddress.getText());
-        user.setResidence(editResidence.getText());
-        user.setTelephone(editTelephone.getText());
-        user.setMobile(editMobile.getText());
+        viewUsername.setText(user.getUsername());
+        viewPassword.setText(user.getPassword());
+        viewFirstname.setText(user.getFirstname());
+        viewPrefix.setText(user.getPrefix());
+        viewLastname.setText(user.getLastname());
+        viewAddress.setText(user.getAddress());
+        viewPostalcode.setText(user.getPostalcode());
+        viewResidence.setText(user.getResidence());
+        viewTelephone.setText(user.getTelephone());
+        viewMobile.setText(user.getMobile());
         
+    }
+    
+    public void viewClose() {
+        UsersController userController = (UsersController) StageHelper.callbackController;
+        userController.listOnSearch();
     }
     
     public void editCancel() {
