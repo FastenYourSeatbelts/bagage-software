@@ -71,4 +71,18 @@ public class Permissions {
         }
     ));
     
+    public static final Set<String> SUPER_PERMISSIONS = new HashSet<String>(Arrays.asList(
+        new String[] {
+            PERMISSION_MANAGE_CUSTOMERS,
+            PERMISSION_MANAGE_LUGGAGE,
+            PERMISSION_VIEW_GRAPH_LUGGAGE,
+            PERMISSION_VIEW_TOTAL_LUGGAGE,
+            PERMISSION_VIEW_MISSING_LUGGAGE,
+            PERMISSION_VIEW_FOUND_LUGGAGE,
+            PERMISSION_VIEW_RESOLVED_LUGGAGE,
+            PERMISSION_MANAGE_USERS
+        }
+    ));
+    
+    
 }

@@ -257,6 +257,7 @@ public class UsersController extends BaseController implements Initializable {
         ));
 
         addRole.setItems(FXCollections.observableArrayList(
+                "Super",
                 "Manager",
                 "Moderator",
                 "Employee"
