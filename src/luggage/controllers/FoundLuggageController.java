@@ -27,6 +27,7 @@ package luggage.controllers;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -83,7 +84,7 @@ public class FoundLuggageController extends BaseController  implements Initializ
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        new Thread(new Runnable() {
+        Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 String[] params = new String[1];
@@ -91,7 +92,7 @@ public class FoundLuggageController extends BaseController  implements Initializ
 
                 resetTableView("status = ?", params);
             }
-        }).start();
+        });
     }
     
     public void resetTableView(String where, String... params) {
