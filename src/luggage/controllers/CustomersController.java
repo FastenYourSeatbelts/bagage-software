@@ -298,8 +298,6 @@ public class CustomersController extends BaseController implements Initializable
         viewTelephone.setText(customer.getTelephone());
         viewMobile.setText(customer.getMobile());
         
-        //new InsurerModel(customer.getInsurerId())
-        
         viewInsurerId.getSelectionModel().select(selectedInsurer);
         viewGender.getSelectionModel().select("MALE");
     }
@@ -336,8 +334,6 @@ public class CustomersController extends BaseController implements Initializable
         editEmail.setText(customer.getEmail());
         editTelephone.setText(customer.getTelephone());
         editMobile.setText(customer.getMobile());
-        
-        //new InsurerModel(customer.getInsurerId())
         
         editInsurerId.getSelectionModel().select(selectedInsurer);
         editGender.getSelectionModel().select(customer.getGender().toUpperCase());
@@ -473,8 +469,6 @@ public class CustomersController extends BaseController implements Initializable
 
             customer.delete();
             listOnSearch();
-        } else {
-            return;
         }
     }
     
