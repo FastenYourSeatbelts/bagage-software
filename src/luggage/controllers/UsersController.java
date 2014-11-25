@@ -191,6 +191,9 @@ public class UsersController extends BaseController implements Initializable {
      */
     
     @FXML
+    private Button listView;
+    
+    @FXML
     private TextField viewUsername;
     
     @FXML 

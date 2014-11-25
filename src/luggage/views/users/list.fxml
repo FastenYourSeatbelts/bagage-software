@@ -42,7 +42,7 @@
                 <ColorAdjust />
             </effect>
         </Button>
-        <Button layoutX="93.0" layoutY="460.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#listView" prefHeight="26.0" prefWidth="70.0" text="View" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="91.0">
+        <Button fx:id="listView" layoutX="93.0" layoutY="460.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#listView" prefHeight="26.0" prefWidth="70.0" text="View" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="91.0">
         </Button>
     </children>
 </AnchorPane>
