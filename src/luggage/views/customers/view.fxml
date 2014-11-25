@@ -55,7 +55,7 @@
             <TextField fx:id="viewAddress" promptText="Enter address" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="4" />
             <TextField fx:id="viewPostalcode" promptText="Enter postal code" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="5" />
             <TextField fx:id="viewResidence" promptText="Enter residence" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="6" />
-            <TextField fx:id="viewEmail" promptText="Enter E-mail address" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="7" />
+            <TextField fx:id="viewEmail" promptText="Enter email address" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="7" />
             <TextField fx:id="viewTelephone" promptText="Enter telephone number" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="8" />
             <TextField fx:id="viewMobile" promptText="Enter mobile number" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="9" />
             
@@ -83,7 +83,7 @@
                   <Insets left="10.0" />
                </GridPane.margin>
             </Label>
-            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="E-mail address" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="7">
+            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Email address" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="7">
                <font>
                   <Font size="14.0" />
                </font>

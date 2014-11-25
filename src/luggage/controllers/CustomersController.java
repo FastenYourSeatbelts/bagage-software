@@ -304,8 +304,9 @@ public class CustomersController extends BaseController implements Initializable
     
     public void setViewChoiceBoxes() {
         viewGender.setItems(FXCollections.observableArrayList(
-            "MALE", 
-            "FEMALE"
+            "Male", 
+            "Female",
+            "Other"
         ));
         
         InsurerModel insurers = new InsurerModel();
@@ -341,8 +342,9 @@ public class CustomersController extends BaseController implements Initializable
     
     public void setEditChoiceBoxes() {
         editGender.setItems(FXCollections.observableArrayList(
-            "MALE", 
-            "FEMALE"
+            "Male", 
+            "Female",
+            "Other"
         ));
         
         InsurerModel insurers = new InsurerModel();
@@ -361,8 +363,9 @@ public class CustomersController extends BaseController implements Initializable
     
     public void setAddChoiceBoxes() {
         addGender.setItems(FXCollections.observableArrayList(
-            "MALE", 
-            "FEMALE"
+            "Male", 
+            "Female",
+            "Other"
         ));
         
         InsurerModel insurers = new InsurerModel();
@@ -388,7 +391,7 @@ public class CustomersController extends BaseController implements Initializable
         listTableViewName.setCellValueFactory(new PropertyValueFactory("fullname"));
         listTableViewInsurer.setCellValueFactory(new PropertyValueFactory("insurerName"));
         listTableViewAddress.setCellValueFactory(new PropertyValueFactory("address"));
-        listTableViewPhone.setCellValueFactory(new PropertyValueFactory("telephone"));
+        listTableViewPhone.setCellValueFactory(new PropertyValueFactory("mobile"));
         listTableViewEmail.setCellValueFactory(new PropertyValueFactory("email"));
                     
         listTableView.setItems(listData);
@@ -422,7 +425,7 @@ public class CustomersController extends BaseController implements Initializable
             query += " OR email LIKE ?";
  
             params[4 + i] = "%" + keywords[i] + "%";
-            query += " OR telephone LIKE ?";
+            query += " OR mobile LIKE ?";
             
             firstColumn = false;
         }
