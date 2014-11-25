@@ -39,7 +39,7 @@
                   <Insets right="7.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="editPrefix" prefHeight="25.0" prefWidth="312.0" promptText="Middle name" GridPane.columnIndex="3" GridPane.rowIndex="1">
+            <TextField fx:id="editPrefix" prefHeight="25.0" prefWidth="312.0" promptText="Prefix" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="7.0" right="7.0" />
                </GridPane.margin>
@@ -83,7 +83,7 @@
                   <Insets left="10.0" />
                </GridPane.margin>
             </Label>
-            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="E-mail address" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="7">
+            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Email address" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="7">
                <font>
                   <Font size="14.0" />
                </font>

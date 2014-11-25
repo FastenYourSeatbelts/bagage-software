@@ -146,14 +146,14 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ChoiceBox>
-            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Name" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <Label alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="137.0" text="Name" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
             <TextField fx:id="addUsername" prefHeight="25.0" prefWidth="125.0" promptText="Username" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="1" />
             <TextField fx:id="addPassword" prefHeight="25.0" prefWidth="125.0" promptText="Password" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="2" />
-            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Password" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="20.0" prefWidth="140.0" text="Password" textAlignment="RIGHT" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font size="14.0" />
                </font>
