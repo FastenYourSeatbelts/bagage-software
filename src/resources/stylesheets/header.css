@@ -1,6 +1,18 @@
-* {
+*,
+*:focus,
+*:focused,
+*:active {
     -fx-focus-color: transparent;   
-    -fx-effect: null; 
+    -fx-effect: null;
+}
+
+.table-view,
+.table-view:focus,
+.table-view:focused,
+.table-view:active {
+    -fx-border-width: 0;
+    -fx-background-insets: 0, 0, 1, 2;
+    -fx-background-color: #c8c8c8;
 }
 
 .tab-pane {
