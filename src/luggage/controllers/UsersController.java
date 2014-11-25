@@ -295,7 +295,7 @@ public class UsersController extends BaseController implements Initializable {
                     setEditFields();
                     setEditChoiceBoxes();
                 }
-                //view
+                
                 // View
                 if (viewGender != null && viewRole != null) {
                     setViewChoiceBoxes();
