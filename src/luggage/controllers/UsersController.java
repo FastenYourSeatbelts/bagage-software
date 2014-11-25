@@ -42,6 +42,7 @@ import luggage.MainActivity;
 import luggage.database.models.UserModel;
 import luggage.database.models.Model;
 import luggage.helpers.StageHelper;
+import luggage.security.Encryption;
 
 /**
  * UsersController
@@ -268,7 +269,7 @@ public class UsersController extends BaseController implements Initializable {
         editPostalcode.setText(user.getPostalcode());
         editResidence.setText(user.getResidence());
         editTelephone.setText(user.getTelephone());
-        editMobile.setText(user.getTelephone());
+        editMobile.setText(user.getMobile());
         
         editGender.getSelectionModel().select("Male");
         editRole.getSelectionModel().select("Employee");
@@ -365,7 +366,7 @@ public class UsersController extends BaseController implements Initializable {
         }
 
         UserModel users = new UserModel();
-        users.setPassword(addPassword.getText());
+        users.setPassword(Encryption.hash(addPassword.getText()));
         users.setUsername(addUsername.getText());
         users.setFirstname(addFirstname.getText());
         users.setPrefix(addPrefix.getText());
@@ -411,7 +412,7 @@ public class UsersController extends BaseController implements Initializable {
         
         UserModel user = new UserModel(MainActivity.editId);
         user.setUsername(editUsername.getText());
-        user.setPassword(editPassword.getText());
+        user.setPassword(Encryption.hash(editPassword.getText()));
         user.setFirstname(editFirstname.getText());
         user.setPrefix(editPrefix.getText());
         user.setLastname(editLastname.getText());
