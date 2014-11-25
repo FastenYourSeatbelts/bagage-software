@@ -55,6 +55,11 @@ public class LocationModel extends Model {
     protected Model getModel(int id) {
         return new LocationModel(id);
     }
+    
+    @Override
+    public String toString() {
+        return getName();
+    }
    
     /**
      * Return the name of the current row
