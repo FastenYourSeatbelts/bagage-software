@@ -80,6 +80,7 @@ public class UsersController extends BaseController implements Initializable {
 
     @FXML
     private TableColumn listTableViewRole;
+   
     @FXML
     private TextField listSearchField;
 
@@ -134,6 +135,9 @@ public class UsersController extends BaseController implements Initializable {
     /*
      * all EDIT fields
      */
+    @FXML
+    private Button editAdd;
+    
     @FXML
     private TextField editFirstname;
 
