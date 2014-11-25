@@ -46,46 +46,7 @@
         <AnchorPane fx:id="dashboardWrapper" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="75.0">
             <TabPane fx:id="tabs" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                 <tabs>
-                    <Tab fx:id="manage_customers" id="manage_customers" text="Customers">
-                        <content>
-                            <fx:include source="/luggage/views/customers/list.fxml" />
-                        </content>
-                    </Tab>
-                    <Tab fx:id="manage_users" id="manage_users" text="Users">
-                        <content>
-                            <fx:include source="/luggage/views/users/list.fxml" />
-                        </content>
-                    </Tab>
-                    <Tab fx:id="manage_luggage" id="manage_luggage" text="Luggage">
-                        <content>
-                            <fx:include source="/luggage/views/luggage/list.fxml" />
-                        </content>
-                    </Tab>
-                    <Tab fx:id="view_total_luggage" id="view_total_luggage" text="All luggage">
-                        <content>
-                            <fx:include source="/luggage/views/luggage/total.fxml" />
-                        </content>
-                    </Tab>
-                    <Tab fx:id="view_missing_luggage" id="view_missing_luggage" text="Missing luggage overview">
-                        <content>
-                            <fx:include source="/luggage/views/luggage/missing.fxml" />
-                        </content>
-                    </Tab>
-                    <Tab fx:id="view_found_luggage" id="view_found_luggage" text="Found luggage overview">
-                        <content>
-                            <fx:include source="/luggage/views/luggage/found.fxml" />
-                        </content>
-                    </Tab>
-                    <Tab fx:id="view_resolved_luggage" id="view_resolved_luggage" text="Resolved luggage overview">
-                        <content>
-                            <fx:include source="/luggage/views/luggage/resolved.fxml" />
-                        </content>
-                    </Tab>
-                    <Tab fx:id="view_graph_luggage" id="view_graph_luggage" text="Graph">
-                        <content>
-                            <fx:include source="/luggage/views/graphs/luggage.fxml" />
-                        </content>
-                    </Tab>
+                    
                 </tabs>
             </TabPane>
         </AnchorPane>

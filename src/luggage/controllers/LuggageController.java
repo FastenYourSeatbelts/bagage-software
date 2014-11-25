@@ -25,9 +25,12 @@
 package luggage.controllers;
 
 import java.net.URL;
+import java.sql.Date;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -54,6 +57,9 @@ import luggage.helpers.StageHelper;
  */
 public class LuggageController extends BaseController implements Initializable {
 
+    /**
+     * LIST ELEMENTS
+     */
     @FXML
     private TableView listTableView;
 
@@ -74,7 +80,9 @@ public class LuggageController extends BaseController implements Initializable {
 
     @FXML
     private TextField listSearchField;
-
+    /**
+     * ADD ELEMENTS
+     */
     @FXML
     private Button newAdd;
 
@@ -118,7 +126,7 @@ public class LuggageController extends BaseController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-         new Thread(new Runnable() {
+        Platform.runLater(new Runnable() {
             @Override
             public void run() {
 
@@ -133,7 +141,7 @@ public class LuggageController extends BaseController implements Initializable {
                 }
             
             }
-         }).start();
+        });
     }
 
     public void setAddChoiceBoxes() {
@@ -179,7 +187,7 @@ public class LuggageController extends BaseController implements Initializable {
     public void listNew() {
         StageHelper.addStage("luggage/add", this, false, true);
     }
-
+    
     public void listResetTableView(String where, String... params) {
         LuggageModel luggage = new LuggageModel();
         List<Model> allLuggage = luggage.findAll(where, params);
@@ -221,12 +229,16 @@ public class LuggageController extends BaseController implements Initializable {
 
         LuggageModel luggage = new LuggageModel();
         luggage.setStatus(addStatus.getSelectionModel().getSelectedItem().toString());
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        String dateString = sdf.format(addDate.getValue());
+        
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date dateValue = new Date(addDate.getValue().toEpochDay());
+        String dateString = dateFormat.format(dateValue);
         luggage.setDatetime(dateString);
+        
         luggage.setTags(addTags.getText());
         luggage.setNotes(addNotes.getText());
         luggage.save();
+        
         LuggageController luggageController = (LuggageController) StageHelper.callbackController;
         luggageController.listOnSearch();
 
