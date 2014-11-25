@@ -62,7 +62,6 @@ public class CustomersController extends BaseController implements Initializable
     /**
      * LIST ELEMENTS
      */
-    
     @FXML
     private TableView listTableView;
     
@@ -84,10 +83,21 @@ public class CustomersController extends BaseController implements Initializable
     @FXML
     private TextField listSearchField;
     
+    @FXML
+    private Button listNew;
+    
+    @FXML
+    private Button listEdit;
+    
+    @FXML
+    private Button listView;
+    
+    @FXML
+    private Button listRemove;
+    
     /**
      * ADD ELEMENTS
      */
-    
     @FXML
     private Button newAdd;
     
@@ -133,7 +143,6 @@ public class CustomersController extends BaseController implements Initializable
     /**
      * EDIT ELEMENTS
      */
-    
     @FXML
     private Button editAdd;
     
@@ -179,7 +188,6 @@ public class CustomersController extends BaseController implements Initializable
     /**
      * VIEW ELEMENTS
      */
-    
     @FXML
     private Button viewAdd;
     
@@ -221,6 +229,8 @@ public class CustomersController extends BaseController implements Initializable
 
     @FXML
     private TextField viewMobile;
+    
+    
 
     private ObservableList<CustomerModel> listData = FXCollections.observableArrayList();
     
@@ -242,6 +252,11 @@ public class CustomersController extends BaseController implements Initializable
                 if(listTableView != null)
                 {
                     listResetTableView("", new String[0]);
+                    
+                    listEdit.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
+                    listRemove.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
+                    listView.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
+                    listTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
                 }
 
                 // Add
@@ -283,8 +298,6 @@ public class CustomersController extends BaseController implements Initializable
         viewTelephone.setText(customer.getTelephone());
         viewMobile.setText(customer.getMobile());
         
-        //new InsurerModel(customer.getInsurerId())
-        
         viewInsurerId.getSelectionModel().select(selectedInsurer);
         viewGender.getSelectionModel().select("MALE");
     }
@@ -322,10 +335,8 @@ public class CustomersController extends BaseController implements Initializable
         editTelephone.setText(customer.getTelephone());
         editMobile.setText(customer.getMobile());
         
-        //new InsurerModel(customer.getInsurerId())
-        
         editInsurerId.getSelectionModel().select(selectedInsurer);
-        editGender.getSelectionModel().select("MALE");
+        editGender.getSelectionModel().select(customer.getGender().toUpperCase());
     }
     
     public void setEditChoiceBoxes() {
@@ -387,7 +398,7 @@ public class CustomersController extends BaseController implements Initializable
     public void listOnSearch()  {
         String[] keywords = listSearchField.getText().split("\\s+");
         
-        String[] params = new String[4 * keywords.length];
+        String[] params = new String[5 * keywords.length];
         boolean firstColumn = true;
         String query = "";
         
@@ -409,6 +420,9 @@ public class CustomersController extends BaseController implements Initializable
  
             params[3 + i] = "%" + keywords[i] + "%";
             query += " OR email LIKE ?";
+ 
+            params[4 + i] = "%" + keywords[i] + "%";
+            query += " OR telephone LIKE ?";
             
             firstColumn = false;
         }
@@ -426,7 +440,9 @@ public class CustomersController extends BaseController implements Initializable
         CustomerModel customer = (CustomerModel) listTableView.getSelectionModel().getSelectedItem();
         
         if(customer == null)
+        {
             return;
+        }
         
         MainActivity.editId = customer.getId();
         
@@ -453,8 +469,6 @@ public class CustomersController extends BaseController implements Initializable
 
             customer.delete();
             listOnSearch();
-        } else {
-            return;
         }
     }
     

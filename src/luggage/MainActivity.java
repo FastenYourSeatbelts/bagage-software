@@ -60,7 +60,7 @@ public class MainActivity extends Application {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                  DatabaseHelper.openConnection();
+                DatabaseHelper.openConnection();
             }
         }).start();
         
