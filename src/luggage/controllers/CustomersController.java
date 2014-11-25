@@ -340,7 +340,7 @@ public class CustomersController extends BaseController implements Initializable
         //new InsurerModel(customer.getInsurerId())
         
         editInsurerId.getSelectionModel().select(selectedInsurer);
-        editGender.getSelectionModel().select("MALE");
+        editGender.getSelectionModel().select(customer.getGender().toUpperCase());
     }
     
     public void setEditChoiceBoxes() {
@@ -445,7 +445,6 @@ public class CustomersController extends BaseController implements Initializable
         
         if(customer == null)
         {
-            System.out.println("HUUUHHHHHH");
             return;
         }
         
