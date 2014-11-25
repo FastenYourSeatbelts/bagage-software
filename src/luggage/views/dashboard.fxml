@@ -51,14 +51,14 @@
                             <fx:include source="/luggage/views/customers/list.fxml" />
                         </content>
                     </Tab>
-                    <Tab fx:id="manage_luggage" id="manage_luggage" text="Luggage">
-                        <content>
-                            <fx:include source="/luggage/views/luggage/list.fxml" />
-                        </content>
-                    </Tab>
                     <Tab fx:id="manage_users" id="manage_users" text="Users">
                         <content>
                             <fx:include source="/luggage/views/users/list.fxml" />
+                        </content>
+                    </Tab>
+                    <Tab fx:id="manage_luggage" id="manage_luggage" text="Luggage">
+                        <content>
+                            <fx:include source="/luggage/views/luggage/list.fxml" />
                         </content>
                     </Tab>
                     <Tab fx:id="view_total_luggage" id="view_total_luggage" text="All luggage">
