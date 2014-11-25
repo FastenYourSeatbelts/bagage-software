@@ -38,6 +38,7 @@ import luggage.security.Permissions;
 public class UserModel extends Model {
     
     public static final String ROLE_EMPLOYEE = "employee";
+    public static final String ROLE_SUPER = "super";
     public static final String ROLE_MODERATOR = "moderator";
     public static final String ROLE_MANAGER = "manager";
 
@@ -203,6 +204,8 @@ public class UserModel extends Model {
         switch(getRole()) {
             case ROLE_EMPLOYEE:
                 return Permissions.EMPLOYEE_PERMISSIONS.contains(operation);
+            case ROLE_SUPER:
+                return Permissions.SUPER_PERMISSIONS.contains(operation);
             case ROLE_MODERATOR:
                 return Permissions.MODERATOR_PERMISSIONS.contains(operation);
             case ROLE_MANAGER:
