@@ -24,19 +24,30 @@
  */
 package luggage.controllers;
 
+import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.layout.Background;
 import javafx.stage.Stage;
+import luggage.MainActivity;
 import luggage.helpers.StageHelper;
 import luggage.security.Authentication;
+import luggage.security.Permissions;
 
 /**
  * DashboardController
@@ -67,25 +78,53 @@ public class DashboardController extends BaseController  implements Initializabl
     public void initialize(URL url, ResourceBundle rb) {
         fullname.setText(Authentication.getCurrentUser().getFullname());
           
-        removeForbiddenTabs();   
+        addTabs();
     }
+
     
     /**
      * Remove all the tabs the current user doesn't have permissions on
      */
-    public void removeForbiddenTabs()
+    public void addTabs()
     {
-        ArrayList<Tab> tabsToRemove = new ArrayList<Tab>();
-        for(int i = 0; i < tabs.getTabs().size(); i ++) {
-            if(!Authentication.getCurrentUser().hasPermissionsOn(tabs.getTabs().get(i).getId()))
-            {
-                tabsToRemove.add(tabs.getTabs().get(i));
-            }
-        }
+        List<Permissions.Tab> tabPermissions = Permissions.getPermissions(Authentication.getCurrentUser());
         
-        for(Tab tabToRemove : tabsToRemove) {
-            tabs.getTabs().remove(tabToRemove);
-        }
+        
+        String image = MainActivity.class.getResource("/resources/images/loading.gif").toExternalForm();
+        tabs.setStyle("-fx-background-image: url('" + image + "'); -fx-background-position: center center; -fx-background-repeat: no-repeat;");
+                
+        Task task = new Task<Void>() {
+            
+            @Override
+            protected Void call() throws Exception {
+                
+                for(Permissions.Tab tabPermission : tabPermissions) {
+
+                    Tab newTab = new Tab(tabPermission.getText());
+                    newTab.setId(tabPermission.getId());
+
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                FXMLLoader oFXMLLoader = new FXMLLoader();
+                                Parent primaryLoader = (Parent) oFXMLLoader.load(this.getClass().getResource("/luggage/views/" + tabPermission.getView() + ".fxml").openStream());
+                                newTab.setContent(primaryLoader);
+
+                                tabs.getTabs().add(newTab);
+                            } catch (IOException ex) {
+                                Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    });
+                }
+                
+                return null;
+            }
+            
+        };
+        
+        new Thread(task).start();
     }
     
     /**

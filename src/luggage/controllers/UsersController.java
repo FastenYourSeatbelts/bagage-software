@@ -27,6 +27,7 @@ package luggage.controllers;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -276,7 +277,7 @@ public class UsersController extends BaseController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        new Thread(new Runnable() {
+        Platform.runLater(new Runnable() {
             @Override
             public void run() {
 
@@ -303,7 +304,7 @@ public class UsersController extends BaseController implements Initializable {
                 }
 
             }
-        }).start();
+        });
     }
 
     public void setViewChoiceBoxes() {
