@@ -304,9 +304,9 @@ public class CustomersController extends BaseController implements Initializable
     
     public void setViewChoiceBoxes() {
         viewGender.setItems(FXCollections.observableArrayList(
-            "Male", 
-            "Female",
-            "Other"
+            "MALE", 
+            "FEMALE",
+            "OTHER"
         ));
         
         InsurerModel insurers = new InsurerModel();
@@ -342,9 +342,9 @@ public class CustomersController extends BaseController implements Initializable
     
     public void setEditChoiceBoxes() {
         editGender.setItems(FXCollections.observableArrayList(
-            "Male", 
-            "Female",
-            "Other"
+            "MALE", 
+            "FEMALE",
+            "OTHER"
         ));
         
         InsurerModel insurers = new InsurerModel();
@@ -363,9 +363,9 @@ public class CustomersController extends BaseController implements Initializable
     
     public void setAddChoiceBoxes() {
         addGender.setItems(FXCollections.observableArrayList(
-            "Male", 
-            "Female",
-            "Other"
+            "MALE", 
+            "FEMALE",
+            "OTHER"
         ));
         
         InsurerModel insurers = new InsurerModel();

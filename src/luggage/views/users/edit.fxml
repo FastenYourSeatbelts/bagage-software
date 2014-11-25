@@ -41,8 +41,8 @@
             <TextField fx:id="editResidence" promptText="e.g. Amsterdam" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="7" />
             <TextField fx:id="editAddress" promptText="e.g. Amsterdamseweg 90" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="5" />
             <TextField fx:id="editPostalcode" promptText="e.g. 3892PB" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="6" />
-            <TextField fx:id="editMobile" promptText="e.g. +31629887377" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="10" />
-            <TextField fx:id="editTelephone" promptText="e.g. 0297-293919" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="9" />
+            <TextField fx:id="editMobile" promptText="e.g. 0031629887377" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="10" />
+            <TextField fx:id="editTelephone" promptText="e.g. 0031202939190" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="9" />
             <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Username" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font size="14.0" />

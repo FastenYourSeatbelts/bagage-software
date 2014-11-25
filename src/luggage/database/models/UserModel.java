@@ -322,22 +322,4 @@ public class UserModel extends Model {
     public void setMobile(String mobile) {
         row.put("mobile", mobile);
     }
-    
-    
-    /**
-     * Return the workplace of the current row
-     * 
-     * @return 
-     */
-    public String getWorkplace() {
-       return row.get("residence");
-    }
-    /**
-     * Set the workplace of the current row
-     * 
-     * @param workplace 
-     */
-    public void setWorkplace(String workplace) {
-        row.put("residence", workplace);
-    }
 }

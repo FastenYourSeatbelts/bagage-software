@@ -79,7 +79,7 @@ public class UsersController extends BaseController implements Initializable {
     private TableColumn listTableViewEmail;
 
     @FXML
-    private TableColumn listTableViewWorkplace;
+    private TableColumn listTableViewResidence;
 
     @FXML
     private TableColumn listTableViewRole;
@@ -191,6 +191,12 @@ public class UsersController extends BaseController implements Initializable {
      */
     @FXML
     private Button listView;
+    
+    @FXML
+    private Button listEdit;
+    
+    @FXML
+    private Button listRemove;
 
     @FXML
     private TextField viewUsername;
@@ -282,7 +288,12 @@ public class UsersController extends BaseController implements Initializable {
 
                 // List
                 if (listTableView != null) {
-                    listResetTableView("", new String[0]);
+                    listResetTableView("", new String[0]);                    
+                
+                    listEdit.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
+                    listRemove.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
+                    listView.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
+                    listTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
                 }
 
                 // Add
@@ -309,7 +320,8 @@ public class UsersController extends BaseController implements Initializable {
     public void setViewChoiceBoxes() {
         viewGender.setItems(FXCollections.observableArrayList(
                 "MALE",
-                "FEMALE"
+                "FEMALE",
+                "OTHER"
         ));
         
         viewRole.setItems(FXCollections.observableArrayList(
@@ -325,15 +337,16 @@ public class UsersController extends BaseController implements Initializable {
     public void setAddChoiceBox() {
 
         addGender.setItems(FXCollections.observableArrayList(
-                "Male",
-                "Female"
+                "MALE",
+                "FEMALE",
+                "OTHER"
         ));
 
         addRole.setItems(FXCollections.observableArrayList(
-                "Super",
-                "Manager",
-                "Moderator",
-                "Employee"
+                "EMPLOYEE",
+                "MANAGER",
+                "MODERATOR",
+                "SUPER"
         ));
     }
 
@@ -351,21 +364,22 @@ public class UsersController extends BaseController implements Initializable {
         editTelephone.setText(user.getTelephone());
         editMobile.setText(user.getMobile());
 
-        editGender.getSelectionModel().select("Male");
-        editRole.getSelectionModel().select("Employee");
-
+        editGender.getSelectionModel().select(user.getGender().toUpperCase());
+        editRole.getSelectionModel().select(user.getRole().toUpperCase());
     }
 
     public void setEditChoiceBoxes() {
         editGender.setItems(FXCollections.observableArrayList(
-                "Male",
-                "Female"
+                "MALE",
+                "FEMALE",
+                "OTHER"
         ));
 
         editRole.setItems(FXCollections.observableArrayList(
-                "Manager",
-                "Moderator",
-                "Employee"
+                "EMPLOYEE",
+                "MANAGER",
+                "MODERATOR",
+                "SUPER"
         ));
     }
 
@@ -381,7 +395,7 @@ public class UsersController extends BaseController implements Initializable {
 
         listTableViewUsername.setCellValueFactory(new PropertyValueFactory("username"));
         listTableViewName.setCellValueFactory(new PropertyValueFactory("fullname"));
-        listTableViewWorkplace.setCellValueFactory(new PropertyValueFactory("workplace"));
+        listTableViewResidence.setCellValueFactory(new PropertyValueFactory("residence"));
         listTableViewRole.setCellValueFactory(new PropertyValueFactory("role"));
 
         listTableView.setItems(data);
@@ -534,7 +548,7 @@ public class UsersController extends BaseController implements Initializable {
     }
 
     public void setViewFields() {
-        UserModel user = new UserModel(MainActivity.editId);
+        UserModel user = new UserModel(MainActivity.viewId);
 
         viewUsername.setText(user.getUsername());
         viewPassword.setText(user.getPassword());
@@ -546,13 +560,16 @@ public class UsersController extends BaseController implements Initializable {
         viewResidence.setText(user.getResidence());
         viewTelephone.setText(user.getTelephone());
         viewMobile.setText(user.getMobile());
+        
+        viewGender.getSelectionModel().select(user.getGender().toUpperCase());
+        viewRole.getSelectionModel().select(user.getRole().toUpperCase());
 
     }
 
     public void viewClose() {
-        UsersController userController = (UsersController) StageHelper.callbackController;
-        userController.listOnSearch();
-    }
+        Stage cancelStage = (Stage) viewClose.getScene().getWindow();
+        StageHelper.closeStage(cancelStage);
+   }
 
     public void editCancel() {
         Stage cancelStage = (Stage) editCancel.getScene().getWindow();
