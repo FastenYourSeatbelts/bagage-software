@@ -31,6 +31,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import luggage.controllers.BaseController;
 
@@ -67,6 +68,7 @@ public class StageHelper {
             oNewStage.setTitle(AppConfig.ApplicationName + " " + sNewStage);
             oNewStage.setMinHeight(AppConfig.MinHeight);
             oNewStage.setMinWidth(AppConfig.MinWidth);
+            oNewStage.initModality(Modality.APPLICATION_MODAL);
             
             if(bLocked)
             {
