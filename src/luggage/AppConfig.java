@@ -54,7 +54,7 @@ public class AppConfig {
     /**
      * Database host & driver
      */
-    public static final String databaseName = "jdbc:mysql://localhost/luggage-system";
+    public static final String databaseName = "jdbc:mysql://localhost/luggage-system?zeroDateTimeBehavior=convertToNull";
     
     /**
      * Database user

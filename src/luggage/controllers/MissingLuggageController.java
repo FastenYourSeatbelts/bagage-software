@@ -83,10 +83,17 @@ public class MissingLuggageController extends BaseController  implements Initial
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        String[] params = new String[1];
-        params[0] = "missing";
-        
-        resetTableView("status = ?", params);
+         new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                String[] params = new String[1];
+                params[0] = "missing";
+
+                resetTableView("status = ?", params);
+                
+            }
+         }).start();
     }
     
     public void resetTableView(String where, String... params) {

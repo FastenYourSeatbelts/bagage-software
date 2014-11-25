@@ -43,6 +43,9 @@ import luggage.database.models.CustomerModel;
 import luggage.database.models.InsurerModel;
 import luggage.database.models.Model;
 import luggage.helpers.StageHelper;
+import org.controlsfx.control.action.Action;
+import org.controlsfx.dialog.Dialog;
+import org.controlsfx.dialog.Dialogs;
 
 /**
  * CustomersController
@@ -169,17 +172,60 @@ public class CustomersController extends BaseController implements Initializable
     
     @FXML
     private TextField editTelephone;
-    
+
     @FXML
     private TextField editMobile;
     
- 
+    /**
+     * VIEW ELEMENTS
+     */
+    
+    @FXML
+    private Button viewAdd;
+    
+    @FXML
+    private Button viewReset;
+    
+    @FXML
+    private Button viewCancel;
+    
+    @FXML
+    private TextField viewFirstname;
+    
+    @FXML
+    private TextField viewPrefix;
+    
+    @FXML
+    private TextField viewLastname;
+    
+    @FXML
+    private ChoiceBox viewGender;
+    
+    @FXML
+    private ChoiceBox<InsurerModel> viewInsurerId;
+    
+    @FXML
+    private TextField viewAddress;
+    
+    @FXML
+    private TextField viewPostalcode;
+    
+    @FXML
+    private TextField viewResidence;
+    
+    @FXML
+    private TextField viewEmail;
+    
+    @FXML
+    private TextField viewTelephone;
+
+    @FXML
+    private TextField viewMobile;
+
     private ObservableList<CustomerModel> listData = FXCollections.observableArrayList();
     
     private final ObservableList<InsurerModel> insurerData = FXCollections.observableArrayList();
-    
-    public int EDIT_ID;
-
+ 
     /**
      * Called on controller start
      * 
@@ -188,24 +234,79 @@ public class CustomersController extends BaseController implements Initializable
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // List
-        if(listTableView != null)
-        {
-            listResetTableView("", new String[0]);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                 
+                // List
+                if(listTableView != null)
+                {
+                    listResetTableView("", new String[0]);
+                }
+
+                // Add
+                if(addGender != null && addInsurerId != null)
+                {
+                    setAddChoiceBoxes();
+                }
+
+                // Edit
+                if(editGender != null && editInsurerId != null)
+                {
+                    setEditChoiceBoxes();
+                    setEditFields();
+                }
+
+                // View
+                if(viewGender != null && viewInsurerId != null)
+                {
+                    setViewChoiceBoxes();
+                    setViewFields();
+                }
+                
+            }
+        }).start();
+    }
+    
+    public InsurerModel selectedInsurer;
+    
+    public void setViewFields() {
+        CustomerModel customer = new CustomerModel(MainActivity.viewId);
+        
+        viewFirstname.setText(customer.getFirstname());
+        viewPrefix.setText(customer.getPrefix());
+        viewLastname.setText(customer.getLastname());
+        viewAddress.setText(customer.getAddress());
+        viewPostalcode.setText(customer.getPostalCode());
+        viewResidence.setText(customer.getResidence());
+        viewEmail.setText(customer.getEmail());
+        viewTelephone.setText(customer.getTelephone());
+        viewMobile.setText(customer.getMobile());
+        
+        //new InsurerModel(customer.getInsurerId())
+        
+        viewInsurerId.getSelectionModel().select(selectedInsurer);
+        viewGender.getSelectionModel().select("MALE");
+    }
+    
+    public void setViewChoiceBoxes() {
+        viewGender.setItems(FXCollections.observableArrayList(
+            "MALE", 
+            "FEMALE"
+        ));
+        
+        InsurerModel insurers = new InsurerModel();
+        List<Model> allInsurers = insurers.findAll("", new String[0]);
+        for(Model allInsurer : allInsurers) {
+            InsurerModel insurer = (InsurerModel) allInsurer;
+            if(insurer.getId() == new CustomerModel(MainActivity.viewId).getInsurerId())
+            {
+                selectedInsurer = insurer;
+            }
+            insurerData.add(insurer);
         }
         
-        // Add
-        if(addGender != null && addInsurerId != null)
-        {
-            setAddChoiceBoxes();
-        }
-        
-        // Edit
-        if(editGender != null && editInsurerId != null)
-        {
-            setEditChoiceBoxes();
-            setEditFields();
-        }
+        viewInsurerId.setItems(insurerData);
     }
     
     public void setEditFields() {
@@ -221,30 +322,11 @@ public class CustomersController extends BaseController implements Initializable
         editTelephone.setText(customer.getTelephone());
         editMobile.setText(customer.getMobile());
         
-        
         //new InsurerModel(customer.getInsurerId())
         
         editInsurerId.getSelectionModel().select(selectedInsurer);
         editGender.getSelectionModel().select("MALE");
     }
-    
-    public void setAddChoiceBoxes() {
-        addGender.setItems(FXCollections.observableArrayList(
-            "MALE", 
-            "FEMALE"
-        ));
-        
-        InsurerModel insurers = new InsurerModel();
-        List<Model> allInsurers = insurers.findAll("", new String[0]);
-        for(Model allInsurer : allInsurers) {
-            InsurerModel insurer = (InsurerModel) allInsurer;
-            insurerData.add(insurer);
-        }
-        
-        addInsurerId.setItems(insurerData);
-    }
-    
-    public InsurerModel selectedInsurer;
     
     public void setEditChoiceBoxes() {
         editGender.setItems(FXCollections.observableArrayList(
@@ -264,6 +346,22 @@ public class CustomersController extends BaseController implements Initializable
         }
         
         editInsurerId.setItems(insurerData);
+    }
+    
+    public void setAddChoiceBoxes() {
+        addGender.setItems(FXCollections.observableArrayList(
+            "MALE", 
+            "FEMALE"
+        ));
+        
+        InsurerModel insurers = new InsurerModel();
+        List<Model> allInsurers = insurers.findAll("", new String[0]);
+        for(Model allInsurer : allInsurers) {
+            InsurerModel insurer = (InsurerModel) allInsurer;
+            insurerData.add(insurer);
+        }
+        
+        addInsurerId.setItems(insurerData);
     }
     
     public void listResetTableView(String where, String... params) {
@@ -337,18 +435,39 @@ public class CustomersController extends BaseController implements Initializable
     
     @FXML
     public void listRemove() {
+        Stage removeStage = (Stage) listTableView.getScene().getWindow();
+        
+        Action response = Dialogs.create().owner(removeStage)
+            .title("Are you sure you want to delete this item?")
+            //.masthead("Are you sure you want to delete this item? 2")
+            .message("Are you sure you want to delete this item?")
+            .actions(Dialog.ACTION_OK, Dialog.ACTION_CANCEL)
+            .showWarning();
+
+                
+        if (response == Dialog.ACTION_OK) {
+            CustomerModel customer = (CustomerModel) listTableView.getSelectionModel().getSelectedItem();
+
+            if(customer == null)
+                return;
+
+            customer.delete();
+            listOnSearch();
+        } else {
+            return;
+        }
+    }
+    
+    @FXML
+    public void listView() {
         CustomerModel customer = (CustomerModel) listTableView.getSelectionModel().getSelectedItem();
         
         if(customer == null)
             return;
         
-        customer.delete();
-        listOnSearch();
-    }
-    
-    @FXML
-    public void listView() {
+        MainActivity.viewId = customer.getId();
         
+        StageHelper.addStage("customers/view", this, false, true);
     }
     
     public void newCancel() {
@@ -445,6 +564,11 @@ public class CustomersController extends BaseController implements Initializable
         customersController.listOnSearch();
       
         editCancel();
+    }
+    
+    public void viewCancel() {
+        Stage cancelStage = (Stage) viewCancel.getScene().getWindow();
+        StageHelper.closeStage(cancelStage);
     }
    
 }

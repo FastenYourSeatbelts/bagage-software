@@ -33,7 +33,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import luggage.database.models.LuggageModel;
 import luggage.database.models.Model;
@@ -84,10 +83,15 @@ public class FoundLuggageController extends BaseController  implements Initializ
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        String[] params = new String[1];
-        params[0] = "found";
-        
-        resetTableView("status = ?", params);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String[] params = new String[1];
+                params[0] = "found";
+
+                resetTableView("status = ?", params);
+            }
+        }).start();
     }
     
     public void resetTableView(String where, String... params) {

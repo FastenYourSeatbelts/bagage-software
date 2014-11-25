@@ -33,7 +33,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import luggage.database.models.LuggageModel;
 import luggage.database.models.Model;
@@ -84,7 +83,12 @@ public class TotalLuggageController extends BaseController  implements Initializ
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        resetTableView("", new String[0]);
+         new Thread(new Runnable() {
+            @Override
+            public void run() {
+                resetTableView("", new String[0]);
+            }
+         }).start();
     }
     
     public void resetTableView(String where, String... params) {
