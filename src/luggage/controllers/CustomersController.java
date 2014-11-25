@@ -229,6 +229,8 @@ public class CustomersController extends BaseController implements Initializable
 
     @FXML
     private TextField viewMobile;
+    
+    
 
     private ObservableList<CustomerModel> listData = FXCollections.observableArrayList();
     

@@ -42,6 +42,10 @@ import luggage.MainActivity;
 import luggage.database.models.UserModel;
 import luggage.database.models.Model;
 import luggage.helpers.StageHelper;
+import luggage.security.Encryption;
+import org.controlsfx.control.action.Action;
+import org.controlsfx.dialog.Dialog;
+import org.controlsfx.dialog.Dialogs;
 
 /**
  * UsersController
@@ -79,6 +83,7 @@ public class UsersController extends BaseController implements Initializable {
 
     @FXML
     private TableColumn listTableViewRole;
+   
     @FXML
     private TextField listSearchField;
 
@@ -134,6 +139,9 @@ public class UsersController extends BaseController implements Initializable {
      * all EDIT fields
      */
     @FXML
+    private Button editAdd;
+    
+    @FXML
     private TextField editFirstname;
 
     @FXML
@@ -177,6 +185,49 @@ public class UsersController extends BaseController implements Initializable {
     
     @FXML
     private Button editCancel;
+    
+    /**
+     * VIEW ELEMENTS
+     */
+    
+    @FXML
+    private TextField viewUsername;
+    
+    @FXML 
+    private TextField viewPassword;
+    
+    @FXML
+    private TextField viewFirstname;
+    
+    @FXML
+    private TextField viewPrefix;
+    
+    @FXML 
+    private TextField viewLastname;
+    
+    @FXML
+    private TextField viewAddress;
+    
+    @FXML 
+    private TextField viewPostalcode;
+    
+    @FXML 
+    private TextField viewResidence;
+    
+    @FXML 
+    private TextField viewTelephone;
+    
+    @FXML
+    private TextField viewMobile;
+        
+    @FXML
+    private ChoiceBox viewRole;
+    
+    @FXML 
+    private ChoiceBox viewGender;
+    
+    @FXML 
+    private Button viewClose;
 
     private ObservableList<UserModel> listData = FXCollections.observableArrayList();
 
@@ -275,7 +326,7 @@ public class UsersController extends BaseController implements Initializable {
         editPostalcode.setText(user.getPostalcode());
         editResidence.setText(user.getResidence());
         editTelephone.setText(user.getTelephone());
-        editMobile.setText(user.getTelephone());
+        editMobile.setText(user.getMobile());
         
         editGender.getSelectionModel().select("Male");
         editRole.getSelectionModel().select("Employee");
@@ -331,17 +382,43 @@ public class UsersController extends BaseController implements Initializable {
         StageHelper.addStage("users/edit", this, false, true);
     }
     
+    @FXML
     public void listRemove() {
+        Stage removeStage = (Stage) listTableView.getScene().getWindow();
+        
+        Action response = Dialogs.create().owner(removeStage)
+            .title("Are you sure you want to delete this item?")
+            //.masthead("Are you sure you want to delete this item? 2")
+            .message("Are you sure you want to delete this item?")
+            .actions(Dialog.ACTION_OK, Dialog.ACTION_CANCEL)
+            .showWarning();
+
+                
+        if (response == Dialog.ACTION_OK) {
+            UserModel user = (UserModel) listTableView.getSelectionModel().getSelectedItem();
+
+            if(user == null)
+                return;
+
+            user.delete();
+            listOnSearch();
+        } else {
+            return;
+        }
+    }
+    
+     @FXML
+    public void listView() {
         UserModel user = (UserModel) listTableView.getSelectionModel().getSelectedItem();
         
         if(user == null)
             return;
         
-        user.delete();
-        listOnSearch();
-    }
+        MainActivity.viewId = user.getId();
+        
+        StageHelper.addStage("users/view", this, false, true);
     
-
+    }
     public void newCancel() {
         Stage addStage = (Stage) newCancel.getScene().getWindow();
         StageHelper.closeStage(addStage);
@@ -372,7 +449,7 @@ public class UsersController extends BaseController implements Initializable {
         }
 
         UserModel users = new UserModel();
-        users.setPassword(addPassword.getText());
+        users.setPassword(Encryption.hash(addPassword.getText()));
         users.setUsername(addUsername.getText());
         users.setFirstname(addFirstname.getText());
         users.setPrefix(addPrefix.getText());
@@ -418,7 +495,7 @@ public class UsersController extends BaseController implements Initializable {
         
         UserModel user = new UserModel(MainActivity.editId);
         user.setUsername(editUsername.getText());
-        user.setPassword(editPassword.getText());
+        user.setPassword(Encryption.hash(editPassword.getText()));
         user.setFirstname(editFirstname.getText());
         user.setPrefix(editPrefix.getText());
         user.setLastname(editLastname.getText());
@@ -433,6 +510,22 @@ public class UsersController extends BaseController implements Initializable {
         userController.listOnSearch();
         
         editCancel();
+    }
+    
+    public void setViewFields() {
+        UserModel user = new UserModel(MainActivity.editId);        
+       
+        user.setUsername(editUsername.getText());
+        user.setPassword(Encryption.hash(editPassword.getText()));
+        user.setFirstname(editFirstname.getText());
+        user.setPrefix(editPrefix.getText());
+        user.setLastname(editLastname.getText());
+        user.setPostalcode(editPostalcode.getText());
+        user.setAddress(editAddress.getText());
+        user.setResidence(editResidence.getText());
+        user.setTelephone(editTelephone.getText());
+        user.setMobile(editMobile.getText());
+        
     }
     
     public void editCancel() {
