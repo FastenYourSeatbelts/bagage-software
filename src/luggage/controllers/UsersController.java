@@ -83,7 +83,7 @@ public class UsersController extends BaseController implements Initializable {
 
     @FXML
     private TableColumn listTableViewRole;
-   
+
     @FXML
     private TextField listSearchField;
 
@@ -140,7 +140,7 @@ public class UsersController extends BaseController implements Initializable {
      */
     @FXML
     private Button editAdd;
-    
+
     @FXML
     private TextField editFirstname;
 
@@ -176,60 +176,59 @@ public class UsersController extends BaseController implements Initializable {
 
     @FXML
     private ChoiceBox editRole;
-    
+
     @FXML
     private Button editReset;
-    
+
     @FXML
     private Button editSave;
-    
+
     @FXML
     private Button editCancel;
-    
+
     /**
      * VIEW ELEMENTS
      */
-    
     @FXML
     private Button listView;
-    
+
     @FXML
     private TextField viewUsername;
-    
-    @FXML 
+
+    @FXML
     private TextField viewPassword;
-    
+
     @FXML
     private TextField viewFirstname;
-    
+
     @FXML
     private TextField viewPrefix;
-    
-    @FXML 
+
+    @FXML
     private TextField viewLastname;
-    
+
     @FXML
     private TextField viewAddress;
-    
-    @FXML 
+
+    @FXML
     private TextField viewPostalcode;
-    
-    @FXML 
+
+    @FXML
     private TextField viewResidence;
-    
-    @FXML 
+
+    @FXML
     private TextField viewTelephone;
-    
+
     @FXML
     private TextField viewMobile;
-        
+
     @FXML
     private ChoiceBox viewRole;
-    
-    @FXML 
+
+    @FXML
     private ChoiceBox viewGender;
-    
-    @FXML 
+
+    @FXML
     private Button viewClose;
 
     private ObservableList<UserModel> listData = FXCollections.observableArrayList();
@@ -280,31 +279,51 @@ public class UsersController extends BaseController implements Initializable {
         new Thread(new Runnable() {
             @Override
             public void run() {
-               
+
                 // List
-                if (listTableView != null) 
-                {
+                if (listTableView != null) {
                     listResetTableView("", new String[0]);
                 }
 
                 // Add
-                if (addGender != null && addRole != null)
-                {
+                if (addGender != null && addRole != null) {
                     setAddChoiceBox();
                 }
 
                 //Edit
-                if(editGender != null && editRole != null)
-                {
+                if (editGender != null && editRole != null) {
                     setEditFields();
                     setEditChoiceBoxes();
                 }
-            
+                //view
+                // View
+                if (viewGender != null && viewRole != null) {
+                    setViewChoiceBoxes();
+                    setViewFields();
+                }
+
             }
         }).start();
     }
 
+    public void setViewChoiceBoxes() {
+        viewGender.setItems(FXCollections.observableArrayList(
+                "MALE",
+                "FEMALE"
+        ));
+        
+        viewRole.setItems(FXCollections.observableArrayList(
+                "EMPLOYEE",
+                "MANAGER",
+                "MODERATOR",
+                "SUPER"
+        ));
+    }
+
+    
+
     public void setAddChoiceBox() {
+
         addGender.setItems(FXCollections.observableArrayList(
                 "Male",
                 "Female"
@@ -331,22 +350,22 @@ public class UsersController extends BaseController implements Initializable {
         editResidence.setText(user.getResidence());
         editTelephone.setText(user.getTelephone());
         editMobile.setText(user.getMobile());
-        
+
         editGender.getSelectionModel().select("Male");
         editRole.getSelectionModel().select("Employee");
 
     }
-    
+
     public void setEditChoiceBoxes() {
         editGender.setItems(FXCollections.observableArrayList(
-            "Male", 
-            "Female"
+                "Male",
+                "Female"
         ));
-        
+
         editRole.setItems(FXCollections.observableArrayList(
-            "Manager",
-            "Moderator",
-            "Employee"
+                "Manager",
+                "Moderator",
+                "Employee"
         ));
     }
 
@@ -385,24 +404,24 @@ public class UsersController extends BaseController implements Initializable {
 
         StageHelper.addStage("users/edit", this, false, true);
     }
-    
+
     @FXML
     public void listRemove() {
         Stage removeStage = (Stage) listTableView.getScene().getWindow();
-        
-        Action response = Dialogs.create().owner(removeStage)
-            .title("Are you sure you want to delete this item?")
-            //.masthead("Are you sure you want to delete this item? 2")
-            .message("Are you sure you want to delete this item?")
-            .actions(Dialog.ACTION_OK, Dialog.ACTION_CANCEL)
-            .showWarning();
 
-                
+        Action response = Dialogs.create().owner(removeStage)
+                .title("Are you sure you want to delete this item?")
+                //.masthead("Are you sure you want to delete this item? 2")
+                .message("Are you sure you want to delete this item?")
+                .actions(Dialog.ACTION_OK, Dialog.ACTION_CANCEL)
+                .showWarning();
+
         if (response == Dialog.ACTION_OK) {
             UserModel user = (UserModel) listTableView.getSelectionModel().getSelectedItem();
 
-            if(user == null)
+            if (user == null) {
                 return;
+            }
 
             user.delete();
             listOnSearch();
@@ -410,19 +429,21 @@ public class UsersController extends BaseController implements Initializable {
             return;
         }
     }
-    
-     @FXML
+
+    @FXML
     public void listView() {
         UserModel user = (UserModel) listTableView.getSelectionModel().getSelectedItem();
-        
-        if(user == null)
+
+        if (user == null) {
             return;
-        
+        }
+
         MainActivity.viewId = user.getId();
-        
+
         StageHelper.addStage("users/view", this, false, true);
-    
+
     }
+
     public void newCancel() {
         Stage addStage = (Stage) newCancel.getScene().getWindow();
         StageHelper.closeStage(addStage);
@@ -442,13 +463,11 @@ public class UsersController extends BaseController implements Initializable {
     }
 
     public void newSave() {
-        if(addGender.getSelectionModel().getSelectedItem() == null) 
-        {
+        if (addGender.getSelectionModel().getSelectedItem() == null) {
             return;
         }
 
-        if(addRole.getSelectionModel().getSelectedItem() == null) 
-        {
+        if (addRole.getSelectionModel().getSelectedItem() == null) {
             return;
         }
 
@@ -472,7 +491,7 @@ public class UsersController extends BaseController implements Initializable {
 
         newCancel();
     }
-    
+
     public void editReset() {
         editUsername.setText("");
         editPassword.setText("");
@@ -485,18 +504,16 @@ public class UsersController extends BaseController implements Initializable {
         editTelephone.setText("");
         editMobile.setText("");
     }
-    
+
     public void editSave() {
-        if(editGender.getSelectionModel().getSelectedItem() == null)
-        {
+        if (editGender.getSelectionModel().getSelectedItem() == null) {
             return;
         }
-        
-        if(editRole.getSelectionModel().getSelectedItem() == null)
-        {
+
+        if (editRole.getSelectionModel().getSelectedItem() == null) {
             return;
         }
-        
+
         UserModel user = new UserModel(MainActivity.editId);
         user.setUsername(editUsername.getText());
         user.setPassword(Encryption.hash(editPassword.getText()));
@@ -509,16 +526,16 @@ public class UsersController extends BaseController implements Initializable {
         user.setTelephone(editTelephone.getText());
         user.setMobile(editMobile.getText());
         user.save();
-        
+
         UsersController userController = (UsersController) StageHelper.callbackController;
         userController.listOnSearch();
-        
+
         editCancel();
     }
-    
+
     public void setViewFields() {
-        UserModel user = new UserModel(MainActivity.editId);        
-       
+        UserModel user = new UserModel(MainActivity.editId);
+
         viewUsername.setText(user.getUsername());
         viewPassword.setText(user.getPassword());
         viewFirstname.setText(user.getFirstname());
@@ -529,14 +546,14 @@ public class UsersController extends BaseController implements Initializable {
         viewResidence.setText(user.getResidence());
         viewTelephone.setText(user.getTelephone());
         viewMobile.setText(user.getMobile());
-        
+
     }
-    
+
     public void viewClose() {
         UsersController userController = (UsersController) StageHelper.callbackController;
         userController.listOnSearch();
     }
-    
+
     public void editCancel() {
         Stage cancelStage = (Stage) editCancel.getScene().getWindow();
         StageHelper.closeStage(cancelStage);
