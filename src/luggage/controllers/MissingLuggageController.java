@@ -86,9 +86,9 @@ public class MissingLuggageController extends BaseController  implements Initial
          new Thread(new Runnable() {
             @Override
             public void run() {
-        
+
                 String[] params = new String[1];
-                params[0] = "lost";
+                params[0] = "missing";
 
                 resetTableView("status = ?", params);
                 
