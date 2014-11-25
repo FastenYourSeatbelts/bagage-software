@@ -46,6 +46,8 @@ import javafx.stage.Stage;
 public class MainActivity extends Application {
     
     public static int editId;
+    
+    public static int viewId;
 
     /**
      * Called on application run

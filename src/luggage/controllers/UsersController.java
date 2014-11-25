@@ -223,24 +223,31 @@ public class UsersController extends BaseController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+               
+                // List
+                if (listTableView != null) 
+                {
+                    listResetTableView("", new String[0]);
+                }
 
-        // List
-        if (listTableView != null) {
-            listResetTableView("", new String[0]);
-        }
+                // Add
+                if (addGender != null && addRole != null)
+                {
+                    setAddChoiceBox();
+                }
 
-        // Add
-        if (addGender != null && addRole != null) {
-            setAddChoiceBox();
-        }
-        
-        //Edit
-        if(editGender != null && editRole != null)
-        {
+                //Edit
+                if(editGender != null && editRole != null)
+                {
+                    setEditFields();
+                    setEditChoiceBoxes();
+                }
             
-            setEditFields();
-            setEditChoiceBoxes();
-        }
+            }
+        }).start();
     }
 
     public void setAddChoiceBox() {

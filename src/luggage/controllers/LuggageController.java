@@ -40,7 +40,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import luggage.database.models.CustomerModel;
 import luggage.database.models.LuggageModel;
 import luggage.database.models.Model;
 import luggage.helpers.StageHelper;
@@ -119,16 +118,22 @@ public class LuggageController extends BaseController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // List
-        if (listTableView != null) {
-            listResetTableView("", new String[0]);
-        }
+         new Thread(new Runnable() {
+            @Override
+            public void run() {
 
-        // Add
-        if (addStatus != null) {
-            setAddChoiceBoxes();
-        }
+                // List
+                if (listTableView != null) {
+                    listResetTableView("", new String[0]);
+                }
 
+                // Add
+                if (addStatus != null) {
+                    setAddChoiceBoxes();
+                }
+            
+            }
+         }).start();
     }
 
     public void setAddChoiceBoxes() {

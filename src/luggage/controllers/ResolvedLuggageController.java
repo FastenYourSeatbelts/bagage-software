@@ -84,10 +84,17 @@ public class ResolvedLuggageController extends BaseController  implements Initia
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        String[] params = new String[1];
-        params[0] = "resolved";
+         new Thread(new Runnable() {
+            @Override
+            public void run() {
         
-        resetTableView("status = ?", params);
+                String[] params = new String[1];
+                params[0] = "resolved";
+
+                resetTableView("status = ?", params);
+                
+            }
+         }).start();
     }
     
     public void resetTableView(String where, String... params) {
