@@ -36,6 +36,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import luggage.MainActivity;
+
 import luggage.database.models.LuggageModel;
 import luggage.database.models.Model;
 
@@ -116,6 +118,12 @@ public class MissingLuggageController extends BaseController  implements Initial
         tableViewNotes.setCellValueFactory(new PropertyValueFactory("notes"));
                     
         luggageTableView.setItems(data);
+    }
+    
+    public void setViewFields() {
+        LuggageModel luggage = new LuggageModel(MainActivity.viewId);
+        
+        
     }
     
 }

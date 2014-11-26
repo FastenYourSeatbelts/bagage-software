@@ -28,7 +28,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
@@ -42,7 +41,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.layout.Background;
 import javafx.stage.Stage;
 import luggage.MainActivity;
 import luggage.helpers.StageHelper;
@@ -88,7 +86,6 @@ public class DashboardController extends BaseController  implements Initializabl
     public void addTabs()
     {
         List<Permissions.Tab> tabPermissions = Permissions.getPermissions(Authentication.getCurrentUser());
-        
         
         String image = MainActivity.class.getResource("/resources/images/loading.gif").toExternalForm();
         tabs.setStyle("-fx-background-image: url('" + image + "'); -fx-background-position: center center; -fx-background-repeat: no-repeat;");

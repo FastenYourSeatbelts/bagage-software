@@ -64,7 +64,11 @@ public class CustomerModel extends Model {
      * @return 
      */
     public int getInsurerId() {
-        return Integer.parseInt(row.get("insurer_id"));
+        try {
+            return Integer.parseInt(row.get("insurer_id"));
+        } catch(Exception e) {
+            return 0;
+        }
     }
    
     /**
