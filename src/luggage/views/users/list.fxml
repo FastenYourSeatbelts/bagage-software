@@ -15,7 +15,7 @@
             <columns>
                 <TableColumn fx:id="listTableViewUsername" prefWidth="202.0" text="Username" />
                 <TableColumn fx:id="listTableViewName" minWidth="0.0" prefWidth="253.0" text="Name" />
-                <TableColumn fx:id="listTableViewResidence" prefWidth="173.0" text="Residence" />
+                <TableColumn fx:id="listTableViewWorkplace" prefWidth="173.0" text="Workplace" />
                 <TableColumn fx:id="listTableViewRole" prefWidth="171.0" text="Role" />
             </columns>
         </TableView>

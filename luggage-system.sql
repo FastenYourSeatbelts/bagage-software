@@ -89,8 +89,7 @@ CREATE TABLE IF NOT EXISTS `locations` (
 --
 
 INSERT INTO `locations` (`id`, `name`) VALUES
-(1, 'AMS-Amsterdam'),(2, 'ETH-Eilat'),(3, 'GZP-Gazipasa'),(4, 'BJV-Bodrum'),(5, 'DLM-Dalaman'),(6, 'ADB-Izmir'),(7, 'SAW-Istanbul'),(8, 'RAK-Marrakech'),(9, 'AQJ-Aqaba'),(10, 'DXB-Dubai'),(11, 'BRU-Brussel'),(12, 'NBE-Enfidha'),(13, 'TUN-Tunis'),(14, 'HRG-Hurghada'),(15, 'BOJ-Burgas'),(16, 'ECN-Nicosia'),(17, 'ZTH-Zakynthos'),(18, 'RHO-Rodes Island'),(19, 'JSH-Crete Island'),(20, 'KGS-Kos Island'),(21, 'CFU-Corfu'),(22, 'BJL-Banjul'),(23, 'BCN-Barcelona'),(24, 'AGP-Costa del Sol'),(25, 'FUE-Fuerteventura'),(26, 'LPA-Gran Canaria'),(27, 'PMI-Mallorca'),(28, 'TFS-Tenerife'),(29, 'FAO-Faro'),(30, 'CUR-Curaçao'),(31, 'ACE-Lanzarote'),(32, 'GRQ-Groningen'),(33, 'BRE-Bremen'),(34, 'DTM-Dortmund'),(35, 'DUS-Düsseldorf'),(36, 'EIN-Eindhoven'),(37, 'MST-Maastricht'),(38, 'RTM-Rotterdam');
-
+(1, 'ACE-Lanzarote'),(2, 'ADB-Izmir'),(3, 'AGP-Costa Del Sol'),(4, 'AMS-Amsterdam'),(5, 'AQJ-Aqaba'),(6, 'BCN-Barcelona'),(7, 'BJL-Banjul'),(8, 'BJV-Bodrum'),(9, 'BOJ-Burgas'),(10, 'BRE-Bremen'),(11, 'BRU-Brussel'),(12, 'CFU-Corfu'),(13, 'CUR-Curaçao'),(14, 'DLM-Dalaman'),(15, 'DTM-Dortmund'),(16, 'DUS-Düsseldorf'),(17, 'DXB-Dubai'),(18, 'ECN-Nicosia'),(19, 'EIN-Eindhoven'),(20, 'ETH-Eilat'),(21, 'FAO-Faro'),(22, 'FUE-Fuerteventura'),(23, 'GRQ-Groningen'),(24, 'GZP-Gazipasa'),(25, 'HRG-Hurghada'),(26, 'JSH-Crete Island'),(27, 'KGS-Kos Island'),(28, 'LPA-Gran Canaria'),(29, 'MST-Maastricht'),(30, 'NBE-Enfidha'),(31, 'PMI-Mallorca'),(32, 'RAK-Marrakech'),(33, 'RHO-Rodes Island'),(34, 'RTM-Rotterdam'),(35, 'SAW-Istanbul'),(36, 'TFS-Tenerife'),(37, 'TUN-Tunis'),(38, 'ZTH-Zakynthos');
 -- --------------------------------------------------------
 
 --
@@ -149,6 +148,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `address` varchar(255) NOT NULL,
   `postalcode` varchar(255) NOT NULL,
   `residence` varchar(255) NOT NULL,
+  `workplace_id` int(11) NOT NULL,
   `telephone` varchar(255) NOT NULL,
   `mobile` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
@@ -158,8 +158,12 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `firstname`, `prefix`, `lastname`, `role`, `gender`, `address`, `postalcode`, `residence`, `telephone`, `mobile`) VALUES
-(1, 'Admin', '7a8d0e81b9e73f3e39cbaccfac16097a8c88e6bddf068160946115bfc31ff59e81533b292f5cafd3be42f6980aced7b8791f0738a91717f62f3f542a535c2e51', 'Tijme', 'de', 'Admin', 'super', 'male', '', '', '', '', ''),(2, 'Moderator', '7a8d0e81b9e73f3e39cbaccfac16097a8c88e6bddf068160946115bfc31ff59e81533b292f5cafd3be42f6980aced7b8791f0738a91717f62f3f542a535c2e51', 'Moderator', '', 'Nick', 'moderator', 'male', '', '', '', '', ''),(3, 'Manager', '7a8d0e81b9e73f3e39cbaccfac16097a8c88e6bddf068160946115bfc31ff59e81533b292f5cafd3be42f6980aced7b8791f0738a91717f62f3f542a535c2e51', 'Manager', '', '', 'manager', 'male', '', '', '', '', ''),(4, 'Employee', '7a8d0e81b9e73f3e39cbaccfac16097a8c88e6bddf068160946115bfc31ff59e81533b292f5cafd3be42f6980aced7b8791f0738a91717f62f3f542a535c2e51', 'Employee', '', '', 'employee', 'male', '', '', '', '', ''),(5, 'Gerrit', '7a8d0e81b9e73f3e39cbaccfac16097a8c88e6bddf068160946115bfc31ff59e81533b292f5cafd3be42f6980aced7b8791f0738a91717f62f3f542a535c2e51', 'Gerrit', 'van de', 'Fabriek', 'employee', 'other', 'Rietveldstraat 12', '1012AB', 'Amstergracht', '0031201234567', '00316123456789');
+INSERT INTO `users` (`id`, `username`, `password`, `firstname`, `prefix`, `lastname`, `role`, `gender`, `address`, `postalcode`, `residence`, `workplace_id`, `telephone`, `mobile`) VALUES
+(1, 'Admin', '7a8d0e81b9e73f3e39cbaccfac16097a8c88e6bddf068160946115bfc31ff59e81533b292f5cafd3be42f6980aced7b8791f0738a91717f62f3f542a535c2e51', 'Super', '', 'Admin', 'super', 'male', '', '', '', '8', '', ''),
+(2, 'Moderator', '7a8d0e81b9e73f3e39cbaccfac16097a8c88e6bddf068160946115bfc31ff59e81533b292f5cafd3be42f6980aced7b8791f0738a91717f62f3f542a535c2e51', 'Moderator', '', '', 'moderator', 'male', '', '', '', '16', '', ''),
+(3, 'Manager', '7a8d0e81b9e73f3e39cbaccfac16097a8c88e6bddf068160946115bfc31ff59e81533b292f5cafd3be42f6980aced7b8791f0738a91717f62f3f542a535c2e51', 'Manager', '', '', 'manager', 'male', '', '', '', '1', '', ''),
+(4, 'Employee', '7a8d0e81b9e73f3e39cbaccfac16097a8c88e6bddf068160946115bfc31ff59e81533b292f5cafd3be42f6980aced7b8791f0738a91717f62f3f542a535c2e51', 'Employee', '', '', 'employee', 'female', '', '', '', '25', '', ''),
+(5, 'Gerrit', '7a8d0e81b9e73f3e39cbaccfac16097a8c88e6bddf068160946115bfc31ff59e81533b292f5cafd3be42f6980aced7b8791f0738a91717f62f3f542a535c2e51', 'Gerrit', 'van de', 'Fabriek', 'employee', 'other', 'Rietveldstraat 12', '1012AB', 'Amstelveen', '12', '0031201234567', '0031612345678');
 
 --
 -- Constraints for dumped tables
@@ -170,13 +174,17 @@ INSERT INTO `users` (`id`, `username`, `password`, `firstname`, `prefix`, `lastn
 --
 ALTER TABLE `customers`
   ADD CONSTRAINT `customers_ibfk_1` FOREIGN KEY (`insurer_id`) REFERENCES `insurers` (`id`) ON UPDATE CASCADE;
-
 --
 -- Constraints for table `luggage`
 --
 ALTER TABLE `luggage`
   ADD CONSTRAINT `luggage_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `luggage_ibfk_2` FOREIGN KEY (`location_id`) REFERENCES `locations` (`id`) ON UPDATE CASCADE;
+--
+-- Constraints for table `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`workplace_id`) REFERENCES `locations` (`id`) ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

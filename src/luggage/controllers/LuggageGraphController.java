@@ -26,7 +26,15 @@ package luggage.controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import static javafx.application.Application.launch;
 import javafx.fxml.Initializable;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.chart.*;
+import javafx.scene.Group;
 
 /**
  * UsersController
@@ -34,9 +42,9 @@ import javafx.fxml.Initializable;
  * Controller for graphs/luggage.fxml
  *
  * @package luggage.controllers
- * @author Tijme Gommers
+ * @author Nick + Lars
  */
-public class LuggageGraphController extends BaseController  implements Initializable {
+public class LuggageGraphController extends BaseController implements Initializable {
 
     /**
      * Called on controller start
@@ -48,5 +56,74 @@ public class LuggageGraphController extends BaseController  implements Initializ
     public void initialize(URL url, ResourceBundle rb) {
         
     }
-   
+    /*
+    //@Override
+    public void start(Stage stage) {
+        Scene scene = new Scene(new Group());
+        stage.setTitle("Luggage status");
+        stage.setWidth(500);
+        stage.setHeight(500);
+
+        ObservableList<PieChart.Data> pieChartData
+                = FXCollections.observableArrayList(
+                new PieChart.Data("Missing", 13),
+                new PieChart.Data("Found", 25),
+                new PieChart.Data("Resolved", 110));
+        final PieChart chart = new PieChart(pieChartData);
+        chart.setTitle("Luggage status");
+
+        ((Group) scene.getRoot()).getChildren().add(chart);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+      public static void main(String[] args) {
+        launch(args);
+    }
+      
+      
+      
+    public class PieChartDemo extends BaseController {
+
+        //PIE CHART DATA
+        private ObservableList data;
+
+        //MAIN EXECUTOR
+        public static void main(String[] args) {
+            buildData()
+        }
+
+        //CONNECTION DATABASE SAVING DATA
+        public void buildData() {
+            data = FXCollections.observableArrayList();
+            try {
+                //SQL FOR SELECTING NATIONALITY OF CUSTOMER
+                String SQL = "SELECT COUNT(status), "
+                        + "type FROM luggage l"
+                        + " WHERE na.id=c.nationality_id GROUP BY type";
+
+                ResultSet rs = l.createStatement().executeQuery(SQL);
+                while (rs.next()) {
+                    //adding data on piechart data
+                    data.add(new PieChart.Data(rs.getString(2), rs.getDouble(1)));
+                }
+            }
+
+        }
+
+        @Override
+        public void start(Stage stage) throws Exception {
+            //PIE CHART
+            PieChart pieChart = new PieChart();
+            buildData();
+            pieChart.getData().addAll(data);
+
+            //Main Scene
+            Scene scene = new Scene(pieChart);
+
+            stage.setScene(scene);
+            stage.setVisible(true);
+        }
+    }
+ */   
 }

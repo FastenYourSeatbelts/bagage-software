@@ -34,6 +34,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -80,7 +81,7 @@ public class UsersController extends BaseController implements Initializable {
     private TableColumn listTableViewEmail;
 
     @FXML
-    private TableColumn listTableViewResidence;
+    private TableColumn listTableViewWorkplace;
 
     @FXML
     private TableColumn listTableViewRole;
@@ -110,6 +111,9 @@ public class UsersController extends BaseController implements Initializable {
     private TextField addResidence;
 
     @FXML
+    private ChoiceBox addWorkplace;
+
+    @FXML
     private ChoiceBox addRole;
 
     @FXML
@@ -136,6 +140,9 @@ public class UsersController extends BaseController implements Initializable {
     @FXML
     private TextField addPassword;
 
+    @FXML
+    private TextField addPasswordRepeat;
+    
     /*
      * all EDIT fields
      */
@@ -158,6 +165,9 @@ public class UsersController extends BaseController implements Initializable {
     private TextField editPassword;
 
     @FXML
+    private TextField editPasswordRepeat;
+
+    @FXML
     private TextField editAddress;
 
     @FXML
@@ -177,6 +187,9 @@ public class UsersController extends BaseController implements Initializable {
 
     @FXML
     private ChoiceBox editRole;
+
+    @FXML
+    private ChoiceBox editWorkplace;
 
     @FXML
     private Button editReset;
@@ -236,6 +249,9 @@ public class UsersController extends BaseController implements Initializable {
     private ChoiceBox viewGender;
 
     @FXML
+    private ChoiceBox viewWorkplace;
+
+    @FXML
     private Button viewClose;
 
     private ObservableList<UserModel> listData = FXCollections.observableArrayList();
@@ -265,7 +281,7 @@ public class UsersController extends BaseController implements Initializable {
             query += " OR lastname LIKE ?";
 
             params[3 + i] = "%" + keywords[i] + "%";
-            query += " OR residence LIKE ?";
+            query += " OR workplace_id LIKE ?";
 
             firstColumn = false;
         }
@@ -298,18 +314,18 @@ public class UsersController extends BaseController implements Initializable {
                 }
 
                 // Add
-                if (addGender != null && addRole != null) {
+                if (addGender != null && addRole != null && addWorkplace != null) {
                     setAddChoiceBox();
                 }
 
                 //Edit
-                if (editGender != null && editRole != null) {
+                if (editGender != null && editRole != null && editWorkplace != null) {
                     setEditFields();
                     setEditChoiceBoxes();
                 }
                 
                 // View
-                if (viewGender != null && viewRole != null) {
+                if (viewGender != null && viewRole != null && viewWorkplace != null) {
                     setViewChoiceBoxes();
                     setViewFields();
                 }
@@ -324,12 +340,53 @@ public class UsersController extends BaseController implements Initializable {
                 "FEMALE",
                 "OTHER"
         ));
-        
+
         viewRole.setItems(FXCollections.observableArrayList(
                 "EMPLOYEE",
                 "MANAGER",
                 "MODERATOR",
                 "SUPER"
+        ));
+
+        viewWorkplace.setItems(FXCollections.observableArrayList(
+		"ACE-LANZAROTE",
+		"ADB-IZMIR",
+		"AGP-COSTA DEL SOL",
+		"AMS-AMSTERDAM",
+		"AQJ-AQABA",
+		"BCN-BARCELONA",
+		"BJL-BANJUL",
+		"BJV-BODRUM",
+		"BOJ-BURGAS",
+		"BRE-BREMEN",
+		"BRU-BRUSSEL",
+		"CFU-CORFU",
+		"CUR-CURAÇAO",
+		"DLM-DALAMAN",
+		"DTM-DORTMUND",
+		"DUS-DÜSSELDORF",
+		"DXB-DUBAI",
+		"ECN-NICOSIA",
+		"EIN-EINDHOVEN",
+		"ETH-EILAT",
+		"FAO-FARO",
+		"FUE-FUERTEVENTURA",
+		"GRQ-GRONINGEN",
+		"GZP-GAZIPASA",
+		"HRG-HURGHADA",
+		"JSH-CRETE ISLAND",
+		"KGS-KOS ISLAND",
+		"LPA-GRAN CANARIA",
+		"MST-MAASTRICHT",
+		"NBE-ENFIDHA",
+		"PMI-MALLORCA",
+		"RAK-MARRAKECH",
+		"RHO-RODES ISLAND",
+		"RTM-ROTTERDAM",
+		"SAW-ISTANBUL",
+		"TFS-TENERIFE",
+		"TUN-TUNIS",
+		"ZTH-ZAKYNTHOS"
         ));
     }
 
@@ -349,6 +406,48 @@ public class UsersController extends BaseController implements Initializable {
                 "MODERATOR",
                 "SUPER"
         ));
+
+        addWorkplace.setItems(FXCollections.observableArrayList(
+		"ACE-LANZAROTE",
+		"ADB-IZMIR",
+		"AGP-COSTA DEL SOL",
+		"AMS-AMSTERDAM",
+		"AQJ-AQABA",
+		"BCN-BARCELONA",
+		"BJL-BANJUL",
+		"BJV-BODRUM",
+		"BOJ-BURGAS",
+		"BRE-BREMEN",
+		"BRU-BRUSSEL",
+		"CFU-CORFU",
+		"CUR-CURAÇAO",
+		"DLM-DALAMAN",
+		"DTM-DORTMUND",
+		"DUS-DÜSSELDORF",
+		"DXB-DUBAI",
+		"ECN-NICOSIA",
+		"EIN-EINDHOVEN",
+		"ETH-EILAT",
+		"FAO-FARO",
+		"FUE-FUERTEVENTURA",
+		"GRQ-GRONINGEN",
+		"GZP-GAZIPASA",
+		"HRG-HURGHADA",
+		"JSH-CRETE ISLAND",
+		"KGS-KOS ISLAND",
+		"LPA-GRAN CANARIA",
+		"MST-MAASTRICHT",
+		"NBE-ENFIDHA",
+		"PMI-MALLORCA",
+		"RAK-MARRAKECH",
+		"RHO-RODES ISLAND",
+		"RTM-ROTTERDAM",
+		"SAW-ISTANBUL",
+		"TFS-TENERIFE",
+		"TUN-TUNIS",
+		"ZTH-ZAKYNTHOS"
+        ));
+        
     }
 
     public void setEditFields() {
@@ -356,6 +455,7 @@ public class UsersController extends BaseController implements Initializable {
 
         editUsername.setText(user.getFirstname());
         editPassword.setText(user.getPassword());
+        editPasswordRepeat.setText(user.getPassword());
         editFirstname.setText(user.getFirstname());
         editPrefix.setText(user.getPrefix());
         editLastname.setText(user.getLastname());
@@ -367,6 +467,8 @@ public class UsersController extends BaseController implements Initializable {
 
         editGender.getSelectionModel().select(user.getGender().toUpperCase());
         editRole.getSelectionModel().select(user.getRole().toUpperCase());
+        editWorkplace.getSelectionModel().select(user.getWorkplace());
+        
     }
 
     public void setEditChoiceBoxes() {
@@ -382,6 +484,47 @@ public class UsersController extends BaseController implements Initializable {
                 "MODERATOR",
                 "SUPER"
         ));
+        
+        editWorkplace.setItems(FXCollections.observableArrayList(
+		"ACE-LANZAROTE",
+		"ADB-IZMIR",
+		"AGP-COSTA DEL SOL",
+		"AMS-AMSTERDAM",
+		"AQJ-AQABA",
+		"BCN-BARCELONA",
+		"BJL-BANJUL",
+		"BJV-BODRUM",
+		"BOJ-BURGAS",
+		"BRE-BREMEN",
+		"BRU-BRUSSEL",
+		"CFU-CORFU",
+		"CUR-CURAÇAO",
+		"DLM-DALAMAN",
+		"DTM-DORTMUND",
+		"DUS-DÜSSELDORF",
+		"DXB-DUBAI",
+		"ECN-NICOSIA",
+		"EIN-EINDHOVEN",
+		"ETH-EILAT",
+		"FAO-FARO",
+		"FUE-FUERTEVENTURA",
+		"GRQ-GRONINGEN",
+		"GZP-GAZIPASA",
+		"HRG-HURGHADA",
+		"JSH-CRETE ISLAND",
+		"KGS-KOS ISLAND",
+		"LPA-GRAN CANARIA",
+		"MST-MAASTRICHT",
+		"NBE-ENFIDHA",
+		"PMI-MALLORCA",
+		"RAK-MARRAKECH",
+		"RHO-RODES ISLAND",
+		"RTM-ROTTERDAM",
+		"SAW-ISTANBUL",
+		"TFS-TENERIFE",
+		"TUN-TUNIS",
+		"ZTH-ZAKYNTHOS"
+        ));
     }
 
     public void listResetTableView(String where, String... params) {
@@ -396,7 +539,8 @@ public class UsersController extends BaseController implements Initializable {
 
         listTableViewUsername.setCellValueFactory(new PropertyValueFactory("username"));
         listTableViewName.setCellValueFactory(new PropertyValueFactory("fullname"));
-        listTableViewResidence.setCellValueFactory(new PropertyValueFactory("residence"));
+//        listTableViewName.setCellValueFactory(new PropertyValueFactory("mobile"));
+        listTableViewWorkplace.setCellValueFactory(new PropertyValueFactory("locationName"));
         listTableViewRole.setCellValueFactory(new PropertyValueFactory("role"));
 
         listTableView.setItems(data);
@@ -404,7 +548,7 @@ public class UsersController extends BaseController implements Initializable {
 
     @FXML
     public void listNew() {
-        StageHelper.addStage("users/add", this, false, true);
+        StageHelper.addStage("users/new", this, false, true);
     }
 
     @FXML
@@ -466,6 +610,7 @@ public class UsersController extends BaseController implements Initializable {
 
     public void newReset() {
         addPassword.setText("");
+        addPasswordRepeat.setText("");
         addUsername.setText("");
         addFirstname.setText("");
         addPrefix.setText("");
@@ -475,17 +620,30 @@ public class UsersController extends BaseController implements Initializable {
         addResidence.setText("");
         addTelephone.setText("");
         addMobile.setText("");
+        addGender.setValue(null);
+        addRole.setValue("EMPLOYEE");
+        addWorkplace.setValue(null);
     }
 
     public void newSave() {
-        if (addGender.getSelectionModel().getSelectedItem() == null) {
+
+
+        if (addGender.getSelectionModel().getSelectedItem() == null || addRole.getSelectionModel().getSelectedItem() == null || addWorkplace.getSelectionModel().getSelectedItem() == null || addPassword != addPasswordRepeat) {
             return;
         }
 
-        if (addRole.getSelectionModel().getSelectedItem() == null) {
-            return;
-        }
-
+//        if (addRole.getSelectionModel().getSelectedItem() == null) {
+//            return;
+//        }
+//
+//        if (addWorkplace.getSelectionModel().getSelectedItem() == null) {
+//            return;
+//        }
+//        
+//        if (addPassword != addPasswordRepeat) {
+//            return;
+//        }
+        
         UserModel users = new UserModel();
         users.setPassword(Encryption.hash(addPassword.getText()));
         users.setUsername(addUsername.getText());
@@ -496,6 +654,7 @@ public class UsersController extends BaseController implements Initializable {
         users.setAddress(addAddress.getText());
         users.setPostalcode(addPostalcode.getText());
         users.setResidence(addResidence.getText());
+        users.setWorkplace(addWorkplace.getSelectionModel().getSelectedItem().toString());
         users.setRole(addRole.getSelectionModel().getSelectedItem().toString());
         users.setTelephone(addTelephone.getText());
         users.setMobile(addMobile.getText());
@@ -503,13 +662,14 @@ public class UsersController extends BaseController implements Initializable {
 
         UsersController usersController = (UsersController) StageHelper.callbackController;
         usersController.listOnSearch();
-
+        
         newCancel();
     }
 
     public void editReset() {
         editUsername.setText("");
         editPassword.setText("");
+        editPasswordRepeat.setText("");
         editFirstname.setText("");
         editPrefix.setText("");
         editLastname.setText("");
@@ -518,16 +678,27 @@ public class UsersController extends BaseController implements Initializable {
         editResidence.setText("");
         editTelephone.setText("");
         editMobile.setText("");
+        editGender.setValue(null);
+        editRole.setValue("EMPLOYEE");
+        editWorkplace.setValue(null);
     }
 
     public void editSave() {
-        if (editGender.getSelectionModel().getSelectedItem() == null) {
+        if (editGender.getSelectionModel().getSelectedItem() == null || editRole.getSelectionModel().getSelectedItem() == null || editWorkplace.getSelectionModel().getSelectedItem() == null || editPassword != editPasswordRepeat) {
             return;
         }
 
-        if (editRole.getSelectionModel().getSelectedItem() == null) {
-            return;
-        }
+//        if (editRole.getSelectionModel().getSelectedItem() == null) {
+//            return;
+//        }
+//
+//        if (editWorkplace.getSelectionModel().getSelectedItem() == null) {
+//            return;
+//        }
+//
+//        if (editPassword != editPasswordRepeat) {
+//            return;
+//        }
 
         UserModel user = new UserModel(MainActivity.editId);
         user.setUsername(editUsername.getText());
@@ -564,6 +735,7 @@ public class UsersController extends BaseController implements Initializable {
         
         viewGender.getSelectionModel().select(user.getGender().toUpperCase());
         viewRole.getSelectionModel().select(user.getRole().toUpperCase());
+        viewWorkplace.getSelectionModel().select(user.getWorkplace());
 
     }
 

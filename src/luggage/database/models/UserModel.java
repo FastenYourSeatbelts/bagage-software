@@ -286,7 +286,43 @@ public class UserModel extends Model {
     public void setResidence(String residence) {
         row.put("residence", residence);
     }
+    
+    /**
+     * Return the workplace_id of the current row
+     * 
+     * @return 
+     */
+    public int getWorkplace() {
+        return Integer.parseInt(row.get("workplace_id"));
+    }
    
+    /**
+     * Return the LocationModel of the current row
+     *
+     * @return LocationModel
+     */
+    public LocationModel getLocation() {
+        return new LocationModel(getWorkplace());
+    }
+
+    /**
+     * Return the workplace name of the current row
+     *
+     * @return workplace
+     */
+    public String getLocationName() {
+        return getLocation().getName();
+    }
+    
+    /**
+     * Set the workplace_id of the current row
+     * 
+     * @param workplace
+     */
+    public void setWorkplace(String workplace) {
+        row.put("workplace_id", workplace);
+    }
+    
     /**
      * Return the telephone of the current row
      * 
