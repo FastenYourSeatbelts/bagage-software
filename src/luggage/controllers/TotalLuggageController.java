@@ -91,6 +91,7 @@ public class TotalLuggageController extends BaseController  implements Initializ
                 Debug.print("TOTAL LUGGAGE CONTROLLER-----------------------------------------------------------------");
                 
                 resetTableView("", new String[0]);
+                luggageTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
             }
         });
     }

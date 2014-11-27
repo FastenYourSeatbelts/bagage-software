@@ -90,14 +90,14 @@ public class MissingLuggageController extends BaseController  implements Initial
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                
+
                 Debug.print("MISSING LUGGAGE CONTROLLER-----------------------------------------------------------------");
 
                 String[] params = new String[1];
                 params[0] = "missing";
 
                 resetTableView("status = ?", params);
-                
+                luggageTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);                
             }
         });
     }
