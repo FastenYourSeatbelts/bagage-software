@@ -26,7 +26,6 @@ package luggage.controllers;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -42,6 +41,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import luggage.Debug;
 import luggage.MainActivity;
 import luggage.database.models.CustomerModel;
 import luggage.database.models.LocationModel;
@@ -73,9 +73,6 @@ public class LuggageController extends BaseController implements Initializable {
 
     @FXML
     private TableColumn listTableViewStatus;
-
-    @FXML
-    private TableColumn listTableViewLocation;
 
     @FXML
     private TableColumn listTableViewTags;
@@ -117,6 +114,9 @@ public class LuggageController extends BaseController implements Initializable {
     private ChoiceBox<LocationModel> addLocationId;
 
     @FXML
+    private ChoiceBox<CustomerModel> addCustomerId;
+
+    @FXML
     private TextField addNotes;
 
     @FXML
@@ -141,6 +141,9 @@ public class LuggageController extends BaseController implements Initializable {
     private ChoiceBox<LocationModel> editLocationId;
 
     @FXML
+    private ChoiceBox<CustomerModel> editCustomerId;
+
+    @FXML
     private TextField editNotes;
 
     @FXML
@@ -149,6 +152,8 @@ public class LuggageController extends BaseController implements Initializable {
     private ObservableList<LuggageModel> listData = FXCollections.observableArrayList();
     
     private final ObservableList<LocationModel> locationData = FXCollections.observableArrayList();
+    
+    private final ObservableList<CustomerModel> customerData = FXCollections.observableArrayList();
 
     /**
      * Called on controller start
@@ -161,6 +166,9 @@ public class LuggageController extends BaseController implements Initializable {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
+                
+                Debug.print("LUGGAGE CONTROLLER-----------------------------------------------------------------");
+                
                 // List
                 if(listTableView != null)
                 {
@@ -181,7 +189,6 @@ public class LuggageController extends BaseController implements Initializable {
                 // Edit
                 if(editLocationId != null)
                 {
-                    System.out.println("YOLO");
                     setEditChoiceBoxes();
                     setEditFields();
                 }
@@ -189,40 +196,66 @@ public class LuggageController extends BaseController implements Initializable {
         });
     }
     
-    public LocationModel selectedLoction;
+    public LocationModel selectedLocation;
+    
+    public CustomerModel selectedCustomer;
 
     public void setAddChoiceBoxes() {
+        // Locations
         LocationModel oLocationModel = new LocationModel();
         List<Model> allLocations = oLocationModel.findAll();
         
         for(Model allLocation : allLocations) {
             LocationModel location = (LocationModel) allLocation;
-            if(location.getId() == new CustomerModel(MainActivity.editId).getInsurerId())
-            {
-                selectedLoction = location;
-            }
-            
             locationData.add(location);
         }
         
         addLocationId.setItems(locationData);
+        
+        // Customers
+        CustomerModel oCustomerModel = new CustomerModel();
+        List<Model> allCustomers = oCustomerModel.findAll();
+        
+        for(Model allCustomer : allCustomers) {
+            CustomerModel customer = (CustomerModel) allCustomer;
+            customerData.add(customer);
+        }
+        
+        addCustomerId.setItems(customerData);
     }
     
     public void setEditChoiceBoxes() {
+        // Locations
         LocationModel oLocationModel = new LocationModel();
         List<Model> allLocations = oLocationModel.findAll();
         
         for(Model allLocation : allLocations) {
             LocationModel location = (LocationModel) allLocation;
-            if(location.getId() == new CustomerModel(MainActivity.editId).getInsurerId())
+            if(location.getId() == new LuggageModel(MainActivity.editId).getLocationId())
             {
-                selectedLoction = location;
+                selectedLocation = location;
             }
             
             locationData.add(location);
         }
         
         editLocationId.setItems(locationData);
+        
+         // Customers
+        CustomerModel oCustomerModel = new CustomerModel();
+        List<Model> allCustomers = oCustomerModel.findAll();
+        
+        for(Model allCustomer : allCustomers) {
+            CustomerModel customer = (CustomerModel) allCustomer;
+            if(customer.getId() == new LuggageModel(MainActivity.editId).getCustomerId())
+            {
+                selectedCustomer = customer;
+            }
+            
+            customerData.add(customer);
+        }
+        
+        editCustomerId.setItems(customerData);
     }
 
     @FXML
@@ -312,7 +345,7 @@ public class LuggageController extends BaseController implements Initializable {
     public void listResetTableView(String where, String... params) {
         LuggageModel luggage = new LuggageModel();
         List<Model> allLuggage = luggage.findAll(where, params);
-
+        
         listData = FXCollections.observableArrayList();
         for (Model allLuggage1 : allLuggage) {
             LuggageModel luggage2 = (LuggageModel) allLuggage1;
@@ -321,7 +354,6 @@ public class LuggageController extends BaseController implements Initializable {
 
         listTableViewId.setCellValueFactory(new PropertyValueFactory("id"));
         listTableViewStatus.setCellValueFactory(new PropertyValueFactory("status"));
-        listTableViewLocation.setCellValueFactory(new PropertyValueFactory("locationName"));
         listTableViewTags.setCellValueFactory(new PropertyValueFactory("tags"));
         listTableViewDate.setCellValueFactory(new PropertyValueFactory("datetime"));
 
@@ -359,7 +391,7 @@ public class LuggageController extends BaseController implements Initializable {
     }
     
     public void setEditFields() {
-        LuggageModel luggage = new LuggageModel(MainActivity.viewId);
+        LuggageModel luggage = new LuggageModel(MainActivity.editId);
         
         editTags.setText(luggage.getTags());
         editNotes.setText(luggage.getNotes());
@@ -367,11 +399,12 @@ public class LuggageController extends BaseController implements Initializable {
         LocalDate date = LocalDate.parse(luggage.getDatetime());
         editDate.setValue(date);
     
-        editLocationId.getSelectionModel().select(selectedLoction);
+        editLocationId.getSelectionModel().select(selectedLocation);
+        editCustomerId.getSelectionModel().select(selectedCustomer);
     }
     
     public void editCancel() {
-        Stage addStage = (Stage) newCancel.getScene().getWindow();
+        Stage addStage = (Stage) editCancel.getScene().getWindow();
         StageHelper.closeStage(addStage);
     }
 

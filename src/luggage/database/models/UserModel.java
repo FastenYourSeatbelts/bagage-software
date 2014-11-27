@@ -55,8 +55,8 @@ public class UserModel extends Model {
     }
 
     @Override
-    protected Model getModel(int id) {
-        return new UserModel(id);
+    protected Model getModel() {
+        return new UserModel();
     }
 
     @Override

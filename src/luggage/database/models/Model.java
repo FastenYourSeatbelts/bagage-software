@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
+import luggage.Debug;
 
 /**
  * Model
@@ -48,7 +49,7 @@ abstract public class Model {
     
     protected abstract String getTable();
     
-    protected abstract Model getModel(int id);
+    protected abstract Model getModel();
     
     protected HashMap<String, String> row = new HashMap<String, String>();
  
@@ -58,6 +59,8 @@ abstract public class Model {
     
     public Model(int id) {
         try {
+            long startTime = System.nanoTime();
+    
             Statement stmt = DatabaseHelper.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             
             ResultSet rs = stmt.executeQuery("SELECT * FROM " + getTable() + " WHERE id = " + id);
@@ -70,6 +73,10 @@ abstract public class Model {
                 String column = rsmd.getColumnName((i+1));
                 row.put(column, rs.getString(column));
             }
+            
+            long endTime = System.nanoTime();
+            long microseconds = ((endTime - startTime) / 1000);
+            Debug.print("SELECT * FROM " + getTable() + " WHERE id = " + id + " took " + microseconds + " microseconds.");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
@@ -77,6 +84,8 @@ abstract public class Model {
     
     public Model(String where, String... params) {
         try {
+            long startTime = System.nanoTime();
+    
             PreparedStatement statement = DatabaseHelper.getConnection().prepareStatement("SELECT * FROM " + getTable() + " WHERE " + where);
 
             for(int i = 0; i < params.length; i ++) {
@@ -93,7 +102,10 @@ abstract public class Model {
                 String column = rsmd.getColumnName((i+1));
                 row.put(column, rs.getString(column));
             } 
-
+            
+            long endTime = System.nanoTime();
+            long microseconds = (endTime - startTime) / 1000;
+            Debug.print("SELECT * FROM " + getTable() + " WHERE " + where + " took " + microseconds + " microseconds.");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
@@ -105,7 +117,8 @@ abstract public class Model {
     
     public List<Model> findAll(String where, String... params) {
         try {
-            
+            long startTime = System.nanoTime();
+    
             String query = "SELECT * FROM " + getTable();
                     
             if(!where.equals(""))
@@ -127,9 +140,20 @@ abstract public class Model {
             
             while(rs.next())
             {
-                Model model = getModel(Integer.parseInt(rs.getString("id")));
+                Model model = getModel();
+                
+                for(int i = 0; i < rsmd.getColumnCount(); i ++)
+                {
+                    String column = rsmd.getColumnName((i+1));
+                    model.row.put(column, rs.getString(column));
+                }
+                
                 rowList.add(model);
             }
+            
+            long endTime = System.nanoTime();
+            long microseconds = (endTime - startTime) / 1000;
+            Debug.print(query + " took " + microseconds + " microseconds.");
             
             return rowList;
         } catch (SQLException ex) {
@@ -176,6 +200,8 @@ abstract public class Model {
     
     private boolean create() {
         try {
+            long startTime = System.nanoTime();
+    
             String sQuery = "INSERT INTO " + getTable() + " (";
             
             boolean firstColumn = true;
@@ -210,7 +236,13 @@ abstract public class Model {
                 currentColumn = currentColumn + 1;
             }
             
-            return statement.execute();
+            boolean result = statement.execute();
+            
+            long endTime = System.nanoTime();
+            long microseconds = (endTime - startTime) / 1000;
+            Debug.print(sQuery + " took " + microseconds + " microseconds.");
+            
+            return result;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             return false;
@@ -219,6 +251,8 @@ abstract public class Model {
     
     private boolean update() {
         try {
+            long startTime = System.nanoTime();
+    
             String sQuery = "UPDATE " + getTable() + " SET ";
             
             boolean firstColumn = true;
@@ -241,7 +275,13 @@ abstract public class Model {
                 currentColumn = currentColumn + 1;
             }
             
-            return statement.execute();
+            boolean result = statement.execute();
+            
+            long endTime = System.nanoTime();
+            long microseconds = (endTime - startTime) / 1000;
+            Debug.print(sQuery + " took " + microseconds + " microseconds.");
+            
+            return result;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             return false;
@@ -252,9 +292,17 @@ abstract public class Model {
         String sQuery = "DELETE FROM " + getTable() + " WHERE id = ?";
         PreparedStatement preparedStmt;
         try {
+            long startTime = System.nanoTime();
+    
             preparedStmt = DatabaseHelper.getConnection().prepareStatement(sQuery);
             preparedStmt.setInt(1, getId());
-            return preparedStmt.execute();
+            boolean result = preparedStmt.execute();
+            
+            long endTime = System.nanoTime();
+            long microseconds = (endTime - startTime) / 1000;
+            Debug.print(sQuery + " took " + microseconds + " microseconds.");
+            
+            return result;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             return false;

@@ -39,6 +39,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import luggage.Debug;
 import luggage.MainActivity;
 import luggage.database.models.CustomerModel;
 import luggage.database.models.InsurerModel;
@@ -68,9 +69,6 @@ public class CustomersController extends BaseController implements Initializable
     
     @FXML
     private TableColumn listTableViewName;
-    
-    @FXML
-    private TableColumn listTableViewInsurer;
     
     @FXML
     private TableColumn listTableViewAddress;
@@ -247,6 +245,8 @@ public class CustomersController extends BaseController implements Initializable
             @Override
             public void run() {
                  
+                Debug.print("CUSTOMERS CONTROLLER-----------------------------------------------------------------");
+                
                 // List
                 if(listTableView != null)
                 {
@@ -388,7 +388,6 @@ public class CustomersController extends BaseController implements Initializable
         }
         
         listTableViewName.setCellValueFactory(new PropertyValueFactory("fullname"));
-        listTableViewInsurer.setCellValueFactory(new PropertyValueFactory("insurerName"));
         listTableViewAddress.setCellValueFactory(new PropertyValueFactory("address"));
         listTableViewPhone.setCellValueFactory(new PropertyValueFactory("mobile"));
         listTableViewEmail.setCellValueFactory(new PropertyValueFactory("email"));

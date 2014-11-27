@@ -58,8 +58,8 @@ public class LogModel extends Model {
     }
 
     @Override
-    protected Model getModel(int id) {
-        return new LogModel(id);
+    protected Model getModel() {
+        return new LogModel();
     }
     
    

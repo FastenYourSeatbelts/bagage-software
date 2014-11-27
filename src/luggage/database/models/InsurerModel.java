@@ -47,8 +47,8 @@ public class InsurerModel extends Model {
     }
 
     @Override
-    protected Model getModel(int id) {
-        return new InsurerModel(id);
+    protected Model getModel() {
+        return new InsurerModel();
     }
 
     @Override

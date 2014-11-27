@@ -14,7 +14,6 @@
       <TableView fx:id="listTableView" layoutY="50.0" AnchorPane.bottomAnchor="53.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="53.0">
         <columns>
             <TableColumn fx:id="listTableViewName" prefWidth="202.0" text="Name" />
-            <TableColumn fx:id="listTableViewInsurer" prefWidth="253.0" text="Insurer" />
             <TableColumn fx:id="listTableViewAddress" prefWidth="253.0" text="Address" />
             <TableColumn fx:id="listTableViewPhone" prefWidth="173.0" text="Phone" />
             <TableColumn fx:id="listTableViewEmail" prefWidth="171.0" text="Email" />

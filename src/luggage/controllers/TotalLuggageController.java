@@ -35,6 +35,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import luggage.Debug;
 import luggage.database.models.LuggageModel;
 import luggage.database.models.Model;
 
@@ -55,13 +56,7 @@ public class TotalLuggageController extends BaseController  implements Initializ
     private TableColumn tableViewId;
     
     @FXML
-    private TableColumn tableViewName;
-    
-    @FXML
     private TableColumn tableViewStatus;
-    
-    @FXML
-    private TableColumn tableViewLocation;
     
     @FXML
     private TableColumn tableViewTags;
@@ -87,7 +82,10 @@ public class TotalLuggageController extends BaseController  implements Initializ
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
+                Debug.print("TOTAL LUGGAGE CONTROLLER-----------------------------------------------------------------");
+                
                 resetTableView("", new String[0]);
+                luggageTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
             }
         });
     }
@@ -104,8 +102,6 @@ public class TotalLuggageController extends BaseController  implements Initializ
         
         tableViewId.setCellValueFactory(new PropertyValueFactory("id"));
         tableViewStatus.setCellValueFactory(new PropertyValueFactory("status"));
-        tableViewName.setCellValueFactory(new PropertyValueFactory("customerName"));
-        tableViewLocation.setCellValueFactory(new PropertyValueFactory("locationName"));
         tableViewTags.setCellValueFactory(new PropertyValueFactory("tags"));
         tableViewDate.setCellValueFactory(new PropertyValueFactory("datetime"));
         tableViewNotes.setCellValueFactory(new PropertyValueFactory("notes"));

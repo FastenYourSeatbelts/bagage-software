@@ -39,6 +39,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import luggage.AppConfig;
+import luggage.Debug;
 
 /**
  * LoginController
@@ -102,6 +103,7 @@ public class LoginController extends BaseController  implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        Debug.print("LOGIN CONTROLLER-----------------------------------------------------------------");
         copyright.setText(AppConfig.ApplicationCopyRight);
     }
 

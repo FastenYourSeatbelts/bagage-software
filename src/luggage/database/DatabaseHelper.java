@@ -30,6 +30,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import luggage.Debug;
 
 /**
  * DatabaseHelper
@@ -63,7 +64,11 @@ public class DatabaseHelper {
      */
     public static void openConnection() {
         try {
+            long startTime = System.nanoTime();
             oConnection = DriverManager.getConnection(AppConfig.databaseName, AppConfig.databaseUser, AppConfig.databasePass);
+            long endTime = System.nanoTime();
+            long microseconds = (endTime - startTime) / 1000;
+            Debug.print("Connecting to database (microseconds): " + microseconds);
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -34,12 +34,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import luggage.Debug;
 import luggage.MainActivity;
 import luggage.database.models.UserModel;
 import luggage.database.models.Model;
@@ -79,9 +79,6 @@ public class UsersController extends BaseController implements Initializable {
 
     @FXML
     private TableColumn listTableViewEmail;
-
-    @FXML
-    private TableColumn listTableViewWorkplace;
 
     @FXML
     private TableColumn listTableViewRole;
@@ -261,7 +258,7 @@ public class UsersController extends BaseController implements Initializable {
 
         String[] keywords = listSearchField.getText().split("\\s+");
 
-        String[] params = new String[4 * keywords.length];
+        String[] params = new String[3 * keywords.length];
         boolean firstColumn = true;
         String query = "";
 
@@ -279,9 +276,6 @@ public class UsersController extends BaseController implements Initializable {
 
             params[2 + i] = "%" + keywords[i] + "%";
             query += " OR lastname LIKE ?";
-
-            params[3 + i] = "%" + keywords[i] + "%";
-            query += " OR workplace_id LIKE ?";
 
             firstColumn = false;
         }
@@ -302,7 +296,8 @@ public class UsersController extends BaseController implements Initializable {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-
+                Debug.print("USERS CONTROLLER-----------------------------------------------------------------");
+                
                 // List
                 if (listTableView != null) {
                     listResetTableView("", new String[0]);                    
@@ -540,7 +535,6 @@ public class UsersController extends BaseController implements Initializable {
         listTableViewUsername.setCellValueFactory(new PropertyValueFactory("username"));
         listTableViewName.setCellValueFactory(new PropertyValueFactory("fullname"));
 //        listTableViewName.setCellValueFactory(new PropertyValueFactory("mobile"));
-        listTableViewWorkplace.setCellValueFactory(new PropertyValueFactory("locationName"));
         listTableViewRole.setCellValueFactory(new PropertyValueFactory("role"));
 
         listTableView.setItems(data);
