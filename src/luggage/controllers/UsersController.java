@@ -324,8 +324,6 @@ public class UsersController extends BaseController implements Initializable {
                     setViewChoiceBoxes();
                     setViewFields();
                 }
-                
-                Debug.print("USERS CONTROLLER END -----------------------------------------------------------------");
 
             }
         });
