@@ -26,7 +26,6 @@ package luggage.controllers;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -74,9 +73,6 @@ public class LuggageController extends BaseController implements Initializable {
 
     @FXML
     private TableColumn listTableViewStatus;
-
-    @FXML
-    private TableColumn listTableViewLocation;
 
     @FXML
     private TableColumn listTableViewTags;
@@ -233,9 +229,11 @@ public class LuggageController extends BaseController implements Initializable {
         LocationModel oLocationModel = new LocationModel();
         List<Model> allLocations = oLocationModel.findAll();
         
+        int selectedLocationId = new LuggageModel(MainActivity.editId).getLocationId();
+        
         for(Model allLocation : allLocations) {
             LocationModel location = (LocationModel) allLocation;
-            if(location.getId() == new LuggageModel(MainActivity.editId).getLocationId())
+            if(location.getId() == selectedLocationId)
             {
                 selectedLocation = location;
             }
@@ -249,9 +247,11 @@ public class LuggageController extends BaseController implements Initializable {
         CustomerModel oCustomerModel = new CustomerModel();
         List<Model> allCustomers = oCustomerModel.findAll();
         
+        int selectedCustomerId = new LuggageModel(MainActivity.editId).getCustomerId();
+        
         for(Model allCustomer : allCustomers) {
             CustomerModel customer = (CustomerModel) allCustomer;
-            if(customer.getId() == new LuggageModel(MainActivity.editId).getCustomerId())
+            if(customer.getId() == selectedCustomerId)
             {
                 selectedCustomer = customer;
             }
@@ -358,7 +358,6 @@ public class LuggageController extends BaseController implements Initializable {
 
         listTableViewId.setCellValueFactory(new PropertyValueFactory("id"));
         listTableViewStatus.setCellValueFactory(new PropertyValueFactory("status"));
-        listTableViewLocation.setCellValueFactory(new PropertyValueFactory("locationName"));
         listTableViewTags.setCellValueFactory(new PropertyValueFactory("tags"));
         listTableViewDate.setCellValueFactory(new PropertyValueFactory("datetime"));
 

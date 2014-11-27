@@ -43,6 +43,7 @@ public class Permissions {
     public static final Permissions.Tab PERMISSION_VIEW_RESOLVED_LUGGAGE = new Permissions.Tab("view_resolved_luggage", "Resolved luggage", "luggage/resolved");
     
     public static final Permissions.Tab PERMISSION_VIEW_GRAPH_LUGGAGE = new Permissions.Tab("view_graph_luggage", "Luggage graph", "graphs/luggage");
+    public static final Permissions.Tab PERMISSION_VIEW_LOG = new Permissions.Tab("view_log", "Logs", "log/list");
     
     public static class Tab {
         
@@ -83,7 +84,8 @@ public class Permissions {
             PERMISSION_VIEW_TOTAL_LUGGAGE,
             PERMISSION_VIEW_MISSING_LUGGAGE,
             PERMISSION_VIEW_FOUND_LUGGAGE,
-            PERMISSION_VIEW_RESOLVED_LUGGAGE
+            PERMISSION_VIEW_RESOLVED_LUGGAGE,
+            PERMISSION_VIEW_LOG
         }
     ));
     
@@ -101,7 +103,8 @@ public class Permissions {
             PERMISSION_VIEW_MISSING_LUGGAGE,
             PERMISSION_VIEW_FOUND_LUGGAGE,
             PERMISSION_VIEW_RESOLVED_LUGGAGE,
-            PERMISSION_MANAGE_USERS
+            PERMISSION_MANAGE_USERS,
+            PERMISSION_VIEW_LOG
         }
     ));
     
@@ -114,7 +117,8 @@ public class Permissions {
             PERMISSION_VIEW_MISSING_LUGGAGE,
             PERMISSION_VIEW_FOUND_LUGGAGE,
             PERMISSION_VIEW_RESOLVED_LUGGAGE,
-            PERMISSION_MANAGE_USERS
+            PERMISSION_MANAGE_USERS,
+            PERMISSION_VIEW_LOG
         }
     ));
     

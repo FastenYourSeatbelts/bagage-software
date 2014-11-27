@@ -71,9 +71,6 @@ public class CustomersController extends BaseController implements Initializable
     private TableColumn listTableViewName;
     
     @FXML
-    private TableColumn listTableViewInsurer;
-    
-    @FXML
     private TableColumn listTableViewAddress;
     
     @FXML
@@ -351,9 +348,12 @@ public class CustomersController extends BaseController implements Initializable
         
         InsurerModel insurers = new InsurerModel();
         List<Model> allInsurers = insurers.findAll("", new String[0]);
+        
+        int selectedInsurerId = new CustomerModel(MainActivity.editId).getInsurerId();
+        
         for(Model allInsurer : allInsurers) {
             InsurerModel insurer = (InsurerModel) allInsurer;
-            if(insurer.getId() == new CustomerModel(MainActivity.editId).getInsurerId())
+            if(insurer.getId() == selectedInsurerId)
             {
                 selectedInsurer = insurer;
             }
@@ -391,7 +391,6 @@ public class CustomersController extends BaseController implements Initializable
         }
         
         listTableViewName.setCellValueFactory(new PropertyValueFactory("fullname"));
-        listTableViewInsurer.setCellValueFactory(new PropertyValueFactory("insurerName"));
         listTableViewAddress.setCellValueFactory(new PropertyValueFactory("address"));
         listTableViewPhone.setCellValueFactory(new PropertyValueFactory("mobile"));
         listTableViewEmail.setCellValueFactory(new PropertyValueFactory("email"));

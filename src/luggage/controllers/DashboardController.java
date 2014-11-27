@@ -106,11 +106,17 @@ public class DashboardController extends BaseController  implements Initializabl
                         @Override
                         public void run() {
                             try {
+                                long startTime = System.nanoTime();
+            
                                 FXMLLoader oFXMLLoader = new FXMLLoader();
                                 Parent primaryLoader = (Parent) oFXMLLoader.load(this.getClass().getResource("/luggage/views/" + tabPermission.getView() + ".fxml").openStream());
                                 newTab.setContent(primaryLoader);
 
                                 tabs.getTabs().add(newTab);
+            
+                                long endTime = System.nanoTime();
+                                long microseconds = ((endTime - startTime) / 1000);
+                                Debug.print("Add tab: " + tabPermission.getView() + " took " + microseconds + " microseconds.");
                             } catch (IOException ex) {
                                 Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
                             }
