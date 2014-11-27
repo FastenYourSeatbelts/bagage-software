@@ -25,6 +25,8 @@
 package luggage.controllers;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -119,6 +121,30 @@ public class LuggageController extends BaseController implements Initializable {
 
     @FXML
     private DatePicker addDate;
+    
+    /**
+     * EDIT ELEMENTS
+     */
+    @FXML
+    private Button editAdd;
+
+    @FXML
+    private Button editReset;
+
+    @FXML
+    private Button editCancel;
+
+    @FXML
+    private TextField editTags;
+
+    @FXML
+    private ChoiceBox<LocationModel> editLocationId;
+
+    @FXML
+    private TextField editNotes;
+
+    @FXML
+    private DatePicker editDate;
 
     private ObservableList<LuggageModel> listData = FXCollections.observableArrayList();
     
@@ -151,6 +177,14 @@ public class LuggageController extends BaseController implements Initializable {
                 {
                     setAddChoiceBoxes();
                 }
+
+                // Edit
+                if(editLocationId != null)
+                {
+                    System.out.println("YOLO");
+                    setEditChoiceBoxes();
+                    setEditFields();
+                }
             }
         });
     }
@@ -158,10 +192,8 @@ public class LuggageController extends BaseController implements Initializable {
     public LocationModel selectedLoction;
 
     public void setAddChoiceBoxes() {
-        
         LocationModel oLocationModel = new LocationModel();
         List<Model> allLocations = oLocationModel.findAll();
-        
         
         for(Model allLocation : allLocations) {
             LocationModel location = (LocationModel) allLocation;
@@ -174,6 +206,23 @@ public class LuggageController extends BaseController implements Initializable {
         }
         
         addLocationId.setItems(locationData);
+    }
+    
+    public void setEditChoiceBoxes() {
+        LocationModel oLocationModel = new LocationModel();
+        List<Model> allLocations = oLocationModel.findAll();
+        
+        for(Model allLocation : allLocations) {
+            LocationModel location = (LocationModel) allLocation;
+            if(location.getId() == new CustomerModel(MainActivity.editId).getInsurerId())
+            {
+                selectedLoction = location;
+            }
+            
+            locationData.add(location);
+        }
+        
+        editLocationId.setItems(locationData);
     }
 
     @FXML
@@ -307,5 +356,47 @@ public class LuggageController extends BaseController implements Initializable {
         luggageController.listOnSearch();
 
         newCancel();
+    }
+    
+    public void setEditFields() {
+        LuggageModel luggage = new LuggageModel(MainActivity.viewId);
+        
+        editTags.setText(luggage.getTags());
+        editNotes.setText(luggage.getNotes());
+        
+        LocalDate date = LocalDate.parse(luggage.getDatetime());
+        editDate.setValue(date);
+    
+        editLocationId.getSelectionModel().select(selectedLoction);
+    }
+    
+    public void editCancel() {
+        Stage addStage = (Stage) newCancel.getScene().getWindow();
+        StageHelper.closeStage(addStage);
+    }
+
+    public void editReset() {
+        editTags.setText("");
+        editNotes.setText("");
+    }
+
+    public void editSave() {
+        if (editLocationId.getSelectionModel().getSelectedItem() == null) {
+            return;
+        }
+
+        LuggageModel luggage = new LuggageModel();
+        luggage.setLocationId(Integer.toString(editLocationId.getSelectionModel().getSelectedItem().getId()));
+        
+        luggage.setDatetime(editDate.getValue() + " 00:00:00");
+        
+        luggage.setTags(editTags.getText());
+        luggage.setNotes(editNotes.getText());
+        luggage.save();
+        
+        LuggageController luggageController = (LuggageController) StageHelper.callbackController;
+        luggageController.listOnSearch();
+
+        editCancel();
     }
 }
