@@ -117,4 +117,43 @@ public class LogModel extends Model {
         row.put("message", message);
     }
     
+  
+    
+        /**
+     * Return the location_id of the current row
+     * 
+     * @return 
+     */
+    public int getUserId() {
+        return Integer.parseInt(row.get("user_id"));
+    }
+    
+    /**
+     * Return the LocationModel of the current row
+     * 
+     * @return UserModel
+     */
+    public UserModel getUsers() {
+        return new UserModel(getUserId());
+    }
+    
+    
+    
+        /**
+     * Return the location name of the current row
+     * 
+     * @return username
+     */
+    public String getUsername() {
+        return getUsers().getUsername();
+    }
+   
+    /**
+     * Set the location_id of the current row
+     * 
+     * @param user_id
+     */
+    public void setUserId(String user_id) {
+        row.put("user_id", user_id);
+    }
 }
