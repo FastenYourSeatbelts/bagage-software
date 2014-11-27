@@ -145,10 +145,10 @@ CREATE TABLE IF NOT EXISTS `users` (
   `lastname` varchar(255) NOT NULL,
   `role` enum('super','manager','employee','moderator','') NOT NULL DEFAULT 'employee',
   `gender` enum('male','female','other') NOT NULL,
+  `workplace_id` int(11) NOT NULL,
   `address` varchar(255) NOT NULL,
   `postalcode` varchar(255) NOT NULL,
   `residence` varchar(255) NOT NULL,
-  `workplace_id` int(11) NOT NULL,
   `telephone` varchar(255) NOT NULL,
   `mobile` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
@@ -158,12 +158,14 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `firstname`, `prefix`, `lastname`, `role`, `gender`, `address`, `postalcode`, `residence`, `workplace_id`, `telephone`, `mobile`) VALUES
-(1, 'Admin', '7a8d0e81b9e73f3e39cbaccfac16097a8c88e6bddf068160946115bfc31ff59e81533b292f5cafd3be42f6980aced7b8791f0738a91717f62f3f542a535c2e51', 'Super', '', 'Admin', 'super', 'male', '', '', '', '8', '', ''),
-(2, 'Moderator', '7a8d0e81b9e73f3e39cbaccfac16097a8c88e6bddf068160946115bfc31ff59e81533b292f5cafd3be42f6980aced7b8791f0738a91717f62f3f542a535c2e51', 'Moderator', '', '', 'moderator', 'male', '', '', '', '16', '', ''),
-(3, 'Manager', '7a8d0e81b9e73f3e39cbaccfac16097a8c88e6bddf068160946115bfc31ff59e81533b292f5cafd3be42f6980aced7b8791f0738a91717f62f3f542a535c2e51', 'Manager', '', '', 'manager', 'male', '', '', '', '1', '', ''),
-(4, 'Employee', '7a8d0e81b9e73f3e39cbaccfac16097a8c88e6bddf068160946115bfc31ff59e81533b292f5cafd3be42f6980aced7b8791f0738a91717f62f3f542a535c2e51', 'Employee', '', '', 'employee', 'female', '', '', '', '25', '', ''),
-(5, 'Gerrit', '7a8d0e81b9e73f3e39cbaccfac16097a8c88e6bddf068160946115bfc31ff59e81533b292f5cafd3be42f6980aced7b8791f0738a91717f62f3f542a535c2e51', 'Gerrit', 'van de', 'Fabriek', 'employee', 'other', 'Rietveldstraat 12', '1012AB', 'Amstelveen', '12', '0031201234567', '0031612345678');
+INSERT INTO `users` (`id`, `username`, `password`, `firstname`, `prefix`, `lastname`, `role`, `gender`, `workplace_id`, `address`, `postalcode`, `residence`, `telephone`, `mobile`) VALUES
+(1, 'Admin', '7a8d0e81b9e73f3e39cbaccfac16097a8c88e6bddf068160946115bfc31ff59e81533b292f5cafd3be42f6980aced7b8791f0738a91717f62f3f542a535c2e51', 'Super', '', 'Admin', 'super', 'male', '8', '', '', '', '', ''),
+(2, 'Moderator', '7a8d0e81b9e73f3e39cbaccfac16097a8c88e6bddf068160946115bfc31ff59e81533b292f5cafd3be42f6980aced7b8791f0738a91717f62f3f542a535c2e51', 'Moderator', '', '', 'moderator', 'male', '16', '', '', '', '', ''),
+(3, 'Manager', '7a8d0e81b9e73f3e39cbaccfac16097a8c88e6bddf068160946115bfc31ff59e81533b292f5cafd3be42f6980aced7b8791f0738a91717f62f3f542a535c2e51', 'Manager', '', '', 'manager', 'male', '1', '', '', '', '', ''),
+(4, 'Employee', '7a8d0e81b9e73f3e39cbaccfac16097a8c88e6bddf068160946115bfc31ff59e81533b292f5cafd3be42f6980aced7b8791f0738a91717f62f3f542a535c2e51', 'Employee', '', '', 'employee', 'female', '25', '', '', '', '', ''),
+(5, 'Gerrit', '7a8d0e81b9e73f3e39cbaccfac16097a8c88e6bddf068160946115bfc31ff59e81533b292f5cafd3be42f6980aced7b8791f0738a91717f62f3f542a535c2e51', 'Gerrit', 'van de', 'Fabriek', 'employee', 'other', '12', 'Rietveldstraat 12', '1012AB', 'Amstelveen', '0031201234567', '0031612345678'),
+(6, '', '9c1dd9c1e1684575051616be7814f15374bb73a9f7685ebe30969de4975976fac5fa449519fbc54ddcdc43fcf08eabb292523548349b5ce7fbb86b6fa30c1278', 'Super', '', 'User', 'super', 'other', '4', '', '', '', '', '');
+
 
 --
 -- Constraints for dumped tables

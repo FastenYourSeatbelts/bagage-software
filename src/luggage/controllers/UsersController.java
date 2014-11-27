@@ -548,7 +548,7 @@ public class UsersController extends BaseController implements Initializable {
 
     @FXML
     public void listNew() {
-        StageHelper.addStage("users/new", this, false, true);
+        StageHelper.addStage("users/Add new user", this, false, true);
     }
 
     @FXML
@@ -561,7 +561,7 @@ public class UsersController extends BaseController implements Initializable {
 
         MainActivity.editId = user.getId();
 
-        StageHelper.addStage("users/edit", this, false, true);
+        StageHelper.addStage("users/Edit selected user", this, false, true);
     }
 
     @FXML
@@ -599,7 +599,7 @@ public class UsersController extends BaseController implements Initializable {
 
         MainActivity.viewId = user.getId();
 
-        StageHelper.addStage("users/view", this, false, true);
+        StageHelper.addStage("users/Detail view", this, false, true);
 
     }
 
