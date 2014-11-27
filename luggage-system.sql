@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Machine: 127.0.0.1
--- Gegenereerd op: 27 nov 2014 om 10:32
+-- Gegenereerd op: 27 nov 2014 om 11:07
 -- Serverversie: 5.6.21
 -- PHP-versie: 5.6.3
 
@@ -233,10 +233,18 @@ INSERT INTO `locations` (`id`, `name`) VALUES
 
 CREATE TABLE IF NOT EXISTS `log` (
 `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `type` enum('info','warning','error') NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `message` varchar(500) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `log`
+--
+
+INSERT INTO `log` (`id`, `user_id`, `type`, `datetime`, `message`) VALUES
+(1, 1, 'info', '2014-11-27 10:07:17', 'Logged in succesfully');
 
 -- --------------------------------------------------------
 
@@ -422,7 +430,7 @@ ALTER TABLE `locations`
 -- Indexen voor tabel `log`
 --
 ALTER TABLE `log`
- ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`), ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexen voor tabel `luggage`
@@ -459,7 +467,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=39;
 -- AUTO_INCREMENT voor een tabel `log`
 --
 ALTER TABLE `log`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT voor een tabel `luggage`
 --
@@ -479,6 +487,12 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 ALTER TABLE `customers`
 ADD CONSTRAINT `customers_ibfk_1` FOREIGN KEY (`insurer_id`) REFERENCES `insurers` (`id`) ON UPDATE CASCADE;
+
+--
+-- Beperkingen voor tabel `log`
+--
+ALTER TABLE `log`
+ADD CONSTRAINT `log_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Beperkingen voor tabel `luggage`
