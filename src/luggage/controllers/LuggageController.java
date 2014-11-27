@@ -229,9 +229,11 @@ public class LuggageController extends BaseController implements Initializable {
         LocationModel oLocationModel = new LocationModel();
         List<Model> allLocations = oLocationModel.findAll();
         
+        int selectedLocationId = new LuggageModel(MainActivity.editId).getLocationId();
+        
         for(Model allLocation : allLocations) {
             LocationModel location = (LocationModel) allLocation;
-            if(location.getId() == new LuggageModel(MainActivity.editId).getLocationId())
+            if(location.getId() == selectedLocationId)
             {
                 selectedLocation = location;
             }
@@ -245,9 +247,11 @@ public class LuggageController extends BaseController implements Initializable {
         CustomerModel oCustomerModel = new CustomerModel();
         List<Model> allCustomers = oCustomerModel.findAll();
         
+        int selectedCustomerId = new LuggageModel(MainActivity.editId).getCustomerId();
+        
         for(Model allCustomer : allCustomers) {
             CustomerModel customer = (CustomerModel) allCustomer;
-            if(customer.getId() == new LuggageModel(MainActivity.editId).getCustomerId())
+            if(customer.getId() == selectedCustomerId)
             {
                 selectedCustomer = customer;
             }

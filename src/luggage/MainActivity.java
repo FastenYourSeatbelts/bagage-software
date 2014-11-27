@@ -29,6 +29,7 @@ import java.util.logging.Logger;
 import luggage.database.DatabaseHelper;
 import luggage.helpers.StageHelper;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -57,29 +58,14 @@ public class MainActivity extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
+        startMainStage();
         
-        new Thread(new Runnable() {
+        Platform.runLater(new Runnable(){
             @Override
             public void run() {
                 DatabaseHelper.openConnection();
             }
-        }).start();
-        
-        startMainStage();
-        /*
-        UserModel tijme = new UserModel();
-        tijme.setFirstname("Tijme");
-        tijme.setPrefix("");
-        tijme.setLastname("Gommers");
-        tijme.save();
-        
-        UserModel tijme = new UserModel(1);
-        tijme.setFirstname("Tijme");
-        tijme.save();
-        
-        UserModel tijme = new UserModel(1);
-        tijme.delete();
-        */
+        });
     }
     
     /**

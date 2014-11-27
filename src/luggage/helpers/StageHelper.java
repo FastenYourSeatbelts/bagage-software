@@ -33,6 +33,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import luggage.Debug;
 import luggage.controllers.BaseController;
 
 /**
@@ -53,6 +54,8 @@ public class StageHelper {
     
     public static void addStage(String sNewStage, BaseController oCurrentClass, boolean bMaximized, boolean bLocked) {
         try {
+            long startTime = System.nanoTime();
+            
             FXMLLoader primaryLoader = new FXMLLoader(oCurrentClass.getClass().getResource("/luggage/views/" + sNewStage + ".fxml"));
             Parent root = (Parent) primaryLoader.load();
             
@@ -79,6 +82,10 @@ public class StageHelper {
             oNewStage.setMaximized(bMaximized);
             
             oNewStage.show();
+            
+            long endTime = System.nanoTime();
+            long microseconds = ((endTime - startTime) / 1000);
+            Debug.print("Add stage: " + sNewStage + " took " + microseconds + " microseconds.");
         } catch (IOException ex) {
             Logger.getLogger(StageHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
