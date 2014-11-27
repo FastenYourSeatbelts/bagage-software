@@ -26,7 +26,6 @@ package luggage.controllers;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -74,9 +73,6 @@ public class LuggageController extends BaseController implements Initializable {
 
     @FXML
     private TableColumn listTableViewStatus;
-
-    @FXML
-    private TableColumn listTableViewLocation;
 
     @FXML
     private TableColumn listTableViewTags;
@@ -358,7 +354,6 @@ public class LuggageController extends BaseController implements Initializable {
 
         listTableViewId.setCellValueFactory(new PropertyValueFactory("id"));
         listTableViewStatus.setCellValueFactory(new PropertyValueFactory("status"));
-        listTableViewLocation.setCellValueFactory(new PropertyValueFactory("locationName"));
         listTableViewTags.setCellValueFactory(new PropertyValueFactory("tags"));
         listTableViewDate.setCellValueFactory(new PropertyValueFactory("datetime"));
 

@@ -34,7 +34,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import luggage.Debug;
 import luggage.MainActivity;
@@ -59,13 +58,7 @@ public class MissingLuggageController extends BaseController  implements Initial
     private TableColumn tableViewId;
     
     @FXML
-    private TableColumn tableViewName;
-    
-    @FXML
     private TableColumn tableViewStatus;
-    
-    @FXML
-    private TableColumn tableViewLocation;
     
     @FXML
     private TableColumn tableViewTags;
@@ -114,8 +107,6 @@ public class MissingLuggageController extends BaseController  implements Initial
         
         tableViewId.setCellValueFactory(new PropertyValueFactory("id"));
         tableViewStatus.setCellValueFactory(new PropertyValueFactory("status"));
-        tableViewName.setCellValueFactory(new PropertyValueFactory("customerName"));
-        tableViewLocation.setCellValueFactory(new PropertyValueFactory("locationName"));
         tableViewTags.setCellValueFactory(new PropertyValueFactory("tags"));
         tableViewDate.setCellValueFactory(new PropertyValueFactory("datetime"));
         tableViewNotes.setCellValueFactory(new PropertyValueFactory("notes"));

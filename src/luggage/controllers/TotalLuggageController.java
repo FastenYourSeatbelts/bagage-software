@@ -56,13 +56,7 @@ public class TotalLuggageController extends BaseController  implements Initializ
     private TableColumn tableViewId;
     
     @FXML
-    private TableColumn tableViewName;
-    
-    @FXML
     private TableColumn tableViewStatus;
-    
-    @FXML
-    private TableColumn tableViewLocation;
     
     @FXML
     private TableColumn tableViewTags;
@@ -108,8 +102,6 @@ public class TotalLuggageController extends BaseController  implements Initializ
         
         tableViewId.setCellValueFactory(new PropertyValueFactory("id"));
         tableViewStatus.setCellValueFactory(new PropertyValueFactory("status"));
-        tableViewName.setCellValueFactory(new PropertyValueFactory("customerName"));
-        tableViewLocation.setCellValueFactory(new PropertyValueFactory("locationName"));
         tableViewTags.setCellValueFactory(new PropertyValueFactory("tags"));
         tableViewDate.setCellValueFactory(new PropertyValueFactory("datetime"));
         tableViewNotes.setCellValueFactory(new PropertyValueFactory("notes"));

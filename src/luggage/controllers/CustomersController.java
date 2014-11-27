@@ -71,9 +71,6 @@ public class CustomersController extends BaseController implements Initializable
     private TableColumn listTableViewName;
     
     @FXML
-    private TableColumn listTableViewInsurer;
-    
-    @FXML
     private TableColumn listTableViewAddress;
     
     @FXML
@@ -391,7 +388,6 @@ public class CustomersController extends BaseController implements Initializable
         }
         
         listTableViewName.setCellValueFactory(new PropertyValueFactory("fullname"));
-        listTableViewInsurer.setCellValueFactory(new PropertyValueFactory("insurerName"));
         listTableViewAddress.setCellValueFactory(new PropertyValueFactory("address"));
         listTableViewPhone.setCellValueFactory(new PropertyValueFactory("mobile"));
         listTableViewEmail.setCellValueFactory(new PropertyValueFactory("email"));
