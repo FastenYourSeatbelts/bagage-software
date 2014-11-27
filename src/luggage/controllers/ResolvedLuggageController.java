@@ -88,12 +88,11 @@ public class ResolvedLuggageController extends BaseController  implements Initia
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-        
                 String[] params = new String[1];
                 params[0] = "resolved";
-
-                resetTableView("status = ?", params);
                 
+                resetTableView("status = ?", params);
+                luggageTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
             }
         });
     }

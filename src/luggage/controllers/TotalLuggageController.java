@@ -88,6 +88,7 @@ public class TotalLuggageController extends BaseController  implements Initializ
             @Override
             public void run() {
                 resetTableView("", new String[0]);
+                luggageTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
             }
         });
     }

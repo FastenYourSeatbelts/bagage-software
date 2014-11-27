@@ -91,6 +91,7 @@ public class FoundLuggageController extends BaseController  implements Initializ
                 params[0] = "found";
 
                 resetTableView("status = ?", params);
+                luggageTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
             }
         });
     }
