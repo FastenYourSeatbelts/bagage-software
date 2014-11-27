@@ -35,6 +35,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.chart.*;
 import javafx.scene.Group;
+import luggage.Debug;
 
 /**
  * UsersController
@@ -54,7 +55,7 @@ public class LuggageGraphController extends BaseController implements Initializa
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        Debug.print("GRAPH CONTROLLER-----------------------------------------------------------------");
     }
     /*
     //@Override

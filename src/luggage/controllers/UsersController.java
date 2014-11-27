@@ -40,6 +40,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import luggage.Debug;
 import luggage.MainActivity;
 import luggage.database.models.UserModel;
 import luggage.database.models.Model;
@@ -302,7 +303,8 @@ public class UsersController extends BaseController implements Initializable {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-
+                Debug.print("USERS CONTROLLER-----------------------------------------------------------------");
+                
                 // List
                 if (listTableView != null) {
                     listResetTableView("", new String[0]);                    

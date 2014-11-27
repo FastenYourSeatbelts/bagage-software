@@ -36,6 +36,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import luggage.Debug;
 import luggage.database.models.LuggageModel;
 import luggage.database.models.Model;
 
@@ -89,6 +90,8 @@ public class ResolvedLuggageController extends BaseController  implements Initia
             @Override
             public void run() {
         
+                Debug.print("RESOLVED LUGGAGE CONTROLLER-----------------------------------------------------------------");
+                
                 String[] params = new String[1];
                 params[0] = "resolved";
 

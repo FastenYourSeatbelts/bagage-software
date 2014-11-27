@@ -24,8 +24,6 @@
  */
 package luggage.database.models;
 
-import com.mysql.jdbc.StringUtils;
-
 /**
  * City Model
  *
@@ -60,8 +58,8 @@ public class LuggageModel extends Model {
     }
 
     @Override
-    protected Model getModel(int id) {
-        return new LuggageModel(id);
+    protected Model getModel() {
+        return new LuggageModel();
     }
    
     /**
@@ -160,7 +158,7 @@ public class LuggageModel extends Model {
      * @return 
      */
     public String getDatetime() {
-        return row.get("datetime");
+        return row.get("datetime").substring(0, 10);
     }
    
     /**
@@ -172,13 +170,31 @@ public class LuggageModel extends Model {
         row.put("datetime", datetime);
     }
     
-        /**
+    /**
      * Return the customer_id of the current row
      * 
      * @return 
      */
-    public String getCustomerId() {
-        return row.get("customer_id");
+    public int getCustomerId() {
+        return Integer.parseInt(row.get("customer_id"));
+    }
+    
+    /**
+     * Return the CustomerModel of the current row
+     * 
+     * @return CustomerModel
+     */
+    public CustomerModel getCustomer() {
+        return new CustomerModel(getCustomerId());
+    }
+    
+    /**
+     * Return the customer name of the current row
+     * 
+     * @return customer
+     */
+    public String getCustomerName() {
+        return getCustomer().getFullname();
     }
     
     /**
@@ -190,12 +206,4 @@ public class LuggageModel extends Model {
         row.put("customer_id", customer_id);
     }
     
-    /**
-     * Return the customer_id of the current row
-     * 
-     * @return 
-     */
-    public String getCustomerName() {
-        return new CustomerModel(row.get("customer_id")).getFullname();
-    }
 }

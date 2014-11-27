@@ -35,6 +35,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import luggage.Debug;
 import luggage.database.models.LuggageModel;
 import luggage.database.models.Model;
 
@@ -86,7 +87,9 @@ public class FoundLuggageController extends BaseController  implements Initializ
     public void initialize(URL url, ResourceBundle rb) {
         Platform.runLater(new Runnable() {
             @Override
-            public void run() {
+            public void run() { 
+                Debug.print("FOUND LUGGAGE CONTROLLER-----------------------------------------------------------------");
+                
                 String[] params = new String[1];
                 params[0] = "found";
 

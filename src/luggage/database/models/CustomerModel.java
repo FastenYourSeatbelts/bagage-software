@@ -54,8 +54,13 @@ public class CustomerModel extends Model {
     }
 
     @Override
-    protected Model getModel(int id) {
-        return new CustomerModel(id);
+    protected Model getModel() {
+        return new CustomerModel();
+    }
+    
+    @Override
+    public String toString() {
+        return getFullname();
     }
    
     /**

@@ -71,4 +71,8 @@ public class AppConfig {
      */
     public static final String passwordSalt = "asdfp9384thSIDfhO2IU3RHlskdFH-93w48thSdufhP3498HSOD9F7H23lifuhSDLkfjhW3LKJH";
     
+    /**
+     * If debug mode is on
+     */
+    public static final boolean debug = true;
 }

@@ -42,6 +42,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
+import luggage.Debug;
 import luggage.MainActivity;
 import luggage.helpers.StageHelper;
 import luggage.security.Authentication;
@@ -73,7 +74,8 @@ public class DashboardController extends BaseController  implements Initializabl
      * @param rb 
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb) { 
+        Debug.print("DASHBOARD CONTROLLER-----------------------------------------------------------------");
         fullname.setText(Authentication.getCurrentUser().getFullname());
           
         addTabs();

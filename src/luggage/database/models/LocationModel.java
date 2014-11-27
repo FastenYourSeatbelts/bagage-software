@@ -52,8 +52,8 @@ public class LocationModel extends Model {
     }
 
     @Override
-    protected Model getModel(int id) {
-        return new LocationModel(id);
+    protected Model getModel() {
+        return new LocationModel();
     }
     
     @Override

@@ -36,6 +36,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import luggage.Debug;
 import luggage.MainActivity;
 
 import luggage.database.models.LuggageModel;
@@ -89,6 +90,8 @@ public class MissingLuggageController extends BaseController  implements Initial
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
+                
+                Debug.print("MISSING LUGGAGE CONTROLLER-----------------------------------------------------------------");
 
                 String[] params = new String[1];
                 params[0] = "missing";
