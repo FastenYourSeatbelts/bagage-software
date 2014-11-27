@@ -81,9 +81,6 @@ public class UsersController extends BaseController implements Initializable {
     private TableColumn listTableViewEmail;
 
     @FXML
-    private TableColumn listTableViewWorkplace;
-
-    @FXML
     private TableColumn listTableViewRole;
 
     @FXML
@@ -261,7 +258,7 @@ public class UsersController extends BaseController implements Initializable {
 
         String[] keywords = listSearchField.getText().split("\\s+");
 
-        String[] params = new String[4 * keywords.length];
+        String[] params = new String[3 * keywords.length];
         boolean firstColumn = true;
         String query = "";
 
@@ -279,9 +276,6 @@ public class UsersController extends BaseController implements Initializable {
 
             params[2 + i] = "%" + keywords[i] + "%";
             query += " OR lastname LIKE ?";
-
-            params[3 + i] = "%" + keywords[i] + "%";
-            query += " OR workplace_id LIKE ?";
 
             firstColumn = false;
         }
@@ -543,7 +537,6 @@ public class UsersController extends BaseController implements Initializable {
         listTableViewUsername.setCellValueFactory(new PropertyValueFactory("username"));
         listTableViewName.setCellValueFactory(new PropertyValueFactory("fullname"));
 //        listTableViewName.setCellValueFactory(new PropertyValueFactory("mobile"));
-        listTableViewWorkplace.setCellValueFactory(new PropertyValueFactory("locationName"));
         listTableViewRole.setCellValueFactory(new PropertyValueFactory("role"));
 
         listTableView.setItems(data);
