@@ -41,8 +41,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import luggage.Debug;
 import luggage.MainActivity;
-import luggage.database.models.CustomerModel;
-import luggage.database.models.InsurerModel;
 import luggage.database.models.LocationModel;
 import luggage.database.models.UserModel;
 import luggage.database.models.Model;
@@ -320,8 +318,8 @@ public class UsersController extends BaseController implements Initializable {
 
                 //Edit
                 if (editGender != null && editRole != null && editWorkplace != null) {
-                    setEditFields();
                     setEditChoiceBoxes();
+                    setEditFields();
                 }
 
                 // View
@@ -366,7 +364,6 @@ public class UsersController extends BaseController implements Initializable {
     }
 
     public void setAddChoiceBox() {
-
         addGender.setItems(FXCollections.observableArrayList(
             "MALE",
             "FEMALE",
@@ -389,15 +386,12 @@ public class UsersController extends BaseController implements Initializable {
         }
 
         addWorkplace.setItems(workplaceData);
-
     }
 
     public void setEditFields() {
         UserModel user = new UserModel(MainActivity.editId);
 
         editUsername.setText(user.getFirstname());
-        //editPassword.setText(user.getPassword());
-        //editPasswordRepeat.setText(user.getPassword());
         editFirstname.setText(user.getFirstname());
         editPrefix.setText(user.getPrefix());
         editLastname.setText(user.getLastname());
@@ -409,7 +403,7 @@ public class UsersController extends BaseController implements Initializable {
 
         editGender.getSelectionModel().select(user.getGender().toUpperCase());
         editRole.getSelectionModel().select(user.getRole().toUpperCase());
-        editWorkplace.getSelectionModel().select(user.getLocation());
+        editWorkplace.getSelectionModel().select(selectedWorkplace);
     }
     
     public LocationModel selectedWorkplace;
@@ -431,7 +425,7 @@ public class UsersController extends BaseController implements Initializable {
         LocationModel locations = new LocationModel();
         List<Model> allLocations = locations.findAll("", new String[0]);
         
-        int locationId = new UserModel(MainActivity.editId).getLocation().getId();
+        int locationId = new UserModel(MainActivity.editId).getLocationId();
         for(Model allLocation : allLocations) {
             LocationModel location = (LocationModel) allLocation;
             if(location.getId() == locationId)
@@ -457,7 +451,6 @@ public class UsersController extends BaseController implements Initializable {
 
         listTableViewUsername.setCellValueFactory(new PropertyValueFactory("username"));
         listTableViewName.setCellValueFactory(new PropertyValueFactory("fullname"));
-//        listTableViewName.setCellValueFactory(new PropertyValueFactory("mobile"));
         listTableViewRole.setCellValueFactory(new PropertyValueFactory("role"));
 
         listTableView.setItems(data);
@@ -465,7 +458,7 @@ public class UsersController extends BaseController implements Initializable {
 
     @FXML
     public void listNew() {
-        StageHelper.addStage("users/Add new user", this, false, true);
+        StageHelper.addStage("users/add", this, false, true);
     }
 
     @FXML
@@ -478,7 +471,7 @@ public class UsersController extends BaseController implements Initializable {
 
         MainActivity.editId = user.getId();
 
-        StageHelper.addStage("users/Edit selected user", this, false, true);
+        StageHelper.addStage("users/edit", this, false, true);
     }
 
     @FXML
@@ -487,7 +480,6 @@ public class UsersController extends BaseController implements Initializable {
 
         Action response = Dialogs.create().owner(removeStage)
                 .title("Are you sure you want to delete this item?")
-                //.masthead("Are you sure you want to delete this item? 2")
                 .message("Are you sure you want to delete this item?")
                 .actions(Dialog.ACTION_OK, Dialog.ACTION_CANCEL)
                 .showWarning();
@@ -516,7 +508,7 @@ public class UsersController extends BaseController implements Initializable {
 
         MainActivity.viewId = user.getId();
 
-        StageHelper.addStage("users/Detail view", this, false, true);
+        StageHelper.addStage("users/view", this, false, true);
 
     }
 
@@ -543,22 +535,27 @@ public class UsersController extends BaseController implements Initializable {
     }
 
     public void newSave() {
-
-        if (addGender.getSelectionModel().getSelectedItem() == null || addRole.getSelectionModel().getSelectedItem() == null || addWorkplace.getSelectionModel().getSelectedItem() == null || addPassword != addPasswordRepeat) {
+        if (addGender.getSelectionModel().getSelectedItem() == null || addRole.getSelectionModel().getSelectedItem() == null || addWorkplace.getSelectionModel().getSelectedItem() == null) {
+            Dialogs.create()
+                .owner((Stage) addPassword.getScene().getWindow())
+                .title("Warning")
+                .masthead("Selection error")
+                .message("Please enter all the select boxes.")
+                .showWarning();
+            return;
+        }
+        
+        if(!addPassword.getText().equals(addPasswordRepeat.getText()))
+        {
+            Dialogs.create()
+                .owner((Stage) addPassword.getScene().getWindow())
+                .title("Warning")
+                .masthead("Password error")
+                .message("The passwords do not match.")
+                .showWarning();
             return;
         }
 
-//        if (addRole.getSelectionModel().getSelectedItem() == null) {
-//            return;
-//        }
-//
-//        if (addWorkplace.getSelectionModel().getSelectedItem() == null) {
-//            return;
-//        }
-//        
-//        if (addPassword != addPasswordRepeat) {
-//            return;
-//        }
         UserModel users = new UserModel();
         users.setPassword(Encryption.hash(addPassword.getText()));
         users.setUsername(addUsername.getText());
@@ -599,24 +596,35 @@ public class UsersController extends BaseController implements Initializable {
     }
 
     public void editSave() {
-        if (editGender.getSelectionModel().getSelectedItem() == null || editRole.getSelectionModel().getSelectedItem() == null || editWorkplace.getSelectionModel().getSelectedItem() == null || editPassword != editPasswordRepeat) {
+        if (editGender.getSelectionModel().getSelectedItem() == null || editRole.getSelectionModel().getSelectedItem() == null || editWorkplace.getSelectionModel().getSelectedItem() == null) {
+            Dialogs.create()
+                .owner((Stage) editPassword.getScene().getWindow())
+                .title("Warning")
+                .masthead("Selection error")
+                .message("Please enter all the select boxes.")
+                .showWarning();
+            return;
+        }
+        
+        if(!editPassword.getText().equals(editPasswordRepeat.getText()))
+        {
+            Dialogs.create()
+                .owner((Stage) editPassword.getScene().getWindow())
+                .title("Warning")
+                .masthead("Password error")
+                .message("The passwords do not match.")
+                .showWarning();
             return;
         }
 
-//        if (editRole.getSelectionModel().getSelectedItem() == null) {
-//            return;
-//        }
-//
-//        if (editWorkplace.getSelectionModel().getSelectedItem() == null) {
-//            return;
-//        }
-//
-//        if (editPassword != editPasswordRepeat) {
-//            return;
-//        }
         UserModel user = new UserModel(MainActivity.editId);
         user.setUsername(editUsername.getText());
-        user.setPassword(Encryption.hash(editPassword.getText()));
+        
+        if(!editPassword.getText().equals(""))
+        {
+            user.setPassword(Encryption.hash(editPassword.getText()));
+        }
+        
         user.setFirstname(editFirstname.getText());
         user.setPrefix(editPrefix.getText());
         user.setLastname(editLastname.getText());
@@ -638,7 +646,6 @@ public class UsersController extends BaseController implements Initializable {
         UserModel user = new UserModel(MainActivity.viewId);
 
         viewUsername.setText(user.getUsername());
-        //viewPassword.setText(user.getPassword());
         viewFirstname.setText(user.getFirstname());
         viewPrefix.setText(user.getPrefix());
         viewLastname.setText(user.getLastname());
@@ -650,8 +657,7 @@ public class UsersController extends BaseController implements Initializable {
 
         viewGender.getSelectionModel().select(user.getGender().toUpperCase());
         viewRole.getSelectionModel().select(user.getRole().toUpperCase());
-        viewWorkplace.getSelectionModel().select(user.getLocation());
-
+        viewWorkplace.getSelectionModel().select(selectedWorkplace);
     }
 
     public void viewClose() {
