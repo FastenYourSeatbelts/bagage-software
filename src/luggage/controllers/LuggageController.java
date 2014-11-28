@@ -286,6 +286,7 @@ public class LuggageController extends BaseController implements Initializable {
     }
 
     public void setViewChoiceBoxes() {
+        
         // Locations
         LocationModel oLocationModel = new LocationModel();
         List<Model> allLocations = oLocationModel.findAll();
@@ -302,6 +303,11 @@ public class LuggageController extends BaseController implements Initializable {
         }
 
         viewLocationId.setItems(locationData);
+        
+        
+        
+      
+        long startTime = System.nanoTime();
 
         // Customers
         CustomerModel oCustomerModel = new CustomerModel();
@@ -319,6 +325,10 @@ public class LuggageController extends BaseController implements Initializable {
         }
 
         viewCustomerId.setItems(customerData);
+            
+        long endTime = System.nanoTime();
+        long microseconds = ((endTime - startTime) / 1000);
+        Debug.print("zoooio: " + " took " + microseconds + " microseconds.");
     }
 
     @FXML
