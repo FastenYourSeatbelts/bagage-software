@@ -23,6 +23,12 @@
  */
 package luggage;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import luggage.database.models.LogModel;
+import luggage.security.Authentication;
+
 /**
  *
  * @author Tijme Gommers
@@ -35,6 +41,20 @@ public class Debug {
         }
         
         System.out.println(message);
+    }
+    
+    public static void logToDatabase(String type, String message) {
+        LogModel log = new LogModel();
+        log.setDatetime(type);
+        log.setUserId(Integer.toString(Authentication.getCurrentUser().getId()));
+        log.setType(type);
+        log.setMessage(message);
+        
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date();
+
+        log.setDatetime(dateFormat.format(date));
+        log.save();
     }
     
 }

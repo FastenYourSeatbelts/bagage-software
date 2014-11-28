@@ -253,6 +253,9 @@ abstract public class Model {
             long microseconds = (endTime - startTime) / 1000;
             Debug.print(statement + " took " + microseconds + " microseconds.");
             
+            if(!getTable().equals("log"))
+                Debug.logToDatabase(LogModel.TYPE_INFO, "User added row in " + getTable() + ".");
+            
             return result;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -298,6 +301,9 @@ abstract public class Model {
             long microseconds = (endTime - startTime) / 1000;
             Debug.print(statement + " took " + microseconds + " microseconds.");
             
+            if(!getTable().equals("log"))
+                Debug.logToDatabase(LogModel.TYPE_INFO, "User updated row from " + getTable() + ", id: " + getId() + ".");
+            
             return result;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -318,6 +324,9 @@ abstract public class Model {
             long endTime = System.nanoTime();
             long microseconds = (endTime - startTime) / 1000;
             Debug.print(sQuery + " took " + microseconds + " microseconds.");
+            
+            if(!getTable().equals("log"))
+                Debug.logToDatabase(LogModel.TYPE_INFO, "User deleted row from " + getTable() + ", id: " + getId() + ".");
             
             return result;
         } catch (SQLException ex) {

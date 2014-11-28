@@ -40,6 +40,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import luggage.AppConfig;
 import luggage.Debug;
+import luggage.database.models.LogModel;
 
 /**
  * LoginController
@@ -93,6 +94,8 @@ public class LoginController extends BaseController  implements Initializable {
         Authentication.setCurrentUser(user);
         Stage loginStage = (Stage) username.getScene().getWindow();
         StageHelper.replaceStage(loginStage, "dashboard", this);
+        
+        Debug.logToDatabase(LogModel.TYPE_INFO, "User succesfully logged in");
     }
 
     /**
