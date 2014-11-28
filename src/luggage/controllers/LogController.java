@@ -112,13 +112,9 @@ public class LogController extends BaseController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         Platform.runLater(new Runnable() {
             @Override
-            public void run() {
-
-                // List
-                if (listTableView != null) {
-                    listResetTableView("", new String[0]);                    
+            public void run() {               
                     listTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-                }
+                
 
             }
         });

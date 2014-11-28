@@ -25,6 +25,7 @@
 package luggage.controllers;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -32,15 +33,24 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import luggage.Debug;
+import luggage.MainActivity;
+import luggage.database.models.CustomerModel;
+import luggage.database.models.LocationModel;
 import luggage.database.models.LuggageModel;
 import luggage.database.models.Model;
+import luggage.helpers.StageHelper;
 
 /**
- * LuggageController
+ * FoundLuggageController
  *
  * Controller for customers/list.fxml
  *
@@ -67,9 +77,37 @@ public class FoundLuggageController extends BaseController  implements Initializ
     @FXML
     private TableColumn tableViewNotes;
     
+    @FXML
+    private Button listView;
+    
+        /**
+     * VIEW ELEMENTS
+     */
+    
+    @FXML
+    private Button viewCancel;
+
+    @FXML
+    private TextField viewTags;
+
+    @FXML
+    private ChoiceBox<LocationModel> viewLocationId;
+
+    @FXML
+    private ChoiceBox<CustomerModel> viewCustomerId;
+
+    @FXML
+    private TextField viewNotes;
+
+    @FXML
+    private DatePicker viewDate;
     
     private ObservableList<LuggageModel> data = FXCollections.observableArrayList();   
 
+    private final ObservableList<LocationModel> locationData = FXCollections.observableArrayList();
+
+    private final ObservableList<CustomerModel> customerData = FXCollections.observableArrayList();
+    
     
     /**
      * Called on controller start
@@ -84,13 +122,90 @@ public class FoundLuggageController extends BaseController  implements Initializ
             public void run() { 
                 Debug.print("FOUND LUGGAGE CONTROLLER-----------------------------------------------------------------");
                 
+                if(luggageTableView != null)
+                {
+                    
                 String[] params = new String[1];
                 params[0] = "found";
 
                 resetTableView("status = ?", params);
-                luggageTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+                    
+                    luggageTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+                }
+                
+                if(viewLocationId != null)
+                {
+                    setViewChoiceBoxes();
+                    setViewFields();
+                }     
             }
         });
+    }
+    
+    public LocationModel selectedLocation;
+
+    public CustomerModel selectedCustomer;
+         
+    public void setViewChoiceBoxes() {
+        // Locations
+        LocationModel oLocationModel = new LocationModel();
+        List<Model> allLocations = oLocationModel.findAll();
+
+        int selectedLocationId = new LuggageModel(MainActivity.viewId).getLocationId();
+
+        for (Model allLocation : allLocations) {
+            LocationModel location = (LocationModel) allLocation;
+            if (location.getId() == selectedLocationId) {
+                selectedLocation = location;
+            }
+
+            locationData.add(location);
+        }
+
+        viewLocationId.setItems(locationData);
+
+        // Customers
+        CustomerModel oCustomerModel = new CustomerModel();
+        List<Model> allCustomers = oCustomerModel.findAll();
+
+        int selectedCustomerId = new LuggageModel(MainActivity.viewId).getCustomerId();
+
+        for (Model allCustomer : allCustomers) {
+            CustomerModel customer = (CustomerModel) allCustomer;
+            if (customer.getId() == selectedCustomerId) {
+                selectedCustomer = customer;
+            }
+
+            customerData.add(customer);
+        }
+
+        viewCustomerId.setItems(customerData);
+    }
+    
+    @FXML
+    public void listView() {
+        LuggageModel luggage = (LuggageModel) luggageTableView.getSelectionModel().getSelectedItem();
+
+        if (luggage == null) {
+            return;
+        }
+
+        MainActivity.viewId = luggage.getId();
+
+        StageHelper.addStage("luggage/foundview", this, false, true);
+    }
+
+     public void setViewFields() {
+        LuggageModel luggage = new LuggageModel(MainActivity.viewId);
+
+        viewTags.setText(luggage.getTags());
+        viewNotes.setText(luggage.getNotes());
+
+        LocalDate date = LocalDate.parse(luggage.getDatetime());
+        viewDate.setValue(date);
+
+        viewLocationId.getSelectionModel().select(selectedLocation);
+        viewCustomerId.getSelectionModel().select(selectedCustomer);
     }
     
     public void resetTableView(String where, String... params) {
@@ -110,6 +225,11 @@ public class FoundLuggageController extends BaseController  implements Initializ
         tableViewNotes.setCellValueFactory(new PropertyValueFactory("notes"));
                     
         luggageTableView.setItems(data);
+    }
+    
+    public void viewCancel() {
+        Stage addStage = (Stage) viewCancel.getScene().getWindow();
+        StageHelper.closeStage(addStage);
     }
     
 }
