@@ -509,11 +509,23 @@ public class CustomersController extends BaseController implements Initializable
     public void newSave() {
         if(addGender.getSelectionModel().getSelectedItem() == null)
         {
+            Dialogs.create()
+                .owner((Stage) addGender.getScene().getWindow())
+                .title("Warning")
+                .masthead("Selection error")
+                .message("Please enter the gender.")
+                .showWarning();
             return;
         }
         
         if(addInsurerId.getSelectionModel().getSelectedItem() == null)
         {
+            Dialogs.create()
+                .owner((Stage) addInsurerId.getScene().getWindow())
+                .title("Warning")
+                .masthead("Selection error")
+                .message("Please enter the insurer.")
+                .showWarning();
             return;
         }
         
@@ -557,11 +569,23 @@ public class CustomersController extends BaseController implements Initializable
     public void editSave() {
         if(editGender.getSelectionModel().getSelectedItem() == null)
         {
+            Dialogs.create()
+                .owner((Stage) editGender.getScene().getWindow())
+                .title("Warning")
+                .masthead("Selection error")
+                .message("Please enter the gender.")
+                .showWarning();
             return;
         }
         
         if(editInsurerId.getSelectionModel().getSelectedItem() == null)
         {
+            Dialogs.create()
+                .owner((Stage) editInsurerId.getScene().getWindow())
+                .title("Warning")
+                .masthead("Selection error")
+                .message("Please enter the insurer.")
+                .showWarning();
             return;
         }
         
