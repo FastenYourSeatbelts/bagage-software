@@ -288,21 +288,30 @@ public class UserModel extends Model {
     }
     
     /**
-     * Return the workplace_id of the current row
+     * Return the Location of the current row
      * 
      * @return 
      */
-    public int getWorkplace() {
-        return Integer.parseInt(row.get("workplace_id"));
-    }
-   
-    /**
-     * Return the LocationModel of the current row
-     *
-     * @return LocationModel
-     */
     public LocationModel getLocation() {
-        return new LocationModel(getWorkplace());
+        return new LocationModel(Integer.parseInt(row.get("location_id")));
+    }
+    
+    /**
+     * Return the Location of the current row
+     * 
+     * @return 
+     */
+    public int getLocationId() {
+        return Integer.parseInt(row.get("location_id"));
+    }
+    
+    /**
+     * Set the Location of the current row
+     * 
+     * @return 
+     */
+    public void setLocationId(String location_id) {
+         row.put("location_id", location_id);
     }
 
     /**
@@ -312,15 +321,6 @@ public class UserModel extends Model {
      */
     public String getLocationName() {
         return getLocation().getName();
-    }
-    
-    /**
-     * Set the workplace_id of the current row
-     * 
-     * @param workplace
-     */
-    public void setWorkplace(String workplace) {
-        row.put("workplace_id", workplace);
     }
     
     /**

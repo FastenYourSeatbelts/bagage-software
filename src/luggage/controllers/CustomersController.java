@@ -308,9 +308,12 @@ public class CustomersController extends BaseController implements Initializable
         
         InsurerModel insurers = new InsurerModel();
         List<Model> allInsurers = insurers.findAll("", new String[0]);
+        
+        int insurerId = new CustomerModel(MainActivity.viewId).getInsurerId();
+        
         for(Model allInsurer : allInsurers) {
             InsurerModel insurer = (InsurerModel) allInsurer;
-            if(insurer.getId() == new CustomerModel(MainActivity.viewId).getInsurerId())
+            if(insurer.getId() == insurerId)
             {
                 selectedInsurer = insurer;
             }
