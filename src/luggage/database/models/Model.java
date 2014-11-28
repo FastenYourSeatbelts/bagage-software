@@ -71,7 +71,11 @@ abstract public class Model {
             for(int i = 0; i < rsmd.getColumnCount(); i ++)
             {
                 String column = rsmd.getColumnName((i+1));
-                row.put(column, rs.getString(column));
+                
+                if(!column.equals("password"))
+                {
+                    row.put(column, rs.getString(column));
+                }
             }
             
             long endTime = System.nanoTime();
@@ -100,7 +104,11 @@ abstract public class Model {
             for(int i = 0; i < rsmd.getColumnCount(); i ++)
             {
                 String column = rsmd.getColumnName((i+1));
-                row.put(column, rs.getString(column));
+                
+                if(!column.equals("password"))
+                {
+                    row.put(column, rs.getString(column));
+                }
             } 
             
             long endTime = System.nanoTime();
@@ -145,7 +153,10 @@ abstract public class Model {
                 for(int i = 0; i < rsmd.getColumnCount(); i ++)
                 {
                     String column = rsmd.getColumnName((i+1));
-                    model.row.put(column, rs.getString(column));
+                    if(!column.equals("password"))
+                    {
+                        model.row.put(column, rs.getString(column));
+                    }
                 }
                 
                 rowList.add(model);
@@ -240,7 +251,7 @@ abstract public class Model {
             
             long endTime = System.nanoTime();
             long microseconds = (endTime - startTime) / 1000;
-            Debug.print(sQuery + " took " + microseconds + " microseconds.");
+            Debug.print(statement + " took " + microseconds + " microseconds.");
             
             return result;
         } catch (SQLException ex) {
@@ -257,6 +268,12 @@ abstract public class Model {
             
             boolean firstColumn = true;
             for (Entry<String, String> column  : row.entrySet()) {
+                
+                if(column.getKey().equals("password") && column.getValue().equals(""))
+                {
+                    continue;
+                }
+                
                 if(firstColumn) {
                     firstColumn = false;
                     sQuery = sQuery + column.getKey() + " = ?";
@@ -279,7 +296,7 @@ abstract public class Model {
             
             long endTime = System.nanoTime();
             long microseconds = (endTime - startTime) / 1000;
-            Debug.print(sQuery + " took " + microseconds + " microseconds.");
+            Debug.print(statement + " took " + microseconds + " microseconds.");
             
             return result;
         } catch (SQLException ex) {
