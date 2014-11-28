@@ -36,6 +36,10 @@ import javafx.stage.Stage;
 import javafx.scene.chart.*;
 import javafx.scene.Group;
 import luggage.Debug;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.chart.PieChart;
 
 /**
  * UsersController
@@ -46,85 +50,61 @@ import luggage.Debug;
  * @author Nick + Lars
  */
 public class LuggageGraphController extends BaseController implements Initializable {
-
+    
     /**
      * Called on controller start
      * 
      * @param url
      * @param rb 
      */
+    @FXML
+    private PieChart piechart;
+     
+    @FXML
+    private void handleButton1Action(ActionEvent event) {
+        ObservableList<PieChart.Data> pieChartData = 
+                FXCollections.observableArrayList(
+                    new PieChart.Data("January", 100),
+                    new PieChart.Data("February", 200),
+                    new PieChart.Data("March", 50),
+                    new PieChart.Data("April", 75),
+                    new PieChart.Data("May", 110),
+                    new PieChart.Data("June", 300),
+                    new PieChart.Data("July", 111),
+                    new PieChart.Data("August", 30),
+                    new PieChart.Data("September", 75),
+                    new PieChart.Data("October", 55),
+                    new PieChart.Data("November", 225),
+                    new PieChart.Data("December", 99));
+         
+        piechart.setTitle("Monthly Record");
+        piechart.setData(pieChartData);
+    }
+     
+    @FXML
+    private void handleButton2Action(ActionEvent event) {
+        
+    }
+     
+    @FXML
+    private void handleButtonClearAction(ActionEvent event) {
+        ObservableList<PieChart.Data> pieChartData = 
+                FXCollections.observableArrayList();
+        piechart.setTitle("");
+        piechart.setData(pieChartData);
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         Debug.print("GRAPH CONTROLLER-----------------------------------------------------------------");
-    }
-    /*
-    //@Override
-    public void start(Stage stage) {
-        Scene scene = new Scene(new Group());
-        stage.setTitle("Luggage status");
-        stage.setWidth(500);
-        stage.setHeight(500);
-
-        ObservableList<PieChart.Data> pieChartData
-                = FXCollections.observableArrayList(
-                new PieChart.Data("Missing", 13),
-                new PieChart.Data("Found", 25),
-                new PieChart.Data("Resolved", 110));
-        final PieChart chart = new PieChart(pieChartData);
-        chart.setTitle("Luggage status");
-
-        ((Group) scene.getRoot()).getChildren().add(chart);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-      public static void main(String[] args) {
-        launch(args);
-    }
-      
-      
-      
-    public class PieChartDemo extends BaseController {
-
-        //PIE CHART DATA
-        private ObservableList data;
-
-        //MAIN EXECUTOR
-        public static void main(String[] args) {
-            buildData()
-        }
-
-        //CONNECTION DATABASE SAVING DATA
-        public void buildData() {
-            data = FXCollections.observableArrayList();
-            try {
-                //SQL FOR SELECTING NATIONALITY OF CUSTOMER
-                String SQL = "SELECT COUNT(status), "
-                        + "type FROM luggage l"
-                        + " WHERE na.id=c.nationality_id GROUP BY type";
-
-                ResultSet rs = l.createStatement().executeQuery(SQL);
-                while (rs.next()) {
-                    //adding data on piechart data
-                    data.add(new PieChart.Data(rs.getString(2), rs.getDouble(1)));
-                }
-            }
-
-        }
-
-        @Override
-        public void start(Stage stage) throws Exception {
-            //PIE CHART
-            PieChart pieChart = new PieChart();
-            buildData();
-            pieChart.getData().addAll(data);
-
-            //Main Scene
-            Scene scene = new Scene(pieChart);
-
-            stage.setScene(scene);
-            stage.setVisible(true);
-        }
-    }
- */   
+        ObservableList<PieChart.Data> pieChartData = 
+                FXCollections.observableArrayList(
+                    new PieChart.Data("Missing", 70),
+                    new PieChart.Data("Found", 20),
+                    new PieChart.Data("Resolved", 65)
+                );
+                   
+        piechart.setTitle("Weekly Record");
+        piechart.setData(pieChartData);
+    } 
 }

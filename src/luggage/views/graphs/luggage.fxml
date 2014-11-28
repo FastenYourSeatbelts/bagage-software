@@ -3,9 +3,10 @@
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="luggage.controllers.LuggageGraphController">
+<AnchorPane id="AnchorPane" prefHeight="520" prefWidth="520" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="luggage.controllers.LuggageGraphController">
    <children>
-      <Label text="LuggageGraphController Controller" />
+      <PieChart id="piechart" fx:id="piechart" layoutX="400" layoutY="100" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
    </children>
 </AnchorPane>
