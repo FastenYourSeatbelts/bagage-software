@@ -82,19 +82,19 @@ public class LuggageController extends BaseController implements Initializable {
 
     @FXML
     private TextField listSearchField;
-    
+
     @FXML
     private Button listNew;
-    
+
     @FXML
     private Button listEdit;
-    
+
     @FXML
     private Button listView;
-    
+
     @FXML
     private Button listRemove;
-    
+
     /**
      * ADD ELEMENTS
      */
@@ -121,7 +121,7 @@ public class LuggageController extends BaseController implements Initializable {
 
     @FXML
     private DatePicker addDate;
-    
+
     /**
      * EDIT ELEMENTS
      */
@@ -149,13 +149,35 @@ public class LuggageController extends BaseController implements Initializable {
     @FXML
     private DatePicker editDate;
 
+    /**
+     * VIEW ELEMENTS
+     */
+    @FXML
+    private Button viewCancel;
+
+    @FXML
+    private TextField viewTags;
+
+    @FXML
+    private ChoiceBox<LocationModel> viewLocationId;
+
+    @FXML
+    private ChoiceBox<CustomerModel> viewCustomerId;
+
+    @FXML
+    private TextField viewNotes;
+
+    @FXML
+    private DatePicker viewDate;
+
     private ObservableList<LuggageModel> listData = FXCollections.observableArrayList();
-    
+
     private final ObservableList<LocationModel> locationData = FXCollections.observableArrayList();
-    
+
     private final ObservableList<CustomerModel> customerData = FXCollections.observableArrayList();
 
     /**
+     *
      * Called on controller start
      *
      * @param url
@@ -166,14 +188,13 @@ public class LuggageController extends BaseController implements Initializable {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                
+
                 Debug.print("LUGGAGE CONTROLLER-----------------------------------------------------------------");
-                
+
                 // List
-                if(listTableView != null)
-                {
+                if (listTableView != null) {
                     listResetTableView("", new String[0]);
-                    
+
                     listEdit.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
                     listRemove.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
                     listView.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
@@ -181,85 +202,123 @@ public class LuggageController extends BaseController implements Initializable {
                 }
 
                 // Add
-                if(addLocationId != null)
-                {
+                if (addLocationId != null) {
                     setAddChoiceBoxes();
                 }
 
                 // Edit
-                if(editLocationId != null)
-                {
+                if (editLocationId != null) {
                     setEditChoiceBoxes();
                     setEditFields();
+                }
+
+                // View
+                if (viewLocationId != null) {
+                    setViewChoiceBoxes();
+                    setViewFields();
                 }
             }
         });
     }
-    
+
     public LocationModel selectedLocation;
-    
+
     public CustomerModel selectedCustomer;
 
     public void setAddChoiceBoxes() {
         // Locations
         LocationModel oLocationModel = new LocationModel();
         List<Model> allLocations = oLocationModel.findAll();
-        
-        for(Model allLocation : allLocations) {
+
+        for (Model allLocation : allLocations) {
             LocationModel location = (LocationModel) allLocation;
             locationData.add(location);
         }
-        
+
         addLocationId.setItems(locationData);
-        
+
         // Customers
         CustomerModel oCustomerModel = new CustomerModel();
         List<Model> allCustomers = oCustomerModel.findAll();
-        
-        for(Model allCustomer : allCustomers) {
+
+        for (Model allCustomer : allCustomers) {
             CustomerModel customer = (CustomerModel) allCustomer;
             customerData.add(customer);
         }
-        
+
         addCustomerId.setItems(customerData);
     }
-    
+
     public void setEditChoiceBoxes() {
         // Locations
         LocationModel oLocationModel = new LocationModel();
         List<Model> allLocations = oLocationModel.findAll();
-        
+
         int selectedLocationId = new LuggageModel(MainActivity.editId).getLocationId();
-        
-        for(Model allLocation : allLocations) {
+
+        for (Model allLocation : allLocations) {
             LocationModel location = (LocationModel) allLocation;
-            if(location.getId() == selectedLocationId)
-            {
+            if (location.getId() == selectedLocationId) {
                 selectedLocation = location;
             }
-            
+
             locationData.add(location);
         }
-        
+
         editLocationId.setItems(locationData);
-        
-         // Customers
+
+        // Customers
         CustomerModel oCustomerModel = new CustomerModel();
         List<Model> allCustomers = oCustomerModel.findAll();
-        
+
         int selectedCustomerId = new LuggageModel(MainActivity.editId).getCustomerId();
-        
-        for(Model allCustomer : allCustomers) {
+
+        for (Model allCustomer : allCustomers) {
             CustomerModel customer = (CustomerModel) allCustomer;
-            if(customer.getId() == selectedCustomerId)
-            {
+            if (customer.getId() == selectedCustomerId) {
                 selectedCustomer = customer;
             }
-            
+
             customerData.add(customer);
         }
-        
+
         editCustomerId.setItems(customerData);
+    }
+
+    public void setViewChoiceBoxes() {
+        // Locations
+        LocationModel oLocationModel = new LocationModel();
+        List<Model> allLocations = oLocationModel.findAll();
+
+        int selectedLocationId = new LuggageModel(MainActivity.viewId).getLocationId();
+
+        for (Model allLocation : allLocations) {
+            LocationModel location = (LocationModel) allLocation;
+            if (location.getId() == selectedLocationId) {
+                selectedLocation = location;
+            }
+
+            locationData.add(location);
+        }
+
+        viewLocationId.setItems(locationData);
+
+        // Customers
+        CustomerModel oCustomerModel = new CustomerModel();
+        List<Model> allCustomers = oCustomerModel.findAll();
+
+        int selectedCustomerId = new LuggageModel(MainActivity.viewId).getCustomerId();
+
+        for (Model allCustomer : allCustomers) {
+            CustomerModel customer = (CustomerModel) allCustomer;
+            if (customer.getId() == selectedCustomerId) {
+                selectedCustomer = customer;
+            }
+
+            customerData.add(customer);
+        }
+
+        viewCustomerId.setItems(customerData);
     }
 
     @FXML
@@ -296,60 +355,60 @@ public class LuggageController extends BaseController implements Initializable {
     public void listNew() {
         StageHelper.addStage("luggage/add", this, false, true);
     }
-    
+
     @FXML
     public void listEdit() {
         LuggageModel luggage = (LuggageModel) listTableView.getSelectionModel().getSelectedItem();
-        
-        if(luggage == null)
-        {
+
+        if (luggage == null) {
             return;
         }
-        
+
         MainActivity.editId = luggage.getId();
-        
+
         StageHelper.addStage("luggage/edit", this, false, true);
     }
-    
+
     @FXML
     public void listRemove() {
         Stage removeStage = (Stage) listTableView.getScene().getWindow();
-        
-        Action response = Dialogs.create().owner(removeStage)
-            .title("Are you sure you want to delete this item?")
-            //.masthead("Are you sure you want to delete this item? 2")
-            .message("Are you sure you want to delete this item?")
-            .actions(Dialog.ACTION_OK, Dialog.ACTION_CANCEL)
-            .showWarning();
 
-                
+        Action response = Dialogs.create().owner(removeStage)
+                .title("Are you sure you want to delete this item?")
+                //.masthead("Are you sure you want to delete this item? 2")
+                .message("Are you sure you want to delete this item?")
+                .actions(Dialog.ACTION_OK, Dialog.ACTION_CANCEL)
+                .showWarning();
+
         if (response == Dialog.ACTION_OK) {
             LuggageModel luggage = (LuggageModel) listTableView.getSelectionModel().getSelectedItem();
 
-            if(luggage == null)
+            if (luggage == null) {
                 return;
+            }
 
             luggage.delete();
             listOnSearch();
         }
     }
-    
+
     @FXML
     public void listView() {
         LuggageModel luggage = (LuggageModel) listTableView.getSelectionModel().getSelectedItem();
-        
-        if(luggage == null)
+
+        if (luggage == null) {
             return;
-        
+        }
+
         MainActivity.viewId = luggage.getId();
-        
+
         StageHelper.addStage("luggage/view", this, false, true);
     }
-    
+
     public void listResetTableView(String where, String... params) {
         LuggageModel luggage = new LuggageModel();
         List<Model> allLuggage = luggage.findAll(where, params);
-        
+
         listData = FXCollections.observableArrayList();
         for (Model allLuggage1 : allLuggage) {
             LuggageModel luggage2 = (LuggageModel) allLuggage1;
@@ -381,32 +440,45 @@ public class LuggageController extends BaseController implements Initializable {
 
         LuggageModel luggage = new LuggageModel();
         luggage.setLocationId(Integer.toString(addLocationId.getSelectionModel().getSelectedItem().getId()));
-        
+
         luggage.setDatetime(addDate.getValue() + " 00:00:00");
-        
+
         luggage.setTags(addTags.getText());
         luggage.setNotes(addNotes.getText());
         luggage.save();
-        
+
         LuggageController luggageController = (LuggageController) StageHelper.callbackController;
         luggageController.listOnSearch();
 
         newCancel();
     }
-    
+
     public void setEditFields() {
         LuggageModel luggage = new LuggageModel(MainActivity.editId);
-        
+
         editTags.setText(luggage.getTags());
         editNotes.setText(luggage.getNotes());
-        
+
         LocalDate date = LocalDate.parse(luggage.getDatetime());
         editDate.setValue(date);
-    
+
         editLocationId.getSelectionModel().select(selectedLocation);
         editCustomerId.getSelectionModel().select(selectedCustomer);
     }
-    
+
+    public void setViewFields() {
+        LuggageModel luggage = new LuggageModel(MainActivity.viewId);
+
+        viewTags.setText(luggage.getTags());
+        viewNotes.setText(luggage.getNotes());
+
+        LocalDate date = LocalDate.parse(luggage.getDatetime());
+        viewDate.setValue(date);
+
+        viewLocationId.getSelectionModel().select(selectedLocation);
+        viewCustomerId.getSelectionModel().select(selectedCustomer);
+    }
+
     public void editCancel() {
         Stage addStage = (Stage) editCancel.getScene().getWindow();
         StageHelper.closeStage(addStage);
@@ -422,18 +494,24 @@ public class LuggageController extends BaseController implements Initializable {
             return;
         }
 
-        LuggageModel luggage = new LuggageModel();
+        LuggageModel luggage = new LuggageModel(MainActivity.editId);
         luggage.setLocationId(Integer.toString(editLocationId.getSelectionModel().getSelectedItem().getId()));
-        
+
         luggage.setDatetime(editDate.getValue() + " 00:00:00");
-        
+
         luggage.setTags(editTags.getText());
         luggage.setNotes(editNotes.getText());
         luggage.save();
-        
+
         LuggageController luggageController = (LuggageController) StageHelper.callbackController;
         luggageController.listOnSearch();
 
         editCancel();
     }
+
+    public void viewCancel() {
+        Stage addStage = (Stage) viewCancel.getScene().getWindow();
+        StageHelper.closeStage(addStage);
+    }
+
 }

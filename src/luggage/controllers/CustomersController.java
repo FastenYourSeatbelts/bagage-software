@@ -272,12 +272,10 @@ public class CustomersController extends BaseController implements Initializable
                 }
 
                 // View
-                if(viewGender != null && viewInsurerId != null)
-                {
+                if (viewGender != null && viewInsurerId != null) {
                     setViewChoiceBoxes();
                     setViewFields();
                 }
-                
             }
         });
     }
