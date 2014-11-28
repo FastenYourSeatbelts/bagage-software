@@ -409,8 +409,7 @@ public class UsersController extends BaseController implements Initializable {
 
         editGender.getSelectionModel().select(user.getGender().toUpperCase());
         editRole.getSelectionModel().select(user.getRole().toUpperCase());
-        editWorkplace.getSelectionModel().select(user.getWorkplace());
-
+        editWorkplace.getSelectionModel().select(user.getLocation());
     }
     
     public LocationModel selectedWorkplace;
@@ -651,7 +650,7 @@ public class UsersController extends BaseController implements Initializable {
 
         viewGender.getSelectionModel().select(user.getGender().toUpperCase());
         viewRole.getSelectionModel().select(user.getRole().toUpperCase());
-        viewWorkplace.getSelectionModel().select(user.getWorkplace());
+        viewWorkplace.getSelectionModel().select(user.getLocation());
 
     }
 
