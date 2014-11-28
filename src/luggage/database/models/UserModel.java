@@ -25,6 +25,11 @@
 package luggage.database.models;
 
 import com.mysql.jdbc.StringUtils;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Map;
+import luggage.Debug;
+import luggage.database.DatabaseHelper;
 import luggage.security.Permissions;
 
 /**
@@ -288,39 +293,39 @@ public class UserModel extends Model {
     }
     
     /**
-     * Return the workplace_id of the current row
+     * Return the Location of the current row
      * 
      * @return 
      */
-    public int getWorkplace() {
-        return Integer.parseInt(row.get("workplace_id"));
-    }
-   
-    /**
-     * Return the LocationModel of the current row
-     *
-     * @return LocationModel
-     */
     public LocationModel getLocation() {
-        return new LocationModel(getWorkplace());
-    }
-
-    /**
-     * Return the workplace name of the current row
-     *
-     * @return workplace
-     */
-    public String getLocationName() {
-        return getLocation().getName();
+        return new LocationModel(Integer.parseInt(row.get("location_id")));
     }
     
     /**
-     * Set the workplace_id of the current row
+     * Return the Location of the current row
      * 
-     * @param workplace
+     * @return 
      */
-    public void setWorkplace(String workplace) {
-        row.put("workplace_id", workplace);
+    public int getLocationId() {
+        return Integer.parseInt(row.get("location_id"));
+    }
+    
+    /**
+     * Set the Location of the current row
+     * 
+     * @return 
+     */
+    public void setLocationId(String location_id) {
+         row.put("location_id", location_id);
+    }
+
+    /**
+     * Return the location name of the current row
+     *
+     * @return location
+     */
+    public String getLocationName() {
+        return getLocation().getName();
     }
     
     /**
@@ -358,4 +363,5 @@ public class UserModel extends Model {
     public void setMobile(String mobile) {
         row.put("mobile", mobile);
     }
+   
 }
