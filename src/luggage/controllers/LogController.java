@@ -113,9 +113,8 @@ public class LogController extends BaseController implements Initializable {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {               
-                    listTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-                
-
+                listTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+                listOnSearch();
             }
         });
     }
