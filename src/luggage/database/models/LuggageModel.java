@@ -181,6 +181,9 @@ public class LuggageModel extends Model {
      * @return 
      */
     public int getCustomerId() {
+        if(row.get("customer_id") == null || row.get("customer_id").isEmpty())
+            return 0;
+        
         return Integer.parseInt(row.get("customer_id"));
     }
     

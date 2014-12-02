@@ -90,6 +90,9 @@ public class LocationModel extends Model {
      * @return 
      */
     public int getCityId() {
+        if(row.get("city_id") == null || row.get("city_id").isEmpty())
+            return 0;
+        
         return Integer.parseInt(row.get("city_id"));
     }
  

@@ -307,6 +307,9 @@ public class UserModel extends Model {
      * @return 
      */
     public int getLocationId() {
+        if(row.get("location_id") == null || row.get("location_id").isEmpty())
+            return 0;
+        
         return Integer.parseInt(row.get("location_id"));
     }
     
@@ -316,7 +319,7 @@ public class UserModel extends Model {
      * @return 
      */
     public void setLocationId(String location_id) {
-         row.put("location_id", location_id);
+        row.put("location_id", location_id);
     }
 
     /**

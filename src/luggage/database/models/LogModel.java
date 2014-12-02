@@ -130,6 +130,9 @@ public class LogModel extends Model {
      * @return 
      */
     public int getUserId() {
+        if(row.get("user_id") == null || row.get("user_id").isEmpty())
+            return 0;
+        
         return Integer.parseInt(row.get("user_id"));
     }
     

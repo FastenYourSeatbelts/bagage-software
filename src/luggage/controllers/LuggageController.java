@@ -208,6 +208,7 @@ public class LuggageController extends BaseController implements Initializable {
 
                 // Edit
                 if (editLocationId != null) {
+                    System.out.println("EDIT");
                     setEditChoiceBoxes();
                     setEditFields();
                 }
