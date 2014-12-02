@@ -405,6 +405,11 @@ public class LuggageController extends BaseController implements Initializable {
 
         StageHelper.addPopup("luggage/edit", this, false, true);
     }
+    
+    @FXML
+    public void listHelp() {
+        StageHelper.addStage("luggage/listHelp", this, false, true);
+        }
 
     @FXML
     public void listRemove() {
