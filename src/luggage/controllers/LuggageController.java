@@ -94,6 +94,9 @@ public class LuggageController extends BaseController implements Initializable {
 
     @FXML
     private Button listRemove;
+    
+    @FXML
+    private Button listExportToPdf;
 
     /**
      * ADD ELEMENTS
@@ -207,6 +210,7 @@ public class LuggageController extends BaseController implements Initializable {
                     listEdit.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
                     listRemove.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
                     listView.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
+                    listExportToPdf.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
                     listTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
                 }
 
@@ -445,6 +449,19 @@ public class LuggageController extends BaseController implements Initializable {
         MainActivity.viewId = luggage.getId();
 
         StageHelper.addPopup("luggage/view", this, false, true);
+    }
+    
+    @FXML
+    public void listExportToPdf() {
+        LuggageModel luggage = (LuggageModel) listTableView.getSelectionModel().getSelectedItem();
+        
+        if(luggage == null)
+            return;
+        
+        MainActivity.viewId = luggage.getId();
+        //Jasper is de beste
+        System.out.println("Ayy ik doe iets");
+        StageHelper.addStage("luggage/view", this, false, true);
     }
 
     public void listResetTableView(String where, String... params) {
