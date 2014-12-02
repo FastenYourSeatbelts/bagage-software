@@ -34,9 +34,10 @@
             <children>
                 <ChoiceBox fx:id="viewLocationId" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="1" />
                 <ChoiceBox fx:id="viewCustomerId" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="2" />
-                <TextField fx:id="viewTags" promptText="e.g. blue, purple, big, square" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="3" />
-                <DatePicker fx:id="viewDate" prefHeight="25.0" prefWidth="394.0" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="4" />
-                <TextField fx:id="viewNotes" promptText="e.g. Fragile contents" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="5" />
+                <ChoiceBox fx:id="viewStatus" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="3" />
+                <TextField fx:id="viewTags" promptText="e.g. blue, purple, big, square" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="4" />
+                <DatePicker fx:id="viewDate" prefHeight="25.0" prefWidth="394.0" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="5" />
+                <TextField fx:id="viewNotes" promptText="e.g. Fragile contents" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="6" />
                 <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Location" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <font>
                         <Font size="14.0" />
@@ -53,7 +54,7 @@
                         <Insets left="10.0" />
                     </GridPane.margin>
                 </Label>
-                <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Tags" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Status" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -61,7 +62,7 @@
                         <Insets left="10.0" />
                     </GridPane.margin>
                 </Label>
-                <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Date" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Status" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="4">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -69,7 +70,15 @@
                         <Insets left="10.0" />
                     </GridPane.margin>
                 </Label>
-                <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Notes" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Date" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                    <GridPane.margin>
+                        <Insets left="10.0" />
+                    </GridPane.margin>
+                </Label>
+                <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Notes" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="6">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -79,7 +88,7 @@
                 </Label>
                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="9">
                     <children>
-                        <Button fx:id="viewCancel" alignment="CENTER" cancelButton="true" layoutX="206.0" layoutY="8.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#viewCancel" prefWidth="70.0" text="Cancel" AnchorPane.rightAnchor="0.0">
+                        <Button fx:id="viewCancel" alignment="CENTER" cancelButton="true" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#viewCancel" prefWidth="70.0" text="Cancel" AnchorPane.rightAnchor="0.0">
                         </Button>
                     </children>
                 </AnchorPane>

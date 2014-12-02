@@ -115,6 +115,9 @@ public class LuggageController extends BaseController implements Initializable {
 
     @FXML
     private ChoiceBox<CustomerModel> addCustomerId;
+    
+    @FXML
+    private ChoiceBox<String> addStatus;
 
     @FXML
     private TextField addNotes;
@@ -142,6 +145,9 @@ public class LuggageController extends BaseController implements Initializable {
 
     @FXML
     private ChoiceBox<CustomerModel> editCustomerId;
+    
+    @FXML
+    private ChoiceBox<String> editStatus;
 
     @FXML
     private TextField editNotes;
@@ -157,6 +163,9 @@ public class LuggageController extends BaseController implements Initializable {
 
     @FXML
     private TextField viewTags;
+    
+    @FXML
+    private ChoiceBox<String> viewStatus;
 
     @FXML
     private ChoiceBox<LocationModel> viewLocationId;
@@ -208,7 +217,6 @@ public class LuggageController extends BaseController implements Initializable {
 
                 // Edit
                 if (editLocationId != null) {
-                    System.out.println("EDIT");
                     setEditChoiceBoxes();
                     setEditFields();
                 }
@@ -248,6 +256,12 @@ public class LuggageController extends BaseController implements Initializable {
         }
 
         addCustomerId.setItems(customerData);
+      
+        ObservableList<String> statuses = FXCollections.observableArrayList();
+        statuses.add("Missing");
+        statuses.add("Found");
+        statuses.add("Resolved");
+        addStatus.setItems(statuses);
     }
 
     public void setEditChoiceBoxes() {
@@ -284,10 +298,16 @@ public class LuggageController extends BaseController implements Initializable {
         }
 
         editCustomerId.setItems(customerData);
+      
+        ObservableList<String> statuses = FXCollections.observableArrayList();
+        statuses.add("Missing");
+        statuses.add("Found");
+        statuses.add("Resolved");
+        editStatus.setItems(statuses);
     }
 
     public void setViewChoiceBoxes() {
-        
+
         // Locations
         LocationModel oLocationModel = new LocationModel();
         List<Model> allLocations = oLocationModel.findAll();
@@ -304,10 +324,7 @@ public class LuggageController extends BaseController implements Initializable {
         }
 
         viewLocationId.setItems(locationData);
-        
-        
-        
-      
+
         long startTime = System.nanoTime();
 
         // Customers
@@ -326,7 +343,13 @@ public class LuggageController extends BaseController implements Initializable {
         }
 
         viewCustomerId.setItems(customerData);
-            
+        
+        ObservableList<String> statuses = FXCollections.observableArrayList();
+        statuses.add("Missing");
+        statuses.add("Found");
+        statuses.add("Resolved");
+        viewStatus.setItems(statuses);
+
         long endTime = System.nanoTime();
         long microseconds = ((endTime - startTime) / 1000);
         Debug.print("zoooio: " + " took " + microseconds + " microseconds.");
@@ -337,7 +360,7 @@ public class LuggageController extends BaseController implements Initializable {
 
         String[] keywords = listSearchField.getText().split("\\s+");
 
-        String[] params = new String[3 * keywords.length];
+        String[] params = new String[4 * keywords.length];
         boolean firstColumn = true;
         String query = "";
 
@@ -352,6 +375,9 @@ public class LuggageController extends BaseController implements Initializable {
 
             params[1 + i] = "%" + keywords[i] + "%";
             query += " OR tags LIKE ?";
+
+            params[1 + i] = "%" + keywords[i] + "%";
+            query += " OR status LIKE ?";
 
             params[2 + i] = "%" + keywords[i] + "%";
             query += " OR datetime LIKE ?";
@@ -456,6 +482,7 @@ public class LuggageController extends BaseController implements Initializable {
 
         luggage.setTags(addTags.getText());
         luggage.setNotes(addNotes.getText());
+        luggage.setStatus(addStatus.getValue());
         luggage.save();
 
         LuggageController luggageController = (LuggageController) StageHelper.callbackController;
@@ -469,6 +496,7 @@ public class LuggageController extends BaseController implements Initializable {
 
         editTags.setText(luggage.getTags());
         editNotes.setText(luggage.getNotes());
+        editStatus.setValue(luggage.getStatus());
 
         LocalDate date = LocalDate.parse(luggage.getDatetime());
         editDate.setValue(date);
@@ -482,6 +510,7 @@ public class LuggageController extends BaseController implements Initializable {
 
         viewTags.setText(luggage.getTags());
         viewNotes.setText(luggage.getNotes());
+        viewStatus.setValue(luggage.getStatus());
 
         LocalDate date = LocalDate.parse(luggage.getDatetime());
         viewDate.setValue(date);
@@ -512,6 +541,7 @@ public class LuggageController extends BaseController implements Initializable {
 
         luggage.setTags(editTags.getText());
         luggage.setNotes(editNotes.getText());
+        luggage.setStatus(editStatus.getValue());
         luggage.save();
 
         LuggageController luggageController = (LuggageController) StageHelper.callbackController;
