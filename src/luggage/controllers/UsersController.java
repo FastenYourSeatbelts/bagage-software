@@ -285,6 +285,11 @@ public class UsersController extends BaseController implements Initializable {
 
         listResetTableView(query, params);
     }
+    
+    @FXML
+    public void listHelp() {
+        StageHelper.addStage("users/help", this, false, true);
+        }
 
     private ObservableList<UserModel> data = FXCollections.observableArrayList();
 
