@@ -25,11 +25,6 @@
 package luggage.database.models;
 
 import com.mysql.jdbc.StringUtils;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.Map;
-import luggage.Debug;
-import luggage.database.DatabaseHelper;
 import luggage.security.Permissions;
 
 /**
@@ -67,6 +62,11 @@ public class UserModel extends Model {
     @Override
     protected String getTable() {
         return "users";
+    }
+    
+    @Override
+    protected String getOrderBy() {
+        return "ORDER BY firstname ASC";
     }
    
     /**
@@ -307,6 +307,9 @@ public class UserModel extends Model {
      * @return 
      */
     public int getLocationId() {
+        if(row.get("location_id") == null || row.get("location_id").isEmpty())
+            return 0;
+        
         return Integer.parseInt(row.get("location_id"));
     }
     
@@ -316,7 +319,7 @@ public class UserModel extends Model {
      * @return 
      */
     public void setLocationId(String location_id) {
-         row.put("location_id", location_id);
+        row.put("location_id", location_id);
     }
 
     /**

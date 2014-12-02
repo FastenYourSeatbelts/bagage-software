@@ -110,11 +110,12 @@ public class LogController extends BaseController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         Platform.runLater(new Runnable() {
             @Override
-            public void run() {               
-                listTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+            public void run() {
                 listOnSearch();
+                listTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
             }
         });
     }

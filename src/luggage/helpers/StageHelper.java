@@ -48,6 +48,49 @@ public class StageHelper {
     
     public static BaseController callbackController;
     
+    public static void addPopup(String sNewStage, BaseController oCurrentClass) {
+        StageHelper.addPopup(sNewStage, oCurrentClass, true, false);
+    }
+    
+    public static void addPopup(String sNewStage, BaseController oCurrentClass, boolean bMaximized, boolean bLocked) {
+        try {
+            long startTime = System.nanoTime();
+            
+            FXMLLoader primaryLoader = new FXMLLoader(oCurrentClass.getClass().getResource("/luggage/views/" + sNewStage + ".fxml"));
+            Parent root = (Parent) primaryLoader.load();
+            
+            BaseController baseController = (BaseController) primaryLoader.getController();
+            callbackController = oCurrentClass;
+        
+            Scene newScene = new Scene(root);
+            newScene.getStylesheets().add("/resources/stylesheets/header.css");
+            
+            Stage oNewStage = new Stage();
+            oNewStage.setScene(newScene);
+            oNewStage.getIcons().add(new Image("/resources/images/logo_red.png"));
+            oNewStage.setTitle(AppConfig.ApplicationName + " " + sNewStage);
+            oNewStage.setMinHeight(AppConfig.MinHeight);
+            oNewStage.setMinWidth(AppConfig.MinWidth);
+            oNewStage.initModality(Modality.APPLICATION_MODAL);
+            
+            if(bLocked)
+            {
+                oNewStage.setMaxHeight(AppConfig.MinHeight);
+                oNewStage.setMaxWidth(AppConfig.MinWidth);
+            }
+            
+            oNewStage.setMaximized(bMaximized);
+            
+            oNewStage.showAndWait();
+            
+            long endTime = System.nanoTime();
+            long microseconds = ((endTime - startTime) / 1000);
+            Debug.print("Add stage: " + sNewStage + " took " + microseconds + " microseconds.");
+        } catch (IOException ex) {
+            Logger.getLogger(StageHelper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public static void addStage(String sNewStage, BaseController oCurrentClass) {
         StageHelper.addStage(sNewStage, oCurrentClass, true, false);
     }

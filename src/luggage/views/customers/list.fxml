@@ -51,5 +51,6 @@
             <Font size="12.0" />
          </font>
       </Button>
+      <Button fx:id="listExportToPdf" layoutX="170.0" layoutY="467.0" mnemonicParsing="false" text="Export to PDF" onMouseClicked="#listExportToPdf" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="170.0" />
    </children>
 </AnchorPane>

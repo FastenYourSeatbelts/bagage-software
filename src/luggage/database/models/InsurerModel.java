@@ -57,6 +57,11 @@ public class InsurerModel extends Model {
     }
     
     @Override
+    protected String getOrderBy() {
+        return "ORDER BY name ASC";
+    }
+    
+    @Override
     public String toString() {
         return getName();
     }

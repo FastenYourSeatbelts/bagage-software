@@ -57,6 +57,11 @@ public class LocationModel extends Model {
     }
     
     @Override
+    protected String getOrderBy() {
+        return "ORDER BY name ASC";
+    }
+    
+    @Override
     public String toString() {
         return getName();
     }
@@ -85,6 +90,9 @@ public class LocationModel extends Model {
      * @return 
      */
     public int getCityId() {
+        if(row.get("city_id") == null || row.get("city_id").isEmpty())
+            return 0;
+        
         return Integer.parseInt(row.get("city_id"));
     }
  

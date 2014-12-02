@@ -51,6 +51,8 @@ abstract public class Model {
     
     protected abstract Model getModel();
     
+    protected abstract String getOrderBy();
+    
     protected HashMap<String, String> row = new HashMap<String, String>();
  
     public Model() {
@@ -129,9 +131,12 @@ abstract public class Model {
     
             String query = "SELECT * FROM " + getTable();
                     
-            if(!where.equals(""))
-            {
+            if(!where.equals("")) {
                 query += " WHERE " + where;
+            }
+            
+            if(!getOrderBy().equals("")) {
+                query += " " + getOrderBy();
             }
             
             PreparedStatement statement = DatabaseHelper.getConnection().prepareStatement(query);
