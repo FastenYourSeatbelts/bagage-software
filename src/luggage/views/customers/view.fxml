@@ -34,30 +34,30 @@
         </rowConstraints>
          <children>
             
-             <TextField fx:id="viewFirstname" prefHeight="25.0" prefWidth="125.0" promptText="First name" GridPane.columnIndex="2" GridPane.rowIndex="1">
+             <TextField fx:id="viewFirstname" editable="false" prefHeight="25.0" prefWidth="125.0" promptText="First name" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets right="7.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="viewPrefix" prefHeight="25.0" prefWidth="312.0" promptText="Middle name" GridPane.columnIndex="3" GridPane.rowIndex="1">
+            <TextField fx:id="viewPrefix" editable="false" prefHeight="25.0" prefWidth="312.0" promptText="Middle name" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="7.0" right="7.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="viewLastname" prefHeight="25.0" prefWidth="312.0" promptText="Last name" GridPane.columnIndex="4" GridPane.rowIndex="1">
+            <TextField fx:id="viewLastname" editable="false" prefHeight="25.0" prefWidth="312.0" promptText="Last name" GridPane.columnIndex="4" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="7.0" />
                </GridPane.margin>
             </TextField>
-            <ChoiceBox fx:id="viewGender" prefWidth="150.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2">
+            <ChoiceBox fx:id="viewGender" disable="true" prefWidth="150.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2">
             </ChoiceBox>
-            <ChoiceBox fx:id="viewInsurerId" prefWidth="150.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3" />
-            <TextField fx:id="viewAddress" promptText="Enter address" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="4" />
-            <TextField fx:id="viewPostalcode" promptText="Enter postal code" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="5" />
-            <TextField fx:id="viewResidence" promptText="Enter residence" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="6" />
-            <TextField fx:id="viewEmail" promptText="Enter email address" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="7" />
-            <TextField fx:id="viewTelephone" promptText="Enter telephone number" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="8" />
-            <TextField fx:id="viewMobile" promptText="Enter mobile number" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="9" />
+            <ChoiceBox fx:id="viewInsurerId" disable="true" prefWidth="150.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+            <TextField fx:id="viewAddress" editable="false" promptText="Enter address" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="4" />
+            <TextField fx:id="viewPostalcode" editable="false" promptText="Enter postal code" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="5" />
+            <TextField fx:id="viewResidence" editable="false" promptText="Enter residence" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="6" />
+            <TextField fx:id="viewEmail" editable="false" promptText="Enter email address" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="7" />
+            <TextField fx:id="viewTelephone" editable="false" promptText="Enter telephone number" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="8" />
+            <TextField fx:id="viewMobile" editable="false" promptText="Enter mobile number" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="9" />
             
             <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Name" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>

@@ -25,7 +25,6 @@
         <rowConstraints>
           <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -38,15 +37,15 @@
             <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TextField fx:id="viewFirstname" editable="false" prefHeight="25.0" prefWidth="125.0" promptText="First name" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="3">
+            <TextField fx:id="viewFirstname" editable="false" prefHeight="25.0" prefWidth="125.0" promptText="First name" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin></TextField>
-            <TextField fx:id="viewResidence" editable="false" promptText="e.g. Amsterdam" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="7" />
-            <TextField fx:id="viewAddress" editable="false" promptText="e.g. Amsterdamseweg 90" GridPane.columnIndex="3" GridPane.columnSpan="6" GridPane.rowIndex="5" />
-            <TextField fx:id="viewPostalcode" editable="false" promptText="e.g. 3892PB" GridPane.columnIndex="3" GridPane.columnSpan="6" GridPane.rowIndex="6" />
-            <TextField fx:id="viewMobile" editable="false" promptText="e.g. 0031629887377" GridPane.columnIndex="3" GridPane.columnSpan="6" GridPane.rowIndex="10" />
-            <TextField fx:id="viewTelephone" editable="false" promptText="e.g. 0031202939190" GridPane.columnIndex="3" GridPane.columnSpan="6" GridPane.rowIndex="9" />
+            <TextField fx:id="viewResidence" editable="false" promptText="e.g. Amsterdam" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="6" />
+            <TextField fx:id="viewAddress" editable="false" promptText="e.g. Amsterdamseweg 90" GridPane.columnIndex="3" GridPane.columnSpan="6" GridPane.rowIndex="4" />
+            <TextField fx:id="viewPostalcode" editable="false" promptText="e.g. 3892PB" GridPane.columnIndex="3" GridPane.columnSpan="6" GridPane.rowIndex="5" />
+            <TextField fx:id="viewMobile" editable="false" promptText="e.g. 0031629887377" GridPane.columnIndex="3" GridPane.columnSpan="6" GridPane.rowIndex="9" />
+            <TextField fx:id="viewTelephone" editable="false" promptText="e.g. 0031202939190" GridPane.columnIndex="3" GridPane.columnSpan="6" GridPane.rowIndex="8" />
             <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Username" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
                <font>
                   <Font size="14.0" />
@@ -55,7 +54,7 @@
                   <Insets left="10.0" />
                </GridPane.margin>
             </Label>
-            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Address" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="5">
+            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Address" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="4">
                <font>
                   <Font size="14.0" />
                </font>
@@ -63,7 +62,7 @@
                   <Insets left="10.0" />
                </GridPane.margin>
             </Label>
-            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Postal code" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="6">
+            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Postal code" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="5">
                <font>
                   <Font size="14.0" />
                </font>
@@ -71,7 +70,7 @@
                   <Insets left="10.0" />
                </GridPane.margin>
             </Label>
-            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Role" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="8">
+            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Role" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="7">
                <font>
                   <Font size="14.0" />
                </font>
@@ -79,7 +78,7 @@
                   <Insets left="10.0" />
                </GridPane.margin>
             </Label>
-            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Mobile number" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="10">
+            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Mobile number" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="9">
                <font>
                   <Font size="14.0" />
                </font>
@@ -87,7 +86,7 @@
                   <Insets left="10.0" />
                </GridPane.margin>
             </Label>
-            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Telephone number" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="9">
+            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Telephone number" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="8">
                <font>
                   <Font size="14.0" />
                </font>
@@ -95,7 +94,7 @@
                   <Insets left="10.0" />
                </GridPane.margin>
             </Label>
-            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Residence" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="7">
+            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Residence" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="6">
                <font>
                   <Font size="14.0" />
                </font>
@@ -103,7 +102,7 @@
                   <Insets left="10.0" />
                </GridPane.margin>
             </Label>
-            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Gender" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="4">
+            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Gender" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3">
                <font>
                   <Font size="14.0" />
                </font>
@@ -111,28 +110,28 @@
                   <Insets left="10.0" />
                </GridPane.margin>
             </Label>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="11" />
-            <ChoiceBox fx:id="viewGender" disable="true" prefWidth="150.0" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="4">
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="10" />
+            <ChoiceBox fx:id="viewGender" disable="true" prefWidth="150.0" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="3">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ChoiceBox>
-            <TextField fx:id="viewPrefix" editable="false" prefHeight="25.0" prefWidth="312.0" promptText="prefix" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="3">
+            <TextField fx:id="viewPrefix" editable="false" prefHeight="25.0" prefWidth="312.0" promptText="prefix" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="14.0" right="14.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="viewLastname" editable="false" prefHeight="25.0" prefWidth="312.0" promptText="Last name" GridPane.columnIndex="7" GridPane.columnSpan="2" GridPane.rowIndex="3">
+            <TextField fx:id="viewLastname" editable="false" prefHeight="25.0" prefWidth="312.0" promptText="Last name" GridPane.columnIndex="7" GridPane.columnSpan="2" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
             </TextField>
-            <ChoiceBox fx:id="viewRole" disable="true" prefWidth="150.0" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="8">
+            <ChoiceBox fx:id="viewRole" disable="true" prefWidth="150.0" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="7">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ChoiceBox>
-            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Name" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3">
+            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Name" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
                <font>
                   <Font size="14.0" />
                </font>
@@ -141,20 +140,12 @@
                </GridPane.margin>
             </Label>
             <TextField fx:id="viewUsername" editable="false" prefHeight="25.0" prefWidth="125.0" promptText="Username" GridPane.columnIndex="3" GridPane.columnSpan="6" GridPane.rowIndex="1" />
-            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Password" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets left="10.0" />
-               </GridPane.margin>
-            </Label>
-            <Button fx:id="viewClose" alignment="CENTER" cancelButton="true" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#viewClose" prefWidth="60.0" text="Close" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.halignment="RIGHT" GridPane.rowIndex="11">
+            <Button fx:id="viewClose" alignment="CENTER" cancelButton="true" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#viewClose" prefWidth="60.0" text="Close" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.halignment="RIGHT" GridPane.rowIndex="10">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Workplace" textFill="WHITE" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="7">
+            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Workplace" textFill="WHITE" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="6">
                <font>
                   <Font size="14.0" />
                </font>
@@ -162,7 +153,7 @@
                   <Insets right="35.0" />
                </GridPane.margin>
             </Label>
-            <ChoiceBox fx:id="viewWorkplace" disable="true" prefWidth="150.0" GridPane.columnIndex="7" GridPane.columnSpan="3" GridPane.rowIndex="7">
+            <ChoiceBox fx:id="viewWorkplace" disable="true" prefWidth="150.0" GridPane.columnIndex="7" GridPane.columnSpan="3" GridPane.rowIndex="6">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

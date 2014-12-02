@@ -123,6 +123,7 @@ public class TotalLuggageController extends BaseController  implements Initializ
                 if(luggageTableView != null)
                 {
                     resetTableView("", new String[0]);
+                    listView.disableProperty().bind(luggageTableView.getSelectionModel().selectedItemProperty().isNull());
                     luggageTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
                 }
                 

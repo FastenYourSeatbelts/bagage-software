@@ -130,6 +130,7 @@ public class FoundLuggageController extends BaseController  implements Initializ
 
                 resetTableView("status = ?", params);
                     
+                    listView.disableProperty().bind(luggageTableView.getSelectionModel().selectedItemProperty().isNull());
                     luggageTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
                 }
                 

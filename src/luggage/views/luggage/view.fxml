@@ -32,12 +32,12 @@
                 <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <ChoiceBox fx:id="viewLocationId" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="1" />
-                <ChoiceBox fx:id="viewCustomerId" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="2" />
-                <ChoiceBox fx:id="viewStatus" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="3" />
-                <TextField fx:id="viewTags" promptText="e.g. blue, purple, big, square" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="4" />
-                <DatePicker fx:id="viewDate" prefHeight="25.0" prefWidth="394.0" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="5" />
-                <TextField fx:id="viewNotes" promptText="e.g. Fragile contents" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="6" />
+                <ChoiceBox fx:id="viewLocationId" disable="true" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="1" />
+                <ChoiceBox fx:id="viewCustomerId" disable="true" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="2" />
+                <ChoiceBox fx:id="viewStatus" disable="true" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="3" />
+                <TextField fx:id="viewTags" editable="false" promptText="e.g. blue, purple, big, square" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="4" />
+                <DatePicker fx:id="viewDate" editable="false" prefHeight="25.0" prefWidth="394.0" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="5" />
+                <TextField fx:id="viewNotes" editable="false" promptText="e.g. Fragile contents" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="6" />
                 <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Location" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <font>
                         <Font size="14.0" />
@@ -88,7 +88,7 @@
                 </Label>
                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="9">
                     <children>
-                        <Button fx:id="viewCancel" alignment="CENTER" cancelButton="true" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#viewCancel" prefWidth="70.0" text="Cancel" AnchorPane.rightAnchor="0.0">
+                        <Button fx:id="viewCancel" alignment="CENTER" cancelButton="true" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#viewCancel" prefWidth="70.0" text="Close" AnchorPane.rightAnchor="0.0">
                         </Button>
                     </children>
                 </AnchorPane>

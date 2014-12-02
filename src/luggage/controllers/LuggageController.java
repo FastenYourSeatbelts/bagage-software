@@ -473,6 +473,10 @@ public class LuggageController extends BaseController implements Initializable {
     public void newReset() {
         addTags.setText("");
         addNotes.setText("");
+        addLocationId.setValue(null);
+        addCustomerId.setValue(null);
+        addStatus.setValue(null);
+        addDate.setValue(null);
     }
 
     public void newSave() {
@@ -532,6 +536,10 @@ public class LuggageController extends BaseController implements Initializable {
     public void editReset() {
         editTags.setText("");
         editNotes.setText("");
+        editLocationId.setValue(null);
+        editCustomerId.setValue(null);
+        editStatus.setValue(null);
+        editDate.setValue(null);
     }
 
     public void editSave() {
