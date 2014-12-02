@@ -32,11 +32,10 @@
                 <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <ChoiceBox fx:id="addLocationId" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="1" />
-                <ChoiceBox fx:id="addCustomerId" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="2" />
-                <ChoiceBox fx:id="addStatus" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="3" />
-                <TextField fx:id="addTags" promptText="e.g. blue, purple, big, square" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="4" />
-                <DatePicker fx:id="addDate" prefHeight="25.0" prefWidth="394.0" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="5" />
+                <ChoiceBox fx:id="addLocationId" minWidth="150.0" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="1" />
+                <ChoiceBox fx:id="addCustomerId" minWidth="150.0" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="2" />
+                <ChoiceBox fx:id="addStatus" minWidth="150.0" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="3" />
+                <TextField fx:id="addTags" promptText="e.g. blue, purple, big, square" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="5" />
                 <TextField fx:id="addNotes" promptText="e.g. Fragile contents" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="6" />
                 <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Location" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <font>
@@ -62,15 +61,7 @@
                         <Insets left="10.0" />
                     </GridPane.margin>
                 </Label>
-                <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Status" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                    <font>
-                        <Font size="14.0" />
-                    </font>
-                    <GridPane.margin>
-                        <Insets left="10.0" />
-                    </GridPane.margin>
-                </Label>
-                <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Date" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Tags" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="5">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -96,6 +87,12 @@
                         </Button>
                     </children>
                 </AnchorPane>
+            <DatePicker fx:id="addDate" minWidth="150.0" prefHeight="25.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Date" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
             </children>
         </GridPane>
     </children>

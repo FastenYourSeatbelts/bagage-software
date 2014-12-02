@@ -49,9 +49,9 @@
                   <Insets left="7.0" />
                </GridPane.margin>
             </TextField>
-            <ChoiceBox fx:id="editGender" prefWidth="150.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2">
+            <ChoiceBox fx:id="editGender" minWidth="150.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2">
             </ChoiceBox>
-            <ChoiceBox fx:id="editInsurerId" prefWidth="150.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+            <ChoiceBox fx:id="editInsurerId" minWidth="150.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3" />
             <TextField fx:id="editAddress" promptText="Enter address" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="4" />
             <TextField fx:id="editPostalcode" promptText="Enter postal code" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="5" />
             <TextField fx:id="editResidence" promptText="Enter residence" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="6" />
