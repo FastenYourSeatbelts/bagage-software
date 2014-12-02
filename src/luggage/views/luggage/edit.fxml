@@ -62,7 +62,7 @@
                         <Insets left="10.0" />
                     </GridPane.margin>
                 </Label>
-                <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Status" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Tags" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="4">
                     <font>
                         <Font size="14.0" />
                     </font>
