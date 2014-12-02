@@ -437,7 +437,7 @@ public class CustomersController extends BaseController implements Initializable
     
     @FXML
     public void listNew() {
-        StageHelper.addStage("customers/add", this, false, true);
+        StageHelper.addPopup("customers/add", this, false, true);
     }
     
     @FXML
@@ -451,7 +451,7 @@ public class CustomersController extends BaseController implements Initializable
         
         MainActivity.editId = customer.getId();
         
-        StageHelper.addStage("customers/edit", this, false, true);
+        StageHelper.addPopup("customers/edit", this, false, true);
     }
     
     @FXML
@@ -486,7 +486,7 @@ public class CustomersController extends BaseController implements Initializable
         
         MainActivity.viewId = customer.getId();
         
-        StageHelper.addStage("customers/view", this, false, true);
+        StageHelper.addPopup("customers/view", this, false, true);
     }
     
     public void newCancel() {

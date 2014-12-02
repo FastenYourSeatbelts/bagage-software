@@ -186,7 +186,7 @@ public class TotalLuggageController extends BaseController  implements Initializ
 
         MainActivity.viewId = luggage.getId();
 
-        StageHelper.addStage("luggage/totalview", this, false, true);
+        StageHelper.addPopup("luggage/totalview", this, false, true);
     }
 
      public void setViewFields() {

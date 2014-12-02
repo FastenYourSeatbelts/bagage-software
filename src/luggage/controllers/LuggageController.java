@@ -363,7 +363,7 @@ public class LuggageController extends BaseController implements Initializable {
 
     @FXML
     public void listNew() {
-        StageHelper.addStage("luggage/add", this, false, true);
+        StageHelper.addPopup("luggage/add", this, false, true);
     }
 
     @FXML
@@ -376,7 +376,7 @@ public class LuggageController extends BaseController implements Initializable {
 
         MainActivity.editId = luggage.getId();
 
-        StageHelper.addStage("luggage/edit", this, false, true);
+        StageHelper.addPopup("luggage/edit", this, false, true);
     }
 
     @FXML
@@ -412,7 +412,7 @@ public class LuggageController extends BaseController implements Initializable {
 
         MainActivity.viewId = luggage.getId();
 
-        StageHelper.addStage("luggage/view", this, false, true);
+        StageHelper.addPopup("luggage/view", this, false, true);
     }
 
     public void listResetTableView(String where, String... params) {

@@ -192,7 +192,7 @@ public class FoundLuggageController extends BaseController  implements Initializ
 
         MainActivity.viewId = luggage.getId();
 
-        StageHelper.addStage("luggage/foundview", this, false, true);
+        StageHelper.addPopup("luggage/foundview", this, false, true);
     }
 
      public void setViewFields() {

@@ -56,6 +56,11 @@ public class LuggageModel extends Model {
     protected String getTable() {
         return "luggage";
     }
+    
+    @Override
+    protected String getOrderBy() {
+        return "ORDER BY datetime DESC";
+    }
 
     @Override
     protected Model getModel() {
