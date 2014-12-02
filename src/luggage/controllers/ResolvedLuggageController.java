@@ -124,12 +124,11 @@ public class ResolvedLuggageController extends BaseController  implements Initia
 
                 if(luggageTableView != null)
                 {
-                    
-                String[] params = new String[1];
-                params[0] = "resolved";
+                    String[] params = new String[1];
+                    params[0] = "resolved";
 
-                resetTableView("status = ?", params);
-                    
+                    resetTableView("status = ?", params);
+
                     luggageTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
                 }
                 
@@ -191,7 +190,7 @@ public class ResolvedLuggageController extends BaseController  implements Initia
 
         MainActivity.viewId = luggage.getId();
 
-        StageHelper.addStage("luggage/resolvedview", this, false, true);
+        StageHelper.addPopup("luggage/resolvedview", this, false, true);
     }
 
      public void setViewFields() {

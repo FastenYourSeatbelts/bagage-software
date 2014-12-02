@@ -441,7 +441,7 @@ public class CustomersController extends BaseController implements Initializable
     
     @FXML
     public void listNew() {
-        StageHelper.addStage("customers/add", this, false, true);
+        StageHelper.addPopup("customers/add", this, false, true);
     }
     
     @FXML
@@ -455,7 +455,7 @@ public class CustomersController extends BaseController implements Initializable
         
         MainActivity.editId = customer.getId();
         
-        StageHelper.addStage("customers/edit", this, false, true);
+        StageHelper.addPopup("customers/edit", this, false, true);
     }
     
     @FXML
@@ -490,7 +490,7 @@ public class CustomersController extends BaseController implements Initializable
         
         MainActivity.viewId = customer.getId();
         
-        StageHelper.addStage("customers/view", this, false, true);
+        StageHelper.addPopup("customers/view", this, false, true);
     }
     @FXML
     public void listExportToPdf() {
@@ -525,11 +525,23 @@ public class CustomersController extends BaseController implements Initializable
     public void newSave() {
         if(addGender.getSelectionModel().getSelectedItem() == null)
         {
+            Dialogs.create()
+                .owner((Stage) addGender.getScene().getWindow())
+                .title("Warning")
+                .masthead("Selection error")
+                .message("Please enter the gender.")
+                .showWarning();
             return;
         }
         
         if(addInsurerId.getSelectionModel().getSelectedItem() == null)
         {
+            Dialogs.create()
+                .owner((Stage) addInsurerId.getScene().getWindow())
+                .title("Warning")
+                .masthead("Selection error")
+                .message("Please enter the insurer.")
+                .showWarning();
             return;
         }
         
@@ -573,11 +585,23 @@ public class CustomersController extends BaseController implements Initializable
     public void editSave() {
         if(editGender.getSelectionModel().getSelectedItem() == null)
         {
+            Dialogs.create()
+                .owner((Stage) editGender.getScene().getWindow())
+                .title("Warning")
+                .masthead("Selection error")
+                .message("Please enter the gender.")
+                .showWarning();
             return;
         }
         
         if(editInsurerId.getSelectionModel().getSelectedItem() == null)
         {
+            Dialogs.create()
+                .owner((Stage) editInsurerId.getScene().getWindow())
+                .title("Warning")
+                .masthead("Selection error")
+                .message("Please enter the insurer.")
+                .showWarning();
             return;
         }
         

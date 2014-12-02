@@ -77,7 +77,7 @@ public class LuggageGraphController extends BaseController implements Initializa
                     new PieChart.Data("November", 225),
                     new PieChart.Data("December", 99));
          
-        piechart.setTitle("Monthly Record");
+        
         piechart.setData(pieChartData);
     }
      
@@ -104,7 +104,8 @@ public class LuggageGraphController extends BaseController implements Initializa
                     new PieChart.Data("Resolved", 65)
                 );
                    
-        piechart.setTitle("Weekly Record");
+       
         piechart.setData(pieChartData);
+        
     } 
 }

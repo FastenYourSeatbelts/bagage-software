@@ -59,6 +59,11 @@ public class CustomerModel extends Model {
     }
     
     @Override
+    protected String getOrderBy() {
+        return "ORDER BY firstname ASC";
+    }
+    
+    @Override
     public String toString() {
         return getFullname();
     }

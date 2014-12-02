@@ -391,7 +391,7 @@ public class UsersController extends BaseController implements Initializable {
     public void setEditFields() {
         UserModel user = new UserModel(MainActivity.editId);
 
-        editUsername.setText(user.getFirstname());
+        editUsername.setText(user.getUsername());
         editFirstname.setText(user.getFirstname());
         editPrefix.setText(user.getPrefix());
         editLastname.setText(user.getLastname());
@@ -458,7 +458,7 @@ public class UsersController extends BaseController implements Initializable {
 
     @FXML
     public void listNew() {
-        StageHelper.addStage("users/add", this, false, true);
+        StageHelper.addPopup("users/add", this, false, true);
     }
 
     @FXML
@@ -471,7 +471,7 @@ public class UsersController extends BaseController implements Initializable {
 
         MainActivity.editId = user.getId();
 
-        StageHelper.addStage("users/edit", this, false, true);
+        StageHelper.addPopup("users/edit", this, false, true);
     }
 
     @FXML
@@ -508,7 +508,7 @@ public class UsersController extends BaseController implements Initializable {
 
         MainActivity.viewId = user.getId();
 
-        StageHelper.addStage("users/view", this, false, true);
+        StageHelper.addPopup("users/view", this, false, true);
 
     }
 

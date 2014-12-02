@@ -208,6 +208,7 @@ public class LuggageController extends BaseController implements Initializable {
 
                 // Edit
                 if (editLocationId != null) {
+                    System.out.println("EDIT");
                     setEditChoiceBoxes();
                     setEditFields();
                 }
@@ -286,6 +287,7 @@ public class LuggageController extends BaseController implements Initializable {
     }
 
     public void setViewChoiceBoxes() {
+        
         // Locations
         LocationModel oLocationModel = new LocationModel();
         List<Model> allLocations = oLocationModel.findAll();
@@ -302,6 +304,11 @@ public class LuggageController extends BaseController implements Initializable {
         }
 
         viewLocationId.setItems(locationData);
+        
+        
+        
+      
+        long startTime = System.nanoTime();
 
         // Customers
         CustomerModel oCustomerModel = new CustomerModel();
@@ -319,6 +326,10 @@ public class LuggageController extends BaseController implements Initializable {
         }
 
         viewCustomerId.setItems(customerData);
+            
+        long endTime = System.nanoTime();
+        long microseconds = ((endTime - startTime) / 1000);
+        Debug.print("zoooio: " + " took " + microseconds + " microseconds.");
     }
 
     @FXML
@@ -353,7 +364,7 @@ public class LuggageController extends BaseController implements Initializable {
 
     @FXML
     public void listNew() {
-        StageHelper.addStage("luggage/add", this, false, true);
+        StageHelper.addPopup("luggage/add", this, false, true);
     }
 
     @FXML
@@ -366,7 +377,7 @@ public class LuggageController extends BaseController implements Initializable {
 
         MainActivity.editId = luggage.getId();
 
-        StageHelper.addStage("luggage/edit", this, false, true);
+        StageHelper.addPopup("luggage/edit", this, false, true);
     }
 
     @FXML
@@ -402,7 +413,7 @@ public class LuggageController extends BaseController implements Initializable {
 
         MainActivity.viewId = luggage.getId();
 
-        StageHelper.addStage("luggage/view", this, false, true);
+        StageHelper.addPopup("luggage/view", this, false, true);
     }
 
     public void listResetTableView(String where, String... params) {

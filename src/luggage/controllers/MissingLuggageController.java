@@ -125,11 +125,10 @@ public class MissingLuggageController extends BaseController  implements Initial
                 
                 if(luggageTableView != null)
                 {
-                    
-                String[] params = new String[1];
-                params[0] = "missing";
+                    String[] params = new String[1];
+                    params[0] = "missing";
 
-                resetTableView("status = ?", params);
+                    resetTableView("status = ?", params);
                     
                     luggageTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
                 }
@@ -194,7 +193,7 @@ public class MissingLuggageController extends BaseController  implements Initial
 
         MainActivity.viewId = luggage.getId();
 
-        StageHelper.addStage("luggage/missingview", this, false, true);
+        StageHelper.addPopup("luggage/missingview", this, false, true);
     }
 
      public void setViewFields() {
