@@ -64,6 +64,10 @@ public class CustomersController extends BaseController implements Initializable
     /**
      * LIST ELEMENTS
      */
+    
+    @FXML
+    private Button listHelp;
+    
     @FXML
     private TableView listTableView;
     
@@ -439,6 +443,11 @@ public class CustomersController extends BaseController implements Initializable
     public void listNew() {
         StageHelper.addStage("customers/add", this, false, true);
     }
+    
+    @FXML
+    public void listHelp() {
+        StageHelper.addStage("customers/help", this, false, true);
+        }
     
     @FXML
     public void listEdit() {

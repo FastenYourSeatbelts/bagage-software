@@ -100,7 +100,7 @@ public class LuggageGraphController extends BaseController implements Initializa
         ObservableList<PieChart.Data> pieChartData = 
                 FXCollections.observableArrayList(
                     new PieChart.Data("Missing", 70),
-                    new PieChart.Data("Found", 20),
+                    new PieChart.Data("Found", 56),
                     new PieChart.Data("Resolved", 65)
                 );
                    

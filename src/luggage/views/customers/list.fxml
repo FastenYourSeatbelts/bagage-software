@@ -24,17 +24,17 @@
             <Font size="12.0" />
          </font>
       </TextField>
-      <Button layoutX="14.0" fx:id="listNew" onMouseClicked="#listNew" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" text="New" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+      <Button fx:id="listNew" layoutX="14.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#listNew" prefHeight="26.0" prefWidth="70.0" text="New" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
          <font>
             <Font size="12.0" />
          </font>
       </Button>
-      <Button layoutX="14.0" fx:id="listEdit" onMouseClicked="#listEdit" layoutY="460.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" text="Edit" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0">
+      <Button fx:id="listEdit" layoutX="14.0" layoutY="460.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#listEdit" prefHeight="26.0" prefWidth="70.0" text="Edit" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0">
          <font>
             <Font size="12.0" />
          </font>
       </Button>
-      <Button layoutX="716.0" fx:id="listRemove" onMouseClicked="#listRemove" layoutY="460.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #BB1A1D;" text="Remove" textFill="WHITE" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
+      <Button fx:id="listRemove" layoutX="716.0" layoutY="460.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#listRemove" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #BB1A1D;" text="Remove" textFill="WHITE" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
          <font>
             <Font size="12.0" />
          </font>
@@ -42,9 +42,14 @@
             <ColorAdjust />
          </effect>
       </Button>
-      <Button layoutX="93.0" fx:id="listView" onMouseClicked="#listView" layoutY="460.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" text="View" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="91.0">
+      <Button fx:id="listView" layoutX="93.0" layoutY="460.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#listView" prefHeight="26.0" prefWidth="70.0" text="View" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="91.0">
          <font>
             <Font size="12.0" />
          </font></Button>
+      <Button fx:id="listHelp" layoutX="551.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#listHelp" prefHeight="26.0" prefWidth="70.0" text="Help" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="14.0">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
