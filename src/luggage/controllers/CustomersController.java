@@ -500,7 +500,8 @@ public class CustomersController extends BaseController implements Initializable
             return;
         
         MainActivity.viewId = customer.getId();
-        
+        //Jasper is de beste
+        System.out.println("Ayy ik doe iets");
         StageHelper.addStage("customers/view", this, false, true);
     }
     
