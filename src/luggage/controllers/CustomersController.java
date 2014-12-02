@@ -94,6 +94,9 @@ public class CustomersController extends BaseController implements Initializable
     @FXML
     private Button listRemove;
     
+    @FXML
+    private Button listExportToPdf;
+    
     /**
      * ADD ELEMENTS
      */
@@ -255,6 +258,7 @@ public class CustomersController extends BaseController implements Initializable
                     listEdit.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
                     listRemove.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
                     listView.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
+                    listExportToPdf.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
                     listTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
                 }
 
@@ -487,6 +491,18 @@ public class CustomersController extends BaseController implements Initializable
         MainActivity.viewId = customer.getId();
         
         StageHelper.addPopup("customers/view", this, false, true);
+    }
+    @FXML
+    public void listExportToPdf() {
+        CustomerModel customer = (CustomerModel) listTableView.getSelectionModel().getSelectedItem();
+        
+        if(customer == null)
+            return;
+        
+        MainActivity.viewId = customer.getId();
+        //Jasper is de beste
+        System.out.println("Ayy ik doe iets");
+        StageHelper.addStage("customers/view", this, false, true);
     }
     
     public void newCancel() {
