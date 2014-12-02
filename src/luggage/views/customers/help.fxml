@@ -16,12 +16,12 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="83.0" prefHeight="97.0" prefWidth="275.0" text="To search for users in the database, enter the information you're looking for into the search bar in the top right. You can search by every field you can see to filter your results. To simply sort the results, you can click the top of the table to sort them by that category." textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
+      <Label layoutX="14.0" layoutY="83.0" prefHeight="97.0" prefWidth="275.0" text="To search for customers in the database, enter the information you're looking for into the search bar in the top right. You can search by every field you can see to filter your results. To simply sort the results, you can click the top of the table to sort them by that category." textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
          <padding>
             <Insets left="10.0" right="10.0" />
          </padding>
       </Label>
-      <Label layoutX="14.0" layoutY="210.0" prefHeight="55.0" prefWidth="275.0" text="To create a new user, click the new button in the top left of the window. A screen will pop up where you can enter the new customer information" textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
+      <Label layoutX="14.0" layoutY="210.0" prefHeight="55.0" prefWidth="275.0" text="To create a new customer, click the new button in the top left of the window. A screen will pop up where you can enter the new customer information" textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
          <padding>
             <Insets left="10.0" right="10.0" />
          </padding>
@@ -51,7 +51,7 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="15.0" layoutY="393.0" prefHeight="68.0" prefWidth="275.0" text="To remove a user, click the remove button in the bottom left. A warning will pop up to ask if you really want to remove a user. To delete, click OK, otherwise click cancel." textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="13.0">
+      <Label layoutX="15.0" layoutY="393.0" prefHeight="68.0" prefWidth="275.0" text="To remove a customer, click the remove button in the bottom left. A warning will pop up to ask if you really want to remove a customer. To delete, click OK, otherwise click cancel." textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="13.0">
          <padding>
             <Insets left="10.0" right="10.0" />
          </padding>
