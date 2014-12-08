@@ -34,9 +34,11 @@ import luggage.Debug;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import luggage.database.models.LuggageModel;
 import luggage.database.models.Model;
+import luggage.helpers.StageHelper;
 
 /**
  * UsersController
@@ -56,6 +58,9 @@ public class LuggageGraphController extends BaseController implements Initializa
      */
     @FXML
     public PieChart piechart;
+    
+    @FXML
+    private Button listHelp;
 	
 	@FXML
 	public DatePicker start;
@@ -69,6 +74,11 @@ public class LuggageGraphController extends BaseController implements Initializa
         
 		piechart.visibleProperty().set(false);
     } 
+    
+    @FXML
+    public void listHelp() {
+		StageHelper.addStage("graphs/help", this, false, true);
+	}
 	
 	@FXML
 	public void updateChart() {

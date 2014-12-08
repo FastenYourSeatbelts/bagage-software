@@ -7,23 +7,21 @@
 <?import javafx.scene.chart.*?>
 
 <AnchorPane id="AnchorPane" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="luggage.controllers.LuggageGraphController">
-   <children>
-      <PieChart id="piechart" fx:id="piechart" layoutX="400" layoutY="100" prefHeight="439.0" prefWidth="562.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <AnchorPane layoutY="-1.0" prefHeight="50.0" prefWidth="521.0">
-         <children>
-            <Label layoutX="42.0" layoutY="15.0" text="From:" AnchorPane.topAnchor="15.0" />
-            <DatePicker fx:id="start" layoutX="87.0" layoutY="13.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="87.0" AnchorPane.topAnchor="17.0" onAction="#updateChart" >
-               <opaqueInsets>
-                  <Insets left="14.0" />
-               </opaqueInsets>
-            </DatePicker>
-         </children>
-      </AnchorPane>
-      <DatePicker fx:id="end" layoutX="87.0" layoutY="66.0" prefHeight="25.0" prefWidth="174.0" AnchorPane.leftAnchor="87.0" AnchorPane.topAnchor="67.0" onAction="#updateChart">
-         <opaqueInsets>
-            <Insets left="14.0" />
-         </opaqueInsets>
-      </DatePicker>
-      <Label layoutX="42.0" layoutY="67.0" text="To:" AnchorPane.leftAnchor="42.0" AnchorPane.topAnchor="67.0" />
-   </children>
+    <children>
+        <PieChart id="piechart" fx:id="piechart" layoutX="400" layoutY="100" prefHeight="439.0" prefWidth="562.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+        <DatePicker fx:id="start" layoutX="60.0" layoutY="14.0" onAction="#updateChart" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="14.0">
+            <opaqueInsets>
+                <Insets left="14.0" />
+            </opaqueInsets>
+        </DatePicker>
+        <DatePicker fx:id="end" layoutX="60.0" layoutY="45.0" onAction="#updateChart" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="45.0">
+            <opaqueInsets>
+                <Insets left="14.0" />
+            </opaqueInsets>
+        </DatePicker>
+        <Button fx:id="listHelp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#listHelp" text="Help" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+        </Button>
+        <Label text="From:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
+        <Label text="To:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="49.0" />
+    </children>
 </AnchorPane>

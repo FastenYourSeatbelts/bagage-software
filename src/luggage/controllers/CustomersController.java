@@ -447,8 +447,8 @@ public class CustomersController extends BaseController implements Initializable
     
     @FXML
     public void listHelp() {
-        StageHelper.addStage("customers/help", this, false, true);
-        }
+		StageHelper.addStage("customers/help", this, false, true);
+	}
     
     @FXML
     public void listEdit() {
