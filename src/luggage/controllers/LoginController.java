@@ -51,7 +51,10 @@ import luggage.database.models.LogModel;
  * @author Tijme Gommers
  */
 public class LoginController extends BaseController  implements Initializable {
-
+    
+    @FXML
+    private Button listHelp;
+	
     @FXML
     private TextField username;
 
@@ -71,6 +74,11 @@ public class LoginController extends BaseController  implements Initializable {
     private void onKeyPress() {
         error.setText("");
     }
+    
+    @FXML
+    public void listHelp() {
+		StageHelper.addStage("login_help", this, false, true);
+	}
 
     /**
      * Called on enter in username or password field or when the user clicks on

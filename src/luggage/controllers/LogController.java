@@ -32,12 +32,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import luggage.database.models.LogModel;
 import luggage.database.models.Model;
+import luggage.helpers.StageHelper;
 
 /**
  * LogController
@@ -48,7 +50,10 @@ import luggage.database.models.Model;
  * @author 
  */
 public class LogController extends BaseController implements Initializable {
-
+    
+    @FXML
+    private Button listHelp;
+	
     @FXML
     private TableView listTableView;
 
@@ -68,6 +73,11 @@ public class LogController extends BaseController implements Initializable {
     private TextField listSearchField;
 
     private ObservableList<LogModel> listData = FXCollections.observableArrayList();
+    
+    @FXML
+    public void listHelp() {
+		StageHelper.addStage("customers/help", this, false, true);
+	}
 
     @FXML
     public void listOnSearch() {
