@@ -56,7 +56,7 @@ import org.controlsfx.dialog.Dialogs;
  * Controller for users/list.fxml
  *
  * @package luggage.controllers
- * @author Alexander + Nick
+ * @author Nick
  */
 public class UsersController extends BaseController implements Initializable {
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
@@ -9,21 +10,26 @@
 <AnchorPane id="AnchorPane" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="luggage.controllers.LuggageGraphController">
    <children>
       <PieChart id="piechart" fx:id="piechart" layoutX="400" layoutY="100" prefHeight="439.0" prefWidth="562.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <AnchorPane layoutY="-1.0" prefHeight="50.0" prefWidth="521.0">
+      <AnchorPane layoutY="-1.0" prefHeight="285.0" prefWidth="562.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label layoutX="42.0" layoutY="15.0" text="From:" AnchorPane.topAnchor="15.0" />
-            <DatePicker fx:id="start" layoutX="87.0" layoutY="13.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="87.0" AnchorPane.topAnchor="17.0" onAction="#updateChart" >
+            <Label layoutX="31.0" layoutY="72.0" text="From:" AnchorPane.leftAnchor="31.0" AnchorPane.topAnchor="72.0" />
+            <DatePicker fx:id="start" layoutX="78.0" layoutY="67.0" onAction="#updateChart" AnchorPane.leftAnchor="78.0" AnchorPane.topAnchor="67.0">
                <opaqueInsets>
                   <Insets left="14.0" />
                </opaqueInsets>
             </DatePicker>
+            <DatePicker fx:id="end" layoutX="78.0" layoutY="117.0" onAction="#updateChart" promptText="Today" AnchorPane.leftAnchor="78.0" AnchorPane.topAnchor="117.0">
+               <opaqueInsets>
+                  <Insets left="14.0" />
+               </opaqueInsets>
+            </DatePicker>
+            <Label layoutX="31.0" layoutY="122.0" text="To:" AnchorPane.leftAnchor="31.0" AnchorPane.topAnchor="122.0" />
+            <Label layoutX="31.0" layoutY="28.0" text="Enter the search period for the graph data">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
-      <DatePicker fx:id="end" layoutX="87.0" layoutY="66.0" prefHeight="25.0" prefWidth="174.0" AnchorPane.leftAnchor="87.0" AnchorPane.topAnchor="67.0" onAction="#updateChart">
-         <opaqueInsets>
-            <Insets left="14.0" />
-         </opaqueInsets>
-      </DatePicker>
-      <Label layoutX="42.0" layoutY="67.0" text="To:" AnchorPane.leftAnchor="42.0" AnchorPane.topAnchor="67.0" />
    </children>
 </AnchorPane>
