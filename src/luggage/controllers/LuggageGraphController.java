@@ -108,7 +108,6 @@ public class LuggageGraphController extends BaseController implements Initializa
 			new PieChart.Data("Found", found.size()),
 			new PieChart.Data("Resolved", resolved.size())
         );
-                   
        
         piechart.setData(pieChartData);
 	}

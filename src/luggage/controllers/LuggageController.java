@@ -94,6 +94,9 @@ public class LuggageController extends BaseController implements Initializable {
 
     @FXML
     private Button listRemove;
+    
+    @FXML
+    private Button listExportToPdf;
 
     /**
      * ADD ELEMENTS
@@ -207,6 +210,7 @@ public class LuggageController extends BaseController implements Initializable {
                     listEdit.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
                     listRemove.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
                     listView.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
+                    listExportToPdf.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
                     listTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
                 }
 
@@ -405,6 +409,11 @@ public class LuggageController extends BaseController implements Initializable {
 
         StageHelper.addPopup("luggage/edit", this, false, true);
     }
+    
+    @FXML
+    public void listHelp() {
+        StageHelper.addStage("luggage/listHelp", this, false, true);
+        }
 
     @FXML
     public void listRemove() {
@@ -441,6 +450,19 @@ public class LuggageController extends BaseController implements Initializable {
 
         StageHelper.addPopup("luggage/view", this, false, true);
     }
+    
+    @FXML
+    public void listExportToPdf() {
+        LuggageModel luggage = (LuggageModel) listTableView.getSelectionModel().getSelectedItem();
+        
+        if(luggage == null)
+            return;
+        
+        MainActivity.viewId = luggage.getId();
+        //Jasper is de beste
+        System.out.println("Ayy ik doe iets");
+        StageHelper.addStage("luggage/view", this, false, true);
+    }
 
     public void listResetTableView(String where, String... params) {
         LuggageModel luggage = new LuggageModel();
@@ -468,6 +490,10 @@ public class LuggageController extends BaseController implements Initializable {
     public void newReset() {
         addTags.setText("");
         addNotes.setText("");
+        addLocationId.setValue(null);
+        addCustomerId.setValue(null);
+        addStatus.setValue(null);
+        addDate.setValue(null);
     }
 
     public void newSave() {
@@ -527,6 +553,10 @@ public class LuggageController extends BaseController implements Initializable {
     public void editReset() {
         editTags.setText("");
         editNotes.setText("");
+        editLocationId.setValue(null);
+        editCustomerId.setValue(null);
+        editStatus.setValue(null);
+        editDate.setValue(null);
     }
 
     public void editSave() {
