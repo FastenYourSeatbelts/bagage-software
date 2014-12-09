@@ -16,45 +16,35 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="83.0" prefHeight="97.0" prefWidth="275.0" text="To search for users in the database, enter the information you're looking for into the search bar in the top right. You can search by every field you can see to filter your results. To simply sort the results, you can click the top of the table to sort them by that category." textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
+      <Label layoutX="14.0" layoutY="83.0" prefHeight="97.0" prefWidth="275.0" text="You have been given a username by the moderator. Enter it in the &quot;username&quot; field." textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
          <padding>
             <Insets left="10.0" right="10.0" />
          </padding>
       </Label>
-      <Label layoutX="14.0" layoutY="210.0" prefHeight="55.0" prefWidth="275.0" text="To create a new user, click the new button in the top left of the window. A screen will pop up where you can enter the new customer information" textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
+      <Label layoutX="14.0" layoutY="210.0" prefHeight="55.0" prefWidth="275.0" text="You have also been given a password by the moderator. Enter this in the &quot;password&quot; field." textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
          <padding>
             <Insets left="10.0" right="10.0" />
          </padding>
       </Label>
-      <Label layoutX="23.0" layoutY="295.0" prefHeight="68.0" prefWidth="275.0" text="To edit or view a customer, click the corresponding edit or view buttons in the bottom left of the window. A window will pop up. The view fields can't be edited, but the fields in the edit can be edited." textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
+      <Label layoutX="23.0" layoutY="295.0" prefHeight="68.0" prefWidth="275.0" text="If you forgot what your username or password is, ask one of the moderators to reset your username/ password so you can still access your account." textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
          <padding>
             <Insets left="10.0" right="10.0" />
          </padding>
       </Label>
-      <Label alignment="CENTER" layoutX="119.0" layoutY="59.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="75.0" text="Search" textFill="WHITE" AnchorPane.leftAnchor="119.0" AnchorPane.rightAnchor="119.0">
+      <Label alignment="CENTER" layoutX="119.0" layoutY="59.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="75.0" text="Username" textFill="WHITE" AnchorPane.leftAnchor="119.0" AnchorPane.rightAnchor="119.0">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="119.0" layoutY="180.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="75.0" text="Add" textFill="WHITE" AnchorPane.leftAnchor="119.0" AnchorPane.rightAnchor="119.0">
+      <Label alignment="CENTER" layoutX="119.0" layoutY="180.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="75.0" text="Password" textFill="WHITE" AnchorPane.leftAnchor="119.0" AnchorPane.rightAnchor="119.0">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="119.0" layoutY="265.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="75.0" text="View/Edit" textFill="WHITE" AnchorPane.leftAnchor="119.0" AnchorPane.rightAnchor="119.0">
+      <Label alignment="CENTER" layoutX="119.0" layoutY="265.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="139.0" text="Forgot?" textFill="WHITE" AnchorPane.leftAnchor="119.0" AnchorPane.rightAnchor="92.0">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
-      </Label>
-      <Label alignment="CENTER" layoutX="188.0" layoutY="363.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="75.0" text="Remove" textFill="WHITE" AnchorPane.leftAnchor="119.0" AnchorPane.rightAnchor="119.0">
-         <font>
-            <Font name="System Bold" size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="15.0" layoutY="393.0" prefHeight="68.0" prefWidth="275.0" text="To remove a user, click the remove button in the bottom left. A warning will pop up to ask if you really want to remove a user. To delete, click OK, otherwise click cancel." textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="13.0">
-         <padding>
-            <Insets left="10.0" right="10.0" />
-         </padding>
       </Label>
    </children>
 </AnchorPane>

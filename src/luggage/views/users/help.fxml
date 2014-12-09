@@ -26,7 +26,7 @@
             <Insets left="10.0" right="10.0" />
          </padding>
       </Label>
-      <Label layoutX="23.0" layoutY="295.0" prefHeight="68.0" prefWidth="275.0" text="To edit or view a customer, click the corresponding edit or view buttons in the bottom left of the window. A window will pop up. The view fields can't be edited, but the fields in the edit can be edited." textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
+      <Label layoutX="23.0" layoutY="295.0" prefHeight="68.0" prefWidth="275.0" text="To edit or view a user, click the corresponding edit or view buttons in the bottom left of the window. A window will pop up. The view fields can't be edited, but the fields in the edit can be edited." textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
          <padding>
             <Insets left="10.0" right="10.0" />
          </padding>
