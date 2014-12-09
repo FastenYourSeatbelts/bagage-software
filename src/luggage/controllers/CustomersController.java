@@ -98,8 +98,6 @@ public class CustomersController extends BaseController implements Initializable
     @FXML
     private Button listRemove;
     
-    @FXML
-    private Button listExportToPdf;
     
     /**
      * ADD ELEMENTS
@@ -262,7 +260,6 @@ public class CustomersController extends BaseController implements Initializable
                     listEdit.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
                     listRemove.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
                     listView.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
-                    listExportToPdf.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
                     listTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
                 }
 
@@ -450,8 +447,8 @@ public class CustomersController extends BaseController implements Initializable
     
     @FXML
     public void listHelp() {
-        StageHelper.addStage("customers/help", this, false, true);
-        }
+		StageHelper.addStage("customers/help", this, false, true);
+	}
     
     @FXML
     public void listEdit() {
@@ -472,9 +469,9 @@ public class CustomersController extends BaseController implements Initializable
         Stage removeStage = (Stage) listTableView.getScene().getWindow();
         
         Action response = Dialogs.create().owner(removeStage)
-            .title("Are you sure you want to delete this item?")
+            .title("Remove customer")
             //.masthead("Are you sure you want to delete this item? 2")
-            .message("Are you sure you want to delete this item?")
+            .message("Are you sure you want to delete this customer?")
             .actions(Dialog.ACTION_OK, Dialog.ACTION_CANCEL)
             .showWarning();
 
@@ -501,19 +498,6 @@ public class CustomersController extends BaseController implements Initializable
         
         StageHelper.addPopup("customers/view", this, false, true);
     }
-    @FXML
-    public void listExportToPdf() {
-        CustomerModel customer = (CustomerModel) listTableView.getSelectionModel().getSelectedItem();
-        
-        if(customer == null)
-            return;
-        
-        MainActivity.viewId = customer.getId();
-        //Jasper is de beste
-        System.out.println("Ayy ik doe iets");
-        StageHelper.addStage("customers/view", this, false, true);
-    }
-    
     public void newCancel() {
         Stage addStage = (Stage) newCancel.getScene().getWindow();
         StageHelper.closeStage(addStage);
@@ -529,6 +513,8 @@ public class CustomersController extends BaseController implements Initializable
         addEmail.setText("");
         addTelephone.setText("");
         addMobile.setText("");
+        addGender.setValue(null);
+        addInsurerId.setValue(null);
     }
     
     public void newSave() {
@@ -589,6 +575,8 @@ public class CustomersController extends BaseController implements Initializable
         editEmail.setText("");
         editTelephone.setText("");
         editMobile.setText("");
+        editGender.setValue(null);
+        editInsurerId.setValue(null);
     }
     
     public void editSave() {

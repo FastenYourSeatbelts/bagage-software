@@ -60,7 +60,7 @@
                     </GridPane.margin>
                 </TextField>
             
-                <ChoiceBox fx:id="addGender" prefWidth="150.0" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="4">
+                <ChoiceBox fx:id="addGender" minWidth="150.0" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="4">
                 </ChoiceBox>
             
                 <TextField fx:id="addAddress" promptText="e.g. Amsterdamseweg 90" GridPane.columnIndex="3" GridPane.columnSpan="6" GridPane.rowIndex="5" />
@@ -77,7 +77,7 @@
                     </GridPane.margin>
                 </ChoiceBox>
             
-                <ChoiceBox fx:id="addRole" prefWidth="150.0" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="8">
+                <ChoiceBox fx:id="addRole" minWidth="150.0" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="8">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>

@@ -56,7 +56,7 @@ import org.controlsfx.dialog.Dialogs;
  * Controller for users/list.fxml
  *
  * @package luggage.controllers
- * @author Alexander + Nick
+ * @author Nick
  */
 public class UsersController extends BaseController implements Initializable {
 
@@ -484,8 +484,8 @@ public class UsersController extends BaseController implements Initializable {
         Stage removeStage = (Stage) listTableView.getScene().getWindow();
 
         Action response = Dialogs.create().owner(removeStage)
-                .title("Are you sure you want to delete this item?")
-                .message("Are you sure you want to delete this item?")
+                .title("Remove user")
+                .message("Are you sure you want to delete this user?")
                 .actions(Dialog.ACTION_OK, Dialog.ACTION_CANCEL)
                 .showWarning();
 
@@ -535,7 +535,7 @@ public class UsersController extends BaseController implements Initializable {
         addTelephone.setText("");
         addMobile.setText("");
         addGender.setValue(null);
-        addRole.setValue("EMPLOYEE");
+        addRole.setValue(null);
         addWorkplace.setValue(null);
     }
 

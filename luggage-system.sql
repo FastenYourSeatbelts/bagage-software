@@ -114,7 +114,7 @@ INSERT INTO `locations` (`id`, `name`) VALUES
 (7, 'BJL-Banjul'),
 (8, 'BJV-Bodrum'),
 (9, 'BOJ-Burgas'),
-(10, 'BR\r\n  -Bremen'),
+(10, 'BR-Bremen'),
 (11, 'BRU-Brussel'),
 (12, 'CFU-Corfu'),
 (13, 'CUR-Curaçao'),
@@ -123,7 +123,7 @@ INSERT INTO `locations` (`id`, `name`) VALUES
 (16, 'DUS-Düsseldorf'),
 (17, 'DXB-Dubai'),
 (18, 'ECN-Nicosia'),
-(19, 'EIN\r\nEindhoven'),
+(19, 'EIN-Eindhoven'),
 (20, 'ETH-Eilat'),
 (21, 'FAO-Faro'),
 (22, 'FUE-Fuerteventura'),
@@ -131,7 +131,7 @@ INSERT INTO `locations` (`id`, `name`) VALUES
 (24, 'GZP-Gazipasa'),
 (25, 'HRG-Hurghada'),
 (26, 'JSH-Crete Island'),
-(27, 'KGS-Kos\r\nIsland'),
+(27, 'KGS-Kos Island'),
 (28, 'LPA-Gran Canaria'),
 (29, 'MST-Maastricht'),
 (30, 'NBE-Enfidha'),
@@ -139,7 +139,7 @@ INSERT INTO `locations` (`id`, `name`) VALUES
 (32, 'RAK-Marrakech'),
 (33, 'RHO-Rodes Island'),
 (34, 'RTM-Rotterdam'),
-(35, 'SAW\r\nIstanbul'),
+(35, 'SAW-Istanbul'),
 (36, 'TFS-Tenerife'),
 (37, 'TUN-Tunis'),
 (38, 'ZTH-Zakynthos');
@@ -256,7 +256,8 @@ INSERT INTO `users` (`id`, `username`, `password`, `firstname`, `prefix`, `lastn
 (2, 'moderator', 'f4931e96e3376e0351ad57693085bd98543a1760bda7e553321ddb3fc8c374ad5e0d0d7feca20f163fd523c3f7d4978285ff2b49bc4d7913af20e068ece633ba', 'Moderator', '', '', 'moderator', 'male', 16, '', '', '', '', ''),
 (3, 'manager', 'b1d921f725e7f1696e31a09e86ec52debdbe1f826a77d60705a1682cfd70227200ecb5aee3f8d19cd2061be54ea612b4c713a0e17eb68dd88406a4bc9bd270c3', 'Manager', '', '', 'manager', 'male', 1, '', '', '', '', ''),
 (4, 'employee', '3c13b13c0390035b1d4aa3f456cf3fde8ab950056532ce2932581fada8c05fa114ff05c9b9541b73c9dcffa1b5ff76db3c22233975e323565c0af4962988a6af', 'Employee', '', '', 'employee', 'female', 25, '', '', '', '', ''),
-(5, 'Gerrit', '7a8d0e81b9e73f3e39cbaccfac16097a8c88e6bddf068160946115bfc31ff59e81533b292f5cafd3be42f6980aced7b8791f0738a91717f62f3f542a535c2e51', 'Gerrit', 'van de', 'Fabriek', 'employee', 'other', 12, 'Rietveldstraat 12', '1012AB', 'Amstelveen', '0031201234567', '0031612345678');
+(5, 'Gerrit', '7a8d0e81b9e73f3e39cbaccfac16097a8c88e6bddf068160946115bfc31ff59e81533b292f5cafd3be42f6980aced7b8791f0738a91717f62f3f542a535c2e51', 'Gerrit', 'van de', 'Fabriek', 'employee', 'other', 12, 'Rietveldstraat 12', '1012AB', 'Amstelveen', '0031201234567', '0031612345678'),
+(6, '', '9c1dd9c1e1684575051616be7814f15374bb73a9f7685ebe30969de4975976fac5fa449519fbc54ddcdc43fcf08eabb292523548349b5ce7fbb86b6fa30c1278', 'Super', '', 'User', 'super', 'other', 4, '', '', '', '', '');
 
 --
 -- Indexen voor geëxporteerde tabellen

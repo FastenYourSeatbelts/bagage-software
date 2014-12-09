@@ -25,21 +25,20 @@
 package luggage.controllers;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
-import static javafx.application.Application.launch;
-import javafx.fxml.Initializable;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import javafx.scene.chart.*;
-import javafx.scene.Group;
 import luggage.Debug;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import luggage.database.models.LuggageModel;
+import luggage.database.models.Model;
+import luggage.helpers.StageHelper;
 
 /**
  * UsersController
@@ -58,54 +57,68 @@ public class LuggageGraphController extends BaseController implements Initializa
      * @param rb 
      */
     @FXML
-    private PieChart piechart;
-     
-    @FXML
-    private void handleButton1Action(ActionEvent event) {
-        ObservableList<PieChart.Data> pieChartData = 
-                FXCollections.observableArrayList(
-                    new PieChart.Data("January", 100),
-                    new PieChart.Data("February", 200),
-                    new PieChart.Data("March", 50),
-                    new PieChart.Data("April", 75),
-                    new PieChart.Data("May", 110),
-                    new PieChart.Data("June", 300),
-                    new PieChart.Data("July", 111),
-                    new PieChart.Data("August", 30),
-                    new PieChart.Data("September", 75),
-                    new PieChart.Data("October", 55),
-                    new PieChart.Data("November", 225),
-                    new PieChart.Data("December", 99));
-         
-        
-        piechart.setData(pieChartData);
-    }
-     
-    @FXML
-    private void handleButton2Action(ActionEvent event) {
-        
-    }
-     
-    @FXML
-    private void handleButtonClearAction(ActionEvent event) {
-        ObservableList<PieChart.Data> pieChartData = 
-                FXCollections.observableArrayList();
-        piechart.setTitle("");
-        piechart.setData(pieChartData);
-    }
+    public PieChart piechart;
     
+    @FXML
+    private Button listHelp;
+	
+	@FXML
+	public DatePicker start;
+	
+	@FXML
+	public DatePicker end;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         Debug.print("GRAPH CONTROLLER-----------------------------------------------------------------");
-        ObservableList<PieChart.Data> pieChartData = 
-                FXCollections.observableArrayList(
-                    new PieChart.Data("Missing", 70),
-                    new PieChart.Data("Found", 56),
-                    new PieChart.Data("Resolved", 65)
-                );
-                   
+        
+		piechart.visibleProperty().set(false);
+    } 
+    
+    @FXML
+    public void listHelp() {
+		StageHelper.addStage("graphs/help", this, false, true);
+	}
+	
+	@FXML
+	public void updateChart() {
+		piechart.visibleProperty().set(true);
+		
+		String dateQuery = "";
+		
+		if(this.start.getValue() != null && this.end.getValue() != null) {
+			String sStart = this.start.getValue().toString() + " 00:00:00";
+			String sEnd = this.end.getValue().toString() + " 00:00:00";
+			
+			dateQuery = "AND datetime BETWEEN '" + sStart + "' AND '" + sEnd + "'";
+		} else if(this.start.getValue() != null) {
+			String sStart = this.start.getValue().toString() + " 00:00:00";
+			dateQuery = "AND datetime > '" + sStart + "'";
+		} else if(this.end.getValue() != null) {
+			String sEnd = this.end.getValue().toString() + " 00:00:00";
+			dateQuery = "AND datetime < '" + sEnd + "'";
+		}
+		
+		LuggageModel luggage = new LuggageModel();
+		
+		String[] foundParams = new String[1];
+        foundParams[0] = "Found";
+		List<Model> found = luggage.findAll("status = ? " + dateQuery, foundParams);
+		
+		String[] missingParams = new String[1];
+        missingParams[0] = "Missing";
+		List<Model> missing = luggage.findAll("status = ? " + dateQuery, missingParams);
+		
+		String[] resolvedParams = new String[1];
+        resolvedParams[0] = "Resolved";
+		List<Model> resolved = luggage.findAll("status = ? " + dateQuery, resolvedParams);
+		
+		ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
+			new PieChart.Data("Missing", missing.size()),
+			new PieChart.Data("Found", found.size()),
+			new PieChart.Data("Resolved", resolved.size())
+        );
        
         piechart.setData(pieChartData);
-        
-    } 
+	}
 }
