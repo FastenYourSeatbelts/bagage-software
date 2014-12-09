@@ -469,9 +469,9 @@ public class CustomersController extends BaseController implements Initializable
         Stage removeStage = (Stage) listTableView.getScene().getWindow();
         
         Action response = Dialogs.create().owner(removeStage)
-            .title("Are you sure you want to delete this item?")
+            .title("Remove customer")
             //.masthead("Are you sure you want to delete this item? 2")
-            .message("Are you sure you want to delete this item?")
+            .message("Are you sure you want to delete this customer?")
             .actions(Dialog.ACTION_OK, Dialog.ACTION_CANCEL)
             .showWarning();
 
