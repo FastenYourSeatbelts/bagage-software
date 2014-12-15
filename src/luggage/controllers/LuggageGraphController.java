@@ -72,7 +72,8 @@ public class LuggageGraphController extends BaseController implements Initializa
     public void initialize(URL url, ResourceBundle rb) {
         Debug.print("GRAPH CONTROLLER-----------------------------------------------------------------");
         
-		piechart.visibleProperty().set(false);
+		if(piechart != null)
+			piechart.visibleProperty().set(false);
     } 
     
     @FXML
