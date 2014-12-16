@@ -35,65 +35,91 @@ package luggage.database.models;
 public class LocationModel extends Model {
 
     public LocationModel() {
-        
+
     }
-    
+
+    /**
+     *
+     * @param id
+     */
     public LocationModel(int id) {
         super(id);
     }
-    
+
+    /**
+     *
+     * @param where
+     * @param params
+     */
     public LocationModel(String where, String... params) {
         super(where, params);
     }
 
+    /**
+     *
+     * @return locations
+     */
     @Override
     protected String getTable() {
         return "locations";
     }
 
+    /**
+     *
+     * @return locationmodel
+     */
     @Override
     protected Model getModel() {
         return new LocationModel();
     }
-    
+
+    /**
+     *
+     * @return standard order by
+     */
     @Override
     protected String getOrderBy() {
         return "ORDER BY name ASC";
     }
-    
+
+    /**
+     *
+     * @return name
+     */
     @Override
     public String toString() {
         return getName();
     }
-   
+
     /**
      * Return the name of the current row
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getName() {
         return row.get("name");
     }
-   
+
     /**
      * Set the name of the current row
-     * 
+     *
      * @param name
      */
     public void setName(String name) {
         row.put("name", name);
     }
-   
+
     /**
      * Return the city_id of the current row
-     * 
-     * @return 
+     *
+     * @return
      */
     public int getCityId() {
-        if(row.get("city_id") == null || row.get("city_id").isEmpty())
+        if (row.get("city_id") == null || row.get("city_id").isEmpty()) {
             return 0;
-        
+        }
+
         return Integer.parseInt(row.get("city_id"));
     }
- 
+
 }

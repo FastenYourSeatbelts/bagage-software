@@ -35,53 +35,78 @@ package luggage.database.models;
 public class InsurerModel extends Model {
 
     public InsurerModel() {
-        
+
     }
-    
+
+    /**
+     *
+     * @param id
+     */
     public InsurerModel(int id) {
         super(id);
     }
-    
+
+    /**
+     *
+     * @param where
+     * @param params
+     */
     public InsurerModel(String where, String... params) {
         super(where, params);
     }
 
+    /**
+     *
+     * @return insurermodel
+     */
     @Override
     protected Model getModel() {
         return new InsurerModel();
     }
 
+    /**
+     *
+     * @return insurers
+     */
     @Override
     protected String getTable() {
         return "insurers";
     }
-    
+
+    /**
+     *
+     * @return standard order by
+     */
     @Override
     protected String getOrderBy() {
         return "ORDER BY name ASC";
     }
-    
+
+    /**
+     *
+     * @return name
+     */
     @Override
     public String toString() {
         return getName();
     }
-   
+
     /**
      * Return the name of the current row
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getName() {
         return row.get("name");
     }
-   
+
     /**
      * Set the name of the current row
-     * 
-     * @param name 
+     *
+     * @param name
      */
     public void setName(String name) {
         row.put("name", name);
     }
- 
+
 }
