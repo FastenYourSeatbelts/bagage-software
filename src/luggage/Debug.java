@@ -35,6 +35,10 @@ import luggage.security.Authentication;
  */
 public class Debug {
     
+    /**
+     *
+     * @param message
+     */
     public static void print(String message) {
         if(!AppConfig.debug) {
             return;
@@ -43,6 +47,11 @@ public class Debug {
         System.out.println(message);
     }
     
+    /**
+     *
+     * @param type
+     * @param message
+     */
     public static void logToDatabase(String type, String message) {
         LogModel log = new LogModel();
         log.setDatetime(type);

@@ -94,7 +94,7 @@ public class LuggageController extends BaseController implements Initializable {
 
     @FXML
     private Button listRemove;
-    
+
     @FXML
     private Button listExportToPdf;
 
@@ -118,7 +118,7 @@ public class LuggageController extends BaseController implements Initializable {
 
     @FXML
     private ChoiceBox<CustomerModel> addCustomerId;
-    
+
     @FXML
     private ChoiceBox<String> addStatus;
 
@@ -148,7 +148,7 @@ public class LuggageController extends BaseController implements Initializable {
 
     @FXML
     private ChoiceBox<CustomerModel> editCustomerId;
-    
+
     @FXML
     private ChoiceBox<String> editStatus;
 
@@ -166,7 +166,7 @@ public class LuggageController extends BaseController implements Initializable {
 
     @FXML
     private TextField viewTags;
-    
+
     @FXML
     private ChoiceBox<String> viewStatus;
 
@@ -260,7 +260,7 @@ public class LuggageController extends BaseController implements Initializable {
         }
 
         addCustomerId.setItems(customerData);
-      
+
         ObservableList<String> statuses = FXCollections.observableArrayList();
         statuses.add("Missing");
         statuses.add("Found");
@@ -302,7 +302,7 @@ public class LuggageController extends BaseController implements Initializable {
         }
 
         editCustomerId.setItems(customerData);
-      
+
         ObservableList<String> statuses = FXCollections.observableArrayList();
         statuses.add("Missing");
         statuses.add("Found");
@@ -347,7 +347,7 @@ public class LuggageController extends BaseController implements Initializable {
         }
 
         viewCustomerId.setItems(customerData);
-        
+
         ObservableList<String> statuses = FXCollections.observableArrayList();
         statuses.add("Missing");
         statuses.add("Found");
@@ -409,11 +409,11 @@ public class LuggageController extends BaseController implements Initializable {
 
         StageHelper.addPopup("luggage/edit", this, false, true);
     }
-    
+
     @FXML
     public void listHelp() {
         StageHelper.addStage("luggage/listHelp", this, false, true);
-        }
+    }
 
     @FXML
     public void listRemove() {
@@ -450,20 +450,26 @@ public class LuggageController extends BaseController implements Initializable {
 
         StageHelper.addPopup("luggage/view", this, false, true);
     }
-    
+
     @FXML
     public void listExportToPdf() {
         LuggageModel luggage = (LuggageModel) listTableView.getSelectionModel().getSelectedItem();
-        
-        if(luggage == null)
+
+        if (luggage == null) {
             return;
-        
+        }
+
         MainActivity.viewId = luggage.getId();
         //Jasper is de beste
         System.out.println("Ayy ik doe iets");
         StageHelper.addStage("luggage/view", this, false, true);
     }
 
+    /**
+     *
+     * @param where
+     * @param params
+     */
     public void listResetTableView(String where, String... params) {
         LuggageModel luggage = new LuggageModel();
         List<Model> allLuggage = luggage.findAll(where, params);
