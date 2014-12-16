@@ -34,23 +34,31 @@ import luggage.database.models.UserModel;
  * @author Tijme Gommers
  */
 public class Authentication {
-    
+
     public static UserModel currentUser;
-    
+
+    /**
+     *
+     * @param user
+     */
     public static void setCurrentUser(UserModel user) {
         Authentication.currentUser = user;
     }
-    
+
+    /**
+     *
+     * @return
+     */
     public static UserModel getCurrentUser() {
         return Authentication.currentUser;
     }
-    
+
     public static boolean loggedIn() {
         return Authentication.currentUser.exists();
     }
-    
+
     public static void logout() {
         Authentication.currentUser = new UserModel();
     }
-    
+
 }

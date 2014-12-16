@@ -32,98 +32,121 @@ import luggage.database.models.UserModel;
  * @author Tijme Gommers
  */
 public class Permissions {
-    
+
     public static final Permissions.Tab PERMISSION_MANAGE_CUSTOMERS = new Permissions.Tab("manage_customers", "Customers", "customers/list");
     public static final Permissions.Tab PERMISSION_MANAGE_LUGGAGE = new Permissions.Tab("manage_luggage", "Luggage", "luggage/list");
     public static final Permissions.Tab PERMISSION_MANAGE_USERS = new Permissions.Tab("manage_users", "Users", "users/list");
-    
+
     public static final Permissions.Tab PERMISSION_VIEW_TOTAL_LUGGAGE = new Permissions.Tab("view_total_luggage", "Total luggage", "luggage/total");
     public static final Permissions.Tab PERMISSION_VIEW_MISSING_LUGGAGE = new Permissions.Tab("view_missing_luggage", "Missing luggage", "luggage/missing");
     public static final Permissions.Tab PERMISSION_VIEW_FOUND_LUGGAGE = new Permissions.Tab("view_found_luggage", "Found luggage", "luggage/found");
     public static final Permissions.Tab PERMISSION_VIEW_RESOLVED_LUGGAGE = new Permissions.Tab("view_resolved_luggage", "Resolved luggage", "luggage/resolved");
-    
+
     public static final Permissions.Tab PERMISSION_VIEW_GRAPH_LUGGAGE = new Permissions.Tab("view_graph_luggage", "Luggage graph", "graphs/luggage");
     public static final Permissions.Tab PERMISSION_VIEW_LOG = new Permissions.Tab("view_log", "Logs", "log/list");
-    
+
     public static class Tab {
-        
+
+        /**
+         *
+         * @param id
+         * @param text
+         * @param view
+         */
         public Tab(String id, String text, String view) {
             this.id = id;
             this.text = text;
             this.view = view;
         }
-        
+
         @Override
         public String toString() {
             return text;
         }
-        
+
+        /**
+         *
+         * @return id
+         */
         public String getId() {
             return id;
         }
-        
+
+        /**
+         *
+         * @return text
+         */
         public String getText() {
             return text;
         }
-        
+
+        /**
+         *
+         * @return view
+         */
         public String getView() {
             return view;
         }
-        
+
         public String id;
-        
+
         public String text;
-        
+
         public String view;
-        
+
     }
-    
+
     public static final ArrayList<Permissions.Tab> MANAGER_PERMISSIONS = new ArrayList<Permissions.Tab>(Arrays.asList(
-        new Permissions.Tab[] {
-            PERMISSION_VIEW_GRAPH_LUGGAGE,
-            PERMISSION_VIEW_TOTAL_LUGGAGE,
-            PERMISSION_VIEW_MISSING_LUGGAGE,
-            PERMISSION_VIEW_FOUND_LUGGAGE,
-            PERMISSION_VIEW_RESOLVED_LUGGAGE,
-            PERMISSION_VIEW_LOG
-        }
+            new Permissions.Tab[]{
+                PERMISSION_VIEW_GRAPH_LUGGAGE,
+                PERMISSION_VIEW_TOTAL_LUGGAGE,
+                PERMISSION_VIEW_MISSING_LUGGAGE,
+                PERMISSION_VIEW_FOUND_LUGGAGE,
+                PERMISSION_VIEW_RESOLVED_LUGGAGE,
+                PERMISSION_VIEW_LOG
+            }
     ));
-    
+
     public static final ArrayList<Permissions.Tab> EMPLOYEE_PERMISSIONS = new ArrayList<Permissions.Tab>(Arrays.asList(
-        new Permissions.Tab[] {
-            PERMISSION_MANAGE_CUSTOMERS,
-            PERMISSION_MANAGE_LUGGAGE
-        }
+            new Permissions.Tab[]{
+                PERMISSION_MANAGE_CUSTOMERS,
+                PERMISSION_MANAGE_LUGGAGE
+            }
     ));
-    
+
     public static final ArrayList<Permissions.Tab> MODERATOR_PERMISSIONS = new ArrayList<Permissions.Tab>(Arrays.asList(
-        new Permissions.Tab[] {
-            PERMISSION_MANAGE_CUSTOMERS,
-            PERMISSION_MANAGE_LUGGAGE,
-            PERMISSION_VIEW_MISSING_LUGGAGE,
-            PERMISSION_VIEW_FOUND_LUGGAGE,
-            PERMISSION_VIEW_RESOLVED_LUGGAGE,
-            PERMISSION_MANAGE_USERS,
-            PERMISSION_VIEW_LOG
-        }
+            new Permissions.Tab[]{
+                PERMISSION_MANAGE_CUSTOMERS,
+                PERMISSION_MANAGE_LUGGAGE,
+                PERMISSION_VIEW_MISSING_LUGGAGE,
+                PERMISSION_VIEW_FOUND_LUGGAGE,
+                PERMISSION_VIEW_RESOLVED_LUGGAGE,
+                PERMISSION_MANAGE_USERS,
+                PERMISSION_VIEW_LOG
+            }
     ));
-    
+
     public static final ArrayList<Permissions.Tab> SUPER_PERMISSIONS = new ArrayList<Permissions.Tab>(Arrays.asList(
-        new Permissions.Tab[] {
-            PERMISSION_MANAGE_CUSTOMERS,
-            PERMISSION_MANAGE_LUGGAGE,
-            PERMISSION_VIEW_GRAPH_LUGGAGE,
-            PERMISSION_VIEW_TOTAL_LUGGAGE,
-            PERMISSION_VIEW_MISSING_LUGGAGE,
-            PERMISSION_VIEW_FOUND_LUGGAGE,
-            PERMISSION_VIEW_RESOLVED_LUGGAGE,
-            PERMISSION_MANAGE_USERS,
-            PERMISSION_VIEW_LOG
-        }
+            new Permissions.Tab[]{
+                PERMISSION_MANAGE_CUSTOMERS,
+                PERMISSION_MANAGE_LUGGAGE,
+                PERMISSION_VIEW_GRAPH_LUGGAGE,
+                PERMISSION_VIEW_TOTAL_LUGGAGE,
+                PERMISSION_VIEW_MISSING_LUGGAGE,
+                PERMISSION_VIEW_FOUND_LUGGAGE,
+                PERMISSION_VIEW_RESOLVED_LUGGAGE,
+                PERMISSION_MANAGE_USERS,
+                PERMISSION_VIEW_LOG
+            }
     ));
-    
+
+    /**
+     *
+     * @param user
+     * @return arraylist with permissions
+     */
     public static ArrayList<Permissions.Tab> getPermissions(UserModel user) {
-        switch(user.getRole()) {
+        switch (user.getRole()) {
             case "moderator":
                 return MODERATOR_PERMISSIONS;
             case "super":
@@ -133,8 +156,8 @@ public class Permissions {
             case "manager":
                 return MANAGER_PERMISSIONS;
         }
-        
+
         return new ArrayList<Permissions.Tab>();
     }
-    
+
 }
