@@ -9,52 +9,42 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="500" maxWidth="350" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="350.0" style="-fx-background-color: BB1D14;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="luggage.controllers.LuggageController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: BB1D14;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="luggage.controllers.LuggageController">
    <children>
-      <Label alignment="CENTER" layoutX="119.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="75.0" text="Help" textFill="WHITE" AnchorPane.leftAnchor="119.0" AnchorPane.rightAnchor="119.0" AnchorPane.topAnchor="14.0">
+      <Label alignment="CENTER" layoutX="119.0" layoutY="14.0" text="Help" textFill="WHITE" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="83.0" prefHeight="97.0" prefWidth="275.0" text="To search for luggage in the database, enter the information you're looking for into the search bar in the top right. You can search by every field you can see to filter your results. To simply sort the results, you can click the top of the table to sort them by that category." textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
-         <padding>
-            <Insets left="10.0" right="10.0" />
-         </padding>
-      </Label>
-      <Label layoutX="14.0" layoutY="210.0" prefHeight="55.0" prefWidth="275.0" text="To create a new piece of luggage, click the new button in the top left of the window. A screen will pop up where you can enter the new luggage information" textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
-         <padding>
-            <Insets left="10.0" right="10.0" />
-         </padding>
-      </Label>
-      <Label layoutX="23.0" layoutY="295.0" prefHeight="68.0" prefWidth="275.0" text="To edit or view a piece of luggage, click the corresponding edit or view buttons in the bottom left of the window. A window will pop up. The view fields can't be edited, but the fields in the edit can be edited." textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
-         <padding>
-            <Insets left="10.0" right="10.0" />
-         </padding>
-      </Label>
-      <Label alignment="CENTER" layoutX="119.0" layoutY="59.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="75.0" text="Search" textFill="WHITE" AnchorPane.leftAnchor="119.0" AnchorPane.rightAnchor="119.0">
+      <Label layoutX="14.0" layoutY="179.0" text="To search for luggage in the database, enter the information you're looking for into the search bar located in the top right. You can search through every visible column in order to filter your results. To simply sort the results, you can click the top of the table to sort them by that category." textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="196.0" />
+      <Label layoutX="14.0" layoutY="280.0" text="To create a new piece of luggage, click the new button in the top left of the window. A screen will pop up where you can enter the new luggage information. To edit or view a piece of luggage, click the corresponding edit or view buttons in the bottom left of the window. A window will pop up. The view fields can't be edited, but the fields in the edit can be edited." textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="280.0" />
+      <Label alignment="CENTER" layoutX="119.0" layoutY="169.0" text="Search" textFill="WHITE" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="168.0">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="119.0" layoutY="180.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="75.0" text="Add" textFill="WHITE" AnchorPane.leftAnchor="119.0" AnchorPane.rightAnchor="119.0">
+      <Label alignment="CENTER" layoutX="119.0" layoutY="260.0" text="Add / Edit / View" textFill="WHITE" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="252.0">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="119.0" layoutY="265.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="75.0" text="View/Edit" textFill="WHITE" AnchorPane.leftAnchor="119.0" AnchorPane.rightAnchor="119.0">
+      <Label alignment="CENTER" layoutX="14.0" layoutY="444.0" text="Export to PDF" textFill="WHITE" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="336.0">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="188.0" layoutY="363.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="75.0" text="Remove" textFill="WHITE" AnchorPane.leftAnchor="119.0" AnchorPane.rightAnchor="119.0">
+      <Label layoutX="14.0" layoutY="458.0" text="This button will export the selected luggage information to PDF. Prior to exporting an overview is shown and the user has the possibility to select any other luggage item information belonging the customer to export." textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="364.0" />
+      <Label alignment="CENTER" layoutX="119.0" layoutY="57.0" text="General" textFill="WHITE" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="56.0">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="15.0" layoutY="393.0" prefHeight="68.0" prefWidth="275.0" text="To remove a piece of luggage, click the remove button in the bottom left. A warning will pop up to ask if you really want to remove a piece of luggage. To delete, click OK, otherwise click cancel." textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="13.0">
-         <padding>
-            <Insets left="10.0" right="10.0" />
-         </padding>
+      <Label layoutX="14.0" layoutY="80.0" text="The luggage tab contains a list of all luggage to date. The visible information are the columns ID, Status, Tags and Date. The default sorting is by Date, descending. The ID is unique to a luggage item. The Status shows whether the item is missing, found or that it has been returned to the customer and is resolved. Tags contain information that help identify the luggage. The Date is the date the luggage item was entered in the system. Hidden are the Location, which is where the luggage will be shipped to once it's found, and the Customer it belongs to. This data is visible in the view and edit detail views." textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="84.0" />
+      <Label alignment="CENTER" layoutX="14.0" layoutY="514.0" text="Remove" textFill="WHITE" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="406.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
       </Label>
+      <Label layoutX="14.0" layoutY="528.0" text="To remove a piece of luggage, click the remove button in the bottom left. A warning will pop up to confirm that you really want to remove a piece of luggage. To delete, click OK, otherwise click cancel." textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="434.0" />
    </children>
 </AnchorPane>

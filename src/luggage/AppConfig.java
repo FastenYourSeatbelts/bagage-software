@@ -74,5 +74,5 @@ public class AppConfig {
     /**
      * If debug mode is on
      */
-    public static final boolean debug = true;
+    public static final boolean debug = false;
 }
