@@ -504,6 +504,30 @@ public class LuggageController extends BaseController implements Initializable {
 
     public void newSave() {
         if (addLocationId.getSelectionModel().getSelectedItem() == null) {
+            Dialogs.create()
+                    .owner((Stage) addLocationId.getScene().getWindow())
+                    .title("Warning")
+                    .masthead("Selection error")
+                    .message("Please select the current location of the luggage or where to ship it to.")
+                    .showWarning();
+            return;
+        }
+        if (addStatus.getSelectionModel().getSelectedItem() == null) {
+            Dialogs.create()
+                    .owner((Stage) addStatus.getScene().getWindow())
+                    .title("Warning")
+                    .masthead("Selection error")
+                    .message("Please select the status for the luggage item.")
+                    .showWarning();
+            return;
+        }
+        if (addDate.getValue() == null) {
+            Dialogs.create()
+                    .owner((Stage) addDate.getScene().getWindow())
+                    .title("Warning")
+                    .masthead("Date format error")
+                    .message("Please enter or select the correct date for the luggage item.")
+                    .showWarning();
             return;
         }
 
@@ -567,6 +591,30 @@ public class LuggageController extends BaseController implements Initializable {
 
     public void editSave() {
         if (editLocationId.getSelectionModel().getSelectedItem() == null) {
+            Dialogs.create()
+                    .owner((Stage) editLocationId.getScene().getWindow())
+                    .title("Warning")
+                    .masthead("Selection error")
+                    .message("Please select the location of the luggage or where to ship it to.")
+                    .showWarning();
+            return;
+        }
+        if (editStatus.getSelectionModel().getSelectedItem() == null) {
+            Dialogs.create()
+                    .owner((Stage) editStatus.getScene().getWindow())
+                    .title("Warning")
+                    .masthead("Selection error")
+                    .message("Please select the status for the luggage item.")
+                    .showWarning();
+            return;
+        }
+        if (editDate.getValue() == null) {
+            Dialogs.create()
+                    .owner((Stage) editDate.getScene().getWindow())
+                    .title("Warning")
+                    .masthead("Date format error")
+                    .message("Please enter or select the correct date for the luggage item.")
+                    .showWarning();
             return;
         }
 

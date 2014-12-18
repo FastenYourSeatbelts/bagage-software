@@ -515,7 +515,15 @@ public class CustomersController extends BaseController implements Initializable
     }
 
     public void newSave() {
-        if (addGender.getSelectionModel().getSelectedItem() == null) {
+        if (addFirstname.getText().equals("") || addLastname.getText().equals("")) {
+            Dialogs.create()
+                    .owner((Stage) addLastname.getScene().getWindow())
+                    .title("Warning")
+                    .masthead("Entry error")
+                    .message("Please enter the customer's first and last name.")
+                    .showWarning();
+            return;
+        } else if (addGender.getSelectionModel().getSelectedItem() == null) {
             Dialogs.create()
                     .owner((Stage) addGender.getScene().getWindow())
                     .title("Warning")
@@ -523,14 +531,52 @@ public class CustomersController extends BaseController implements Initializable
                     .message("Please enter the gender.")
                     .showWarning();
             return;
-        }
-
-        if (addInsurerId.getSelectionModel().getSelectedItem() == null) {
+        } else if (addInsurerId.getSelectionModel().getSelectedItem() == null) {
             Dialogs.create()
                     .owner((Stage) addInsurerId.getScene().getWindow())
                     .title("Warning")
                     .masthead("Selection error")
                     .message("Please enter the insurer.")
+                    .showWarning();
+            return;
+        } else if (addAddress.getText().equals("")) {
+            Dialogs.create()
+                    .owner((Stage) addAddress.getScene().getWindow())
+                    .title("Warning")
+                    .masthead("Entry error")
+                    .message("Please enter the customer's address.")
+                    .showWarning();
+            return;
+        } else if (addPostalcode.getText().equals("")) {
+            Dialogs.create()
+                    .owner((Stage) addPostalcode.getScene().getWindow())
+                    .title("Warning")
+                    .masthead("Entry error")
+                    .message("Please enter the customer's postal code.")
+                    .showWarning();
+            return;
+        } else if (addResidence.getText().equals("")) {
+            Dialogs.create()
+                    .owner((Stage) addResidence.getScene().getWindow())
+                    .title("Warning")
+                    .masthead("Entry error")
+                    .message("Please enter the customer's residence.")
+                    .showWarning();
+            return;
+        } else if (addEmail.getText().equals("")) {
+            Dialogs.create()
+                    .owner((Stage) addEmail.getScene().getWindow())
+                    .title("Warning")
+                    .masthead("Entry error")
+                    .message("Please enter the customer's email address.")
+                    .showWarning();
+            return;
+        } else if (addTelephone.getText().equals("") && addMobile.getText().equals("")) {
+            Dialogs.create()
+                    .owner((Stage) addTelephone.getScene().getWindow())
+                    .title("Warning")
+                    .masthead("Entry error")
+                    .message("Please enter the customer's regular telephone number and / or their mobile number.")
                     .showWarning();
             return;
         }
@@ -575,7 +621,15 @@ public class CustomersController extends BaseController implements Initializable
     }
 
     public void editSave() {
-        if (editGender.getSelectionModel().getSelectedItem() == null) {
+                if (editFirstname.getText().equals("") || editLastname.getText().equals("")) {
+            Dialogs.create()
+                    .owner((Stage) editLastname.getScene().getWindow())
+                    .title("Warning")
+                    .masthead("Entry error")
+                    .message("Please enter the customer's first and last name.")
+                    .showWarning();
+            return;
+        } else if (editGender.getSelectionModel().getSelectedItem() == null) {
             Dialogs.create()
                     .owner((Stage) editGender.getScene().getWindow())
                     .title("Warning")
@@ -583,14 +637,52 @@ public class CustomersController extends BaseController implements Initializable
                     .message("Please enter the gender.")
                     .showWarning();
             return;
-        }
-
-        if (editInsurerId.getSelectionModel().getSelectedItem() == null) {
+        } else if (editInsurerId.getSelectionModel().getSelectedItem() == null) {
             Dialogs.create()
                     .owner((Stage) editInsurerId.getScene().getWindow())
                     .title("Warning")
                     .masthead("Selection error")
                     .message("Please enter the insurer.")
+                    .showWarning();
+            return;
+        } else if (editAddress.getText().equals("")) {
+            Dialogs.create()
+                    .owner((Stage) editAddress.getScene().getWindow())
+                    .title("Warning")
+                    .masthead("Entry error")
+                    .message("Please enter the customer's address.")
+                    .showWarning();
+            return;
+        } else if (editPostalcode.getText().equals("")) {
+            Dialogs.create()
+                    .owner((Stage) editPostalcode.getScene().getWindow())
+                    .title("Warning")
+                    .masthead("Entry error")
+                    .message("Please enter the customer's postal code.")
+                    .showWarning();
+            return;
+        } else if (editResidence.getText().equals("")) {
+            Dialogs.create()
+                    .owner((Stage) editResidence.getScene().getWindow())
+                    .title("Warning")
+                    .masthead("Entry error")
+                    .message("Please enter the customer's residence.")
+                    .showWarning();
+            return;
+        } else if (editEmail.getText().equals("")) {
+            Dialogs.create()
+                    .owner((Stage) editEmail.getScene().getWindow())
+                    .title("Warning")
+                    .masthead("Entry error")
+                    .message("Please enter the customer's email address.")
+                    .showWarning();
+            return;
+        } else if (editTelephone.getText().equals("") && editMobile.getText().equals("")) {
+            Dialogs.create()
+                    .owner((Stage) editTelephone.getScene().getWindow())
+                    .title("Warning")
+                    .masthead("Entry error")
+                    .message("Please enter the customer's regular telephone number and / or their mobile number.")
                     .showWarning();
             return;
         }

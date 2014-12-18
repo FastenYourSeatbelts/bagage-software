@@ -541,24 +541,102 @@ public class UsersController extends BaseController implements Initializable {
         addRole.setValue(null);
         addWorkplace.setValue(null);
     }
-
+//SELECT COUNT(*) as count FROM users WHERE username='whatever'
     public void newSave() {
-        if (addGender.getSelectionModel().getSelectedItem() == null || addRole.getSelectionModel().getSelectedItem() == null || addWorkplace.getSelectionModel().getSelectedItem() == null) {
+        if (addUsername.getText().equals("")) {
+            Dialogs.create()
+                    .owner((Stage) addUsername.getScene().getWindow())
+                    .title("Warning")
+                    .masthead("Entry error")
+                    .message("Please enter a unique username.")
+                    .showWarning();
+            return;
+        } else if (addPassword.getText().equals("")) {
             Dialogs.create()
                     .owner((Stage) addPassword.getScene().getWindow())
                     .title("Warning")
-                    .masthead("Selection error")
-                    .message("Please enter all the select boxes.")
+                    .masthead("Password error")
+                    .message("Please enter a password.")
                     .showWarning();
             return;
-        }
-
-        if (!addPassword.getText().equals(addPasswordRepeat.getText())) {
+        } else if (addPasswordRepeat.getText().equals("")) {
+            Dialogs.create()
+                    .owner((Stage) addPasswordRepeat.getScene().getWindow())
+                    .title("Warning")
+                    .masthead("Password error")
+                    .message("Please repeat the password to confirm it.")
+                    .showWarning();
+            return;
+        } else if (!addPassword.getText().equals(addPasswordRepeat.getText())) {
             Dialogs.create()
                     .owner((Stage) addPassword.getScene().getWindow())
                     .title("Warning")
                     .masthead("Password error")
                     .message("The passwords do not match.")
+                    .showWarning();
+            return;
+        } else if (addFirstname.getText().equals("") || addLastname.getText().equals("")) {
+            Dialogs.create()
+                    .owner((Stage) addLastname.getScene().getWindow())
+                    .title("Warning")
+                    .masthead("Entry error")
+                    .message("Please enter the user's first and last name.")
+                    .showWarning();
+            return;
+        } else if (addGender.getSelectionModel().getSelectedItem() == null) {
+            Dialogs.create()
+                    .owner((Stage) addGender.getScene().getWindow())
+                    .title("Warning")
+                    .masthead("Selection error")
+                    .message("Please enter the user's gender.")
+                    .showWarning();
+            return;
+        } else if (addAddress.getText().equals("")) {
+            Dialogs.create()
+                    .owner((Stage) addAddress.getScene().getWindow())
+                    .title("Warning")
+                    .masthead("Entry error")
+                    .message("Please enter the user's address.")
+                    .showWarning();
+            return;
+        } else if (addPostalcode.getText().equals("")) {
+            Dialogs.create()
+                    .owner((Stage) addPostalcode.getScene().getWindow())
+                    .title("Warning")
+                    .masthead("Entry error")
+                    .message("Please enter the user's postal code.")
+                    .showWarning();
+            return;
+        } else if (addResidence.getText().equals("")) {
+            Dialogs.create()
+                    .owner((Stage) addResidence.getScene().getWindow())
+                    .title("Warning")
+                    .masthead("Entry error")
+                    .message("Please enter the user's residence.")
+                    .showWarning();
+            return;
+        } else if (addWorkplace.getSelectionModel().getSelectedItem() == null) {
+            Dialogs.create()
+                    .owner((Stage) addWorkplace.getScene().getWindow())
+                    .title("Warning")
+                    .masthead("Selection error")
+                    .message("Please enter the user's workplace.")
+                    .showWarning();
+            return;
+        } else if (addRole.getSelectionModel().getSelectedItem() == null) {
+            Dialogs.create()
+                    .owner((Stage) addRole.getScene().getWindow())
+                    .title("Warning")
+                    .masthead("Selection error")
+                    .message("Please enter the user's role.")
+                    .showWarning();
+            return;
+        } else if (addTelephone.getText().equals("") && addMobile.getText().equals("")) {
+            Dialogs.create()
+                    .owner((Stage) addTelephone.getScene().getWindow())
+                    .title("Warning")
+                    .masthead("Entry error")
+                    .message("Please enter the customer's regular telephone number and / or their mobile number.")
                     .showWarning();
             return;
         }
@@ -598,27 +676,89 @@ public class UsersController extends BaseController implements Initializable {
         editTelephone.setText("");
         editMobile.setText("");
         editGender.setValue(null);
-        editRole.setValue("EMPLOYEE");
+        editRole.setValue(null);
         editWorkplace.setValue(null);
     }
 
     public void editSave() {
-        if (editGender.getSelectionModel().getSelectedItem() == null || editRole.getSelectionModel().getSelectedItem() == null || editWorkplace.getSelectionModel().getSelectedItem() == null) {
+        if (editUsername.getText().equals("")){
             Dialogs.create()
-                    .owner((Stage) editPassword.getScene().getWindow())
+                    .owner((Stage) editUsername.getScene().getWindow())
                     .title("Warning")
-                    .masthead("Selection error")
-                    .message("Please enter all the select boxes.")
+                    .masthead("Entry error")
+                    .message("Please enter a unique username.")
                     .showWarning();
             return;
-        }
-
-        if (!editPassword.getText().equals(editPasswordRepeat.getText())) {
+        } else if (!editPassword.getText().equals(editPasswordRepeat.getText())) {
             Dialogs.create()
                     .owner((Stage) editPassword.getScene().getWindow())
                     .title("Warning")
                     .masthead("Password error")
                     .message("The passwords do not match.")
+                    .showWarning();
+            return;
+        } else if (editFirstname.getText().equals("") || editLastname.getText().equals("")) {
+            Dialogs.create()
+                    .owner((Stage) editLastname.getScene().getWindow())
+                    .title("Warning")
+                    .masthead("Entry error")
+                    .message("Please enter the user's first and last name.")
+                    .showWarning();
+            return;
+        } else if (editGender.getSelectionModel().getSelectedItem() == null) {
+            Dialogs.create()
+                    .owner((Stage) editGender.getScene().getWindow())
+                    .title("Warning")
+                    .masthead("Selection error")
+                    .message("Please select the user's gender.")
+                    .showWarning();
+            return;
+        } else if (editAddress.getText().equals("")) {
+            Dialogs.create()
+                    .owner((Stage) editAddress.getScene().getWindow())
+                    .title("Warning")
+                    .masthead("Entry error")
+                    .message("Please enter the user's address.")
+                    .showWarning();
+            return;
+        } else if (editPostalcode.getText().equals("")) {
+            Dialogs.create()
+                    .owner((Stage) editPostalcode.getScene().getWindow())
+                    .title("Warning")
+                    .masthead("Entry error")
+                    .message("Please enter the user's postal code.")
+                    .showWarning();
+            return;
+        } else if (editResidence.getText().equals("")) {
+            Dialogs.create()
+                    .owner((Stage) editResidence.getScene().getWindow())
+                    .title("Warning")
+                    .masthead("Entry error")
+                    .message("Please enter the user's residence.")
+                    .showWarning();
+            return;
+        } else if (editWorkplace.getSelectionModel().getSelectedItem() == null) {
+            Dialogs.create()
+                    .owner((Stage) editWorkplace.getScene().getWindow())
+                    .title("Warning")
+                    .masthead("Selection error")
+                    .message("Please select the user's workplace.")
+                    .showWarning();
+            return;
+        } else if (editRole.getSelectionModel().getSelectedItem() == null) {
+            Dialogs.create()
+                    .owner((Stage) editRole.getScene().getWindow())
+                    .title("Warning")
+                    .masthead("Selection error")
+                    .message("Please select the user's role.")
+                    .showWarning();
+            return;
+        } else if (editTelephone.getText().equals("") && editMobile.getText().equals("")) {
+            Dialogs.create()
+                    .owner((Stage) editTelephone.getScene().getWindow())
+                    .title("Warning")
+                    .masthead("Entry error")
+                    .message("Please enter the customer's regular telephone number and / or their mobile number.")
                     .showWarning();
             return;
         }
