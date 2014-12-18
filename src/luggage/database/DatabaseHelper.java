@@ -35,30 +35,28 @@ import luggage.Debug;
 /**
  * DatabaseHelper
  *
- * This class manages the database
- * connection
+ * This class manages the database connection
  *
  * @package luggage.database
  * @author Tijme Gommers
  */
 public class DatabaseHelper {
-    
+
     public static Connection oConnection = null;
 
     /**
-     * Get the connection and generate
-     * it if it doesn't exist yet
-     * 
-     * @return 
+     * Get the connection and generate it if it doesn't exist yet
+     *
+     * @return
      */
     public static Connection getConnection() {
-        if(oConnection == null) {
+        if (oConnection == null) {
             openConnection();
         }
-        
+
         return oConnection;
     }
-    
+
     /**
      * Open a new database connection
      */
@@ -73,14 +71,14 @@ public class DatabaseHelper {
             Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
- 
+
     /**
      * Close the given database connection
-     * 
-     * @param oConnection 
+     *
+     * @param oConnection
      */
     public static void closeConnection(Connection oConnection) {
-        if(oConnection == null) {
+        if (oConnection == null) {
             return;
         }
 
@@ -90,5 +88,5 @@ public class DatabaseHelper {
             Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
 }

@@ -56,48 +56,46 @@ import luggage.security.Permissions;
  * @package luggage.controllers
  * @author Tijme Gommers
  */
-public class DashboardController extends BaseController  implements Initializable {
+public class DashboardController extends BaseController implements Initializable {
 
     @FXML
     private TabPane tabs;
-    
+
     @FXML
     private Button logout;
-    
+
     @FXML
     private Label fullname;
 
     /**
      * Called on controller start
-     * 
+     *
      * @param url
-     * @param rb 
+     * @param rb
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) { 
+    public void initialize(URL url, ResourceBundle rb) {
         Debug.print("DASHBOARD CONTROLLER-----------------------------------------------------------------");
         fullname.setText(Authentication.getCurrentUser().getFullname());
-          
+
         addTabs();
     }
 
-    
     /**
      * Remove all the tabs the current user doesn't have permissions on
      */
-    public void addTabs()
-    {
+    public void addTabs() {
         List<Permissions.Tab> tabPermissions = Permissions.getPermissions(Authentication.getCurrentUser());
-        
+
         String image = MainActivity.class.getResource("/resources/images/loading.gif").toExternalForm();
         tabs.setStyle("-fx-background-image: url('" + image + "'); -fx-background-position: center center; -fx-background-repeat: no-repeat;");
-                
+
         Task task = new Task<Void>() {
-            
+
             @Override
             protected Void call() throws Exception {
-                
-                for(Permissions.Tab tabPermission : tabPermissions) {
+
+                for (Permissions.Tab tabPermission : tabPermissions) {
 
                     Tab newTab = new Tab(tabPermission.getText());
                     newTab.setId(tabPermission.getId());
@@ -107,13 +105,13 @@ public class DashboardController extends BaseController  implements Initializabl
                         public void run() {
                             try {
                                 long startTime = System.nanoTime();
-            
+
                                 FXMLLoader oFXMLLoader = new FXMLLoader();
                                 Parent primaryLoader = (Parent) oFXMLLoader.load(this.getClass().getResource("/luggage/views/" + tabPermission.getView() + ".fxml").openStream());
                                 newTab.setContent(primaryLoader);
 
                                 tabs.getTabs().add(newTab);
-            
+
                                 long endTime = System.nanoTime();
                                 long microseconds = ((endTime - startTime) / 1000);
                                 Debug.print("Add tab: " + tabPermission.getView() + " took " + microseconds + " microseconds.");
@@ -123,15 +121,15 @@ public class DashboardController extends BaseController  implements Initializabl
                         }
                     });
                 }
-                
+
                 return null;
             }
-            
+
         };
-        
+
         new Thread(task).start();
     }
-    
+
     /**
      * Called on logout button click Handles the logout for the user
      *

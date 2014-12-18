@@ -39,47 +39,48 @@ import luggage.Debug;
 /**
  * Model
  *
- * A super class for all the models containing
- * default model functions
+ * A super class for all the models containing default model functions
  *
  * @package luggage.database.models
  * @author Tijme Gommers
  */
 abstract public class Model {
-    
+
     protected abstract String getTable();
-    
+
     protected abstract Model getModel();
-    
+
     protected abstract String getOrderBy();
-    
+
     protected HashMap<String, String> row = new HashMap<String, String>();
- 
+
     public Model() {
-        
+
     }
-    
+
+    /**
+     *
+     * @param id
+     */
     public Model(int id) {
         try {
             long startTime = System.nanoTime();
-    
+
             Statement stmt = DatabaseHelper.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            
+
             ResultSet rs = stmt.executeQuery("SELECT * FROM " + getTable() + " WHERE id = " + id);
             ResultSetMetaData rsmd = rs.getMetaData();
-            
+
             rs.first();
-            
-            for(int i = 0; i < rsmd.getColumnCount(); i ++)
-            {
-                String column = rsmd.getColumnName((i+1));
-                
-                if(!column.equals("password"))
-                {
+
+            for (int i = 0; i < rsmd.getColumnCount(); i++) {
+                String column = rsmd.getColumnName((i + 1));
+
+                if (!column.equals("password")) {
                     row.put(column, rs.getString(column));
                 }
             }
-            
+
             long endTime = System.nanoTime();
             long microseconds = ((endTime - startTime) / 1000);
             Debug.print("SELECT * FROM " + getTable() + " WHERE id = " + id + " took " + microseconds + " microseconds.");
@@ -87,14 +88,19 @@ abstract public class Model {
             System.out.println(ex.getMessage());
         }
     }
-    
+
+    /**
+     *
+     * @param where
+     * @param params
+     */
     public Model(String where, String... params) {
         try {
             long startTime = System.nanoTime();
-    
+
             PreparedStatement statement = DatabaseHelper.getConnection().prepareStatement("SELECT * FROM " + getTable() + " WHERE " + where);
 
-            for(int i = 0; i < params.length; i ++) {
+            for (int i = 0; i < params.length; i++) {
                 statement.setString((i + 1), params[i]);
             }
 
@@ -103,16 +109,14 @@ abstract public class Model {
 
             rs.first();
 
-            for(int i = 0; i < rsmd.getColumnCount(); i ++)
-            {
-                String column = rsmd.getColumnName((i+1));
-                
-                if(!column.equals("password"))
-                {
+            for (int i = 0; i < rsmd.getColumnCount(); i++) {
+                String column = rsmd.getColumnName((i + 1));
+
+                if (!column.equals("password")) {
                     row.put(column, rs.getString(column));
                 }
-            } 
-            
+            }
+
             long endTime = System.nanoTime();
             long microseconds = (endTime - startTime) / 1000;
             Debug.print("SELECT * FROM " + getTable() + " WHERE " + where + " took " + microseconds + " microseconds.");
@@ -120,224 +124,244 @@ abstract public class Model {
             System.out.println(ex.getMessage());
         }
     }
-    
+
     public List<Model> findAll() {
         return findAll("", new String[0]);
     }
-    
+
+    /**
+     *
+     * @param where
+     * @param params
+     * @return
+     */
     public List<Model> findAll(String where, String... params) {
         try {
             long startTime = System.nanoTime();
-    
+
             String query = "SELECT * FROM " + getTable();
-                    
-            if(!where.equals("")) {
+
+            if (!where.equals("")) {
                 query += " WHERE " + where;
             }
-            
-            if(!getOrderBy().equals("")) {
+
+            if (!getOrderBy().equals("")) {
                 query += " " + getOrderBy();
             }
-            
+
             PreparedStatement statement = DatabaseHelper.getConnection().prepareStatement(query);
 
-            for(int i = 0; i < params.length; i ++) {
+            for (int i = 0; i < params.length; i++) {
                 statement.setString((i + 1), params[i]);
             }
 
             ResultSet rs = statement.executeQuery();
             ResultSetMetaData rsmd = rs.getMetaData();
 
-            
             ArrayList<Model> rowList = new ArrayList<>();
-            
-            while(rs.next())
-            {
+
+            while (rs.next()) {
                 Model model = getModel();
-                
-                for(int i = 0; i < rsmd.getColumnCount(); i ++)
-                {
-                    String column = rsmd.getColumnName((i+1));
-                    if(!column.equals("password"))
-                    {
+
+                for (int i = 0; i < rsmd.getColumnCount(); i++) {
+                    String column = rsmd.getColumnName((i + 1));
+                    if (!column.equals("password")) {
                         model.row.put(column, rs.getString(column));
                     }
                 }
-                
+
                 rowList.add(model);
             }
-            
+
             long endTime = System.nanoTime();
             long microseconds = (endTime - startTime) / 1000;
             Debug.print(query + " took " + microseconds + " microseconds.");
-            
+
             return rowList;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-        
+
         return null;
     }
-  
+
     /**
      * Return the id of the current row
-     * 
-     * @return 
+     *
+     * @return
      */
     public int getId() {
-        if(row.get("id") == null) {
+        if (row.get("id") == null) {
             return 0;
         }
-        
+
         return Integer.parseInt(row.get("id"));
     }
-    
+
     /**
      * Check if the current row exists in the database
-     * 
+     *
      * @return boolean true if exists
      */
     public boolean exists() {
-        if(getId() != 0)
-        {
+        if (getId() != 0) {
             return true;
         }
-        
+
         return false;
     }
-    
+
+    /**
+     *
+     * @return create if id = 0
+     */
     public boolean save() {
-        if(getId() == 0) {
+        if (getId() == 0) {
             return create();
         }
-        
+
         return update();
     }
-    
+
+    /**
+     *
+     * @return
+     */
     private boolean create() {
         try {
             long startTime = System.nanoTime();
-    
+
             String sQuery = "INSERT INTO " + getTable() + " (";
-            
+
             boolean firstColumn = true;
-            for (Entry<String, String> column  : row.entrySet()) {
-                if(firstColumn) {
+            for (Entry<String, String> column : row.entrySet()) {
+                if (firstColumn) {
                     firstColumn = false;
                     sQuery = sQuery + column.getKey();
                 } else {
                     sQuery = sQuery + ", " + column.getKey();
                 }
             }
-            
+
             sQuery = sQuery + ") VALUES (";
-            
+
             firstColumn = true;
-            for (Entry<String, String> column  : row.entrySet()) {
-                if(firstColumn) {
+            for (Entry<String, String> column : row.entrySet()) {
+                if (firstColumn) {
                     firstColumn = false;
                     sQuery = sQuery + "?";
                 } else {
                     sQuery = sQuery + ", ?";
                 }
             }
-            
+
             sQuery = sQuery + ")";
-            
+
             PreparedStatement statement = DatabaseHelper.getConnection().prepareStatement(sQuery);
-            
+
             int currentColumn = 1;
-            for (Entry<String, String> column  : row.entrySet()) {
+            for (Entry<String, String> column : row.entrySet()) {
                 statement.setString(currentColumn, column.getValue());
                 currentColumn = currentColumn + 1;
             }
-            
+
             boolean result = statement.execute();
-            
+
             long endTime = System.nanoTime();
             long microseconds = (endTime - startTime) / 1000;
             Debug.print(statement + " took " + microseconds + " microseconds.");
-            
-            if(!getTable().equals("log"))
+
+            if (!getTable().equals("log")) {
                 Debug.logToDatabase(LogModel.TYPE_INFO, "User added row in " + getTable() + ".");
-            
+            }
+
             return result;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             return false;
         }
     }
-    
+
+    /**
+     *
+     * @return
+     */
+
     private boolean update() {
         try {
             long startTime = System.nanoTime();
-    
+
             String sQuery = "UPDATE " + getTable() + " SET ";
-            
+
             boolean firstColumn = true;
-            for (Entry<String, String> column  : row.entrySet()) {
-                
-                if(column.getKey().equals("password") && column.getValue().equals(""))
-                {
+            for (Entry<String, String> column : row.entrySet()) {
+
+                if (column.getKey().equals("password") && column.getValue().equals("")) {
                     continue;
                 }
-                
-                if(firstColumn) {
+
+                if (firstColumn) {
                     firstColumn = false;
                     sQuery = sQuery + column.getKey() + " = ?";
                 } else {
                     sQuery = sQuery + ", " + column.getKey() + " = ?";
                 }
             }
-            
+
             sQuery = sQuery + " WHERE id = " + getId();
-            
+
             PreparedStatement statement = DatabaseHelper.getConnection().prepareStatement(sQuery);
-            
+
             int currentColumn = 1;
-            for (Entry<String, String> column  : row.entrySet()) {
+            for (Entry<String, String> column : row.entrySet()) {
                 statement.setString(currentColumn, column.getValue());
                 currentColumn = currentColumn + 1;
             }
-            
+
             boolean result = statement.execute();
-            
+
             long endTime = System.nanoTime();
             long microseconds = (endTime - startTime) / 1000;
             Debug.print(statement + " took " + microseconds + " microseconds.");
-            
-            if(!getTable().equals("log"))
+
+            if (!getTable().equals("log")) {
                 Debug.logToDatabase(LogModel.TYPE_INFO, "User updated row from " + getTable() + ", id: " + getId() + ".");
-            
+            }
+
             return result;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             return false;
         }
     }
-    
+
+    /**
+     *
+     * @return
+     */
     public boolean delete() {
         String sQuery = "DELETE FROM " + getTable() + " WHERE id = ?";
         PreparedStatement preparedStmt;
         try {
             long startTime = System.nanoTime();
-    
+
             preparedStmt = DatabaseHelper.getConnection().prepareStatement(sQuery);
             preparedStmt.setInt(1, getId());
             boolean result = preparedStmt.execute();
-            
+
             long endTime = System.nanoTime();
             long microseconds = (endTime - startTime) / 1000;
             Debug.print(sQuery + " took " + microseconds + " microseconds.");
-            
-            if(!getTable().equals("log"))
+
+            if (!getTable().equals("log")) {
                 Debug.logToDatabase(LogModel.TYPE_INFO, "User deleted row from " + getTable() + ", id: " + getId() + ".");
-            
+            }
+
             return result;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             return false;
         }
     }
-    
+
 }

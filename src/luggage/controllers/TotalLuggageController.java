@@ -57,30 +57,30 @@ import luggage.helpers.StageHelper;
  * @package luggage.controllers
  * @author Tijme Gommers
  */
-public class TotalLuggageController extends BaseController  implements Initializable {
+public class TotalLuggageController extends BaseController implements Initializable {
 
     @FXML
     private TableView luggageTableView;
-    
+
     @FXML
     private TableColumn tableViewId;
-    
+
     @FXML
     private TableColumn tableViewStatus;
-    
+
     @FXML
     private TableColumn tableViewTags;
-    
+
     @FXML
     private TableColumn tableViewDate;
-    
+
     @FXML
     private TableColumn tableViewNotes;
-    
+
     @FXML
     private Button listView;
-    
-        /**
+
+    /**
      * VIEW ELEMENTS
      */
     @FXML
@@ -100,18 +100,18 @@ public class TotalLuggageController extends BaseController  implements Initializ
 
     @FXML
     private DatePicker viewDate;
-    
-    private ObservableList<LuggageModel> data = FXCollections.observableArrayList();   
+
+    private ObservableList<LuggageModel> data = FXCollections.observableArrayList();
 
     private final ObservableList<LocationModel> locationData = FXCollections.observableArrayList();
 
     private final ObservableList<CustomerModel> customerData = FXCollections.observableArrayList();
-    
+
     /**
      * Called on controller start
-     * 
+     *
      * @param url
-     * @param rb 
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -119,28 +119,25 @@ public class TotalLuggageController extends BaseController  implements Initializ
             @Override
             public void run() {
                 Debug.print("TOTAL LUGGAGE CONTROLLER-----------------------------------------------------------------");
-                
-                if(luggageTableView != null)
-                {
+
+                if (luggageTableView != null) {
                     resetTableView("", new String[0]);
                     listView.disableProperty().bind(luggageTableView.getSelectionModel().selectedItemProperty().isNull());
                     luggageTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
                 }
-                
-                if(viewLocationId != null)
-                {
+
+                if (viewLocationId != null) {
                     setViewChoiceBoxes();
                     setViewFields();
                 }
             }
         });
     }
-    
+
     public LocationModel selectedLocation;
 
     public CustomerModel selectedCustomer;
-     
-    
+
     public void setViewChoiceBoxes() {
         // Locations
         LocationModel oLocationModel = new LocationModel();
@@ -176,7 +173,7 @@ public class TotalLuggageController extends BaseController  implements Initializ
 
         viewCustomerId.setItems(customerData);
     }
-    
+
     @FXML
     public void listView() {
         LuggageModel luggage = (LuggageModel) luggageTableView.getSelectionModel().getSelectedItem();
@@ -190,7 +187,7 @@ public class TotalLuggageController extends BaseController  implements Initializ
         StageHelper.addPopup("luggage/totalview", this, false, true);
     }
 
-     public void setViewFields() {
+    public void setViewFields() {
         LuggageModel luggage = new LuggageModel(MainActivity.viewId);
 
         viewTags.setText(luggage.getTags());
@@ -202,29 +199,34 @@ public class TotalLuggageController extends BaseController  implements Initializ
         viewLocationId.getSelectionModel().select(selectedLocation);
         viewCustomerId.getSelectionModel().select(selectedCustomer);
     }
-    
+
+    /**
+     *
+     * @param where
+     * @param params
+     */
     public void resetTableView(String where, String... params) {
         LuggageModel luggage = new LuggageModel();
         List<Model> allLuggage = luggage.findAll(where, params);
-        
-        data = FXCollections.observableArrayList(); 
+
+        data = FXCollections.observableArrayList();
         for (Model singleModel : allLuggage) {
             LuggageModel singleLuggage = (LuggageModel) singleModel;
             data.add(singleLuggage);
         }
-        
+
         tableViewId.setCellValueFactory(new PropertyValueFactory("id"));
         tableViewStatus.setCellValueFactory(new PropertyValueFactory("status"));
         tableViewTags.setCellValueFactory(new PropertyValueFactory("tags"));
         tableViewDate.setCellValueFactory(new PropertyValueFactory("datetime"));
         tableViewNotes.setCellValueFactory(new PropertyValueFactory("notes"));
-                    
+
         luggageTableView.setItems(data);
     }
-        
+
     public void viewCancel() {
         Stage addStage = (Stage) viewCancel.getScene().getWindow();
         StageHelper.closeStage(addStage);
     }
-    
+
 }

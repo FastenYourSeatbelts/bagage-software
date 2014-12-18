@@ -33,132 +33,149 @@ package luggage.database.models;
  * @author Tijme Gommers
  */
 public class LogModel extends Model {
-    
+
     public static final String TYPE_INFO = "info";
-    
+
     public static final String TYPE_WARNING = "warning";
-    
+
     public static final String TYPE_ERROR = "error";
 
     public LogModel() {
-        
+
     }
-    
+
+    /**
+     *
+     * @param id
+     */
     public LogModel(int id) {
         super(id);
     }
-    
+
+    /**
+     *
+     * @param where
+     * @param params
+     */
     public LogModel(String where, String... params) {
         super(where, params);
     }
 
+    /**
+     *
+     * @return log
+     */
     @Override
     protected String getTable() {
         return "log";
     }
-    
+
+    /**
+     *
+     * @return standard order by
+     */
     @Override
     protected String getOrderBy() {
         return "ORDER BY datetime DESC";
     }
 
+    /**
+     *
+     * @return logmodel
+     */
     @Override
     protected Model getModel() {
         return new LogModel();
     }
-    
-   
+
     /**
      * Return the type of the current row
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getType() {
         return row.get("type");
     }
-   
+
     /**
      * Set the type of the current row
-     * 
-     * @param type 
+     *
+     * @param type
      */
     public void setType(String type) {
         row.put("type", type);
     }
-   
+
     /**
      * Return the datetime of the current row
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getDatetime() {
         return row.get("datetime");
     }
-   
+
     /**
      * Set the datetime of the current row
-     * 
-     * @param datetime 
+     *
+     * @param datetime
      */
     public void setDatetime(String datetime) {
         row.put("datetime", datetime);
     }
-   
+
     /**
      * Return the message of the current row
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getMessage() {
         return row.get("message");
     }
-   
+
     /**
      * Set the message of the current row
-     * 
-     * @param message 
+     *
+     * @param message
      */
     public void setMessage(String message) {
         row.put("message", message);
     }
-    
-  
-    
-        /**
+
+    /**
      * Return the location_id of the current row
-     * 
-     * @return 
+     *
+     * @return
      */
     public int getUserId() {
-        if(row.get("user_id") == null || row.get("user_id").isEmpty())
+        if (row.get("user_id") == null || row.get("user_id").isEmpty()) {
             return 0;
-        
+        }
+
         return Integer.parseInt(row.get("user_id"));
     }
-    
+
     /**
      * Return the LocationModel of the current row
-     * 
+     *
      * @return UserModel
      */
     public UserModel getUsers() {
         return new UserModel(getUserId());
     }
-    
-    
-    
-        /**
+
+    /**
      * Return the location name of the current row
-     * 
+     *
      * @return username
      */
     public String getUsername() {
         return getUsers().getUsername();
     }
-   
+
     /**
      * Set the location_id of the current row
-     * 
+     *
      * @param user_id
      */
     public void setUserId(String user_id) {

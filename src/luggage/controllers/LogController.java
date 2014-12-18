@@ -47,13 +47,13 @@ import luggage.helpers.StageHelper;
  * Controller for log/list.fxml
  *
  * @package luggage.controllers
- * @author 
+ * @author
  */
 public class LogController extends BaseController implements Initializable {
-    
+
     @FXML
     private Button listHelp;
-	
+
     @FXML
     private TableView listTableView;
 
@@ -73,11 +73,11 @@ public class LogController extends BaseController implements Initializable {
     private TextField listSearchField;
 
     private ObservableList<LogModel> listData = FXCollections.observableArrayList();
-    
+
     @FXML
     public void listHelp() {
-		StageHelper.addStage("customers/help", this, false, true);
-	}
+        StageHelper.addStage("customers/help", this, false, true);
+    }
 
     @FXML
     public void listOnSearch() {
@@ -103,7 +103,6 @@ public class LogController extends BaseController implements Initializable {
             params[2 + i] = "%" + keywords[i] + "%";
             query += " OR message LIKE ?";
 
-
             firstColumn = false;
         }
 
@@ -120,7 +119,7 @@ public class LogController extends BaseController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -130,7 +129,11 @@ public class LogController extends BaseController implements Initializable {
         });
     }
 
-   
+    /**
+     *
+     * @param where
+     * @param params
+     */
     public void listResetTableView(String where, String... params) {
         LogModel logs = new LogModel();
         List<Model> allLogs = logs.findAll(where, params);
@@ -149,5 +152,4 @@ public class LogController extends BaseController implements Initializable {
         listTableView.setItems(data);
     }
 
-   
 }

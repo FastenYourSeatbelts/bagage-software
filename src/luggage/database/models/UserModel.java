@@ -36,177 +36,198 @@ import luggage.security.Permissions;
  * @author Tijme Gommers
  */
 public class UserModel extends Model {
-    
+
     public static final String ROLE_EMPLOYEE = "employee";
     public static final String ROLE_SUPER = "super";
     public static final String ROLE_MODERATOR = "moderator";
     public static final String ROLE_MANAGER = "manager";
 
     public UserModel() {
-        
+
     }
-    
+
+    /**
+     *
+     * @param id
+     */
     public UserModel(int id) {
         super(id);
     }
-    
+
+    /**
+     *
+     * @param where
+     * @param params
+     */
     public UserModel(String where, String... params) {
         super(where, params);
     }
 
+    /**
+     *
+     * @return usermodel
+     */
     @Override
     protected Model getModel() {
         return new UserModel();
     }
 
+    /**
+     *
+     * @return users
+     */
     @Override
     protected String getTable() {
         return "users";
     }
-    
+
+    /**
+     *
+     * @return order by standard
+     */
     @Override
     protected String getOrderBy() {
         return "ORDER BY firstname ASC";
     }
-   
+
     /**
      * Return the first name of the current row
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getFirstname() {
         return row.get("firstname");
     }
-   
+
     /**
      * Set the first name of the current row
-     * 
-     * @param firstname 
+     *
+     * @param firstname
      */
     public void setFirstname(String firstname) {
         row.put("firstname", firstname);
     }
-   
+
     /**
      * Return the prefix of the current row
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getPrefix() {
         return row.get("prefix");
     }
-   
+
     /**
      * Set the prefix of the current row
-     * 
-     * @param prefix 
+     *
+     * @param prefix
      */
     public void setPrefix(String prefix) {
         row.put("prefix", prefix);
     }
-   
+
     /**
      * Return the last name of the current row
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getLastname() {
         return row.get("lastname");
     }
-   
+
     /**
      * Set the last name of the current row
-     * 
-     * @param lastname 
+     *
+     * @param lastname
      */
     public void setLastname(String lastname) {
         row.put("lastname", lastname);
     }
-   
+
     /**
      * Return the username of the current row
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getUsername() {
         return row.get("username");
     }
-   
+
     /**
      * Set the username of the current row
-     * 
-     * @param username 
+     *
+     * @param username
      */
     public void setUsername(String username) {
         row.put("username", username);
     }
-   
+
     /**
      * Return the (hash) password of the current row
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getPassword() {
         return row.get("password");
     }
-   
+
     /**
      * Set the password of the current row
-     * 
-     * @param password 
+     *
+     * @param password
      */
     public void setPassword(String password) {
         row.put("password", password);
     }
-   
+
     /**
      * Return the role of the current row
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getRole() {
         return row.get("role");
     }
-   
+
     /**
      * Set the role of the current row
-     * 
-     * @param role 
+     *
+     * @param role
      */
     public void setRole(String role) {
         row.put("role", role);
     }
-    
+
     /**
      * Return the fullname of a user
-     * 
+     *
      * @return;
      */
     public String getFullname() {
         String firstname = getFirstname();
         String prefix = getPrefix();
         String lastname = getLastname();
-        
+
         String fullname = firstname;
-        
-        if(!StringUtils.isNullOrEmpty(prefix)) {
+
+        if (!StringUtils.isNullOrEmpty(prefix)) {
             fullname += " " + prefix;
         }
-        
+
         fullname += " " + lastname;
-        
+
         return fullname;
     }
-    
+
     /**
      * Check if a user has permissions on the given operation
-     * 
+     *
      * @param operation
-     * 
+     *
      * @return true if the user has permissions
      */
     public boolean hasPermissionsOn(String operation) {
-        switch(getRole()) {
+        switch (getRole()) {
             case ROLE_EMPLOYEE:
                 return Permissions.EMPLOYEE_PERMISSIONS.contains(operation);
             case ROLE_SUPER:
@@ -216,107 +237,108 @@ public class UserModel extends Model {
             case ROLE_MANAGER:
                 return Permissions.MANAGER_PERMISSIONS.contains(operation);
         }
-        
+
         return false;
     }
-   
+
     /**
      * Return the gender of the current row
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getGender() {
         return row.get("gender");
     }
-   
+
     /**
      * Set the gender of the current row
-     * 
-     * @param gender 
+     *
+     * @param gender
      */
     public void setGender(String gender) {
         row.put("gender", gender);
     }
-   
+
     /**
      * Return the address of the current row
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getAddress() {
         return row.get("address");
     }
-   
+
     /**
      * Set the address of the current row
-     * 
-     * @param address 
+     *
+     * @param address
      */
     public void setAddress(String address) {
         row.put("address", address);
     }
-   
+
     /**
      * Return the postalcode of the current row
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getPostalcode() {
         return row.get("postalcode");
     }
-   
+
     /**
      * Set the postalcode of the current row
-     * 
-     * @param postalcode 
+     *
+     * @param postalcode
      */
     public void setPostalcode(String postalcode) {
         row.put("postalcode", postalcode);
     }
-   
+
     /**
      * Return the residence of the current row
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getResidence() {
         return row.get("residence");
     }
-   
+
     /**
      * Set the residence of the current row
-     * 
-     * @param residence 
+     *
+     * @param residence
      */
     public void setResidence(String residence) {
         row.put("residence", residence);
     }
-    
+
     /**
      * Return the Location of the current row
-     * 
-     * @return 
+     *
+     * @return
      */
     public LocationModel getLocation() {
         return new LocationModel(Integer.parseInt(row.get("location_id")));
     }
-    
+
     /**
      * Return the Location of the current row
-     * 
-     * @return 
+     *
+     * @return
      */
     public int getLocationId() {
-        if(row.get("location_id") == null || row.get("location_id").isEmpty())
+        if (row.get("location_id") == null || row.get("location_id").isEmpty()) {
             return 0;
-        
+        }
+
         return Integer.parseInt(row.get("location_id"));
     }
-    
+
     /**
      * Set the Location of the current row
-     * 
-     * @return 
+     *
+     * @return
      */
     public void setLocationId(String location_id) {
         row.put("location_id", location_id);
@@ -330,41 +352,41 @@ public class UserModel extends Model {
     public String getLocationName() {
         return getLocation().getName();
     }
-    
+
     /**
      * Return the telephone of the current row
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getTelephone() {
         return row.get("telephone");
     }
-   
+
     /**
      * Set the telephone of the current row
-     * 
-     * @param telephone 
+     *
+     * @param telephone
      */
     public void setTelephone(String telephone) {
         row.put("telephone", telephone);
     }
-   
+
     /**
      * Return the mobile of the current row
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getMobile() {
         return row.get("mobile");
     }
-   
+
     /**
      * Set the mobile of the current row
-     * 
-     * @param mobile 
+     *
+     * @param mobile
      */
     public void setMobile(String mobile) {
         row.put("mobile", mobile);
     }
-   
+
 }
