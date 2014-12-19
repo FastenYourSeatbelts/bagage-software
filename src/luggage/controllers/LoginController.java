@@ -94,7 +94,7 @@ public class LoginController extends BaseController implements Initializable {
 
         UserModel user = new UserModel("username = ? AND password = ?", params);
         if (!user.exists()) {
-            Debug.logLoginFailToDatabase("Login failed. User: \"" + username + "\"  \tPassword: \"" + password + "\"");
+            Debug.logLoginFailToDatabase("Login failed. User: \"" + username.getText() + "\"");
             error.setText("Wrong login, please try again!");
             username.requestFocus();
             return;
