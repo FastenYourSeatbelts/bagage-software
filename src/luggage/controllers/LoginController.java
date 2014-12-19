@@ -73,6 +73,7 @@ public class LoginController extends BaseController implements Initializable {
     @FXML
     private void onKeyPress() {
         error.setText("");
+        System.exit(0);
     }
 
     @FXML
