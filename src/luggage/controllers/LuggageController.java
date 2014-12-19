@@ -45,6 +45,7 @@ import luggage.Debug;
 import luggage.MainActivity;
 import luggage.database.models.CustomerModel;
 import luggage.database.models.LocationModel;
+import luggage.database.models.LogModel;
 import luggage.database.models.LuggageModel;
 import luggage.database.models.Model;
 import luggage.helpers.StageHelper;
@@ -462,6 +463,7 @@ public class LuggageController extends BaseController implements Initializable {
         MainActivity.viewId = luggage.getId();
         //Jasper is de beste
         System.out.println("Ayy ik doe iets");
+        Debug.logToDatabase(LogModel.TYPE_INFO, "User printed " + /*eenIdentifier + */ "as PDF file.");
         StageHelper.addStage("luggage/view", this, false, true);
     }
 
@@ -511,8 +513,7 @@ public class LuggageController extends BaseController implements Initializable {
                     .message("Please select the current location of the luggage or where to ship it to.")
                     .showWarning();
             return;
-        }
-        if (addStatus.getSelectionModel().getSelectedItem() == null) {
+        } else if (addStatus.getSelectionModel().getSelectedItem() == null) {
             Dialogs.create()
                     .owner((Stage) addStatus.getScene().getWindow())
                     .title("Warning")
@@ -520,8 +521,7 @@ public class LuggageController extends BaseController implements Initializable {
                     .message("Please select the status for the luggage item.")
                     .showWarning();
             return;
-        }
-        if (addDate.getValue() == null) {
+        } else if (addDate.getValue() == null) {
             Dialogs.create()
                     .owner((Stage) addDate.getScene().getWindow())
                     .title("Warning")
@@ -598,8 +598,7 @@ public class LuggageController extends BaseController implements Initializable {
                     .message("Please select the location of the luggage or where to ship it to.")
                     .showWarning();
             return;
-        }
-        if (editStatus.getSelectionModel().getSelectedItem() == null) {
+        } else if (editStatus.getSelectionModel().getSelectedItem() == null) {
             Dialogs.create()
                     .owner((Stage) editStatus.getScene().getWindow())
                     .title("Warning")
@@ -607,8 +606,7 @@ public class LuggageController extends BaseController implements Initializable {
                     .message("Please select the status for the luggage item.")
                     .showWarning();
             return;
-        }
-        if (editDate.getValue() == null) {
+        } else if (editDate.getValue() == null) {
             Dialogs.create()
                     .owner((Stage) editDate.getScene().getWindow())
                     .title("Warning")

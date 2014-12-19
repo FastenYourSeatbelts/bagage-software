@@ -54,7 +54,6 @@ public class Debug {
      */
     public static void logToDatabase(String type, String message) {
         LogModel log = new LogModel();
-        log.setDatetime(type);
         log.setUserId(Integer.toString(Authentication.getCurrentUser().getId()));
         log.setType(type);
         log.setMessage(message);
@@ -65,5 +64,16 @@ public class Debug {
         log.setDatetime(dateFormat.format(date));
         log.save();
     }
-    
+    public static void logLoginFailToDatabase(String message) {
+        LogModel log = new LogModel();
+        log.setUserId("14");
+        log.setType(LogModel.TYPE_INFO);
+        log.setMessage(message);
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date();
+
+        log.setDatetime(dateFormat.format(date));
+        log.save();
+    }
 }

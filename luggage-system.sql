@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.11
+-- version 4.2.7.1
 -- http://www.phpmyadmin.net
 --
--- Machine: 127.0.0.1
--- Gegenereerd op: 28 nov 2014 om 13:01
--- Serverversie: 5.6.21
--- PHP-versie: 5.6.3
+-- Host: localhost
+-- Generation Time: Dec 19, 2014 at 11:56 AM
+-- Server version: 5.6.20
+-- PHP Version: 5.5.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Databank: `luggage-system`
+-- Database: `luggage-system`
 --
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `customers`
+-- Table structure for table `customers`
 --
 
 CREATE TABLE IF NOT EXISTS `customers` (
@@ -39,13 +39,14 @@ CREATE TABLE IF NOT EXISTS `customers` (
   `email` varchar(255) NOT NULL,
   `telephone` varchar(255) NOT NULL,
   `mobile` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=502 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
--- Gegevens worden geëxporteerd voor tabel `customers`
+-- Dumping data for table `customers`
 --
 
 INSERT INTO `customers` (`id`, `insurer_id`, `firstname`, `prefix`, `lastname`, `gender`, `address`, `postalcode`, `residence`, `email`, `telephone`, `mobile`) VALUES
+(1, 4, 'Debbie', '', 'Patton', 'other', '8922 Erat, Rd.', '5057ER', 'Assiniboia', 'Duis@luctusut.ca', '0031895584712', '0031645230425'),
 (2, 2, 'Lance', 'Hadley', 'Hall', 'other', '7529 Facilisis. Rd.', '4748SC', 'Buckie', 'ipsum.ac.mi@libero.com', '0031818260402', '0031614060499'),
 (3, 3, 'Jordan', 'Zorita', 'Orr', 'male', 'P.O. Box 105, 6868 Neque Avenue', '5032CB', 'Grand-Leez', 'dolor.quam@auguemalesuadamalesuada.co.uk', '0031304748315', '0031601815769'),
 (4, 4, 'Ingrid', 'Lamar', 'Klein', 'other', '407-3103 Augue, Street', '9837OG', 'Brussel', 'risus.Nulla@insodaleselit.com', '0031200090700', '0031669465616'),
@@ -69,16 +70,16 @@ INSERT INTO `customers` (`id`, `insurer_id`, `firstname`, `prefix`, `lastname`, 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `insurers`
+-- Table structure for table `insurers`
 --
 
 CREATE TABLE IF NOT EXISTS `insurers` (
 `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
--- Gegevens worden geëxporteerd voor tabel `insurers`
+-- Dumping data for table `insurers`
 --
 
 INSERT INTO `insurers` (`id`, `name`) VALUES
@@ -92,16 +93,16 @@ INSERT INTO `insurers` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `locations`
+-- Table structure for table `locations`
 --
 
 CREATE TABLE IF NOT EXISTS `locations` (
 `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=39 ;
 
 --
--- Gegevens worden geëxporteerd voor tabel `locations`
+-- Dumping data for table `locations`
 --
 
 INSERT INTO `locations` (`id`, `name`) VALUES
@@ -147,7 +148,7 @@ INSERT INTO `locations` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `log`
+-- Table structure for table `log`
 --
 
 CREATE TABLE IF NOT EXISTS `log` (
@@ -156,10 +157,10 @@ CREATE TABLE IF NOT EXISTS `log` (
   `type` enum('info','warning','error') NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `message` varchar(500) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=125 ;
 
 --
--- Gegevens worden geëxporteerd voor tabel `log`
+-- Dumping data for table `log`
 --
 
 INSERT INTO `log` (`id`, `user_id`, `type`, `datetime`, `message`) VALUES
@@ -177,134 +178,121 @@ INSERT INTO `log` (`id`, `user_id`, `type`, `datetime`, `message`) VALUES
 (12, 1, 'info', '2014-11-28 11:22:10', 'User updated row from users, id: 6.'),
 (13, 1, 'info', '2014-11-28 11:22:18', 'User deleted row from users, id: 6.'),
 (14, 1, 'info', '2014-11-28 11:22:38', 'User added row in users.'),
-(16, 1, 'info', '2014-11-28 11:23:44', 'User succesfully logged in'),
-(17, 1, 'info', '2014-11-28 11:24:17', 'User succesfully logged in'),
-(18, 1, 'info', '2014-11-28 11:26:33', 'User succesfully logged in'),
-(19, 1, 'info', '2014-11-28 11:29:03', 'User succesfully logged in'),
-(20, 1, 'info', '2014-11-28 11:30:19', 'User succesfully logged in'),
-(21, 1, 'info', '2014-11-28 11:31:28', 'User deleted row from users, id: 7.'),
-(22, 1, 'info', '2014-11-28 11:34:00', 'User updated row from users, id: 2.'),
-(23, 2, 'info', '2014-11-28 11:34:04', 'User succesfully logged in'),
-(24, 2, 'info', '2014-11-28 11:34:18', 'User updated row from users, id: 3.'),
-(25, 3, 'info', '2014-11-28 11:34:21', 'User succesfully logged in'),
-(26, 1, 'info', '2014-11-28 11:34:31', 'User succesfully logged in'),
-(27, 1, 'info', '2014-11-28 11:34:42', 'User updated row from users, id: 4.'),
-(28, 4, 'info', '2014-11-28 11:34:45', 'User succesfully logged in'),
-(29, 1, 'info', '2014-11-28 11:35:17', 'User succesfully logged in'),
-(30, 1, 'info', '2014-11-28 11:45:42', 'User succesfully logged in'),
-(31, 1, 'info', '2014-11-28 11:53:51', 'User succesfully logged in'),
-(32, 1, 'info', '2014-11-28 11:56:01', 'User succesfully logged in'),
-(33, 1, 'info', '2014-11-28 11:57:09', 'User succesfully logged in'),
-(34, 6, 'info', '2014-12-09 01:18:46', 'User succesfully logged in'),
-(35, 6, 'info', '2014-12-09 01:19:07', 'User succesfully logged in'),
-(36, 6, 'info', '2014-12-09 01:20:40', 'User succesfully logged in'),
-(37, 3, 'info', '2014-12-09 01:21:25', 'User succesfully logged in'),
-(38, 6, 'info', '2014-12-09 01:26:19', 'User succesfully logged in'),
-(39, 6, 'info', '2014-12-09 01:27:59', 'User succesfully logged in'),
-(40, 6, 'info', '2014-12-09 01:28:26', 'User succesfully logged in'),
-(41, 6, 'info', '2014-12-09 01:29:31', 'User succesfully logged in'),
-(42, 3, 'info', '2014-12-09 01:34:13', 'User succesfully logged in'),
-(43, 6, 'info', '2014-12-09 01:35:57', 'User succesfully logged in'),
-(44, 6, 'info', '2014-12-09 01:39:47', 'User succesfully logged in'),
-(45, 6, 'info', '2014-12-09 01:43:27', 'User succesfully logged in'),
-(46, 6, 'info', '2014-12-09 01:55:04', 'User succesfully logged in'),
-(47, 6, 'info', '2014-12-09 01:56:32', 'User succesfully logged in'),
-(48, 6, 'info', '2014-12-09 01:57:27', 'User succesfully logged in'),
-(49, 6, 'info', '2014-12-09 02:02:01', 'User succesfully logged in'),
-(50, 6, 'info', '2014-12-09 02:02:14', 'User succesfully logged in'),
-(51, 6, 'info', '2014-12-09 02:02:32', 'User succesfully logged in'),
-(52, 6, 'info', '2014-12-09 02:42:36', 'User succesfully logged in'),
-(53, 6, 'info', '2014-12-09 02:46:03', 'User succesfully logged in'),
-(54, 6, 'info', '2014-12-09 02:47:00', 'User succesfully logged in'),
-(55, 6, 'info', '2014-12-09 02:47:16', 'User succesfully logged in'),
-(56, 6, 'info', '2014-12-09 02:49:51', 'User succesfully logged in'),
-(57, 6, 'info', '2014-12-10 14:03:33', 'User succesfully logged in'),
-(58, 6, 'info', '2014-12-10 14:08:39', 'User succesfully logged in'),
-(59, 3, 'info', '2014-12-10 14:08:58', 'User succesfully logged in'),
-(60, 3, 'info', '2014-12-10 14:11:39', 'User succesfully logged in'),
-(61, 3, 'info', '2014-12-11 18:33:06', 'User succesfully logged in'),
-(62, 6, 'info', '2014-12-11 18:35:22', 'User succesfully logged in'),
-(63, 3, 'info', '2014-12-11 18:35:42', 'User succesfully logged in'),
-(64, 6, 'info', '2014-12-11 18:36:12', 'User succesfully logged in'),
-(65, 6, 'info', '2014-12-11 18:41:30', 'User succesfully logged in'),
-(66, 3, 'info', '2014-12-11 18:44:07', 'User succesfully logged in'),
-(67, 6, 'info', '2014-12-15 10:27:50', 'User succesfully logged in'),
-(68, 6, 'info', '2014-12-15 11:16:50', 'User succesfully logged in'),
-(69, 6, 'info', '2014-12-15 11:17:12', 'User succesfully logged in'),
-(70, 6, 'info', '2014-12-15 11:17:39', 'User succesfully logged in'),
-(71, 4, 'info', '2014-12-15 11:20:10', 'User succesfully logged in'),
-(72, 4, 'info', '2014-12-15 11:20:31', 'User succesfully logged in'),
-(73, 4, 'info', '2014-12-15 11:21:46', 'User added row in luggage.'),
-(74, 6, 'info', '2014-12-15 12:18:29', 'User succesfully logged in'),
-(75, 6, 'info', '2014-12-15 12:21:15', 'User succesfully logged in'),
-(76, 6, 'info', '2014-12-15 12:21:42', 'User succesfully logged in'),
-(77, 6, 'info', '2014-12-15 12:22:40', 'User succesfully logged in'),
-(78, 6, 'info', '2014-12-15 12:23:00', 'User succesfully logged in'),
-(79, 6, 'info', '2014-12-15 12:23:55', 'User succesfully logged in'),
-(80, 6, 'info', '2014-12-15 12:34:51', 'User succesfully logged in'),
-(81, 6, 'info', '2014-12-15 12:47:50', 'User succesfully logged in'),
-(82, 6, 'info', '2014-12-15 12:48:03', 'User succesfully logged in'),
-(83, 6, 'info', '2014-12-15 12:51:57', 'User succesfully logged in'),
-(84, 6, 'info', '2014-12-15 12:52:07', 'User succesfully logged in'),
-(85, 3, 'info', '2014-12-15 12:52:22', 'User succesfully logged in'),
-(86, 6, 'info', '2014-12-15 12:55:31', 'User succesfully logged in'),
-(87, 6, 'info', '2014-12-15 12:56:44', 'User succesfully logged in'),
-(88, 6, 'info', '2014-12-15 12:58:28', 'User succesfully logged in'),
-(89, 6, 'info', '2014-12-15 12:59:17', 'User succesfully logged in'),
-(90, 6, 'info', '2014-12-15 13:00:43', 'User succesfully logged in'),
-(91, 6, 'info', '2014-12-15 13:08:11', 'User succesfully logged in'),
-(92, 6, 'info', '2014-12-15 13:13:44', 'User succesfully logged in'),
-(93, 6, 'info', '2014-12-15 13:15:02', 'User succesfully logged in'),
-(94, 6, 'info', '2014-12-15 13:16:04', 'User succesfully logged in'),
-(95, 6, 'info', '2014-12-15 13:17:04', 'User succesfully logged in'),
-(96, 6, 'info', '2014-12-15 13:21:09', 'User succesfully logged in'),
-(97, 6, 'info', '2014-12-15 13:26:12', 'User succesfully logged in'),
-(98, 6, 'info', '2014-12-15 13:26:44', 'User succesfully logged in'),
-(99, 6, 'info', '2014-12-18 12:45:26', 'User succesfully logged in'),
-(100, 6, 'info', '2014-12-18 12:46:58', 'User succesfully logged in'),
-(101, 6, 'info', '2014-12-18 12:47:14', 'User succesfully logged in'),
-(102, 3, 'info', '2014-12-18 12:47:42', 'User succesfully logged in'),
-(103, 4, 'info', '2014-12-18 12:47:53', 'User succesfully logged in'),
-(104, 1, 'info', '2014-12-18 12:48:29', 'User succesfully logged in'),
-(105, 2, 'info', '2014-12-18 12:48:55', 'User succesfully logged in'),
-(106, 6, 'info', '2014-12-18 12:49:51', 'User succesfully logged in'),
-(107, 2, 'info', '2014-12-18 15:30:37', 'User succesfully logged in'),
-(108, 2, 'info', '2014-12-18 15:31:38', 'User added row in users.'),
-(109, 2, 'info', '2014-12-18 15:32:39', 'User added row in users.'),
-(110, 2, 'info', '2014-12-18 15:36:28', 'User added row in users.'),
-(111, 2, 'info', '2014-12-18 15:37:08', 'User added row in users.'),
-(112, 2, 'info', '2014-12-18 15:43:06', 'User added row in users.'),
-(113, 2, 'info', '2014-12-18 15:43:15', 'User updated row from users, id: 5.'),
-(114, 2, 'info', '2014-12-18 15:44:11', 'User added row in users.'),
-(115, 2, 'info', '2014-12-18 15:44:53', 'User added row in users.'),
-(116, 13, 'info', '2014-12-18 15:44:59', 'User succesfully logged in'),
-(117, 11, 'info', '2014-12-18 15:45:14', 'User succesfully logged in'),
-(118, 13, 'info', '2014-12-18 15:45:41', 'User succesfully logged in'),
-(119, 12, 'info', '2014-12-18 15:45:45', 'User succesfully logged in'),
-(120, 8, 'info', '2014-12-18 15:45:52', 'User succesfully logged in'),
-(121, 6, 'info', '2014-12-18 15:46:04', 'User succesfully logged in'),
-(122, 7, 'info', '2014-12-18 15:46:09', 'User succesfully logged in'),
-(123, 10, 'info', '2014-12-18 15:46:16', 'User succesfully logged in'),
-(124, 4, 'info', '2014-12-18 15:46:25', 'User succesfully logged in'),
-(125, 6, 'info', '2014-12-18 15:48:14', 'User succesfully logged in'),
-(126, 4, 'info', '2014-12-18 16:02:52', 'User succesfully logged in'),
-(127, 6, 'info', '2014-12-18 16:08:58', 'User succesfully logged in'),
-(128, 6, 'info', '2014-12-18 16:10:04', 'User succesfully logged in'),
-(129, 6, 'info', '2014-12-18 16:18:07', 'User succesfully logged in'),
-(130, 6, 'info', '2014-12-18 16:18:32', 'User succesfully logged in'),
-(131, 6, 'info', '2014-12-18 16:18:43', 'User succesfully logged in'),
-(132, 6, 'info', '2014-12-18 16:18:58', 'User succesfully logged in'),
-(133, 6, 'info', '2014-12-18 16:19:36', 'User added row in luggage.'),
-(134, 6, 'info', '2014-12-18 16:20:43', 'User added row in luggage.'),
-(135, 6, 'info', '2014-12-18 16:21:31', 'User added row in luggage.'),
-(136, 6, 'info', '2014-12-18 16:22:24', 'User added row in luggage.'),
-(137, 5, 'info', '2014-12-18 16:22:53', 'User succesfully logged in'),
-(138, 5, 'info', '2014-12-18 16:24:02', 'User added row in luggage.');
+(15, 1, 'info', '2014-11-28 11:23:44', 'User succesfully logged in'),
+(16, 1, 'info', '2014-11-28 11:24:17', 'User succesfully logged in'),
+(17, 1, 'info', '2014-11-28 11:26:33', 'User succesfully logged in'),
+(18, 1, 'info', '2014-11-28 11:29:03', 'User succesfully logged in'),
+(19, 1, 'info', '2014-11-28 11:30:19', 'User succesfully logged in'),
+(20, 1, 'info', '2014-11-28 11:31:28', 'User deleted row from users, id: 7.'),
+(21, 1, 'info', '2014-11-28 11:34:00', 'User updated row from users, id: 2.'),
+(22, 2, 'info', '2014-11-28 11:34:04', 'User succesfully logged in'),
+(23, 2, 'info', '2014-11-28 11:34:18', 'User updated row from users, id: 3.'),
+(24, 3, 'info', '2014-11-28 11:34:21', 'User succesfully logged in'),
+(25, 1, 'info', '2014-11-28 11:34:31', 'User succesfully logged in'),
+(26, 1, 'info', '2014-11-28 11:34:42', 'User updated row from users, id: 4.'),
+(27, 4, 'info', '2014-11-28 11:34:45', 'User succesfully logged in'),
+(28, 1, 'info', '2014-11-28 11:35:17', 'User succesfully logged in'),
+(29, 1, 'info', '2014-11-28 11:45:42', 'User succesfully logged in'),
+(30, 1, 'info', '2014-11-28 11:53:51', 'User succesfully logged in'),
+(31, 1, 'info', '2014-11-28 11:56:01', 'User succesfully logged in'),
+(32, 1, 'info', '2014-11-28 11:57:09', 'User succesfully logged in'),
+(33, 6, 'info', '2014-12-09 01:18:46', 'User succesfully logged in'),
+(34, 6, 'info', '2014-12-09 01:19:07', 'User succesfully logged in'),
+(35, 6, 'info', '2014-12-09 01:20:40', 'User succesfully logged in'),
+(36, 3, 'info', '2014-12-09 01:21:25', 'User succesfully logged in'),
+(37, 6, 'info', '2014-12-09 01:26:19', 'User succesfully logged in'),
+(38, 6, 'info', '2014-12-09 01:27:59', 'User succesfully logged in'),
+(39, 6, 'info', '2014-12-09 01:28:26', 'User succesfully logged in'),
+(40, 6, 'info', '2014-12-09 01:29:31', 'User succesfully logged in'),
+(41, 3, 'info', '2014-12-09 01:34:13', 'User succesfully logged in'),
+(42, 6, 'info', '2014-12-09 01:35:57', 'User succesfully logged in'),
+(43, 6, 'info', '2014-12-09 01:39:47', 'User succesfully logged in'),
+(44, 6, 'info', '2014-12-09 01:43:27', 'User succesfully logged in'),
+(45, 6, 'info', '2014-12-09 01:55:04', 'User succesfully logged in'),
+(46, 3, 'info', '2014-12-10 14:08:58', 'User succesfully logged in'),
+(47, 3, 'info', '2014-12-10 14:11:39', 'User succesfully logged in'),
+(48, 3, 'info', '2014-12-11 18:33:06', 'User succesfully logged in'),
+(49, 6, 'info', '2014-12-11 18:35:22', 'User succesfully logged in'),
+(50, 3, 'info', '2014-12-11 18:35:42', 'User succesfully logged in'),
+(51, 6, 'info', '2014-12-11 18:36:12', 'User succesfully logged in'),
+(52, 6, 'info', '2014-12-11 18:41:30', 'User succesfully logged in'),
+(53, 3, 'info', '2014-12-11 18:44:07', 'User succesfully logged in'),
+(54, 6, 'info', '2014-12-15 10:27:50', 'User succesfully logged in'),
+(55, 6, 'info', '2014-12-15 11:16:50', 'User succesfully logged in'),
+(56, 6, 'info', '2014-12-15 11:17:12', 'User succesfully logged in'),
+(57, 6, 'info', '2014-12-15 11:17:39', 'User succesfully logged in'),
+(58, 4, 'info', '2014-12-15 11:20:10', 'User succesfully logged in'),
+(59, 4, 'info', '2014-12-15 11:20:31', 'User succesfully logged in'),
+(60, 4, 'info', '2014-12-15 11:21:46', 'User added row in luggage.'),
+(61, 6, 'info', '2014-12-15 12:18:29', 'User succesfully logged in'),
+(62, 6, 'info', '2014-12-15 12:21:15', 'User succesfully logged in'),
+(63, 6, 'info', '2014-12-15 12:21:42', 'User succesfully logged in'),
+(64, 6, 'info', '2014-12-15 12:22:40', 'User succesfully logged in'),
+(65, 6, 'info', '2014-12-15 12:23:00', 'User succesfully logged in'),
+(66, 6, 'info', '2014-12-15 12:23:55', 'User succesfully logged in'),
+(67, 6, 'info', '2014-12-15 12:34:51', 'User succesfully logged in'),
+(68, 6, 'info', '2014-12-15 12:47:50', 'User succesfully logged in'),
+(69, 6, 'info', '2014-12-15 12:48:03', 'User succesfully logged in'),
+(70, 6, 'info', '2014-12-15 12:51:57', 'User succesfully logged in'),
+(71, 6, 'info', '2014-12-15 13:15:02', 'User succesfully logged in'),
+(72, 6, 'info', '2014-12-15 13:16:04', 'User succesfully logged in'),
+(73, 6, 'info', '2014-12-15 13:17:04', 'User succesfully logged in'),
+(74, 6, 'info', '2014-12-15 13:21:09', 'User succesfully logged in'),
+(75, 6, 'info', '2014-12-15 13:26:12', 'User succesfully logged in'),
+(76, 6, 'info', '2014-12-15 13:26:44', 'User succesfully logged in'),
+(77, 6, 'info', '2014-12-18 12:45:26', 'User succesfully logged in'),
+(78, 6, 'info', '2014-12-18 12:46:58', 'User succesfully logged in'),
+(79, 6, 'info', '2014-12-18 12:47:14', 'User succesfully logged in'),
+(80, 9, 'info', '2014-12-18 12:47:42', 'User succesfully logged in'),
+(81, 3, 'info', '2014-12-18 12:47:42', 'User succesfully logged in'),
+(82, 4, 'info', '2014-12-18 12:47:53', 'User succesfully logged in'),
+(83, 1, 'info', '2014-12-18 12:48:29', 'User succesfully logged in'),
+(84, 2, 'info', '2014-12-18 12:48:55', 'User succesfully logged in'),
+(85, 6, 'info', '2014-12-18 12:49:51', 'User succesfully logged in'),
+(86, 2, 'info', '2014-12-18 15:30:37', 'User succesfully logged in'),
+(87, 2, 'info', '2014-12-18 15:31:38', 'User added row in users.'),
+(88, 2, 'info', '2014-12-18 15:32:39', 'User added row in users.'),
+(89, 2, 'info', '2014-12-18 15:36:28', 'User added row in users.'),
+(90, 2, 'info', '2014-12-18 15:37:08', 'User added row in users.'),
+(91, 2, 'info', '2014-12-18 15:43:06', 'User added row in users.'),
+(92, 2, 'info', '2014-12-18 15:43:15', 'User updated row from users, id: 5.'),
+(93, 2, 'info', '2014-12-18 15:44:11', 'User added row in users.'),
+(94, 2, 'info', '2014-12-18 15:44:53', 'User added row in users.'),
+(95, 13, 'info', '2014-12-18 15:44:59', 'User succesfully logged in'),
+(96, 11, 'info', '2014-12-18 15:45:14', 'User succesfully logged in'),
+(97, 13, 'info', '2014-12-18 15:45:41', 'User succesfully logged in'),
+(98, 12, 'info', '2014-12-18 15:45:45', 'User succesfully logged in'),
+(99, 8, 'info', '2014-12-18 15:45:52', 'User succesfully logged in'),
+(100, 6, 'info', '2014-12-18 15:46:04', 'User succesfully logged in'),
+(101, 7, 'info', '2014-12-18 15:46:09', 'User succesfully logged in'),
+(102, 10, 'info', '2014-12-18 15:46:16', 'User succesfully logged in'),
+(103, 4, 'info', '2014-12-18 15:46:25', 'User succesfully logged in'),
+(104, 6, 'info', '2014-12-18 15:48:14', 'User succesfully logged in'),
+(105, 4, 'info', '2014-12-18 16:02:52', 'User succesfully logged in'),
+(106, 6, 'info', '2014-12-18 16:18:43', 'User succesfully logged in'),
+(107, 6, 'info', '2014-12-18 16:18:58', 'User succesfully logged in'),
+(108, 6, 'info', '2014-12-18 16:19:36', 'User added row in luggage.'),
+(109, 6, 'info', '2014-12-18 16:20:43', 'User added row in luggage.'),
+(110, 6, 'info', '2014-12-18 16:21:31', 'User added row in luggage.'),
+(111, 6, 'info', '2014-12-18 16:22:24', 'User added row in luggage.'),
+(112, 5, 'info', '2014-12-18 16:22:53', 'User succesfully logged in'),
+(113, 5, 'info', '2014-12-18 16:24:02', 'User added row in luggage.'),
+(114, 14, 'info', '2014-12-18 23:33:25', 'Login failed. User: "moderator"   Password: "I AM TESTING THINGS"'),
+(115, 14, 'info', '2014-12-18 23:33:27', 'Login failed. User: "moderator"   Password: ""'),
+(116, 7, 'info', '2014-12-18 23:47:17', 'User succesfully logged in'),
+(117, 14, 'info', '2014-12-19 00:23:10', 'Login failed. User: ""    Password: "\\DROP TABLE Users"'),
+(118, 14, 'info', '2014-12-19 00:23:29', 'Login failed. User: ""    Password: "\\"DROP TABLE Luggage"'),
+(119, 14, 'info', '2014-12-19 00:23:32', 'Login failed. User: ""    Password: "\\"'),
+(120, 14, 'info', '2014-12-19 00:23:34', 'Login failed. User: ""    Password: "\\\\\\"'),
+(121, 14, 'info', '2014-12-19 00:23:35', 'Login failed. User: ""    Password: "\\\\"'),
+(122, 9, 'info', '2014-12-19 00:23:38', 'User succesfully logged in'),
+(123, 14, 'info', '2014-12-19 10:42:10', 'Login failed. User: "TextField[id=username, styleClass=text-input text-field]"    Password: "PasswordField[id=password, styleClass=text-input text-field password-field]"'),
+(124, 6, 'info', '2014-12-19 10:42:14', 'User succesfully logged in');
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `luggage`
+-- Table structure for table `luggage`
 --
 
 CREATE TABLE IF NOT EXISTS `luggage` (
@@ -312,14 +300,14 @@ CREATE TABLE IF NOT EXISTS `luggage` (
   `customer_id` int(11) DEFAULT NULL,
   `location_id` int(11) NOT NULL,
   `removed` tinyint(1) NOT NULL DEFAULT '0',
-  `status` enum('Missing','Found','Resolved') NOT NULL DEFAULT 'Missing',
+  `status` enum('Missing','Found','Resolved') NOT NULL,
   `tags` varchar(500) NOT NULL,
   `notes` longtext NOT NULL,
   `datetime` datetime NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3994 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=24 ;
 
 --
--- Gegevens worden geëxporteerd voor tabel `luggage`
+-- Dumping data for table `luggage`
 --
 
 INSERT INTO `luggage` (`id`, `customer_id`, `location_id`, `removed`, `status`, `tags`, `notes`, `datetime`) VALUES
@@ -328,17 +316,29 @@ INSERT INTO `luggage` (`id`, `customer_id`, `location_id`, `removed`, `status`, 
 (3, 18, 21, 0, 'Missing', 'Quisque imperdiet, erat nonummy ultricies', 'pede. Suspendisse dui. Fusce diam nunc, ullamcorper eu, euismod ac, fermentum vel, mauris. Integer sem elit, pharetra ut, pharetra sed, hendrerit a, arcu. Sed et', '2012-01-15 08:44:50'),
 (4, 10, 22, 0, 'Resolved', 'Pellentesque tincidunt tempus risus. Donec egestas. Duis ac arcu.', 'conubia nostra, per inceptos hymenaeos. Mauris ut quam vel sapien imperdiet ornare. In faucibus. Morbi vehicula. Pellentesque tincidunt tempus risus. Donec egestas. Duis ac arcu. Nunc mauris. Morbi non sapien molestie orci tincidunt adipiscing. Mauris molestie pharetra nibh. Aliquam ornare, libero at auctor ullamcorper, nisl arcu iaculis enim, sit amet', '2012-07-29 19:42:48'),
 (5, 20, 10, 1, 'Resolved', 'non quam. Pellentesque habitant morbi tristique senectus et', 'penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean eget magna. Suspendisse tristique neque venenatis lacus. Etiam bibendum fermentum metus. Aenean sed pede nec ante blandit viverra. Donec tempus, lorem fringilla ornare placerat, orci lacus vestibulum lorem, sit amet ultricies sem magna nec quam. Curabitur', '2013-03-18 22:45:54'),
-(6, NULL, 4, 0, 'Missing', 'Brown suitcase, missing tag', 'Contains laptop', '2014-12-10 00:00:00'),
-(7, NULL, 12, 0, 'Found', 'Blue', '', '2014-12-17 00:00:00'),
-(8, NULL, 23, 0, 'Missing', 'Pink Helly Kitty bag', '', '2013-12-04 00:00:00'),
-(9, NULL, 13, 0, 'Found', 'Black large suitcase, Samsonite', '', '2014-06-19 00:00:00'),
-(10, NULL, 9, 0, 'Resolved', 'Wheelchair, brand: Mark', 'Foldable', '2011-10-08 00:00:00'),
-(11, NULL, 23, 0, 'Missing', 'Pink backpack, locks on the zippers, many stickers', 'Contains glass object', '2011-12-02 00:00:00');
+(6, 15, 4, 0, 'Missing', 'Brown suitcase, missing tag', 'Contains laptop', '2014-12-10 00:00:00'),
+(7, 16, 12, 0, 'Found', 'Blue', '', '2014-12-17 00:00:00'),
+(8, 14, 23, 0, 'Missing', 'Pink Helly Kitty bag', '', '2013-12-04 00:00:00'),
+(9, 13, 13, 0, 'Found', 'Black large suitcase, Samsonite', '', '2014-06-19 00:00:00'),
+(10, 12, 9, 0, 'Resolved', 'Wheelchair, brand: Mark', 'Foldable', '2011-10-08 00:00:00'),
+(11, 11, 23, 0, 'Missing', 'Pink backpack, locks on the zippers, many stickers', 'Contains glass object', '2011-12-02 00:00:00'),
+(12, 1, 9, 0, 'Resolved', 'Plastic backpack on wheels', '', '2011-10-08 00:00:00'),
+(13, 3, 9, 0, 'Resolved', 'Luggage', '', '2011-10-08 00:00:00'),
+(14, 2, 9, 0, 'Resolved', 'Gray suitcase', '', '2011-10-08 00:00:00'),
+(15, 4, 9, 0, 'Resolved', 'Blue backpack', '', '2011-10-08 00:00:00'),
+(16, 5, 9, 0, 'Resolved', 'Suitcase, tiny, pink', '', '2011-10-08 00:00:00'),
+(17, 6, 9, 0, 'Resolved', 'Gray suitcase', '', '2012-10-08 00:00:00'),
+(18, 7, 9, 0, 'Resolved', 'Green suitcase', '', '2012-10-08 00:00:00'),
+(19, 8, 9, 0, 'Resolved', 'Laptop suitcase', '', '2012-10-08 00:00:00'),
+(20, 9, 9, 0, 'Resolved', 'Blue coat, brand: Odin', '', '2011-10-08 00:00:00'),
+(21, 11, 9, 0, 'Resolved', 'Gray wheelchair', '', '2010-10-08 00:00:00'),
+(22, 10, 9, 0, 'Resolved', 'Purple backpack', '', '2010-10-08 00:00:00'),
+(23, 12, 9, 0, 'Resolved', 'Black backpack', '', '2010-10-08 00:00:00');
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
@@ -348,7 +348,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `firstname` varchar(255) NOT NULL,
   `prefix` varchar(255) NOT NULL,
   `lastname` varchar(255) NOT NULL,
-  `role` enum('super','manager','employee','moderator','') NOT NULL DEFAULT 'employee',
+  `role` enum('super','manager','employee','moderator') NOT NULL,
   `gender` enum('male','female','other') NOT NULL,
   `location_id` int(11) NOT NULL,
   `address` varchar(255) NOT NULL,
@@ -356,10 +356,10 @@ CREATE TABLE IF NOT EXISTS `users` (
   `residence` varchar(255) NOT NULL,
   `telephone` varchar(255) NOT NULL,
   `mobile` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=508 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
--- Gegevens worden geëxporteerd voor tabel `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `firstname`, `prefix`, `lastname`, `role`, `gender`, `location_id`, `address`, `postalcode`, `residence`, `telephone`, `mobile`) VALUES
@@ -375,107 +375,108 @@ INSERT INTO `users` (`id`, `username`, `password`, `firstname`, `prefix`, `lastn
 (10, 'Jasper', 'e515b7af26b997c94375a4775f864a0119d99dc9c06f49c5893de471b5ad3328cfd00a49b36544ca966c340957a493b20c447adb08ed058186e079e861d63bfd', 'Jasper', '', 'Wkdlsflkwe', 'manager', 'male', 26, 'Hierdaar 3', '5465DF', 'Belgrado', '0012345678974', '0012345678974'),
 (11, 'Lars', 'c2b659794a5c1d72ee02d95220fb2e3e0508b2b6f50def959bd9eee69a24ccfa5c4ddd2d059943eade0b9d6b4e346bc867c2dc14d48dd62fc32827f4aee04862', 'Lars', 'de', 'Vries', 'moderator', 'male', 18, 'Blabalbal 132', '1023DF', 'Amsterdam', '003145678943', '003145678943'),
 (12, 'Ali', '02e03ddba23ecb5d872ff5784fe5383c44a171cd371087d0cf80c6cc3c1a182d68d22a75f62615bf39d4edcabffdd808c57f928e4fb82a49ddafc2485bd350ea', 'Ali', 'de', 'Geeuw', 'manager', 'male', 37, 'Amsterdamstraat 124', '8822VD', 'Groningen', '003198374252', '003198374252'),
-(13, 'Derp', '38da7d98bc0e173b0767b5baa8880738e0b62603a7c2e08f729adac3f6f0796dd95d9d66925bbd3976410fc9104a894a20f7c633bf1be3b497ca2363976e8ede', 'Derp', '', '', 'employee', 'other', 17, 'Derp 1', '1000DP', 'Derp', '003121318232', '003121318232');
+(13, 'Derp', '38da7d98bc0e173b0767b5baa8880738e0b62603a7c2e08f729adac3f6f0796dd95d9d66925bbd3976410fc9104a894a20f7c633bf1be3b497ca2363976e8ede', 'Derp', '', '', 'employee', 'other', 17, 'Derp 1', '1000DP', 'Derp', '003121318232', '003121318232'),
+(14, 'At login screen', '38da1d98bc0e173b0767b5baa8880738e0b62603a7c2e08f729adac3f6f0796dd95d8d66925bbd397641dfc9104a894a20f7c6338f1be3b497cb24139b6f8d4e', 'Derp', '', '', 'employee', 'other', 17, 'Derp 1', '1000DP', 'Derp', '003121318232', '003121318232');
 
 --
--- Indexen voor geëxporteerde tabellen
+-- Indexes for dumped tables
 --
 
 --
--- Indexen voor tabel `customers`
+-- Indexes for table `customers`
 --
 ALTER TABLE `customers`
  ADD PRIMARY KEY (`id`), ADD KEY `insurer_id` (`insurer_id`), ADD KEY `insurer_id_2` (`insurer_id`);
 
 --
--- Indexen voor tabel `insurers`
+-- Indexes for table `insurers`
 --
 ALTER TABLE `insurers`
  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `name` (`name`);
 
 --
--- Indexen voor tabel `locations`
+-- Indexes for table `locations`
 --
 ALTER TABLE `locations`
  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `name` (`name`);
 
 --
--- Indexen voor tabel `log`
+-- Indexes for table `log`
 --
 ALTER TABLE `log`
  ADD PRIMARY KEY (`id`), ADD KEY `user_id` (`user_id`);
 
 --
--- Indexen voor tabel `luggage`
+-- Indexes for table `luggage`
 --
 ALTER TABLE `luggage`
  ADD PRIMARY KEY (`id`), ADD KEY `customer_id` (`customer_id`,`location_id`), ADD KEY `location_id` (`location_id`);
 
 --
--- Indexen voor tabel `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
- ADD PRIMARY KEY (`id`), ADD KEY `location_id` (`location_id`);
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `username` (`username`), ADD KEY `location_id` (`location_id`);
 
 --
--- AUTO_INCREMENT voor geëxporteerde tabellen
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT voor een tabel `customers`
+-- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=502;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
 --
--- AUTO_INCREMENT voor een tabel `insurers`
+-- AUTO_INCREMENT for table `insurers`
 --
 ALTER TABLE `insurers`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
--- AUTO_INCREMENT voor een tabel `locations`
+-- AUTO_INCREMENT for table `locations`
 --
 ALTER TABLE `locations`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=39;
 --
--- AUTO_INCREMENT voor een tabel `log`
+-- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=34;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=125;
 --
--- AUTO_INCREMENT voor een tabel `luggage`
+-- AUTO_INCREMENT for table `luggage`
 --
 ALTER TABLE `luggage`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3994;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=24;
 --
--- AUTO_INCREMENT voor een tabel `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=508;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
 --
--- Beperkingen voor geëxporteerde tabellen
+-- Constraints for dumped tables
 --
 
 --
--- Beperkingen voor tabel `customers`
+-- Constraints for table `customers`
 --
 ALTER TABLE `customers`
 ADD CONSTRAINT `customers_ibfk_1` FOREIGN KEY (`insurer_id`) REFERENCES `insurers` (`id`) ON UPDATE CASCADE;
 
 --
--- Beperkingen voor tabel `log`
+-- Constraints for table `log`
 --
 ALTER TABLE `log`
 ADD CONSTRAINT `log_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Beperkingen voor tabel `luggage`
+-- Constraints for table `luggage`
 --
 ALTER TABLE `luggage`
 ADD CONSTRAINT `luggage_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT `luggage_ibfk_2` FOREIGN KEY (`location_id`) REFERENCES `locations` (`id`) ON UPDATE CASCADE;
 
 --
--- Beperkingen voor tabel `users`
+-- Constraints for table `users`
 --
 ALTER TABLE `users`
 ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`location_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
