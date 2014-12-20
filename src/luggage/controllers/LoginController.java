@@ -73,7 +73,6 @@ public class LoginController extends BaseController implements Initializable {
     @FXML
     private void onKeyPress() {
         error.setText("");
-//        System.exit(0);
     }
 
     @FXML
@@ -91,7 +90,7 @@ public class LoginController extends BaseController implements Initializable {
     private void login(ActionEvent event) {
         String[] params = new String[2];
         params[0] = username.getText();
-        params[1] = Encryption.hash(password.getText()) + '1';
+        params[1] = Encryption.hash(password.getText());
 
         UserModel user = new UserModel("username = ? AND password = ?", params);
         if (!user.exists()) {
