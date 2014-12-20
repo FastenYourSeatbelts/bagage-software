@@ -44,6 +44,7 @@ import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
 import luggage.Debug;
 import luggage.MainActivity;
+import luggage.database.models.LogModel;
 import luggage.helpers.StageHelper;
 import luggage.security.Authentication;
 import luggage.security.Permissions;
@@ -137,6 +138,7 @@ public class DashboardController extends BaseController implements Initializable
      */
     @FXML
     private void logout(ActionEvent event) {
+        Debug.logToDatabase(LogModel.TYPE_INFO, "User succesfully logged out");
         Authentication.logout();
         Stage currentStage = (Stage) logout.getScene().getWindow();
         StageHelper.replaceStage(currentStage, "login", this);

@@ -69,6 +69,11 @@ public class LoginController extends BaseController implements Initializable {
 
     @FXML
     private Button login;
+    
+    @FXML
+    private void exit() {
+        System.exit(0);
+    }
 
     @FXML
     private void onKeyPress() {
@@ -79,6 +84,7 @@ public class LoginController extends BaseController implements Initializable {
     public void listHelp() {
         StageHelper.addStage("login_help", this, false, true);
     }
+   
 
     /**
      * Called on enter in username or password field or when the user clicks on
@@ -94,7 +100,7 @@ public class LoginController extends BaseController implements Initializable {
 
         UserModel user = new UserModel("username = ? AND password = ?", params);
         if (!user.exists()) {
-            Debug.logLoginFailToDatabase("Login failed. User: \"" + username.getText() + "\"");
+            Debug.logLoginscreenToDatabase("Login failed. User: \"" + username.getText() + "\"");
             error.setText("Wrong login, please try again!");
             username.requestFocus();
             return;
