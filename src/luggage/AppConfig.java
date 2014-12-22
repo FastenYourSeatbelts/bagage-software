@@ -34,7 +34,7 @@ public class AppConfig {
     /**
      * Application wide title
      */
-    public static final String ApplicationName = "Corendon Bagage";
+    public static final String ApplicationName = "Corendon Luggage";
     
     /**
      * Application copyright
