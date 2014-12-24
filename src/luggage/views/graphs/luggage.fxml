@@ -29,6 +29,7 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
+            <CheckBox fx:id="showResolved" layoutX="31.0" layoutY="157.0" mnemonicParsing="false" selected="true" text="Show resolved cases" AnchorPane.leftAnchor="31.0" AnchorPane.topAnchor="157.0" />
          </children>
       </AnchorPane>
       <Button fx:id="listHelp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#listHelp" prefHeight="26.0" prefWidth="70.0" text="Help" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />

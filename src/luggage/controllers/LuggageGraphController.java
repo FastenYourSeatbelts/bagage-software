@@ -36,6 +36,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import luggage.database.models.LuggageModel;
 import luggage.database.models.Model;
@@ -69,13 +70,16 @@ public class LuggageGraphController extends BaseController implements Initializa
     @FXML
     public DatePicker end;
 
+    @FXML
+    public CheckBox showResolved;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         Debug.print("GRAPH CONTROLLER-----------------------------------------------------------------");
 
         if (piechart != null) {
             piechart.visibleProperty().set(false);
-            start.setValue(LocalDate.parse("1970-01-01"));
+            start.setValue(LocalDate.parse("2011-01-01"));
             updateChart();
         }
     }
@@ -84,6 +88,8 @@ public class LuggageGraphController extends BaseController implements Initializa
     public void listHelp() {
         StageHelper.addStage("graphs/help", this, false, true);
     }
+
+    double foundPercent, missingPercent, resolvedPercent, total;
 
     @FXML
     public void updateChart() {
@@ -118,12 +124,57 @@ public class LuggageGraphController extends BaseController implements Initializa
         resolvedParams[0] = "Resolved";
         List<Model> resolved = luggage.findAll("status = ? " + dateQuery, resolvedParams);
 
-        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
-                new PieChart.Data("Missing", missing.size()),
-                new PieChart.Data("Found", found.size()),
-                new PieChart.Data("Resolved", resolved.size())
+        ObservableList<PieChart.Data> pieChartData;
+        pieChartData = FXCollections.observableArrayList(
+                new PieChart.Data("Missing: " + missing.size() + " (" + Math.round(missingPercent) + "%)", missing.size()),
+                new PieChart.Data("Found: " + found.size() + " (" + Math.round(foundPercent) + "%)", found.size())
         );
+        if (showResolved.isSelected() && pieChartData.size() == 2) {
+            total = found.size() + missing.size() + resolved.size();
+            foundPercent = (found.size() / total * 100);
+            missingPercent = (missing.size() / total * 100);
+            resolvedPercent = (resolved.size() / total * 100);
 
+            pieChartData.add(new PieChart.Data("Resolved: " + resolved.size() + " (" + Math.round(resolvedPercent) + "%)", resolved.size()));
+
+            Debug.print("Graph updated: keep showing 'Resolved' cases");
+        } else if (!showResolved.isSelected() && pieChartData.size() == 2) {
+            total = found.size() + missing.size();
+            foundPercent = (found.size() / total * 100);
+            missingPercent = (missing.size() / total * 100);
+
+            pieChartData.removeAll(pieChartData);
+            pieChartData.add(new PieChart.Data("Missing: " + missing.size() + " (" + Math.round(missingPercent) + "%)", missing.size()));
+            pieChartData.add(new PieChart.Data("Found: " + found.size() + " (" + Math.round(foundPercent) + "%)", found.size()));
+
+            Debug.print("Graph updated: keep hiding 'Resolved 'cases");
+        }
+
+        showResolved.setOnAction((showResolved) -> {
+            if (this.showResolved.isSelected() && pieChartData.size() == 2) {
+                total = found.size() + missing.size() + resolved.size();
+                foundPercent = (found.size() / total * 100);
+                missingPercent = (missing.size() / total * 100);
+                resolvedPercent = (resolved.size() / total * 100);
+
+                pieChartData.removeAll(pieChartData);
+                pieChartData.add(new PieChart.Data("Missing: " + missing.size() + " (" + Math.round(missingPercent) + "%)", missing.size()));
+                pieChartData.add(new PieChart.Data("Found: " + found.size() + " (" + Math.round(foundPercent) + "%)", found.size()));
+                pieChartData.add(new PieChart.Data("Resolved: " + resolved.size() + " (" + Math.round(resolvedPercent) + "%)", resolved.size()));
+
+                Debug.print("CheckBox action: show 'Resolved 'cases");
+            } else if (!this.showResolved.isSelected() && pieChartData.size() == 3) {
+                total = found.size() + missing.size();
+                foundPercent = (found.size() / total * 100);
+                missingPercent = (missing.size() / total * 100);
+                
+                pieChartData.removeAll(pieChartData);
+                pieChartData.add(new PieChart.Data("Missing: " + missing.size() + " (" + Math.round(missingPercent) + "%)", missing.size()));
+                pieChartData.add(new PieChart.Data("Found: " + found.size() + " (" + Math.round(foundPercent) + "%)", found.size()));
+
+                Debug.print("CheckBox action: hide 'Resolved 'cases");
+            }
+        });
         piechart.setData(pieChartData);
     }
 }

@@ -76,3 +76,8 @@
     -fx-effect: null;
     -fx-background-insets: 0;
 }
+
+/* Custom colors for yummy pie chart slices. */
+.default-color0.chart-pie { -fx-pie-color: turquoise; }
+.default-color1.chart-pie { -fx-pie-color: steelblue; }
+.default-color2.chart-pie { -fx-pie-color: blue; }
