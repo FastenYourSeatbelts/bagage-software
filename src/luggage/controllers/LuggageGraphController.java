@@ -52,6 +52,7 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import luggage.database.models.LogModel;
@@ -96,38 +97,9 @@ public class LuggageGraphController extends BaseController implements Initializa
 
     @FXML
     public Label printNotif;
-
-    public void printNotif() {
-        printNotif.setText("");
-    }
-
+    
     @FXML
-    public void saveAsPng() {
-        WritableImage image = piechart.snapshot(new SnapshotParameters(), null);
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss");
-        DateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date();
-        String dateStart = start.getValue().toString();
-        String dateEnd;
-
-        if (end.getValue() == null) {
-            System.out.print(dateFormat2.format(date));
-            dateEnd = dateFormat2.format(date);
-        } else {
-            dateEnd = end.getValue().toString();
-        }
-
-        // TODO: A working FileChooser / location picker :/
-        File file = new File("Piechart of " + dateStart + " - " + dateEnd + " exported at " + dateFormat.format(date) + ".png");
-
-        try {
-            ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
-            printNotif.setText("Piechart successfully exported!");
-            Debug.logToDatabase(LogModel.TYPE_INFO, "Piechart exported as image.");
-        } catch (IOException ex) {
-            Logger.getLogger(LuggageGraphController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+    private Stage stage;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -136,12 +108,12 @@ public class LuggageGraphController extends BaseController implements Initializa
         if (piechart != null) {
             piechart.visibleProperty().set(false);
             start.setValue(LocalDate.parse("2011-01-01"));
-            piechart.setTitle("Hover over the pie slices for more information.");
+            initialTitle();
             updateChart();
             KeyActions();
         }
     }
-
+    
     @FXML
     public void listHelp() {
         StageHelper.addStage("graphs/help", this, false, true);
@@ -230,7 +202,7 @@ public class LuggageGraphController extends BaseController implements Initializa
             pieChartData.removeAll(pieChartData);
             pieChartData.add(new PieChart.Data("Missing: " + missing.size() + " (" + Math.round(missingPercent) + "%)", missing.size()));
             pieChartData.add(new PieChart.Data("Found: " + found.size() + " (" + Math.round(foundPercent) + "%)", found.size()));
-  pieChartData.add(new PieChart.Data("Resolved: " + resolved.size() + " (" + Math.round(resolvedPercent) + "%)", resolved.size()));
+            pieChartData.add(new PieChart.Data("Resolved: " + resolved.size() + " (" + Math.round(resolvedPercent) + "%)", resolved.size()));
 
             hoverNotif();
             Debug.print("Graph updated: keep showing 'Resolved' cases");
@@ -278,6 +250,82 @@ public class LuggageGraphController extends BaseController implements Initializa
         hoverNotif();
         printNotif();
     }
+
+    /**
+     * Saves snapshot of pie chart to image.
+     */
+    public void saveAsPng() {
+        WritableImage image = piechart.snapshot(new SnapshotParameters(), null);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss");
+        DateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        String dateStart = start.getValue().toString();
+        String dateEnd;
+
+        if (end.getValue() == null) {
+            dateEnd = dateFormat2.format(date);
+        } else {
+            dateEnd = end.getValue().toString();
+        }
+
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Save Pie Chart as");
+        Debug.print("Initial Directory prior set poll: " + chooser.getInitialDirectory());
+        chooser.setInitialDirectory(
+                new File(System.getProperty("user.home"))
+        );
+        Debug.print("Initial Directory after set poll: " + chooser.getInitialDirectory());
+        chooser.setInitialFileName("Pie chart of " + dateStart + " - " + dateEnd + " exported on " + dateFormat.format(date));
+        chooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("PNG", "*.png"));
+        chooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("PNG", "*.png"),
+                new FileChooser.ExtensionFilter("BMP", "*.bmp"),
+                new FileChooser.ExtensionFilter("GIF", "*.gif"),
+                new FileChooser.ExtensionFilter("JPEG", "*.jpg"),
+                new FileChooser.ExtensionFilter("PDF", "*.pdf"),
+                new FileChooser.ExtensionFilter("TIFF", "*.tiff"));
+        File file = chooser.showSaveDialog(stage);
+
+        String extension = returnExtension(file.toString());
+
+        if (file == null) {
+            return;
+        }
+        try {
+            ImageIO.write(SwingFXUtils.fromFXImage(image, null), extension, file);
+            printNotif.setText("Pie chart successfully exported!");
+            Debug.logToDatabase(LogModel.TYPE_INFO, "Piechart exported as " + extension + ".");
+            initialTitle();
+        } catch (IOException ex) {
+            Logger.getLogger(LuggageGraphController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public String returnExtension(String file) {
+        if (file.endsWith(".png")) {
+            return "PNG";
+        } else if (file.endsWith(".bmp")) {
+            return "BMP";
+        } else if (file.endsWith(".gif")) {
+            return "GIF";
+        } else if (file.endsWith(".jpg")) {
+            return "jpg";
+        } else if (file.endsWith(".pdf")) {
+            return "PDF";
+        } else if (file.endsWith(".tiff")) {
+            return "TIFF";
+        } else {
+            return "png";
+        }
+    }
+
+    public void initialTitle() {
+        piechart.setTitle("Hover over the pie slices for more information.");
+    }
+
+    public void printNotif() {
+        printNotif.setText("");
+    }
     
     public void hoverNotif() {
         for (final PieChart.Data data : piechart.getData()) {
@@ -285,7 +333,7 @@ public class LuggageGraphController extends BaseController implements Initializa
                     new EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent e) {
-                            String s = data.getName().substring(0, data.getName().length()-6);
+                            String s = data.getName().substring(0, data.getName().length() - 6);
                             Double d = Double.valueOf(data.getPieValue() / total * 10000);
                             piechart.setTitle("The share of '" + s + "' is approximately " + (Math.round(d) / 100) + "%");
                         }
