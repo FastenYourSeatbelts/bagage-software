@@ -42,11 +42,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -56,7 +52,6 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import luggage.database.models.LogModel;
@@ -232,7 +227,10 @@ public class LuggageGraphController extends BaseController implements Initializa
             missingPercent = (missing.size() / total * 100);
             resolvedPercent = (resolved.size() / total * 100);
 
-            pieChartData.add(new PieChart.Data("Resolved: " + resolved.size() + " (" + Math.round(resolvedPercent) + "%)", resolved.size()));
+            pieChartData.removeAll(pieChartData);
+            pieChartData.add(new PieChart.Data("Missing: " + missing.size() + " (" + Math.round(missingPercent) + "%)", missing.size()));
+            pieChartData.add(new PieChart.Data("Found: " + found.size() + " (" + Math.round(foundPercent) + "%)", found.size()));
+  pieChartData.add(new PieChart.Data("Resolved: " + resolved.size() + " (" + Math.round(resolvedPercent) + "%)", resolved.size()));
 
             hoverNotif();
             Debug.print("Graph updated: keep showing 'Resolved' cases");
@@ -287,8 +285,9 @@ public class LuggageGraphController extends BaseController implements Initializa
                     new EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent e) {
-                            Double d = Double.valueOf(data.getPieValue() * 10000 / total);
-                            piechart.setTitle("The share of " + data.getName() + " is approximately " + (Math.round(d) / (double)100) + "%");
+                            String s = data.getName().substring(0, data.getName().length()-6);
+                            Double d = Double.valueOf(data.getPieValue() / total * 10000);
+                            piechart.setTitle("The share of '" + s + "' is approximately " + (Math.round(d) / 100) + "%");
                         }
                     });
         }
