@@ -37,6 +37,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import luggage.database.models.LogModel;
 import luggage.database.models.Model;
 import luggage.helpers.StageHelper;
@@ -125,10 +127,19 @@ public class LogController extends BaseController implements Initializable {
             public void run() {
                 listOnSearch();
                 listTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+                keyActions();
             }
         });
     }
 
+    public void keyActions() {
+        listTableView.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.H)) {
+                listHelp();
+            }
+        });    
+    }
+    
     /**
      *
      * @param where

@@ -401,6 +401,19 @@ public class CustomersController extends BaseController implements Initializable
                 listHelp();
             }
         });
+        listTableView.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.E)) {
+                listEdit();
+            } else if (b.getCode().equals(KeyCode.H)) {
+                listHelp();
+            } else if (b.getCode().equals(KeyCode.N)) {
+                listNew();
+            } else if (b.getCode().equals(KeyCode.R)) {
+                listRemove();
+            } else if (b.getCode().equals(KeyCode.V)) {
+                listView();
+            }
+        });
         listEdit.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 listResetTableView("", new String[0]);

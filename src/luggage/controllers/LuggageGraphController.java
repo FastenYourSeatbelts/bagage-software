@@ -39,9 +39,14 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -50,6 +55,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import luggage.database.models.LogModel;
@@ -115,7 +122,7 @@ public class LuggageGraphController extends BaseController implements Initializa
             dateEnd = end.getValue().toString();
         }
 
-        // TODO: A working file chooser :/
+        // TODO: A working FileChooser / location picker :/
         File file = new File("Piechart of " + dateStart + " - " + dateEnd + " exported at " + dateFormat.format(date) + ".png");
 
         try {
@@ -134,6 +141,7 @@ public class LuggageGraphController extends BaseController implements Initializa
         if (piechart != null) {
             piechart.visibleProperty().set(false);
             start.setValue(LocalDate.parse("2011-01-01"));
+            piechart.setTitle("Hover over the pie slices for more information.");
             updateChart();
             KeyActions();
         }
@@ -226,6 +234,7 @@ public class LuggageGraphController extends BaseController implements Initializa
 
             pieChartData.add(new PieChart.Data("Resolved: " + resolved.size() + " (" + Math.round(resolvedPercent) + "%)", resolved.size()));
 
+            hoverNotif();
             Debug.print("Graph updated: keep showing 'Resolved' cases");
         } else if (!showResolved.isSelected() && pieChartData.size() == 2) {
             total = found.size() + missing.size();
@@ -236,6 +245,7 @@ public class LuggageGraphController extends BaseController implements Initializa
             pieChartData.add(new PieChart.Data("Missing: " + missing.size() + " (" + Math.round(missingPercent) + "%)", missing.size()));
             pieChartData.add(new PieChart.Data("Found: " + found.size() + " (" + Math.round(foundPercent) + "%)", found.size()));
 
+            hoverNotif();
             Debug.print("Graph updated: keep hiding 'Resolved 'cases");
         }
 
@@ -251,6 +261,7 @@ public class LuggageGraphController extends BaseController implements Initializa
                 pieChartData.add(new PieChart.Data("Found: " + found.size() + " (" + Math.round(foundPercent) + "%)", found.size()));
                 pieChartData.add(new PieChart.Data("Resolved: " + resolved.size() + " (" + Math.round(resolvedPercent) + "%)", resolved.size()));
 
+                hoverNotif();
                 Debug.print("CheckBox action: show 'Resolved 'cases");
             } else if (!this.showResolved.isSelected() && pieChartData.size() == 3) {
                 total = found.size() + missing.size();
@@ -261,11 +272,35 @@ public class LuggageGraphController extends BaseController implements Initializa
                 pieChartData.add(new PieChart.Data("Missing: " + missing.size() + " (" + Math.round(missingPercent) + "%)", missing.size()));
                 pieChartData.add(new PieChart.Data("Found: " + found.size() + " (" + Math.round(foundPercent) + "%)", found.size()));
 
+                hoverNotif();
                 Debug.print("CheckBox action: hide 'Resolved 'cases");
             }
         });
         piechart.setData(pieChartData);
+        hoverNotif();
         printNotif();
+    }
+    
+    public void hoverNotif() {
+        for (final PieChart.Data data : piechart.getData()) {
+            data.getNode().addEventHandler(MouseEvent.MOUSE_ENTERED,
+                    new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent e) {
+                            Double d = Double.valueOf(data.getPieValue() * 10000 / total);
+                            piechart.setTitle("The share of " + data.getName() + " is approximately " + (Math.round(d) / (double)100) + "%");
+                        }
+                    });
+        }
+        for (final PieChart.Data data : piechart.getData()) {
+            data.getNode().addEventHandler(MouseEvent.MOUSE_EXITED,
+                    new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent e) {
+                            piechart.setTitle("");
+                        }
+                    });
+        }
     }
 
     public void viewClose() {

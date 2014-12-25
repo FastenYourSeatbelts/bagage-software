@@ -233,6 +233,11 @@ public class FoundLuggageController extends BaseController implements Initializa
     }
     
     public void keyActions() {
+//        luggageTableView.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent a) -> {
+//            if (a.getCode().equals(KeyCode.V)) {
+//                listView();
+//            }
+//        });
         viewLocationId.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
                 viewClose();
