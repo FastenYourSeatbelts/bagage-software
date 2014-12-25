@@ -50,6 +50,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import luggage.database.models.LogModel;
 import luggage.database.models.LuggageModel;
@@ -78,6 +79,9 @@ public class LuggageGraphController extends BaseController implements Initializa
 
     @FXML
     private Button listHelp;
+
+    @FXML
+    private Button viewClose;
 
     @FXML
     public DatePicker start;
@@ -262,5 +266,10 @@ public class LuggageGraphController extends BaseController implements Initializa
         });
         piechart.setData(pieChartData);
         printNotif();
+    }
+
+    public void viewClose() {
+        Stage cancelStage = (Stage) viewClose.getScene().getWindow();
+        StageHelper.closeStage(cancelStage);
     }
 }

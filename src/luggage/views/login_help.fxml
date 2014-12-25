@@ -9,42 +9,43 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="500" maxWidth="350" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="350.0" style="-fx-background-color: BB1D14;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="luggage.controllers.CustomersController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: BB1D14;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="luggage.controllers.CustomersController">
    <children>
-      <Label alignment="CENTER" layoutX="119.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="75.0" text="Help" textFill="WHITE" AnchorPane.leftAnchor="119.0" AnchorPane.rightAnchor="119.0" AnchorPane.topAnchor="14.0">
+      <Label alignment="CENTER" layoutX="119.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="75.0" text="Help" textFill="WHITE" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="83.0" prefHeight="97.0" prefWidth="275.0" text="You have been given a username by the moderator. Enter it in the &quot;username&quot; field." textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
+      <Label layoutX="14.0" layoutY="83.0" prefHeight="97.0" text="You have received a username from a moderator. Enter it in the &quot;username&quot; field to login." textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
          <padding>
             <Insets left="10.0" right="10.0" />
          </padding>
       </Label>
-      <Label layoutX="14.0" layoutY="210.0" prefHeight="55.0" prefWidth="275.0" text="You have also been given a password by the moderator. Enter this in the &quot;password&quot; field." textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
+      <Label layoutX="14.0" layoutY="210.0" prefHeight="55.0" prefWidth="275.0" text="You have received a password from the moderator as well. Enter this in the &quot;password&quot; field to confirm that you are the legitimate owner of this user account.." textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
          <padding>
             <Insets left="10.0" right="10.0" />
          </padding>
       </Label>
-      <Label layoutX="23.0" layoutY="295.0" prefHeight="68.0" prefWidth="275.0" text="If you forgot what your username or password is, ask one of the moderators to reset your username/ password so you can still access your account." textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
+      <Label layoutX="14.0" layoutY="315.0" prefHeight="68.0" prefWidth="275.0" text="If you have forgotten your username or password, contact one of the moderators to reset your username and/or password so you can access your account." textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
          <padding>
             <Insets left="10.0" right="10.0" />
          </padding>
       </Label>
-      <Label alignment="CENTER" layoutX="119.0" layoutY="59.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="75.0" text="Username" textFill="WHITE" AnchorPane.leftAnchor="119.0" AnchorPane.rightAnchor="119.0">
+      <Label alignment="CENTER" layoutX="119.0" layoutY="59.0" text="Username" textFill="WHITE" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="56.0">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="119.0" layoutY="180.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="75.0" text="Password" textFill="WHITE" AnchorPane.leftAnchor="119.0" AnchorPane.rightAnchor="119.0">
+      <Label alignment="CENTER" layoutX="119.0" layoutY="180.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="Password" textFill="WHITE" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="119.0" layoutY="265.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="139.0" text="Forgot?" textFill="WHITE" AnchorPane.leftAnchor="119.0" AnchorPane.rightAnchor="92.0">
+      <Label alignment="CENTER" layoutX="14.0" layoutY="285.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="139.0" text="Forgot login credentials" textFill="WHITE" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
+      <Button fx:id="viewClose" alignment="CENTER" cancelButton="true" defaultButton="true" layoutX="695.0" layoutY="442.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#viewClose" prefWidth="70.0" text="Close" AnchorPane.bottomAnchor="42.0" AnchorPane.rightAnchor="42.0" />
    </children>
 </AnchorPane>

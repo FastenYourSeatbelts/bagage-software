@@ -71,6 +71,9 @@ public class LoginController extends BaseController implements Initializable {
     private Button login;
     
     @FXML
+    private Button viewClose;
+    
+    @FXML
     private void exit() {
         System.exit(0);
     }
@@ -125,4 +128,8 @@ public class LoginController extends BaseController implements Initializable {
         copyright.setText(AppConfig.ApplicationCopyRight);
     }
 
+    public void viewClose() {
+        Stage addStage = (Stage) viewClose.getScene().getWindow();
+        StageHelper.closeStage(addStage);
+    }
 }
