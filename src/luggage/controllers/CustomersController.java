@@ -38,6 +38,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import luggage.Debug;
 import luggage.MainActivity;
@@ -52,7 +54,7 @@ import org.controlsfx.dialog.Dialogs;
 /**
  * CustomersController
  *
- * Controller for customers/list.fxml Controller for customers/add.fxml
+ * Controller for customers/list.fxml Controller for customers/new.fxml
  * Controller for customers/edit.fxml
  *
  * @package luggage.controllers
@@ -100,7 +102,7 @@ public class CustomersController extends BaseController implements Initializable
      * ADD ELEMENTS
      */
     @FXML
-    private Button newAdd;
+    private Button newSave;
 
     @FXML
     private Button newReset;
@@ -145,7 +147,7 @@ public class CustomersController extends BaseController implements Initializable
      * EDIT ELEMENTS
      */
     @FXML
-    private Button editAdd;
+    private Button editSave;
 
     @FXML
     private Button editReset;
@@ -196,7 +198,7 @@ public class CustomersController extends BaseController implements Initializable
     private Button viewReset;
 
     @FXML
-    private Button viewCancel;
+    private Button viewClose;
 
     @FXML
     private TextField viewFirstname;
@@ -257,23 +259,27 @@ public class CustomersController extends BaseController implements Initializable
                     listRemove.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
                     listView.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
                     listTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+                    listKeyActions();
                 }
 
                 // Add
                 if (addGender != null && addInsurerId != null) {
                     setAddChoiceBoxes();
+                    addKeyActions();
                 }
 
                 // Edit
                 if (editGender != null && editInsurerId != null) {
                     setEditChoiceBoxes();
                     setEditFields();
+                    editKeyActions();
                 }
 
                 // View
                 if (viewGender != null && viewInsurerId != null) {
                     setViewChoiceBoxes();
                     setViewFields();
+                    viewKeyActions();
                 }
             }
         });
@@ -378,6 +384,306 @@ public class CustomersController extends BaseController implements Initializable
         addInsurerId.setItems(insurerData);
     }
 
+    public void listKeyActions() {
+        listNew.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                listResetTableView("", new String[0]);
+                listSearchField.setText("");
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                listNew();
+            }
+        });
+        listHelp.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                listResetTableView("", new String[0]);
+                listSearchField.setText("");
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                listHelp();
+            }
+        });
+        listEdit.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                listResetTableView("", new String[0]);
+                listSearchField.setText("");
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                listEdit();
+            }
+        });
+        listView.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                listResetTableView("", new String[0]);
+                listSearchField.setText("");
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                listView();
+            }
+        });
+        listRemove.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                listResetTableView("", new String[0]);
+                listSearchField.setText("");
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                listRemove();
+            }
+        });
+        listSearchField.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                listResetTableView("", new String[0]);
+                listSearchField.setText("");
+            }
+        });
+    }
+
+    public void addKeyActions() {
+        addFirstname.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                newSave();
+            }
+        });
+        addPrefix.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                newSave();
+            }
+        });
+        addLastname.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                newSave();
+            }
+        });
+        addGender.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                newSave();
+            }
+        });
+        addInsurerId.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                newSave();
+            }
+        });
+        addAddress.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                newSave();
+            }
+        });
+        addPostalcode.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                newSave();
+            }
+        });
+        addResidence.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                newSave();
+            }
+        });
+        addEmail.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                newSave();
+            }
+        });
+        addTelephone.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                newSave();
+            }
+        });
+        addMobile.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                newSave();
+            }
+        });
+        newSave.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                newSave();
+            }
+        });
+        newReset.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                newReset();
+            }
+        });
+        newCancel.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+                newCancel();
+            }
+        });
+    }
+
+    public void editKeyActions() {
+        editFirstname.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                editCancel();
+            } else if (evt.getCode().equals(KeyCode.ENTER)) {
+                editSave();
+            }
+        });
+        editPrefix.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                editCancel();
+            } else if (evt.getCode().equals(KeyCode.ENTER)) {
+                editSave();
+            }
+        });
+        editLastname.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                editCancel();
+            } else if (evt.getCode().equals(KeyCode.ENTER)) {
+                editSave();
+            }
+        });
+        editGender.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                editCancel();
+            } else if (evt.getCode().equals(KeyCode.ENTER)) {
+                editSave();
+            }
+        });
+        editInsurerId.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                editCancel();
+            } else if (evt.getCode().equals(KeyCode.ENTER)) {
+                editSave();
+            }
+        });
+        editAddress.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                editCancel();
+            } else if (evt.getCode().equals(KeyCode.ENTER)) {
+                editSave();
+            }
+        });
+        editPostalcode.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                editCancel();
+            } else if (evt.getCode().equals(KeyCode.ENTER)) {
+                editSave();
+            }
+        });
+        editResidence.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                editCancel();
+            } else if (evt.getCode().equals(KeyCode.ENTER)) {
+                editSave();
+            }
+        });
+        editEmail.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                editCancel();
+            } else if (evt.getCode().equals(KeyCode.ENTER)) {
+                editSave();
+            }
+        });
+        editTelephone.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                editCancel();
+            } else if (evt.getCode().equals(KeyCode.ENTER)) {
+                editSave();
+            }
+        });
+        editMobile.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                editCancel();
+            } else if (evt.getCode().equals(KeyCode.ENTER)) {
+                editSave();
+            }
+        });
+        editSave.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                editCancel();
+            } else if (evt.getCode().equals(KeyCode.ENTER)) {
+                editSave();
+            }
+        });
+        editReset.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                editCancel();
+            } else if (evt.getCode().equals(KeyCode.ENTER)) {
+                editReset();
+            }
+        });
+        editCancel.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE) || evt.getCode().equals(KeyCode.ENTER)) {
+                editCancel();
+            }
+        });
+    }
+
+    public void viewKeyActions() {
+        viewFirstname.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+                viewClose();
+            }
+        });
+        viewPrefix.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+                viewClose();
+            }
+        });
+        viewLastname.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+                viewClose();
+            }
+        });
+        viewAddress.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+                viewClose();
+            }
+        });
+        viewPostalcode.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+                viewClose();
+            }
+        });
+        viewResidence.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+                viewClose();
+            }
+        });
+        viewEmail.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+                viewClose();
+            }
+        });
+        viewTelephone.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+                viewClose();
+            }
+        });
+        viewMobile.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+                viewClose();
+            }
+        });
+        viewClose.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+                viewClose();
+            }
+        });
+    }
+    
     /**
      *
      * @param where
@@ -438,7 +744,7 @@ public class CustomersController extends BaseController implements Initializable
 
     @FXML
     public void listNew() {
-        StageHelper.addPopup("customers/add", this, false, true);
+        StageHelper.addPopup("customers/new", this, false, true);
     }
 
     @FXML
@@ -621,7 +927,7 @@ public class CustomersController extends BaseController implements Initializable
     }
 
     public void editSave() {
-                if (editFirstname.getText().equals("") || editLastname.getText().equals("")) {
+        if (editFirstname.getText().equals("") || editLastname.getText().equals("")) {
             Dialogs.create()
                     .owner((Stage) editLastname.getScene().getWindow())
                     .title("Warning")
@@ -707,8 +1013,8 @@ public class CustomersController extends BaseController implements Initializable
         editCancel();
     }
 
-    public void viewCancel() {
-        Stage cancelStage = (Stage) viewCancel.getScene().getWindow();
+    public void viewClose() {
+        Stage cancelStage = (Stage) viewClose.getScene().getWindow();
         StageHelper.closeStage(cancelStage);
     }
 

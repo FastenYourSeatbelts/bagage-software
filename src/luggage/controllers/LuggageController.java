@@ -40,6 +40,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import luggage.Debug;
 import luggage.MainActivity;
@@ -97,13 +99,16 @@ public class LuggageController extends BaseController implements Initializable {
     private Button listRemove;
 
     @FXML
+    private Button listHelp;
+
+    @FXML
     private Button listExportToPdf;
 
     /**
      * ADD ELEMENTS
      */
     @FXML
-    private Button newAdd;
+    private Button newSave;
 
     @FXML
     private Button newReset;
@@ -133,7 +138,7 @@ public class LuggageController extends BaseController implements Initializable {
      * EDIT ELEMENTS
      */
     @FXML
-    private Button editAdd;
+    private Button editSave;
 
     @FXML
     private Button editReset;
@@ -163,7 +168,7 @@ public class LuggageController extends BaseController implements Initializable {
      * VIEW ELEMENTS
      */
     @FXML
-    private Button viewCancel;
+    private Button viewClose;
 
     @FXML
     private TextField viewTags;
@@ -213,23 +218,27 @@ public class LuggageController extends BaseController implements Initializable {
                     listView.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
                     listExportToPdf.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
                     listTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+                    listKeyActions();
                 }
 
                 // Add
                 if (addLocationId != null) {
                     setAddChoiceBoxes();
+                    addKeyActions();
                 }
 
                 // Edit
                 if (editLocationId != null) {
                     setEditChoiceBoxes();
                     setEditFields();
+                    editKeyActions();
                 }
 
                 // View
                 if (viewLocationId != null) {
                     setViewChoiceBoxes();
                     setViewFields();
+                    viewKeyActions();
                 }
             }
         });
@@ -395,7 +404,7 @@ public class LuggageController extends BaseController implements Initializable {
 
     @FXML
     public void listNew() {
-        StageHelper.addPopup("luggage/add", this, false, true);
+        StageHelper.addPopup("luggage/new", this, false, true);
     }
 
     @FXML
@@ -575,6 +584,230 @@ public class LuggageController extends BaseController implements Initializable {
         viewCustomerId.getSelectionModel().select(selectedCustomer);
     }
 
+    public void listKeyActions() {
+        listNew.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                listResetTableView("", new String[0]);
+                listSearchField.setText("");
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                listNew();
+            }
+        });
+        listHelp.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                listResetTableView("", new String[0]);
+                listSearchField.setText("");
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                listHelp();
+            }
+        });
+        listSearchField.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                listResetTableView("", new String[0]);
+                listSearchField.setText("");
+            }
+        });
+        listEdit.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                listResetTableView("", new String[0]);
+                listSearchField.setText("");
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                listEdit();
+            }
+        });
+        listExportToPdf.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                listResetTableView("", new String[0]);
+                listSearchField.setText("");
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                listExportToPdf();
+            }
+        });
+        listView.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                listResetTableView("", new String[0]);
+                listSearchField.setText("");
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                listView();
+            }
+        });
+        listRemove.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                listResetTableView("", new String[0]);
+                listSearchField.setText("");
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                listRemove();
+            }
+        });
+    }
+
+    public void addKeyActions() {
+        addLocationId.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            }
+            if (b.getCode().equals(KeyCode.ENTER)) {
+                newSave();
+            }
+        });
+        addCustomerId.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                newSave();
+            }
+        });
+        addStatus.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                newSave();
+            }
+        });
+        addDate.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                newSave();
+            }
+        });
+        addTags.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                newSave();
+            }
+        });
+        addNotes.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                newSave();
+            }
+        });
+        newSave.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                newSave();
+            }
+        });
+        newReset.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                newReset();
+            }
+        });
+        newCancel.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+                newCancel();
+            }
+        });
+    }
+
+    public void editKeyActions() {
+        editLocationId.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                editCancel();
+            } else if (evt.getCode().equals(KeyCode.ENTER)) {
+                editSave();
+            }
+        });
+        editCustomerId.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                editCancel();
+            } else if (evt.getCode().equals(KeyCode.ENTER)) {
+                editSave();
+            }
+        });
+        editStatus.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                editCancel();
+            } else if (evt.getCode().equals(KeyCode.ENTER)) {
+                editSave();
+            }
+        });
+        editDate.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                editCancel();
+            } else if (evt.getCode().equals(KeyCode.ENTER)) {
+                editSave();
+            }
+        });
+        editTags.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                editCancel();
+            } else if (evt.getCode().equals(KeyCode.ENTER)) {
+                editSave();
+            }
+        });
+        editNotes.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                editCancel();
+            } else if (evt.getCode().equals(KeyCode.ENTER)) {
+                editSave();
+            }
+        });
+        editSave.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                editSave();
+            }
+        });
+        editReset.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                editReset();
+            }
+        });
+        editCancel.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+                editCancel();
+            }
+        });
+    }
+
+    public void viewKeyActions() {
+        viewLocationId.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                viewClose();
+            }
+        });
+        viewCustomerId.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                viewClose();
+            }
+        });
+        viewStatus.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                viewClose();
+            }
+        });
+        viewDate.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                viewClose();
+            }
+        });
+        viewTags.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                viewClose();
+            }
+        });
+        viewNotes.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                viewClose();
+            }
+        });
+        viewClose.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+                viewClose();
+            }
+        });
+    }
+
     public void editCancel() {
         Stage addStage = (Stage) editCancel.getScene().getWindow();
         StageHelper.closeStage(addStage);
@@ -632,8 +865,8 @@ public class LuggageController extends BaseController implements Initializable {
         editCancel();
     }
 
-    public void viewCancel() {
-        Stage addStage = (Stage) viewCancel.getScene().getWindow();
+    public void viewClose() {
+        Stage addStage = (Stage) viewClose.getScene().getWindow();
         StageHelper.closeStage(addStage);
     }
 

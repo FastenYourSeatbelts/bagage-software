@@ -27,16 +27,12 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
                 <ChoiceBox fx:id="editLocationId" minWidth="150.0" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="1" />
                 <ChoiceBox fx:id="editCustomerId" minWidth="150.0" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="2" />
                 <ChoiceBox fx:id="editStatus" minWidth="150.0" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="3" />
-                <TextField fx:id="editTags" promptText="e.g. blue, purple, big, square" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="5" />
-                <TextField fx:id="editNotes" promptText="e.g. Fragile contents" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="6" />
                 <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Location" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <font>
                         <Font size="14.0" />
@@ -77,9 +73,20 @@
                         <Insets left="10.0" />
                     </GridPane.margin>
                 </Label>
-                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="9">
+            <DatePicker fx:id="editDate" minWidth="150.0" prefHeight="25.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Date" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+            </Label>
+                <TextField fx:id="editTags" promptText="e.g. blue, purple, big, square" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="5" />
+                <TextField fx:id="editNotes" promptText="e.g. Fragile contents" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="6" />
+                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="7">
                     <children>
-                        <Button fx:id="editAdd" alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="8.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#editSave" prefWidth="70.0" text="Save" AnchorPane.rightAnchor="150.0">
+                        <Button fx:id="editSave" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="47.0" layoutY="8.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#editSave" prefWidth="70.0" text="Save" AnchorPane.rightAnchor="150.0">
                         </Button>
                         <Button fx:id="editReset" alignment="CENTER" layoutX="110.0" layoutY="8.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#editReset" prefWidth="70.0" text="Reset" AnchorPane.rightAnchor="75.0">
                         </Button>
@@ -87,12 +94,6 @@
                         </Button>
                     </children>
                 </AnchorPane>
-            <DatePicker fx:id="editDate" minWidth="150.0" prefHeight="25.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Date" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="4">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
             </children>
         </GridPane>
     </children>

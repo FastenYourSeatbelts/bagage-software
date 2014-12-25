@@ -10,15 +10,15 @@
 <AnchorPane id="AnchorPane" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="luggage.controllers.LuggageGraphController">
    <children>
       <PieChart id="piechart" fx:id="piechart" layoutX="400" layoutY="100" prefHeight="439.0" prefWidth="562.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
-      <AnchorPane layoutY="-1.0" prefHeight="285.0" prefWidth="562.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutY="-1.0" onMouseClicked="#printNotif" prefHeight="350.0" prefWidth="562.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label layoutX="31.0" layoutY="62.0" text="From:" AnchorPane.leftAnchor="31.0" AnchorPane.topAnchor="62.0" />
-            <DatePicker fx:id="start" layoutX="78.0" layoutY="57.0" onAction="#updateChart" promptText="Enter or select start date" showWeekNumbers="true" AnchorPane.leftAnchor="78.0" AnchorPane.topAnchor="57.0">
+            <DatePicker fx:id="start" layoutX="78.0" layoutY="57.0" onAction="#updateChart" onKeyPressed="#printNotif" onMousePressed="#printNotif" promptText="Enter or select start date" showWeekNumbers="true" AnchorPane.leftAnchor="78.0" AnchorPane.topAnchor="57.0">
                <opaqueInsets>
                   <Insets left="14.0" />
                </opaqueInsets>
             </DatePicker>
-            <DatePicker fx:id="end" layoutX="78.0" layoutY="107.0" onAction="#updateChart" promptText="Today" AnchorPane.leftAnchor="78.0" AnchorPane.topAnchor="107.0">
+            <DatePicker fx:id="end" layoutX="78.0" layoutY="107.0" onAction="#updateChart" onKeyPressed="#printNotif" onMousePressed="#printNotif" promptText="Today" AnchorPane.leftAnchor="78.0" AnchorPane.topAnchor="107.0">
                <opaqueInsets>
                   <Insets left="14.0" />
                </opaqueInsets>
@@ -29,7 +29,13 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <CheckBox fx:id="showResolved" layoutX="31.0" layoutY="157.0" mnemonicParsing="false" selected="true" text="Show resolved cases" AnchorPane.leftAnchor="31.0" AnchorPane.topAnchor="157.0" />
+            <CheckBox fx:id="showResolved" layoutX="31.0" layoutY="157.0" mnemonicParsing="false" onMousePressed="#printNotif" selected="true" text="Show resolved cases" AnchorPane.leftAnchor="31.0" AnchorPane.topAnchor="157.0" />
+            <Button fx:id="saveAsPng" layoutX="31.0" layoutY="245.0" mnemonicParsing="false" onMouseClicked="#saveAsPng" onMousePressed="#printNotif" text="Save as image" AnchorPane.leftAnchor="31.0" AnchorPane.topAnchor="197.0" />
+            <Label fx:id="printNotif" layoutX="33.0" layoutY="289.0" onMousePressed="#printNotif" AnchorPane.topAnchor="237.0">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
       <Button fx:id="listHelp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#listHelp" prefHeight="26.0" prefWidth="70.0" text="Help" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />

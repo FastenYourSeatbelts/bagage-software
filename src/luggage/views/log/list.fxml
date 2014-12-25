@@ -10,6 +10,16 @@
 
 <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="luggage.controllers.LogController">
     <children>
+      <Button fx:id="listHelp" layoutX="551.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#listHelp" prefHeight="26.0" prefWidth="70.0" text="Help" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="14.0">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Button>
+        <TextField fx:id="listSearchField" maxWidth="-Infinity" onKeyReleased="#listOnSearch" prefHeight="26.0" prefWidth="150.0" promptText="Search…" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+            <font>
+                <Font size="12.0" />
+            </font>
+        </TextField>
         <TableView fx:id="listTableView" maxWidth="-Infinity" AnchorPane.bottomAnchor="53.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="53.0">
             <columns>
                 <TableColumn fx:id="listTableViewEmployee" text="Employee" />
@@ -18,15 +28,5 @@
                 <TableColumn fx:id="listTableViewDate" text="Date" />
             </columns>
         </TableView>
-        <TextField fx:id="listSearchField" maxWidth="-Infinity" onKeyReleased="#listOnSearch" prefHeight="26.0" prefWidth="150.0" promptText="Search…" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
-            <font>
-                <Font size="12.0" />
-            </font>
-        </TextField>
-      <Button fx:id="listHelp" layoutX="551.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#listHelp" prefHeight="26.0" prefWidth="70.0" text="Help" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="14.0">
-         <font>
-            <Font size="12.0" />
-         </font>
-      </Button>
     </children>
 </AnchorPane>

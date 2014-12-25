@@ -40,6 +40,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import luggage.Debug;
 import luggage.MainActivity;
@@ -84,7 +86,7 @@ public class TotalLuggageController extends BaseController implements Initializa
      * VIEW ELEMENTS
      */
     @FXML
-    private Button viewCancel;
+    private Button viewClose;
 
     @FXML
     private TextField viewTags;
@@ -129,6 +131,7 @@ public class TotalLuggageController extends BaseController implements Initializa
                 if (viewLocationId != null) {
                     setViewChoiceBoxes();
                     setViewFields();
+                    keyActions();
                 }
             }
         });
@@ -224,8 +227,41 @@ public class TotalLuggageController extends BaseController implements Initializa
         luggageTableView.setItems(data);
     }
 
-    public void viewCancel() {
-        Stage addStage = (Stage) viewCancel.getScene().getWindow();
+    public void keyActions() {
+        viewLocationId.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+                viewClose();
+            }
+        });
+        viewCustomerId.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+                viewClose();
+            }
+        });
+        viewDate.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+                viewClose();
+            }
+        });
+        viewTags.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+                viewClose();
+            }
+        });
+        viewNotes.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+                viewClose();
+            }
+        });
+        viewClose.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+                viewClose();
+            }
+        });
+    }
+    
+    public void viewClose() {
+        Stage addStage = (Stage) viewClose.getScene().getWindow();
         StageHelper.closeStage(addStage);
     }
 
