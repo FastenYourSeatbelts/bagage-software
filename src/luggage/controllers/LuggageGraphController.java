@@ -97,9 +97,9 @@ public class LuggageGraphController extends BaseController implements Initializa
 
     @FXML
     public Label printNotif;
-    
+
     @FXML
-    private Stage stage;
+    public Stage stage;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -113,7 +113,7 @@ public class LuggageGraphController extends BaseController implements Initializa
             KeyActions();
         }
     }
-    
+
     @FXML
     public void listHelp() {
         StageHelper.addStage("graphs/help", this, false, true);
@@ -269,36 +269,32 @@ public class LuggageGraphController extends BaseController implements Initializa
         }
 
         FileChooser chooser = new FileChooser();
-        chooser.setTitle("Save Pie Chart as");
-        Debug.print("Initial Directory prior set poll: " + chooser.getInitialDirectory());
-        chooser.setInitialDirectory(
-                new File(System.getProperty("user.home"))
-        );
-        Debug.print("Initial Directory after set poll: " + chooser.getInitialDirectory());
+        chooser.setTitle("Save Pie Chart As");
+        //Debug.print("Initial Directory poll prior set: " + chooser.getInitialDirectory());
+        chooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        Debug.print("Initial Directory poll after set: " + chooser.getInitialDirectory());
         chooser.setInitialFileName("Pie chart of " + dateStart + " - " + dateEnd + " exported on " + dateFormat.format(date));
-        chooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("PNG", "*.png"));
+//        chooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("PNG", "*.png"));
         chooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("PNG", "*.png"),
-                new FileChooser.ExtensionFilter("BMP", "*.bmp"),
-                new FileChooser.ExtensionFilter("GIF", "*.gif"),
-                new FileChooser.ExtensionFilter("JPEG", "*.jpg"),
-                new FileChooser.ExtensionFilter("PDF", "*.pdf"),
-                new FileChooser.ExtensionFilter("TIFF", "*.tiff"));
+                new FileChooser.ExtensionFilter("PNG", "*.png"));
+//                new FileChooser.ExtensionFilter("bmp", "*.bmp"),
+//                new FileChooser.ExtensionFilter("gif", "*.gif"),
+//                new FileChooser.ExtensionFilter("jpg", "*.jpg"),
+//                new FileChooser.ExtensionFilter("pdf", "*.pdf"),
+//                new FileChooser.ExtensionFilter("tiff", "*.tiff"));
         File file = chooser.showSaveDialog(stage);
-
-        String extension = returnExtension(file.toString());
-
-        if (file == null) {
-            return;
-        }
+        String extension = "PNG";
+        //extension = returnExtension(file.toString().toLowerCase());
+        Debug.print("Extension: " + extension);
+        
         try {
-            ImageIO.write(SwingFXUtils.fromFXImage(image, null), extension, file);
+            ImageIO.write(SwingFXUtils.fromFXImage(image, null), extension, file); //(output == null) bij cancel save in file chooser? :/
             printNotif.setText("Pie chart successfully exported!");
-            Debug.logToDatabase(LogModel.TYPE_INFO, "Piechart exported as " + extension + ".");
-            initialTitle();
-        } catch (IOException ex) {
-            Logger.getLogger(LuggageGraphController.class.getName()).log(Level.SEVERE, null, ex);
+            Debug.logToDatabase(LogModel.TYPE_INFO, "Pie chart exported as " + extension + ".");
+        } catch (IOException io) {
+            Logger.getLogger(LuggageGraphController.class.getName()).log(Level.SEVERE, null, io);
         }
+        initialTitle();
     }
 
     public String returnExtension(String file) {
@@ -309,7 +305,7 @@ public class LuggageGraphController extends BaseController implements Initializa
         } else if (file.endsWith(".gif")) {
             return "GIF";
         } else if (file.endsWith(".jpg")) {
-            return "jpg";
+            return "JPEG";
         } else if (file.endsWith(".pdf")) {
             return "PDF";
         } else if (file.endsWith(".tiff")) {
@@ -326,27 +322,19 @@ public class LuggageGraphController extends BaseController implements Initializa
     public void printNotif() {
         printNotif.setText("");
     }
-    
+
     public void hoverNotif() {
         for (final PieChart.Data data : piechart.getData()) {
-            data.getNode().addEventHandler(MouseEvent.MOUSE_ENTERED,
-                    new EventHandler<MouseEvent>() {
-                        @Override
-                        public void handle(MouseEvent e) {
-                            String s = data.getName().substring(0, data.getName().length() - 6);
-                            Double d = Double.valueOf(data.getPieValue() / total * 10000);
-                            piechart.setTitle("The share of '" + s + "' is approximately " + (Math.round(d) / 100) + "%");
-                        }
-                    });
+            data.getNode().addEventHandler(MouseEvent.MOUSE_ENTERED, (MouseEvent e) -> {
+                String s = data.getName().substring(0, data.getName().length() - 6);
+                Double d = data.getPieValue() / total * 10000;
+                piechart.setTitle("The share of '" + s + "' is approximately " + (Math.round(d) / 100) + "%");
+            });
         }
         for (final PieChart.Data data : piechart.getData()) {
-            data.getNode().addEventHandler(MouseEvent.MOUSE_EXITED,
-                    new EventHandler<MouseEvent>() {
-                        @Override
-                        public void handle(MouseEvent e) {
-                            piechart.setTitle("");
-                        }
-                    });
+            data.getNode().addEventHandler(MouseEvent.MOUSE_EXITED, (MouseEvent me) -> {
+                piechart.setTitle("");
+            });
         }
     }
 
