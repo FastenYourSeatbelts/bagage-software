@@ -2,7 +2,7 @@
 *:focus,
 *:focused,
 *:active {
-    -fx-focus-color: transparent;   
+    -fx-focus-color: transparent;
     -fx-effect: null;
 }
 
@@ -47,7 +47,7 @@
     -fx-border-radius: 0 0 0 0;
     -fx-background-radius: 0 0 0 0;
     -fx-background-insets: 0;
-    
+
     -fx-border-color: #bb1d14;
     -fx-border-width: 0 0 0 9;
 }
@@ -59,19 +59,19 @@
     -fx-effect: null;
 }
 
-.tab-pane .tab .tab-label { 
+.tab-pane .tab .tab-label {
     -fx-alignment: CENTER;
     -fx-text-fill: #ffffff;
     -fx-font-size: 12px;
     -fx-font-weight: bold;
-    -fx-focus-color: transparent;   
-    -fx-effect: null; 
+    -fx-focus-color: transparent;
+    -fx-effect: null;
     -fx-border-width: 0;
     -fx-background-insets: 0;
 }
 
 .tab-pane .tab:hover .tab-label,
-.tab-pane .tab:selected .tab-label { 
+.tab-pane .tab:selected .tab-label {
     -fx-text-fill: #9d0b0f;
     -fx-effect: null;
     -fx-background-insets: 0;
@@ -81,3 +81,5 @@
 .default-color0.chart-pie { -fx-pie-color: turquoise; }
 .default-color1.chart-pie { -fx-pie-color: steelblue; }
 .default-color2.chart-pie { -fx-pie-color: blue; }
+
+.chart-title { -fx-text-fill: black; }

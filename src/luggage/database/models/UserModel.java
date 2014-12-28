@@ -30,18 +30,36 @@ import luggage.security.Permissions;
 /**
  * User Model
  *
- * A class that maps the users table
+ * A class that maps the users table.
  *
  * @package luggage.database.models
  * @author Tijme Gommers
  */
 public class UserModel extends Model {
 
+    /**
+     * Creates role title string for the employee.
+     */
     public static final String ROLE_EMPLOYEE = "employee";
+
+    /**
+     * Creates role title string for the super admin (application vendor).
+     */
     public static final String ROLE_SUPER = "super";
+
+    /**
+     * Creates role title string for the moderator.
+     */
     public static final String ROLE_MODERATOR = "moderator";
+
+    /**
+     * Creates role title string for the manager.
+     */
     public static final String ROLE_MANAGER = "manager";
 
+    /**
+     *
+     */
     public UserModel() {
 
     }
@@ -91,7 +109,7 @@ public class UserModel extends Model {
     }
 
     /**
-     * Return the first name of the current row
+     * Returns the first name of the current row.
      *
      * @return
      */
@@ -100,7 +118,7 @@ public class UserModel extends Model {
     }
 
     /**
-     * Set the first name of the current row
+     * Sets the first name of the current row.
      *
      * @param firstname
      */
@@ -109,7 +127,7 @@ public class UserModel extends Model {
     }
 
     /**
-     * Return the prefix of the current row
+     * Returns the prefix of the current row.
      *
      * @return
      */
@@ -118,7 +136,7 @@ public class UserModel extends Model {
     }
 
     /**
-     * Set the prefix of the current row
+     * Sets the prefix of the current row.
      *
      * @param prefix
      */
@@ -127,7 +145,7 @@ public class UserModel extends Model {
     }
 
     /**
-     * Return the last name of the current row
+     * Returns the last name of the current row.
      *
      * @return
      */
@@ -136,7 +154,7 @@ public class UserModel extends Model {
     }
 
     /**
-     * Set the last name of the current row
+     * Sets the last name of the current row.
      *
      * @param lastname
      */
@@ -145,7 +163,7 @@ public class UserModel extends Model {
     }
 
     /**
-     * Return the username of the current row
+     * Returns the username of the current row.
      *
      * @return
      */
@@ -154,7 +172,7 @@ public class UserModel extends Model {
     }
 
     /**
-     * Set the username of the current row
+     * Sets the username of the current row.
      *
      * @param username
      */
@@ -163,7 +181,7 @@ public class UserModel extends Model {
     }
 
     /**
-     * Return the (hash) password of the current row
+     * Returns the (hashed) password of the current row.
      *
      * @return
      */
@@ -172,7 +190,7 @@ public class UserModel extends Model {
     }
 
     /**
-     * Set the password of the current row
+     * Sets the password of the current row.
      *
      * @param password
      */
@@ -181,7 +199,7 @@ public class UserModel extends Model {
     }
 
     /**
-     * Return the role of the current row
+     * Returns the role of the current row.
      *
      * @return
      */
@@ -190,7 +208,7 @@ public class UserModel extends Model {
     }
 
     /**
-     * Set the role of the current row
+     * Sets the role of the current row
      *
      * @param role
      */
@@ -199,7 +217,7 @@ public class UserModel extends Model {
     }
 
     /**
-     * Return the fullname of a user
+     * Returns the full name of a user
      *
      * @return;
      */
@@ -220,12 +238,13 @@ public class UserModel extends Model {
     }
 
     /**
-     * Check if a user has permissions on the given operation
+     * Checks if a user has permissions on the given operation
      *
      * @param operation
      *
      * @return true if the user has permissions
      */
+    @SuppressWarnings("element-type-mismatch")
     public boolean hasPermissionsOn(String operation) {
         switch (getRole()) {
             case ROLE_EMPLOYEE:
@@ -242,7 +261,7 @@ public class UserModel extends Model {
     }
 
     /**
-     * Return the gender of the current row
+     * Returns the gender of the current row
      *
      * @return
      */
@@ -251,7 +270,7 @@ public class UserModel extends Model {
     }
 
     /**
-     * Set the gender of the current row
+     * Sets the gender of the current row
      *
      * @param gender
      */
@@ -260,7 +279,7 @@ public class UserModel extends Model {
     }
 
     /**
-     * Return the address of the current row
+     * Returns the address of the current row.
      *
      * @return
      */
@@ -269,7 +288,7 @@ public class UserModel extends Model {
     }
 
     /**
-     * Set the address of the current row
+     * Sets the address of the current row.
      *
      * @param address
      */
@@ -278,7 +297,7 @@ public class UserModel extends Model {
     }
 
     /**
-     * Return the postalcode of the current row
+     * Returns the postal code of the current row.
      *
      * @return
      */
@@ -287,7 +306,7 @@ public class UserModel extends Model {
     }
 
     /**
-     * Set the postalcode of the current row
+     * Sets the postal code of the current row.
      *
      * @param postalcode
      */
@@ -296,7 +315,7 @@ public class UserModel extends Model {
     }
 
     /**
-     * Return the residence of the current row
+     * Returns the residence of the current row.
      *
      * @return
      */
@@ -305,7 +324,7 @@ public class UserModel extends Model {
     }
 
     /**
-     * Set the residence of the current row
+     * Sets the residence of the current row.
      *
      * @param residence
      */
@@ -314,7 +333,7 @@ public class UserModel extends Model {
     }
 
     /**
-     * Return the Location of the current row
+     * Returns the Location of the current row.
      *
      * @return
      */
@@ -323,7 +342,7 @@ public class UserModel extends Model {
     }
 
     /**
-     * Return the Location of the current row
+     * Returns the Location of the current row.
      *
      * @return
      */
@@ -336,16 +355,16 @@ public class UserModel extends Model {
     }
 
     /**
-     * Set the Location of the current row
+     * Sets the Location of the current row.
      *
-     * @return
+     * @param location_id
      */
     public void setLocationId(String location_id) {
         row.put("location_id", location_id);
     }
 
     /**
-     * Return the location name of the current row
+     * Returns the location name of the current row.
      *
      * @return location
      */
@@ -354,7 +373,7 @@ public class UserModel extends Model {
     }
 
     /**
-     * Return the telephone of the current row
+     * Returns the telephone of the current row.
      *
      * @return
      */
@@ -363,7 +382,7 @@ public class UserModel extends Model {
     }
 
     /**
-     * Set the telephone of the current row
+     * Sets the telephone of the current row.
      *
      * @param telephone
      */
@@ -372,7 +391,7 @@ public class UserModel extends Model {
     }
 
     /**
-     * Return the mobile of the current row
+     * Returns the mobile of the current row.
      *
      * @return
      */
@@ -381,7 +400,7 @@ public class UserModel extends Model {
     }
 
     /**
-     * Set the mobile of the current row
+     * Sets the mobile of the current row.
      *
      * @param mobile
      */

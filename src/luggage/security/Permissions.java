@@ -139,6 +139,52 @@ public class Permissions {
                 PERMISSION_VIEW_LOG
             }
     ));
+    
+//    private static final ArrayList<Permissions.Tab> CUSTOMERS_PERMISSIONS = new ArrayList<>(Arrays.asList(
+//            new Permissions.Tab[]{
+//                PERMISSION_MANAGE_CUSTOMERS
+//            }
+//    ));
+//    private static final ArrayList<Permissions.Tab> LUGGAGE_PERMISSIONS = new ArrayList<>(Arrays.asList(
+//            new Permissions.Tab[]{
+//                PERMISSION_MANAGE_LUGGAGE
+//            }
+//    ));
+//    private static final ArrayList<Permissions.Tab> GRAPH_PERMISSIONS = new ArrayList<>(Arrays.asList(
+//            new Permissions.Tab[]{
+//                PERMISSION_VIEW_GRAPH_LUGGAGE
+//            }
+//    ));
+//    private static final ArrayList<Permissions.Tab> TOTAL_PERMISSIONS = new ArrayList<>(Arrays.asList(
+//            new Permissions.Tab[]{
+//                PERMISSION_VIEW_TOTAL_LUGGAGE
+//            }
+//    ));
+//    private static final ArrayList<Permissions.Tab> MISSING_PERMISSIONS = new ArrayList<>(Arrays.asList(
+//            new Permissions.Tab[]{
+//                PERMISSION_VIEW_MISSING_LUGGAGE
+//            }
+//    ));
+//    private static final ArrayList<Permissions.Tab> FOUND_PERMISSIONS = new ArrayList<>(Arrays.asList(
+//            new Permissions.Tab[]{
+//                PERMISSION_VIEW_FOUND_LUGGAGE
+//            }
+//    ));
+//    private static final ArrayList<Permissions.Tab> RESOLVED_PERMISSIONS = new ArrayList<>(Arrays.asList(
+//            new Permissions.Tab[]{
+//                PERMISSION_VIEW_RESOLVED_LUGGAGE
+//            }
+//    ));
+//    private static final ArrayList<Permissions.Tab> USERS_PERMISSIONS = new ArrayList<>(Arrays.asList(
+//            new Permissions.Tab[]{
+//                PERMISSION_MANAGE_USERS
+//            }
+//    ));
+//    public static final ArrayList<Permissions.Tab> LOG_PERMISSIONS = new ArrayList<Permissions.Tab>(Arrays.asList(
+//            new Permissions.Tab[]{
+//                PERMISSION_VIEW_LOG
+//            }
+//    ));
 
     /**
      *
@@ -155,6 +201,24 @@ public class Permissions {
                 return EMPLOYEE_PERMISSIONS;
             case "manager":
                 return MANAGER_PERMISSIONS;
+//            case "customers":
+//                return CUSTOMERS_PERMISSIONS;
+//            case "luggage":
+//                return LUGGAGE_PERMISSIONS;
+//            case "graph":
+//                return GRAPH_PERMISSIONS;
+//            case "total":
+//                return TOTAL_PERMISSIONS;
+//            case "found":
+//                return FOUND_PERMISSIONS;
+//            case "missing":
+//                return MISSING_PERMISSIONS;
+//            case "resolved":
+//                return RESOLVED_PERMISSIONS;
+//            case "users":
+//                return USERS_PERMISSIONS;
+//            case "log":
+//                return LOG_PERMISSIONS;
         }
 
         return new ArrayList<Permissions.Tab>();

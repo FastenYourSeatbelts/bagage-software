@@ -39,36 +39,36 @@
             </rowConstraints>
             <children>
             
-                <TextField fx:id="addUsername" prefHeight="25.0" prefWidth="125.0" promptText="Username" GridPane.columnIndex="3" GridPane.columnSpan="6" GridPane.rowIndex="1" />
+                <TextField fx:id="newUsername" prefHeight="25.0" prefWidth="125.0" promptText="Username" GridPane.columnIndex="3" GridPane.columnSpan="6" GridPane.rowIndex="1" />
              
-                <PasswordField fx:id="addPassword" prefHeight="25.0" prefWidth="125.0" promptText="Password" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="2">
+                <PasswordField fx:id="newPassword" prefHeight="25.0" prefWidth="125.0" promptText="Password" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="2">
                     <GridPane.margin>
                         <Insets right="7.0" />
                     </GridPane.margin>
                 </PasswordField>
-                <PasswordField fx:id="addPasswordRepeat" prefHeight="25.0" prefWidth="125.0" promptText="Repeat password" GridPane.columnIndex="6" GridPane.columnSpan="3" GridPane.rowIndex="2" />
+                <PasswordField fx:id="newPasswordRepeat" prefHeight="25.0" prefWidth="125.0" promptText="Repeat password" GridPane.columnIndex="6" GridPane.columnSpan="3" GridPane.rowIndex="2" />
             
-                <TextField fx:id="addFirstname" prefHeight="25.0" prefWidth="125.0" promptText="First name" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="3" />
-                <TextField fx:id="addPrefix" prefHeight="25.0" prefWidth="312.0" promptText="prefix" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="3">
+                <TextField fx:id="newFirstname" prefHeight="25.0" prefWidth="125.0" promptText="First name" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+                <TextField fx:id="newPrefix" prefHeight="25.0" prefWidth="312.0" promptText="prefix" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="3">
                     <GridPane.margin>
                         <Insets left="14.0" right="14.0" />
                     </GridPane.margin>
                 </TextField>
-                <TextField fx:id="addLastname" prefHeight="25.0" prefWidth="312.0" promptText="Last name" GridPane.columnIndex="7" GridPane.columnSpan="2" GridPane.rowIndex="3">
+                <TextField fx:id="newLastname" prefHeight="25.0" prefWidth="312.0" promptText="Last name" GridPane.columnIndex="7" GridPane.columnSpan="2" GridPane.rowIndex="3">
                     <GridPane.margin>
                         <Insets />
                     </GridPane.margin>
                 </TextField>
             
-                <ChoiceBox fx:id="addGender" minWidth="150.0" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="4">
+                <ChoiceBox fx:id="newGender" minWidth="150.0" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="4">
                 </ChoiceBox>
             
-                <TextField fx:id="addAddress" promptText="e.g. Amsterdamseweg 90" GridPane.columnIndex="3" GridPane.columnSpan="6" GridPane.rowIndex="5" />
-                <TextField fx:id="addPostalcode" promptText="e.g. 3892PB" GridPane.columnIndex="3" GridPane.columnSpan="6" GridPane.rowIndex="6" />
+                <TextField fx:id="newAddress" promptText="e.g. Amsterdamseweg 90" GridPane.columnIndex="3" GridPane.columnSpan="6" GridPane.rowIndex="5" />
+                <TextField fx:id="newPostalcode" promptText="e.g. 3892PB" GridPane.columnIndex="3" GridPane.columnSpan="6" GridPane.rowIndex="6" />
             
-                <TextField fx:id="addResidence" promptText="e.g. Amsterdam" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="7" />
+                <TextField fx:id="newResidence" promptText="e.g. Amsterdam" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="7" />
             
-                <ChoiceBox fx:id="addWorkplace" prefWidth="150.0" GridPane.columnIndex="7" GridPane.columnSpan="3" GridPane.rowIndex="7">
+                <ChoiceBox fx:id="newWorkplace" prefWidth="150.0" GridPane.columnIndex="7" GridPane.columnSpan="3" GridPane.rowIndex="7">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
@@ -77,14 +77,14 @@
                     </GridPane.margin>
                 </ChoiceBox>
             
-                <ChoiceBox fx:id="addRole" minWidth="150.0" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="8">
+                <ChoiceBox fx:id="newRole" minWidth="150.0" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="8">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </ChoiceBox>
             
-                <TextField fx:id="addTelephone" promptText="e.g. 0031202939190" GridPane.columnIndex="3" GridPane.columnSpan="6" GridPane.rowIndex="9" />
-                <TextField fx:id="addMobile" promptText="e.g. 0031629887377" GridPane.columnIndex="3" GridPane.columnSpan="6" GridPane.rowIndex="10" />
+                <TextField fx:id="newTelephone" promptText="e.g. 0031202939190" GridPane.columnIndex="3" GridPane.columnSpan="6" GridPane.rowIndex="9" />
+                <TextField fx:id="newMobile" promptText="e.g. 0031629887377" GridPane.columnIndex="3" GridPane.columnSpan="6" GridPane.rowIndex="10" />
             
                 <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Username" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
                     <font>

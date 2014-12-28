@@ -45,60 +45,67 @@ import javafx.stage.Stage;
  * @author Tijme Gommers
  */
 public class MainActivity extends Application {
-    
+
+    /**
+     */
     public static int editId;
-    
+
+    /**
+     */
     public static int viewId;
 
     /**
-     * Called on application run
-     * 
+     * Called on application run.
+     *
      * @param primaryStage
-     * @throws Exception 
+     * @throws Exception
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
         startMainStage();
-        
-        Platform.runLater(new Runnable(){
+
+        Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 DatabaseHelper.openConnection();
             }
         });
     }
-    
+
     /**
-     * Called on application run
-     * 
+     * Called on application run.
+     *
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         launch(args);
     }
-    
+
+    /**
+     * Opens the login view.
+     */
     public void startMainStage() {
         try {
             FXMLLoader primaryLoader = new FXMLLoader(this.getClass().getResource("/luggage/views/login.fxml"));
             Parent root = null;
             root = (Parent) primaryLoader.load();
-           
+
             Scene newScene = new Scene(root);
             newScene.getStylesheets().add("/resources/stylesheets/header.css");
-            
+
             Stage oNewStage = new Stage();
             oNewStage.setScene(newScene);
             oNewStage.getIcons().add(new Image("/resources/images/logo_red.png"));
             oNewStage.setTitle(AppConfig.ApplicationName + " " + "login");
             oNewStage.setMinHeight(AppConfig.MinHeight);
             oNewStage.setMinWidth(AppConfig.MinWidth);
-            
+
             oNewStage.setMaximized(true);
-            
+
             oNewStage.show();
         } catch (IOException ex) {
             Logger.getLogger(StageHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
 }

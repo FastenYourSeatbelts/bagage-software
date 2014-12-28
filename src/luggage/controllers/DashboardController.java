@@ -69,7 +69,7 @@ public class DashboardController extends BaseController implements Initializable
     private Label fullname;
 
     /**
-     * Called on controller start
+     * Called on controller start.
      *
      * @param url
      * @param rb
@@ -83,7 +83,7 @@ public class DashboardController extends BaseController implements Initializable
     }
 
     /**
-     * Remove all the tabs the current user doesn't have permissions on
+     * Only add the tabs the current user has permissions on.
      */
     public void addTabs() {
         List<Permissions.Tab> tabPermissions = Permissions.getPermissions(Authentication.getCurrentUser());
@@ -138,7 +138,7 @@ public class DashboardController extends BaseController implements Initializable
      */
     @FXML
     private void logout(ActionEvent event) {
-        Debug.logToDatabase(LogModel.TYPE_INFO, "User succesfully logged out");
+        Debug.logToDatabase(LogModel.TYPE_INFO, "User succesfully logged out.");
         Authentication.logout();
         Stage currentStage = (Stage) logout.getScene().getWindow();
         StageHelper.replaceStage(currentStage, "login", this);

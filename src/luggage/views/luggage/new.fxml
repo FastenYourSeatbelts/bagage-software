@@ -30,9 +30,9 @@
                 <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <ChoiceBox fx:id="addLocationId" minWidth="150.0" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="1" />
-                <ChoiceBox fx:id="addCustomerId" minWidth="150.0" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="2" />
-                <ChoiceBox fx:id="addStatus" minWidth="150.0" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="3" />
+                <ChoiceBox fx:id="newLocationId" minWidth="150.0" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="1" />
+                <ChoiceBox fx:id="newCustomerId" minWidth="150.0" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="2" />
+                <ChoiceBox fx:id="newStatus" minWidth="150.0" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="3" />
                 <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Location" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <font>
                         <Font size="14.0" />
@@ -81,9 +81,9 @@
                   <Insets left="10.0" />
                </GridPane.margin>
             </Label>
-            <DatePicker fx:id="addDate" minWidth="150.0" prefHeight="25.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                <TextField fx:id="addTags" promptText="e.g. blue, purple, big, square" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="5" />
-                <TextField fx:id="addNotes" promptText="e.g. Fragile contents" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="6" />
+            <DatePicker fx:id="newDate" minWidth="150.0" prefHeight="25.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                <TextField fx:id="newTags" promptText="e.g. blue, purple, big, square" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="5" />
+                <TextField fx:id="newNotes" promptText="e.g. Fragile contents" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="6" />
                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="7">
                     <children>
                         <Button fx:id="newSave" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="47.0" layoutY="8.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#newSave" prefWidth="70.0" text="Save" AnchorPane.rightAnchor="150.0">

@@ -142,10 +142,21 @@ public class FoundLuggageController extends BaseController implements Initializa
         });
     }
 
-    public LocationModel selectedLocation;
+    /**
+     * Calls LocationModel to enable mapping a Location ID to the Location's
+     * name.
+     */
+    private LocationModel selectedLocation;
 
-    public CustomerModel selectedCustomer;
+    /**
+     * Calls CustomernModel to enable mapping a Customer ID to the Customer's
+     * name.
+     */
+    private CustomerModel selectedCustomer;
 
+    /**
+     * Populates the view Location &amp; Customer ChoiceBoxes.
+     */
     public void setViewChoiceBoxes() {
         // Locations
         LocationModel oLocationModel = new LocationModel();
@@ -182,6 +193,9 @@ public class FoundLuggageController extends BaseController implements Initializa
         viewCustomerId.setItems(customerData);
     }
 
+    /**
+     * Opens the Found Luggage list view.
+     */
     @FXML
     public void listView() {
         LuggageModel luggage = (LuggageModel) luggageTableView.getSelectionModel().getSelectedItem();
@@ -195,6 +209,9 @@ public class FoundLuggageController extends BaseController implements Initializa
         StageHelper.addPopup("luggage/foundview", this, false, true);
     }
 
+    /**
+     * Populates the view fields with the selected found luggage\'s data.
+     */
     public void setViewFields() {
         LuggageModel luggage = new LuggageModel(MainActivity.viewId);
 
@@ -231,7 +248,10 @@ public class FoundLuggageController extends BaseController implements Initializa
 
         luggageTableView.setItems(data);
     }
-    
+
+    /**
+     * Creates the (mouse, keyboard, etc.) event filters for the list view.
+     */
     public void keyActions() {
 //        luggageTableView.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent a) -> {
 //            if (a.getCode().equals(KeyCode.V)) {
@@ -269,7 +289,10 @@ public class FoundLuggageController extends BaseController implements Initializa
             }
         });
     }
-    
+
+    /**
+     * Closes current view.
+     */
     public void viewClose() {
         Stage addStage = (Stage) viewClose.getScene().getWindow();
         StageHelper.closeStage(addStage);

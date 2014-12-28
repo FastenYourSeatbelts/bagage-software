@@ -62,7 +62,7 @@ import luggage.helpers.StageHelper;
 public class ResolvedLuggageController extends BaseController implements Initializable {
 
     @FXML
-    protected TableView luggageTableView;
+    private TableView luggageTableView;
 
     @FXML
     private TableColumn tableViewId;
@@ -141,10 +141,22 @@ public class ResolvedLuggageController extends BaseController implements Initial
             }
         });
     }
-    public LocationModel selectedLocation;
 
-    public CustomerModel selectedCustomer;
+    /**
+     * Calls LocationModel to enable mapping a Location ID to the Location's
+     * name.
+     */
+    private LocationModel selectedLocation;
 
+    /**
+     * Calls CustomernModel to enable mapping a Customer ID to the Customer's
+     * name.
+     */
+    private CustomerModel selectedCustomer;
+
+    /**
+     * Populates the view Location &amp; Customer ChoiceBoxes.
+     */
     public void setViewChoiceBoxes() {
         // Locations
         LocationModel oLocationModel = new LocationModel();
@@ -181,6 +193,9 @@ public class ResolvedLuggageController extends BaseController implements Initial
         viewCustomerId.setItems(customerData);
     }
 
+    /**
+     * Opens the Resolved Luggage list view.
+     */
     @FXML
     public void listView() {
         LuggageModel luggage = (LuggageModel) luggageTableView.getSelectionModel().getSelectedItem();
@@ -194,6 +209,9 @@ public class ResolvedLuggageController extends BaseController implements Initial
         StageHelper.addPopup("luggage/resolvedview", this, false, true);
     }
 
+    /**
+     * Populates the view fields with the selected resolved luggage's data.
+     */
     public void setViewFields() {
         LuggageModel luggage = new LuggageModel(MainActivity.viewId);
 
@@ -231,6 +249,9 @@ public class ResolvedLuggageController extends BaseController implements Initial
         luggageTableView.setItems(data);
     }
 
+    /**
+     * Creates the (mouse, keyboard, etc.) event filters for the list view.
+     */
     public void keyActions() {
 //        luggageTableView.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent a) -> {
 //            if (a.getCode().equals(KeyCode.V)) {
@@ -268,7 +289,10 @@ public class ResolvedLuggageController extends BaseController implements Initial
             }
         });
     }
-    
+
+    /**
+     * Closes current view.
+     */
     public void viewClose() {
         Stage addStage = (Stage) viewClose.getScene().getWindow();
         StageHelper.closeStage(addStage);

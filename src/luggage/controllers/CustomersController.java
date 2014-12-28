@@ -192,12 +192,6 @@ public class CustomersController extends BaseController implements Initializable
      * VIEW ELEMENTS
      */
     @FXML
-    private Button viewAdd;
-
-    @FXML
-    private Button viewReset;
-
-    @FXML
     private Button viewClose;
 
     @FXML
@@ -264,7 +258,7 @@ public class CustomersController extends BaseController implements Initializable
 
                 // Add
                 if (addGender != null && addInsurerId != null) {
-                    setAddChoiceBoxes();
+                    setNewChoiceBoxes();
                     addKeyActions();
                 }
 
@@ -285,8 +279,15 @@ public class CustomersController extends BaseController implements Initializable
         });
     }
 
+    /**
+     * Calls InsurerModel to enable mapping an Insurer ID to the Insurer's
+     * name.
+     */
     public InsurerModel selectedInsurer;
 
+    /**
+     * Populates the view fields with the selected Customer's data.
+     */
     public void setViewFields() {
         CustomerModel customer = new CustomerModel(MainActivity.viewId);
 
@@ -304,6 +305,9 @@ public class CustomersController extends BaseController implements Initializable
         viewGender.getSelectionModel().select(customer.getGender().toUpperCase());
     }
 
+    /**
+     * Populates the view Gender &amp; Insurer ChoiceBoxes.
+     */
     public void setViewChoiceBoxes() {
         viewGender.setItems(FXCollections.observableArrayList(
                 "MALE",
@@ -327,6 +331,9 @@ public class CustomersController extends BaseController implements Initializable
         viewInsurerId.setItems(insurerData);
     }
 
+    /**
+     * Populates the edit fields with the selected Customer's data.
+     */
     public void setEditFields() {
         CustomerModel customer = new CustomerModel(MainActivity.editId);
 
@@ -344,6 +351,9 @@ public class CustomersController extends BaseController implements Initializable
         editGender.getSelectionModel().select(customer.getGender().toUpperCase());
     }
 
+    /**
+     * Populates the view Gender &amp; Insurer ChoiceBoxes.
+     */
     public void setEditChoiceBoxes() {
         editGender.setItems(FXCollections.observableArrayList(
                 "MALE",
@@ -367,7 +377,10 @@ public class CustomersController extends BaseController implements Initializable
         editInsurerId.setItems(insurerData);
     }
 
-    public void setAddChoiceBoxes() {
+    /**
+     * Populates the new view's Gender &amp; Insurer ChoiceBoxes.
+     */
+    public void setNewChoiceBoxes() {
         addGender.setItems(FXCollections.observableArrayList(
                 "MALE",
                 "FEMALE",
@@ -384,6 +397,9 @@ public class CustomersController extends BaseController implements Initializable
         addInsurerId.setItems(insurerData);
     }
 
+    /**
+     * Creates the (mouse, keyboard, etc.) event filters for the list view.
+     */
     public void listKeyActions() {
         listNew.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
@@ -446,6 +462,9 @@ public class CustomersController extends BaseController implements Initializable
         });
     }
 
+    /**
+     * Creates the (mouse, keyboard, etc.) event filters for the add view.
+     */
     public void addKeyActions() {
         addFirstname.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
@@ -545,6 +564,9 @@ public class CustomersController extends BaseController implements Initializable
         });
     }
 
+    /**
+     * Creates the (mouse, keyboard, etc.) event filters for the edit view.
+     */
     public void editKeyActions() {
         editFirstname.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
             if (evt.getCode().equals(KeyCode.ESCAPE)) {
@@ -644,6 +666,9 @@ public class CustomersController extends BaseController implements Initializable
         });
     }
 
+    /**
+     * Creates the (mouse, keyboard, etc.) event filters for the view page.
+     */
     public void viewKeyActions() {
         viewFirstname.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
@@ -696,8 +721,9 @@ public class CustomersController extends BaseController implements Initializable
             }
         });
     }
-    
+
     /**
+     * Populates the list (TableView) with the provided parameters (query).
      *
      * @param where
      * @param params
@@ -720,6 +746,9 @@ public class CustomersController extends BaseController implements Initializable
         listTableView.setItems(listData);
     }
 
+    /**
+     * Handles the search field functionality.
+     */
     @FXML
     public void listOnSearch() {
         String[] keywords = listSearchField.getText().split("\\s+");
@@ -755,16 +784,25 @@ public class CustomersController extends BaseController implements Initializable
         listResetTableView(query, params);
     }
 
+    /**
+     * Opens the 'New Customer' view.
+     */
     @FXML
     public void listNew() {
         StageHelper.addPopup("customers/new", this, false, true);
     }
 
+    /**
+     * Opens the Customer list's help view.
+     */
     @FXML
     public void listHelp() {
         StageHelper.addStage("customers/help", this, false, true);
     }
 
+    /**
+     * Opens the Customer edit view for the selected customer.
+     */
     @FXML
     public void listEdit() {
         CustomerModel customer = (CustomerModel) listTableView.getSelectionModel().getSelectedItem();
@@ -778,6 +816,9 @@ public class CustomersController extends BaseController implements Initializable
         StageHelper.addPopup("customers/edit", this, false, true);
     }
 
+    /**
+     * Triggers a confirmation dialog for removing the selected customer.
+     */
     @FXML
     public void listRemove() {
         Stage removeStage = (Stage) listTableView.getScene().getWindow();
@@ -801,6 +842,9 @@ public class CustomersController extends BaseController implements Initializable
         }
     }
 
+    /**
+     * Opens the Customer list view.
+     */
     @FXML
     public void listView() {
         CustomerModel customer = (CustomerModel) listTableView.getSelectionModel().getSelectedItem();
@@ -814,11 +858,17 @@ public class CustomersController extends BaseController implements Initializable
         StageHelper.addPopup("customers/view", this, false, true);
     }
 
+    /**
+     * Handles canceling and closing the new view.
+     */
     public void newCancel() {
         Stage addStage = (Stage) newCancel.getScene().getWindow();
         StageHelper.closeStage(addStage);
     }
 
+    /**
+     * Resets all fields in the new view.
+     */
     public void newReset() {
         addFirstname.setText("");
         addPrefix.setText("");
@@ -833,6 +883,10 @@ public class CustomersController extends BaseController implements Initializable
         addInsurerId.setValue(null);
     }
 
+    /**
+     * Handles saving a new Customer. Checks if all necessary fields are given
+     * and if so, writes to database.
+     */
     public void newSave() {
         if (addFirstname.getText().equals("") || addLastname.getText().equals("")) {
             Dialogs.create()
@@ -920,11 +974,17 @@ public class CustomersController extends BaseController implements Initializable
         newCancel();
     }
 
+    /**
+     * Cancels editing a Customer, does not change saved data.
+     */
     public void editCancel() {
         Stage cancelStage = (Stage) editCancel.getScene().getWindow();
         StageHelper.closeStage(cancelStage);
     }
 
+    /**
+     * Resets all fields in the edit view.
+     */
     public void editReset() {
         editFirstname.setText("");
         editPrefix.setText("");
@@ -939,6 +999,11 @@ public class CustomersController extends BaseController implements Initializable
         editInsurerId.setValue(null);
     }
 
+    /**
+     * Handles saving changes to an existing Customer. Checks if all necessary
+     * fields are filled and if so, writes to database, overwriting existing
+     * data for selected Customer.
+     */
     public void editSave() {
         if (editFirstname.getText().equals("") || editLastname.getText().equals("")) {
             Dialogs.create()
@@ -1026,6 +1091,9 @@ public class CustomersController extends BaseController implements Initializable
         editCancel();
     }
 
+    /**
+     * Closes current view.
+     */
     public void viewClose() {
         Stage cancelStage = (Stage) viewClose.getScene().getWindow();
         StageHelper.closeStage(cancelStage);

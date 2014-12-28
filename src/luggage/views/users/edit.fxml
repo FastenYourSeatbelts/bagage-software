@@ -152,7 +152,7 @@
                 </Label>
                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="11">
                     <children>
-                        <Button fx:id="editSaveButton" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="47.0" layoutY="5.0" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#editSave" prefWidth="60.0" text="Save" AnchorPane.rightAnchor="151.0">
+                        <Button fx:id="editSave" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="47.0" layoutY="5.0" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#editSave" prefWidth="60.0" text="Save" AnchorPane.rightAnchor="151.0">
                         </Button>
                         <Button fx:id="editReset" alignment="CENTER" layoutX="110.0" layoutY="5.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#editReset" prefWidth="60.0" text="Reset" AnchorPane.rightAnchor="74.0">
                         </Button>

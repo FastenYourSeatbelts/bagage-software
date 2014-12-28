@@ -26,53 +26,54 @@ package luggage;
 /**
  * Application configuration
  *
- * @package luggage
+ * -package luggage
+ *
  * @author Tijme Gommers
  */
 public class AppConfig {
-    
+
     /**
-     * Application wide title
+     * Application wide title.
      */
     public static final String ApplicationName = "Corendon Luggage";
-    
+
     /**
-     * Application copyright
+     * Application copyright.
      */
-    public static final String ApplicationCopyRight = "Copyright 2014 Itopia B.V.";
-    
+    public static final String ApplicationCopyRight = "Copyright 2014-2015 Itopia B.V.";
+
     /**
-     * Minimum application height
+     * Minimum application height.
      */
     public static final int MinHeight = 500;
-    
+
     /**
-     * Minimum application width
+     * Minimum application width.
      */
     public static final int MinWidth = 800;
-    
+
     /**
-     * Database host & driver
+     * Database host &amp; driver.
      */
     public static final String databaseName = "jdbc:mysql://localhost/luggage-system?zeroDateTimeBehavior=convertToNull";
-    
+
     /**
-     * Database user
+     * Database user.
      */
     public static final String databaseUser = "root";
-    
+
     /**
-     * Database password
+     * Database password.
      */
     public static final String databasePass = "";
-    
+
     /**
-     * The salt for passwords
+     * The salt for passwords.
      */
     public static final String passwordSalt = "asdfp9384thSIDfhO2IU3RHlskdFH-93w48thSdufhP3498HSOD9F7H23lifuhSDLkfjhW3LKJH";
-    
+
     /**
-     * If debug mode is on
+     * Whether or not debug mode is on.
      */
     public static final boolean debug = true;
 }

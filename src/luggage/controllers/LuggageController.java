@@ -105,7 +105,7 @@ public class LuggageController extends BaseController implements Initializable {
     private Button listExportToPdf;
 
     /**
-     * ADD ELEMENTS
+     * NEW ELEMENTS
      */
     @FXML
     private Button newSave;
@@ -117,22 +117,22 @@ public class LuggageController extends BaseController implements Initializable {
     private Button newCancel;
 
     @FXML
-    private TextField addTags;
+    private TextField newTags;
 
     @FXML
-    private ChoiceBox<LocationModel> addLocationId;
+    private ChoiceBox<LocationModel> newLocationId;
 
     @FXML
-    private ChoiceBox<CustomerModel> addCustomerId;
+    private ChoiceBox<CustomerModel> newCustomerId;
 
     @FXML
-    private ChoiceBox<String> addStatus;
+    private ChoiceBox<String> newStatus;
 
     @FXML
-    private TextField addNotes;
+    private TextField newNotes;
 
     @FXML
-    private DatePicker addDate;
+    private DatePicker newDate;
 
     /**
      * EDIT ELEMENTS
@@ -221,10 +221,10 @@ public class LuggageController extends BaseController implements Initializable {
                     listKeyActions();
                 }
 
-                // Add
-                if (addLocationId != null) {
-                    setAddChoiceBoxes();
-                    addKeyActions();
+                // New
+                if (newLocationId != null) {
+                    setNewChoiceBoxes();
+                    newKeyActions();
                 }
 
                 // Edit
@@ -248,7 +248,7 @@ public class LuggageController extends BaseController implements Initializable {
 
     public CustomerModel selectedCustomer;
 
-    public void setAddChoiceBoxes() {
+    public void setNewChoiceBoxes() {
         // Locations
         LocationModel oLocationModel = new LocationModel();
         List<Model> allLocations = oLocationModel.findAll();
@@ -258,7 +258,7 @@ public class LuggageController extends BaseController implements Initializable {
             locationData.add(location);
         }
 
-        addLocationId.setItems(locationData);
+        newLocationId.setItems(locationData);
 
         // Customers
         CustomerModel oCustomerModel = new CustomerModel();
@@ -269,13 +269,13 @@ public class LuggageController extends BaseController implements Initializable {
             customerData.add(customer);
         }
 
-        addCustomerId.setItems(customerData);
+        newCustomerId.setItems(customerData);
 
         ObservableList<String> statuses = FXCollections.observableArrayList();
         statuses.add("Missing");
         statuses.add("Found");
         statuses.add("Resolved");
-        addStatus.setItems(statuses);
+        newStatus.setItems(statuses);
     }
 
     public void setEditChoiceBoxes() {
@@ -320,6 +320,9 @@ public class LuggageController extends BaseController implements Initializable {
         editStatus.setItems(statuses);
     }
 
+    /**
+     * Populates the view Location, Customer &amp; Status ChoiceBoxes.
+     */
     public void setViewChoiceBoxes() {
 
         // Locations
@@ -369,6 +372,9 @@ public class LuggageController extends BaseController implements Initializable {
         Debug.print("zoooio: " + " took " + microseconds + " microseconds.");
     }
 
+    /**
+     * Handles the search field functionality.
+     */
     @FXML
     protected void listOnSearch() {
 
@@ -402,11 +408,25 @@ public class LuggageController extends BaseController implements Initializable {
         listResetTableView(query, params);
     }
 
+    /**
+     * Opens the 'New Luggage' view.
+     */
     @FXML
     public void listNew() {
         StageHelper.addPopup("luggage/new", this, false, true);
     }
 
+    /**
+     * Opens the Luggage list's help view.
+     */
+    @FXML
+    public void listHelp() {
+        StageHelper.addStage("luggage/listHelp", this, false, true);
+    }
+
+    /**
+     * Opens the Luggage edit view for the selected customer.
+     */
     @FXML
     public void listEdit() {
         LuggageModel luggage = (LuggageModel) listTableView.getSelectionModel().getSelectedItem();
@@ -420,11 +440,9 @@ public class LuggageController extends BaseController implements Initializable {
         StageHelper.addPopup("luggage/edit", this, false, true);
     }
 
-    @FXML
-    public void listHelp() {
-        StageHelper.addStage("luggage/listHelp", this, false, true);
-    }
-
+    /**
+     * Triggers a confirmation dialog for removing the selected luggage item.
+     */
     @FXML
     public void listRemove() {
         Stage removeStage = (Stage) listTableView.getScene().getWindow();
@@ -448,6 +466,9 @@ public class LuggageController extends BaseController implements Initializable {
         }
     }
 
+    /**
+     * Opens the Luggage list view.
+     */
     @FXML
     public void listView() {
         LuggageModel luggage = (LuggageModel) listTableView.getSelectionModel().getSelectedItem();
@@ -472,7 +493,7 @@ public class LuggageController extends BaseController implements Initializable {
         MainActivity.viewId = luggage.getId();
         //Jasper is de beste
         System.out.println("Ayy ik doe iets");
-        Debug.logToDatabase(LogModel.TYPE_INFO, "User printed " + /*eenIdentifier + */ "as PDF file.");
+        Debug.logToDatabase(LogModel.TYPE_INFO, "/*eenIdentifier + */" + "exported as PDF file.");
         StageHelper.addStage("luggage/view", this, false, true);
     }
 
@@ -499,40 +520,50 @@ public class LuggageController extends BaseController implements Initializable {
         listTableView.setItems(listData);
     }
 
+    /**
+     * Handles canceling and closing the new view.
+     */
     public void newCancel() {
         Stage addStage = (Stage) newCancel.getScene().getWindow();
         StageHelper.closeStage(addStage);
     }
 
+    /**
+     * Resets all fields in the new view.
+     */
     public void newReset() {
-        addTags.setText("");
-        addNotes.setText("");
-        addLocationId.setValue(null);
-        addCustomerId.setValue(null);
-        addStatus.setValue(null);
-        addDate.setValue(null);
+        newTags.setText("");
+        newNotes.setText("");
+        newLocationId.setValue(null);
+        newCustomerId.setValue(null);
+        newStatus.setValue(null);
+        newDate.setValue(null);
     }
 
+    /**
+     * Handles saving a new Luggage item. Checks if all necessary fields are
+     * given and if so, writes to database.
+     */
     public void newSave() {
-        if (addLocationId.getSelectionModel().getSelectedItem() == null) {
+        if (newLocationId.getSelectionModel().getSelectedItem() == null) {
             Dialogs.create()
-                    .owner((Stage) addLocationId.getScene().getWindow())
+                    .owner((Stage) newLocationId.getScene().getWindow())
                     .title("Warning")
                     .masthead("Selection error")
                     .message("Please select the current location of the luggage or where to ship it to.")
                     .showWarning();
             return;
-        } else if (addStatus.getSelectionModel().getSelectedItem() == null) {
+        } else if (newStatus.getSelectionModel().getSelectedItem() == null) {
             Dialogs.create()
-                    .owner((Stage) addStatus.getScene().getWindow())
+                    .owner((Stage) newStatus.getScene().getWindow())
                     .title("Warning")
                     .masthead("Selection error")
                     .message("Please select the status for the luggage item.")
                     .showWarning();
             return;
-        } else if (addDate.getValue() == null) {
+        } else if (newDate.getValue() == null) {
             Dialogs.create()
-                    .owner((Stage) addDate.getScene().getWindow())
+                    .owner((Stage) newDate.getScene().getWindow())
                     .title("Warning")
                     .masthead("Date format error")
                     .message("Please enter or select the correct date for the luggage item.")
@@ -541,13 +572,13 @@ public class LuggageController extends BaseController implements Initializable {
         }
 
         LuggageModel luggage = new LuggageModel();
-        luggage.setLocationId(Integer.toString(addLocationId.getSelectionModel().getSelectedItem().getId()));
+        luggage.setLocationId(Integer.toString(newLocationId.getSelectionModel().getSelectedItem().getId()));
 
-        luggage.setDatetime(addDate.getValue() + " 00:00:00");
+        luggage.setDatetime(newDate.getValue() + " 00:00:00");
 
-        luggage.setTags(addTags.getText());
-        luggage.setNotes(addNotes.getText());
-        luggage.setStatus(addStatus.getValue());
+        luggage.setTags(newTags.getText());
+        luggage.setNotes(newNotes.getText());
+        luggage.setStatus(newStatus.getValue());
         luggage.save();
 
         LuggageController luggageController = (LuggageController) StageHelper.callbackController;
@@ -556,6 +587,9 @@ public class LuggageController extends BaseController implements Initializable {
         newCancel();
     }
 
+    /**
+     * Populates the edit fields with the selected Luggage item's data.
+     */
     public void setEditFields() {
         LuggageModel luggage = new LuggageModel(MainActivity.editId);
 
@@ -570,6 +604,9 @@ public class LuggageController extends BaseController implements Initializable {
         editCustomerId.getSelectionModel().select(selectedCustomer);
     }
 
+    /**
+     * Populates the view fields with the selected Luggage item's data.
+     */
     public void setViewFields() {
         LuggageModel luggage = new LuggageModel(MainActivity.viewId);
 
@@ -584,6 +621,9 @@ public class LuggageController extends BaseController implements Initializable {
         viewCustomerId.getSelectionModel().select(selectedCustomer);
     }
 
+    /**
+     * Creates the (mouse, keyboard, etc.) event filters for the list view.
+     */
     public void listKeyActions() {
         listNew.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
@@ -654,8 +694,11 @@ public class LuggageController extends BaseController implements Initializable {
         });
     }
 
-    public void addKeyActions() {
-        addLocationId.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+    /**
+     * Creates the (mouse, keyboard, etc.) event filters for the new view.
+     */
+    public void newKeyActions() {
+        newLocationId.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 newCancel();
             }
@@ -663,35 +706,35 @@ public class LuggageController extends BaseController implements Initializable {
                 newSave();
             }
         });
-        addCustomerId.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+        newCustomerId.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 newCancel();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
                 newSave();
             }
         });
-        addStatus.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+        newStatus.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 newCancel();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
                 newSave();
             }
         });
-        addDate.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+        newDate.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 newCancel();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
                 newSave();
             }
         });
-        addTags.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+        newTags.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 newCancel();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
                 newSave();
             }
         });
-        addNotes.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+        newNotes.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 newCancel();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
@@ -719,6 +762,9 @@ public class LuggageController extends BaseController implements Initializable {
         });
     }
 
+    /**
+     * Creates the (mouse, keyboard, etc.) event filters for the edit view.
+     */
     public void editKeyActions() {
         editLocationId.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
             if (evt.getCode().equals(KeyCode.ESCAPE)) {
@@ -783,6 +829,9 @@ public class LuggageController extends BaseController implements Initializable {
         });
     }
 
+    /**
+     * Creates the (mouse, keyboard, etc.) event filters for the view page.
+     */
     public void viewKeyActions() {
         viewLocationId.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
             if (evt.getCode().equals(KeyCode.ESCAPE)) {
@@ -821,11 +870,17 @@ public class LuggageController extends BaseController implements Initializable {
         });
     }
 
+    /**
+     * Cancels editing a Luggage item, does not change saved data.
+     */
     public void editCancel() {
         Stage addStage = (Stage) editCancel.getScene().getWindow();
         StageHelper.closeStage(addStage);
     }
 
+    /**
+     * Resets all fields in the edit view.
+     */
     public void editReset() {
         editTags.setText("");
         editNotes.setText("");
@@ -835,6 +890,11 @@ public class LuggageController extends BaseController implements Initializable {
         editDate.setValue(null);
     }
 
+    /**
+     * Handles saving changes to an existing Luggage item. Checks if all
+     * necessary fields are filled and if so, writes to database, overwriting
+     * existing data for selected Customer.
+     */
     public void editSave() {
         if (editLocationId.getSelectionModel().getSelectedItem() == null) {
             Dialogs.create()
@@ -878,6 +938,9 @@ public class LuggageController extends BaseController implements Initializable {
         editCancel();
     }
 
+    /**
+     * Closes current view.
+     */
     public void viewClose() {
         Stage addStage = (Stage) viewClose.getScene().getWindow();
         StageHelper.closeStage(addStage);

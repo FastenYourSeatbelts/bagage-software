@@ -64,6 +64,11 @@ public class Debug {
         log.setDatetime(dateFormat.format(date));
         log.save();
     }
+
+    /**
+     *
+     * @param message
+     */
     public static void logLoginscreenToDatabase(String message) {
         LogModel log = new LogModel();
         log.setUserId("14");

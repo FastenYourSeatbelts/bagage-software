@@ -1,0 +1,4 @@
+.chart {
+    -fx-background-repeat: round;
+    -fx-background-image: url("../images/watermark.png");
+}

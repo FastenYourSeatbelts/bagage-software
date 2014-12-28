@@ -42,10 +42,13 @@ import luggage.Debug;
  */
 public class DatabaseHelper {
 
+    /**
+     * Create a connection object.
+     */
     public static Connection oConnection = null;
 
     /**
-     * Get the connection and generate it if it doesn't exist yet
+     * Get the connection and generate it if it doesn't exist yet.
      *
      * @return
      */
@@ -58,7 +61,7 @@ public class DatabaseHelper {
     }
 
     /**
-     * Open a new database connection
+     * Open a new database connection.
      */
     public static void openConnection() {
         try {
@@ -73,7 +76,7 @@ public class DatabaseHelper {
     }
 
     /**
-     * Close the given database connection
+     * Close the given database connection.
      *
      * @param oConnection
      */

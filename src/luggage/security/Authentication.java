@@ -35,6 +35,9 @@ import luggage.database.models.UserModel;
  */
 public class Authentication {
 
+    /**
+     *
+     */
     public static UserModel currentUser;
 
     /**
@@ -53,10 +56,17 @@ public class Authentication {
         return Authentication.currentUser;
     }
 
+    /**
+     *
+     * @return
+     */
     public static boolean loggedIn() {
         return Authentication.currentUser.exists();
     }
 
+    /**
+     * Log out the current user.
+     */
     public static void logout() {
         Authentication.currentUser = new UserModel();
     }

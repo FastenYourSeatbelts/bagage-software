@@ -76,11 +76,17 @@ public class LogController extends BaseController implements Initializable {
 
     private ObservableList<LogModel> listData = FXCollections.observableArrayList();
 
+    /**
+     * Opens the Log list\'s help view.
+     */
     @FXML
     public void listHelp() {
         StageHelper.addStage("customers/help", this, false, true);
     }
 
+    /**
+     * Handles the search field functionality.
+     */
     @FXML
     public void listOnSearch() {
 
@@ -132,6 +138,9 @@ public class LogController extends BaseController implements Initializable {
         });
     }
 
+    /**
+     * Creates the (mouse, keyboard, etc.) event filters for the list view.
+     */
     public void keyActions() {
         listTableView.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.H)) {

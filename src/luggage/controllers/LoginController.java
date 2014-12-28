@@ -83,6 +83,9 @@ public class LoginController extends BaseController implements Initializable {
         error.setText("");
     }
 
+    /**
+     * Opens the login page\'s help view.
+     */
     @FXML
     public void listHelp() {
         StageHelper.addStage("login_help", this, false, true);
@@ -103,7 +106,7 @@ public class LoginController extends BaseController implements Initializable {
 
         UserModel user = new UserModel("username = ? AND password = ?", params);
         if (!user.exists()) {
-            Debug.logLoginscreenToDatabase("Login failed. User: \"" + username.getText() + "\"");
+            Debug.logLoginscreenToDatabase("User: \"" + username.getText() + "\" login failed.");
             error.setText("Wrong login, please try again!");
             username.requestFocus();
             return;
@@ -113,7 +116,7 @@ public class LoginController extends BaseController implements Initializable {
         Stage loginStage = (Stage) username.getScene().getWindow();
         StageHelper.replaceStage(loginStage, "dashboard", this);
 
-        Debug.logToDatabase(LogModel.TYPE_INFO, "User succesfully logged in");
+        Debug.logToDatabase(LogModel.TYPE_INFO, "User succesfully logged in.");
     }
 
     /**
@@ -128,6 +131,9 @@ public class LoginController extends BaseController implements Initializable {
         copyright.setText(AppConfig.ApplicationCopyRight);
     }
 
+    /**
+     * Closes current view.
+     */
     public void viewClose() {
         Stage addStage = (Stage) viewClose.getScene().getWindow();
         StageHelper.closeStage(addStage);

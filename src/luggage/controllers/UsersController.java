@@ -62,6 +62,9 @@ import org.controlsfx.dialog.Dialogs;
  */
 public class UsersController extends BaseController implements Initializable {
 
+    /**
+     * LIST ELEMENTS
+     */
     @FXML
     private TableView listTableView;
 
@@ -72,22 +75,70 @@ public class UsersController extends BaseController implements Initializable {
     private TableColumn listTableViewName;
 
     @FXML
-    private TableColumn listTableViewInsurer;
-
-    @FXML
-    private TableColumn listTableViewAddress;
-
-    @FXML
-    private TableColumn listTableViewPhone;
-
-    @FXML
-    private TableColumn listTableViewEmail;
-
-    @FXML
     private TableColumn listTableViewRole;
 
     @FXML
     private TextField listSearchField;
+
+    @FXML
+    private Button listNew;
+
+    @FXML
+    private Button listHelp;
+
+    @FXML
+    private Button listEdit;
+
+    @FXML
+    private Button listView;
+
+    @FXML
+    private Button listRemove;
+
+    /**
+     * NEW ELEMENTS
+     */
+    @FXML
+    private TextField newAddress;
+
+    @FXML
+    private TextField newPostalcode;
+
+    @FXML
+    private TextField newResidence;
+
+    @FXML
+    private ChoiceBox<LocationModel> newWorkplace;
+
+    @FXML
+    private ChoiceBox newRole;
+
+    @FXML
+    private TextField newTelephone;
+
+    @FXML
+    private TextField newMobile;
+
+    @FXML
+    private TextField newFirstname;
+
+    @FXML
+    private TextField newPrefix;
+
+    @FXML
+    private TextField newLastname;
+
+    @FXML
+    private ChoiceBox newGender;
+
+    @FXML
+    private TextField newUsername;
+
+    @FXML
+    private TextField newPassword;
+
+    @FXML
+    private TextField newPasswordRepeat;
 
     @FXML
     private Button newSave;
@@ -98,57 +149,9 @@ public class UsersController extends BaseController implements Initializable {
     @FXML
     private Button newCancel;
 
-    /*
-     *all ADD fields
+    /**
+     * EDIT ELEMENTS
      */
-    @FXML
-    private TextField addAddress;
-
-    @FXML
-    private TextField addPostalcode;
-
-    @FXML
-    private TextField addResidence;
-
-    @FXML
-    private ChoiceBox<LocationModel> addWorkplace;
-
-    @FXML
-    private ChoiceBox addRole;
-
-    @FXML
-    private TextField addTelephone;
-
-    @FXML
-    private TextField addMobile;
-
-    @FXML
-    private TextField addFirstname;
-
-    @FXML
-    private TextField addPrefix;
-
-    @FXML
-    private TextField addLastname;
-
-    @FXML
-    private ChoiceBox addGender;
-
-    @FXML
-    private TextField addUsername;
-
-    @FXML
-    private TextField addPassword;
-
-    @FXML
-    private TextField addPasswordRepeat;
-
-    /*
-     * all EDIT fields
-     */
-    @FXML
-    private Button editAdd;
-
     @FXML
     private TextField editFirstname;
 
@@ -192,10 +195,10 @@ public class UsersController extends BaseController implements Initializable {
     private ChoiceBox<LocationModel> editWorkplace;
 
     @FXML
-    private Button editReset;
+    private Button editSave;
 
     @FXML
-    private Button editSave;
+    private Button editReset;
 
     @FXML
     private Button editCancel;
@@ -203,21 +206,6 @@ public class UsersController extends BaseController implements Initializable {
     /**
      * VIEW ELEMENTS
      */
-    @FXML
-    private Button listNew;
-
-    @FXML
-    private Button listHelp;
-
-    @FXML
-    private Button listView;
-
-    @FXML
-    private Button listEdit;
-
-    @FXML
-    private Button listRemove;
-
     @FXML
     private TextField viewUsername;
 
@@ -261,6 +249,9 @@ public class UsersController extends BaseController implements Initializable {
 
     private final ObservableList<LocationModel> workplaceData = FXCollections.observableArrayList();
 
+    /**
+     * Handles the search field functionality.
+     */
     @FXML
     public void listOnSearch() {
 
@@ -291,11 +282,6 @@ public class UsersController extends BaseController implements Initializable {
         listResetTableView(query, params);
     }
 
-    @FXML
-    public void listHelp() {
-        StageHelper.addStage("users/help", this, false, true);
-    }
-
     private ObservableList<UserModel> data = FXCollections.observableArrayList();
 
     /**
@@ -322,10 +308,10 @@ public class UsersController extends BaseController implements Initializable {
                     listKeyActions();
                 }
 
-                // Add
-                if (addGender != null && addRole != null && addWorkplace != null) {
-                    setAddChoiceBox();
-                    addKeyActions();
+                // New
+                if (newGender != null && newRole != null && newWorkplace != null) {
+                    setNewChoiceBox();
+                    newKeyActions();
                 }
 
                 //Edit
@@ -376,14 +362,14 @@ public class UsersController extends BaseController implements Initializable {
         viewWorkplace.setItems(workplaceData);
     }
 
-    public void setAddChoiceBox() {
-        addGender.setItems(FXCollections.observableArrayList(
+    public void setNewChoiceBox() {
+        newGender.setItems(FXCollections.observableArrayList(
                 "MALE",
                 "FEMALE",
                 "OTHER"
         ));
 
-        addRole.setItems(FXCollections.observableArrayList(
+        newRole.setItems(FXCollections.observableArrayList(
                 "EMPLOYEE",
                 "MANAGER",
                 "MODERATOR",
@@ -398,7 +384,7 @@ public class UsersController extends BaseController implements Initializable {
             workplaceData.add(location);
         }
 
-        addWorkplace.setItems(workplaceData);
+        newWorkplace.setItems(workplaceData);
     }
 
     public void setEditFields() {
@@ -419,6 +405,9 @@ public class UsersController extends BaseController implements Initializable {
         editWorkplace.getSelectionModel().select(selectedWorkplace);
     }
 
+    /**
+     * Creates the (mouse, keyboard, etc.) event filters for the list view.
+     */
     public void listKeyActions() {
         listNew.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
@@ -481,8 +470,11 @@ public class UsersController extends BaseController implements Initializable {
         });
     }
 
-    public void addKeyActions() {
-        addUsername.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+    /**
+     * Creates the (mouse, keyboard, etc.) event filters for the new view.
+     */
+    public void newKeyActions() {
+        newUsername.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 newCancel();
             }
@@ -490,91 +482,91 @@ public class UsersController extends BaseController implements Initializable {
                 newSave();
             }
         });
-        addPassword.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+        newPassword.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 newCancel();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
                 newSave();
             }
         });
-        addPasswordRepeat.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+        newPasswordRepeat.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 newCancel();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
                 newSave();
             }
         });
-        addFirstname.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+        newFirstname.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 newCancel();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
                 newSave();
             }
         });
-        addPrefix.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+        newPrefix.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 newCancel();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
                 newSave();
             }
         });
-        addLastname.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+        newLastname.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 newCancel();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
                 newSave();
             }
         });
-        addAddress.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+        newAddress.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 newCancel();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
                 newSave();
             }
         });
-        addPostalcode.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+        newPostalcode.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 newCancel();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
                 newSave();
             }
         });
-        addResidence.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+        newResidence.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 newCancel();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
                 newSave();
             }
         });
-        addTelephone.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+        newTelephone.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 newCancel();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
                 newSave();
             }
         });
-        addMobile.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+        newMobile.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 newCancel();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
                 newSave();
             }
         });
-        addGender.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+        newGender.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 newCancel();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
                 newSave();
             }
         });
-        addRole.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+        newRole.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 newCancel();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
                 newSave();
             }
         });
-        addWorkplace.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+        newWorkplace.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 newCancel();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
@@ -602,6 +594,9 @@ public class UsersController extends BaseController implements Initializable {
         });
     }
 
+    /**
+     * Creates the (mouse, keyboard, etc.) event filters for the edit view.
+     */
     public void editKeyActions() {
         editUsername.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
             if (evt.getCode().equals(KeyCode.ESCAPE)) {
@@ -722,6 +717,9 @@ public class UsersController extends BaseController implements Initializable {
         });
     }
 
+    /**
+     * Creates the (mouse, keyboard, etc.) event filters for the view page.
+     */
     public void viewKeyActions() {
         viewUsername.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
@@ -790,6 +788,10 @@ public class UsersController extends BaseController implements Initializable {
         });
     }
 
+    /**
+     * Calls LocationModel to enable mapping a Location ID to the Workplace's
+     * name.
+     */
     public LocationModel selectedWorkplace;
 
     public void setEditChoiceBoxes() {
@@ -844,11 +846,25 @@ public class UsersController extends BaseController implements Initializable {
         listTableView.setItems(data);
     }
 
+    /**
+     * Opens the 'New User' view.
+     */
     @FXML
     public void listNew() {
         StageHelper.addPopup("users/new", this, false, true);
     }
 
+    /**
+     * Opens the Users list's help view.
+     */
+    @FXML
+    public void listHelp() {
+        StageHelper.addStage("users/help", this, false, true);
+    }
+
+    /**
+     * Opens the User edit view for the selected customer.
+     */
     @FXML
     public void listEdit() {
         UserModel user = (UserModel) listTableView.getSelectionModel().getSelectedItem();
@@ -862,6 +878,9 @@ public class UsersController extends BaseController implements Initializable {
         StageHelper.addPopup("users/edit", this, false, true);
     }
 
+    /**
+     * Triggers a confirmation dialog for removing the selected user.
+     */
     @FXML
     public void listRemove() {
         Stage removeStage = (Stage) listTableView.getScene().getWindow();
@@ -886,6 +905,9 @@ public class UsersController extends BaseController implements Initializable {
         }
     }
 
+    /**
+     * Opens the Users list view.
+     */
     @FXML
     public void listView() {
         UserModel user = (UserModel) listTableView.getSelectionModel().getSelectedItem();
@@ -906,115 +928,115 @@ public class UsersController extends BaseController implements Initializable {
     }
 
     public void newReset() {
-        addPassword.setText("");
-        addPasswordRepeat.setText("");
-        addUsername.setText("");
-        addFirstname.setText("");
-        addPrefix.setText("");
-        addLastname.setText("");
-        addAddress.setText("");
-        addPostalcode.setText("");
-        addResidence.setText("");
-        addTelephone.setText("");
-        addMobile.setText("");
-        addGender.setValue(null);
-        addRole.setValue(null);
-        addWorkplace.setValue(null);
+        newPassword.setText("");
+        newPasswordRepeat.setText("");
+        newUsername.setText("");
+        newFirstname.setText("");
+        newPrefix.setText("");
+        newLastname.setText("");
+        newAddress.setText("");
+        newPostalcode.setText("");
+        newResidence.setText("");
+        newTelephone.setText("");
+        newMobile.setText("");
+        newGender.setValue(null);
+        newRole.setValue(null);
+        newWorkplace.setValue(null);
     }
 //SELECT COUNT(*) as count FROM users WHERE username='whatever'
 
     public void newSave() {
-        if (addUsername.getText().equals("")) {
+        if (newUsername.getText().equals("")) {
             Dialogs.create()
-                    .owner((Stage) addUsername.getScene().getWindow())
+                    .owner((Stage) newUsername.getScene().getWindow())
                     .title("Warning")
                     .masthead("Entry error")
                     .message("Please enter a unique username.")
                     .showWarning();
             return;
-        } else if (addPassword.getText().equals("")) {
+        } else if (newPassword.getText().equals("")) {
             Dialogs.create()
-                    .owner((Stage) addPassword.getScene().getWindow())
+                    .owner((Stage) newPassword.getScene().getWindow())
                     .title("Warning")
                     .masthead("Password error")
                     .message("Please enter a password.")
                     .showWarning();
             return;
-        } else if (addPasswordRepeat.getText().equals("")) {
+        } else if (newPasswordRepeat.getText().equals("")) {
             Dialogs.create()
-                    .owner((Stage) addPasswordRepeat.getScene().getWindow())
+                    .owner((Stage) newPasswordRepeat.getScene().getWindow())
                     .title("Warning")
                     .masthead("Password error")
                     .message("Please repeat the password to confirm it.")
                     .showWarning();
             return;
-        } else if (!addPassword.getText().equals(addPasswordRepeat.getText())) {
+        } else if (!newPassword.getText().equals(newPasswordRepeat.getText())) {
             Dialogs.create()
-                    .owner((Stage) addPassword.getScene().getWindow())
+                    .owner((Stage) newPassword.getScene().getWindow())
                     .title("Warning")
                     .masthead("Password error")
                     .message("The passwords do not match.")
                     .showWarning();
             return;
-        } else if (addFirstname.getText().equals("") || addLastname.getText().equals("")) {
+        } else if (newFirstname.getText().equals("") || newLastname.getText().equals("")) {
             Dialogs.create()
-                    .owner((Stage) addLastname.getScene().getWindow())
+                    .owner((Stage) newLastname.getScene().getWindow())
                     .title("Warning")
                     .masthead("Entry error")
                     .message("Please enter the user's first and last name.")
                     .showWarning();
             return;
-        } else if (addGender.getSelectionModel().getSelectedItem() == null) {
+        } else if (newGender.getSelectionModel().getSelectedItem() == null) {
             Dialogs.create()
-                    .owner((Stage) addGender.getScene().getWindow())
+                    .owner((Stage) newGender.getScene().getWindow())
                     .title("Warning")
                     .masthead("Selection error")
                     .message("Please enter the user's gender.")
                     .showWarning();
             return;
-        } else if (addAddress.getText().equals("")) {
+        } else if (newAddress.getText().equals("")) {
             Dialogs.create()
-                    .owner((Stage) addAddress.getScene().getWindow())
+                    .owner((Stage) newAddress.getScene().getWindow())
                     .title("Warning")
                     .masthead("Entry error")
                     .message("Please enter the user's address.")
                     .showWarning();
             return;
-        } else if (addPostalcode.getText().equals("")) {
+        } else if (newPostalcode.getText().equals("")) {
             Dialogs.create()
-                    .owner((Stage) addPostalcode.getScene().getWindow())
+                    .owner((Stage) newPostalcode.getScene().getWindow())
                     .title("Warning")
                     .masthead("Entry error")
                     .message("Please enter the user's postal code.")
                     .showWarning();
             return;
-        } else if (addResidence.getText().equals("")) {
+        } else if (newResidence.getText().equals("")) {
             Dialogs.create()
-                    .owner((Stage) addResidence.getScene().getWindow())
+                    .owner((Stage) newResidence.getScene().getWindow())
                     .title("Warning")
                     .masthead("Entry error")
                     .message("Please enter the user's residence.")
                     .showWarning();
             return;
-        } else if (addWorkplace.getSelectionModel().getSelectedItem() == null) {
+        } else if (newWorkplace.getSelectionModel().getSelectedItem() == null) {
             Dialogs.create()
-                    .owner((Stage) addWorkplace.getScene().getWindow())
+                    .owner((Stage) newWorkplace.getScene().getWindow())
                     .title("Warning")
                     .masthead("Selection error")
                     .message("Please enter the user's workplace.")
                     .showWarning();
             return;
-        } else if (addRole.getSelectionModel().getSelectedItem() == null) {
+        } else if (newRole.getSelectionModel().getSelectedItem() == null) {
             Dialogs.create()
-                    .owner((Stage) addRole.getScene().getWindow())
+                    .owner((Stage) newRole.getScene().getWindow())
                     .title("Warning")
                     .masthead("Selection error")
                     .message("Please enter the user's role.")
                     .showWarning();
             return;
-        } else if (addTelephone.getText().equals("") && addMobile.getText().equals("")) {
+        } else if (newTelephone.getText().equals("") && newMobile.getText().equals("")) {
             Dialogs.create()
-                    .owner((Stage) addTelephone.getScene().getWindow())
+                    .owner((Stage) newTelephone.getScene().getWindow())
                     .title("Warning")
                     .masthead("Entry error")
                     .message("Please enter the customer's regular telephone number and / or their mobile number.")
@@ -1023,19 +1045,19 @@ public class UsersController extends BaseController implements Initializable {
         }
 
         UserModel users = new UserModel();
-        users.setPassword(Encryption.hash(addPassword.getText()));
-        users.setUsername(addUsername.getText());
-        users.setFirstname(addFirstname.getText());
-        users.setPrefix(addPrefix.getText());
-        users.setLastname(addLastname.getText());
-        users.setGender(addGender.getSelectionModel().getSelectedItem().toString());
-        users.setAddress(addAddress.getText());
-        users.setPostalcode(addPostalcode.getText());
-        users.setResidence(addResidence.getText());
-        users.setLocationId(Integer.toString(addWorkplace.getSelectionModel().getSelectedItem().getId()));
-        users.setRole(addRole.getSelectionModel().getSelectedItem().toString());
-        users.setTelephone(addTelephone.getText());
-        users.setMobile(addMobile.getText());
+        users.setPassword(Encryption.hash(newPassword.getText()));
+        users.setUsername(newUsername.getText());
+        users.setFirstname(newFirstname.getText());
+        users.setPrefix(newPrefix.getText());
+        users.setLastname(newLastname.getText());
+        users.setGender(newGender.getSelectionModel().getSelectedItem().toString());
+        users.setAddress(newAddress.getText());
+        users.setPostalcode(newPostalcode.getText());
+        users.setResidence(newResidence.getText());
+        users.setLocationId(Integer.toString(newWorkplace.getSelectionModel().getSelectedItem().getId()));
+        users.setRole(newRole.getSelectionModel().getSelectedItem().toString());
+        users.setTelephone(newTelephone.getText());
+        users.setMobile(newMobile.getText());
         users.save();
 
         UsersController usersController = (UsersController) StageHelper.callbackController;
@@ -1044,6 +1066,9 @@ public class UsersController extends BaseController implements Initializable {
         newCancel();
     }
 
+    /**
+     * Resets all fields in the edit view.
+     */
     public void editReset() {
         editUsername.setText("");
         editPassword.setText("");
@@ -1061,6 +1086,11 @@ public class UsersController extends BaseController implements Initializable {
         editWorkplace.setValue(null);
     }
 
+    /**
+     * Handles saving changes to an existing User. Checks if all necessary
+     * fields are filled and if so, writes to database, overwriting existing
+     * data for selected Customer.
+     */
     public void editSave() {
         if (editUsername.getText().equals("")) {
             Dialogs.create()
@@ -1154,10 +1184,12 @@ public class UsersController extends BaseController implements Initializable {
         user.setFirstname(editFirstname.getText());
         user.setPrefix(editPrefix.getText());
         user.setLastname(editLastname.getText());
+        user.setGender(editGender.getSelectionModel().getSelectedItem().toString());
         user.setPostalcode(editPostalcode.getText());
         user.setAddress(editAddress.getText());
         user.setResidence(editResidence.getText());
         user.setLocationId(Integer.toString(editWorkplace.getSelectionModel().getSelectedItem().getId()));
+        user.setRole(editRole.getSelectionModel().getSelectedItem().toString());
         user.setTelephone(editTelephone.getText());
         user.setMobile(editMobile.getText());
         user.save();
@@ -1168,6 +1200,9 @@ public class UsersController extends BaseController implements Initializable {
         editCancel();
     }
 
+    /**
+     * Populates the view fields with the selected user's data.
+     */
     public void setViewFields() {
         UserModel user = new UserModel(MainActivity.viewId);
 
@@ -1186,11 +1221,17 @@ public class UsersController extends BaseController implements Initializable {
         viewWorkplace.getSelectionModel().select(selectedWorkplace);
     }
 
+    /**
+     * Closes current view.
+     */
     public void viewClose() {
         Stage cancelStage = (Stage) viewClose.getScene().getWindow();
         StageHelper.closeStage(cancelStage);
     }
 
+    /**
+     * Cancels editing a User, does not change saved data.
+     */
     public void editCancel() {
         Stage cancelStage = (Stage) editCancel.getScene().getWindow();
         StageHelper.closeStage(cancelStage);
