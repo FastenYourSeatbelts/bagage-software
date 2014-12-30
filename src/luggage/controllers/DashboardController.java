@@ -99,6 +99,10 @@ public class DashboardController extends BaseController implements Initializable
 
                     Tab newTab = new Tab(tabPermission.getText());
                     newTab.setId(tabPermission.getId());
+					
+					if(tabPermission.getId().equals("view_log")) {
+						MainActivity.logTab = newTab;
+					}
 
                     Platform.runLater(new Runnable() {
                         @Override
@@ -108,6 +112,7 @@ public class DashboardController extends BaseController implements Initializable
 
                                 FXMLLoader oFXMLLoader = new FXMLLoader();
                                 Parent primaryLoader = (Parent) oFXMLLoader.load(this.getClass().getResource("/luggage/views/" + tabPermission.getView() + ".fxml").openStream());
+								BaseController ctrl = oFXMLLoader.getController();
                                 newTab.setContent(primaryLoader);
 
                                 tabs.getTabs().add(newTab);
@@ -121,6 +126,8 @@ public class DashboardController extends BaseController implements Initializable
                         }
                     });
                 }
+				
+				MainActivity.tabs = tabs;
 
                 return null;
             }

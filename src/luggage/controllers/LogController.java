@@ -39,6 +39,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import luggage.MainActivity;
 import luggage.database.models.LogModel;
 import luggage.database.models.Model;
 import luggage.helpers.StageHelper;
@@ -90,7 +91,7 @@ public class LogController extends BaseController implements Initializable {
     @FXML
     public void listOnSearch() {
 
-        if (!luggage.controllers.UsersController.viewUserLogParam.equals("")) {
+        if (MainActivity.viewUserLogParam != 0) {
             viewUserLog();
         } else {
             String[] keywords = listSearchField.getText().split("\\s+");
@@ -131,6 +132,13 @@ public class LogController extends BaseController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+		
+		MainActivity.viewUserLogParamCallback = new Runnable() {
+			@Override
+			public void run() {
+				viewUserLog();
+			}
+		};
 
         Platform.runLater(new Runnable() {
             @Override
@@ -181,8 +189,8 @@ public class LogController extends BaseController implements Initializable {
      */
     @FXML
     public void viewUserLog() {
-        listResetTableView("username LIKE ?", UsersController.viewUserLogParam);
-        UsersController.viewUserLogParam = "";
+        listResetTableView("user_id LIKE ?", new Integer(MainActivity.viewUserLogParam).toString());
+        MainActivity.viewUserLogParam = 0;
     }
 
 }

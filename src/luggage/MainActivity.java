@@ -33,6 +33,8 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
@@ -53,6 +55,29 @@ public class MainActivity extends Application {
     /**
      */
     public static int viewId;
+	
+	/**
+	 */
+	public static TabPane tabs;
+	
+	/**
+	 */
+	public static Tab logTab;
+    
+	
+	/**
+	 */
+    public static int viewUserLogParam;
+	
+	public static Runnable viewUserLogParamCallback;
+	
+	public static void setViewUserLogParam(int user) {
+		viewUserLogParam = user;
+		if(viewUserLogParamCallback != null)
+		{
+			viewUserLogParamCallback.run();
+		}
+	}
 
     /**
      * Called on application run.

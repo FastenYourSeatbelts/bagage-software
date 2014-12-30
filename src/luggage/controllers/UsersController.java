@@ -34,8 +34,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.SingleSelectionModel;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -44,7 +42,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import static jdk.nashorn.internal.runtime.Context.printStackTrace;
 import luggage.Debug;
 import luggage.MainActivity;
 import luggage.database.models.LocationModel;
@@ -52,7 +49,6 @@ import luggage.database.models.UserModel;
 import luggage.database.models.Model;
 import luggage.helpers.StageHelper;
 import luggage.security.Encryption;
-import luggage.security.Permissions;
 import org.controlsfx.control.action.Action;
 import org.controlsfx.dialog.Dialog;
 import org.controlsfx.dialog.Dialogs;
@@ -67,8 +63,8 @@ import org.controlsfx.dialog.Dialogs;
  * @author ITopia IS102-5
  */
 public class UsersController extends BaseController implements Initializable {
-    @FXML
-    private TabPane tabs;
+    
+    public TabPane tabs;
 
     /**
      * LIST ELEMENTS
@@ -1238,8 +1234,6 @@ public class UsersController extends BaseController implements Initializable {
         viewRoleAsText.setText(user.getRole());
         viewWorkplaceAsText.setText(selectedWorkplace.toString());
     }
-    
-    public static String viewUserLogParam = "";
 
     /**
      * Shows the actions selected User has performed.
@@ -1247,27 +1241,11 @@ public class UsersController extends BaseController implements Initializable {
      */
     @FXML
     public void viewUserActions() {
-        viewUserLogParam = viewUsername.getText();
-        Debug.print("Username dump (viewUserLogParam): \"" + viewUserLogParam + "\"");
+        MainActivity.setViewUserLogParam(MainActivity.viewId);
+        Debug.print("Username dump (viewUserLogParam): \"" + MainActivity.viewUserLogParam + "\"");
         viewClose();
-//        Debug.print(Permissions.PERMISSION_VIEW_LOG.getView());
-//        Permissions.PERMISSION_VIEW_LOG.getView();
-
-//        tabs.getTabs().setTab(Permissions.PERMISSION_VIEW_LOG.getId());
-//        tabs.getSelectionModel().selectNext();
-//        tabs.getSelectionModel().clearAndSelect(3);
-        
-//        Debug.print("Loaded tabPane/tabs prior setSM:" + tabs.toString());
-//        tabs.setSelectionModel((SingleSelectionModel<Tab>) tabs.getTabs());
-//        Debug.print("Loaded tabPane/tabs after setSM:" + tabs.toString());
-//        tabs.getSelectionModel().selectLast();
-//        Debug.print("Loaded tabPane/tabs after getSM.sLast:" + tabs.toString());
-        try {
-        tabs.getSelectionModel().select(1);
-        
-        } catch (NullPointerException n) {
-            printStackTrace(n);
-        }
+		
+		MainActivity.tabs.getSelectionModel().select(MainActivity.logTab);
     }
     
     /**
