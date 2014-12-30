@@ -34,6 +34,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -48,6 +50,7 @@ import luggage.database.models.UserModel;
 import luggage.database.models.Model;
 import luggage.helpers.StageHelper;
 import luggage.security.Encryption;
+import luggage.security.Permissions;
 import org.controlsfx.control.action.Action;
 import org.controlsfx.dialog.Dialog;
 import org.controlsfx.dialog.Dialogs;
@@ -55,12 +58,15 @@ import org.controlsfx.dialog.Dialogs;
 /**
  * UsersController
  *
- * Controller for users/list.fxml
+ * Controller for users/list.fxml, users/new.fxml, users/edit, users/view,
+ * and users/help.
  *
  * @package luggage.controllers
  * @author Nick
  */
 public class UsersController extends BaseController implements Initializable {
+    @FXML
+    private TabPane tabs;
 
     /**
      * LIST ELEMENTS
@@ -243,6 +249,15 @@ public class UsersController extends BaseController implements Initializable {
     private ChoiceBox viewWorkplace;
 
     @FXML
+    private TextField viewGenderAsText;
+    
+    @FXML
+    private TextField viewRoleAsText;
+
+    @FXML
+    private TextField viewWorkplaceAsText;
+
+    @FXML
     private Button viewClose;
 
     private ObservableList<UserModel> listData = FXCollections.observableArrayList();
@@ -334,16 +349,16 @@ public class UsersController extends BaseController implements Initializable {
 
     public void setViewChoiceBoxes() {
         viewGender.setItems(FXCollections.observableArrayList(
-                "MALE",
-                "FEMALE",
-                "OTHER"
+                "Male",
+                "Female",
+                "Other"
         ));
 
         viewRole.setItems(FXCollections.observableArrayList(
-                "EMPLOYEE",
-                "MANAGER",
-                "MODERATOR",
-                "SUPER"
+                "Employee",
+                "Manager",
+                "Moderator",
+                "Super"
         ));
 
         LocationModel locations = new LocationModel();
@@ -364,16 +379,16 @@ public class UsersController extends BaseController implements Initializable {
 
     public void setNewChoiceBox() {
         newGender.setItems(FXCollections.observableArrayList(
-                "MALE",
-                "FEMALE",
-                "OTHER"
+                "Male",
+                "Female",
+                "Other"
         ));
 
         newRole.setItems(FXCollections.observableArrayList(
-                "EMPLOYEE",
-                "MANAGER",
-                "MODERATOR",
-                "SUPER"
+                "Employee",
+                "Manager",
+                "Moderator",
+                "Super"
         ));
 
         LocationModel locations = new LocationModel();
@@ -400,8 +415,8 @@ public class UsersController extends BaseController implements Initializable {
         editTelephone.setText(user.getTelephone());
         editMobile.setText(user.getMobile());
 
-        editGender.getSelectionModel().select(user.getGender().toUpperCase());
-        editRole.getSelectionModel().select(user.getRole().toUpperCase());
+        editGender.getSelectionModel().select(user.getGender());
+        editRole.getSelectionModel().select(user.getRole());
         editWorkplace.getSelectionModel().select(selectedWorkplace);
     }
 
@@ -556,21 +571,21 @@ public class UsersController extends BaseController implements Initializable {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 newCancel();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
-                newSave();
+                newGender.show();
             }
         });
         newRole.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 newCancel();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
-                newSave();
+                newRole.show();
             }
         });
         newWorkplace.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 newCancel();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
-                newSave();
+                newWorkplace.show();
             }
         });
         newSave.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
@@ -679,21 +694,21 @@ public class UsersController extends BaseController implements Initializable {
             if (evt.getCode().equals(KeyCode.ESCAPE)) {
                 editCancel();
             } else if (evt.getCode().equals(KeyCode.ENTER)) {
-                editSave();
+                editGender.show();
             }
         });
         editRole.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
             if (evt.getCode().equals(KeyCode.ESCAPE)) {
                 editCancel();
             } else if (evt.getCode().equals(KeyCode.ENTER)) {
-                editSave();
+                editRole.show();
             }
         });
         editWorkplace.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
             if (evt.getCode().equals(KeyCode.ESCAPE)) {
                 editCancel();
             } else if (evt.getCode().equals(KeyCode.ENTER)) {
-                editSave();
+                editWorkplace.show();
             }
         });
         editSave.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
@@ -766,17 +781,17 @@ public class UsersController extends BaseController implements Initializable {
                 viewClose();
             }
         });
-        viewGender.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+        viewGenderAsText.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
                 viewClose();
             }
         });
-        viewRole.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+        viewRoleAsText.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
                 viewClose();
             }
         });
-        viewWorkplace.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+        viewWorkplaceAsText.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
                 viewClose();
             }
@@ -796,16 +811,16 @@ public class UsersController extends BaseController implements Initializable {
 
     public void setEditChoiceBoxes() {
         editGender.setItems(FXCollections.observableArrayList(
-                "MALE",
-                "FEMALE",
-                "OTHER"
+                "Male",
+                "Female",
+                "Other"
         ));
 
         editRole.setItems(FXCollections.observableArrayList(
-                "EMPLOYEE",
-                "MANAGER",
-                "MODERATOR",
-                "SUPER"
+                "Employee",
+                "Manager",
+                "Moderator",
+                "Super"
         ));
 
         LocationModel locations = new LocationModel();
@@ -900,8 +915,6 @@ public class UsersController extends BaseController implements Initializable {
 
             user.delete();
             listOnSearch();
-        } else {
-            return;
         }
     }
 
@@ -1039,7 +1052,7 @@ public class UsersController extends BaseController implements Initializable {
                     .owner((Stage) newTelephone.getScene().getWindow())
                     .title("Warning")
                     .masthead("Entry error")
-                    .message("Please enter the customer's regular telephone number and / or their mobile number.")
+                    .message("Please enter the customer's regular phone number and / or their mobile number.")
                     .showWarning();
             return;
         }
@@ -1169,7 +1182,7 @@ public class UsersController extends BaseController implements Initializable {
                     .owner((Stage) editTelephone.getScene().getWindow())
                     .title("Warning")
                     .masthead("Entry error")
-                    .message("Please enter the customer's regular telephone number and / or their mobile number.")
+                    .message("Please enter the customer's regular phone number and / or their mobile number.")
                     .showWarning();
             return;
         }
@@ -1216,11 +1229,33 @@ public class UsersController extends BaseController implements Initializable {
         viewTelephone.setText(user.getTelephone());
         viewMobile.setText(user.getMobile());
 
-        viewGender.getSelectionModel().select(user.getGender().toUpperCase());
-        viewRole.getSelectionModel().select(user.getRole().toUpperCase());
-        viewWorkplace.getSelectionModel().select(selectedWorkplace);
+//        viewGender.getSelectionModel().select(user.getGender());
+//        viewRole.getSelectionModel().select(user.getRole());
+//        viewWorkplace.getSelectionModel().select(selectedWorkplace);
+        viewGenderAsText.setText((user.getGender()));
+        viewRoleAsText.setText(user.getRole());
+        viewWorkplaceAsText.setText(selectedWorkplace.toString());
     }
+    
+    public static String viewUserLogParam = "";
 
+    /**
+     * Shows the actions selected User has performed.
+     * return username
+     */
+    @FXML
+    public void viewUserActions() {
+        viewUserLogParam = viewUsername.getText();
+        Debug.print(viewUserLogParam);
+        viewClose();
+//        Debug.print(Permissions.PERMISSION_VIEW_LOG.getView());
+//        Permissions.PERMISSION_VIEW_LOG.getView();
+
+//        tabs.getTabs().setTab(Permissions.PERMISSION_VIEW_LOG.getId());
+//        tabs.getSelectionModel().selectNext();
+//        tabs.getSelectionModel().clearAndSelect(3);
+    }
+    
     /**
      * Closes current view.
      */

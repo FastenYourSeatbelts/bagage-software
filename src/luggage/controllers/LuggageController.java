@@ -58,13 +58,13 @@ import org.controlsfx.dialog.Dialogs;
 /**
  * LuggageController
  *
- * Controller for customers/list.fxml
+ * Controller for luggage/list.fxml, luggage/new, luggage/edit, luggage/view,
+ * and luggage/help.
  *
  * @package luggage.controllers
  * @author Tijme Gommers
  */
 public class LuggageController extends BaseController implements Initializable {
-
     /**
      * LIST ELEMENTS
      */
@@ -169,6 +169,9 @@ public class LuggageController extends BaseController implements Initializable {
      */
     @FXML
     private Button viewClose;
+    
+    @FXML
+    private Button customerOverview;
 
     @FXML
     private TextField viewTags;
@@ -181,6 +184,15 @@ public class LuggageController extends BaseController implements Initializable {
 
     @FXML
     private ChoiceBox<CustomerModel> viewCustomerId;
+
+    @FXML
+    private TextField viewStatusAsText;
+
+    @FXML
+    private TextField viewLocationAsText;
+
+    @FXML
+    private TextField viewCustomerAsText;
 
     @FXML
     private TextField viewNotes;
@@ -369,7 +381,7 @@ public class LuggageController extends BaseController implements Initializable {
 
         long endTime = System.nanoTime();
         long microseconds = ((endTime - startTime) / 1000);
-        Debug.print("zoooio: " + " took " + microseconds + " microseconds.");
+        Debug.print("Luggage setViewChoiceBoxes() " + " took " + microseconds + " microseconds.");
     }
 
     /**
@@ -610,15 +622,17 @@ public class LuggageController extends BaseController implements Initializable {
     public void setViewFields() {
         LuggageModel luggage = new LuggageModel(MainActivity.viewId);
 
+        viewLocationId.getSelectionModel().select(selectedLocation);
+        viewCustomerId.getSelectionModel().select(selectedCustomer);
+        viewStatus.setValue(luggage.getStatus());
+        viewLocationAsText.setText(selectedLocation.toString());
+        viewCustomerAsText.setText(selectedCustomer.toString());
+        viewStatusAsText.setText(luggage.getStatus());
         viewTags.setText(luggage.getTags());
         viewNotes.setText(luggage.getNotes());
-        viewStatus.setValue(luggage.getStatus());
 
         LocalDate date = LocalDate.parse(luggage.getDatetime());
         viewDate.setValue(date);
-
-        viewLocationId.getSelectionModel().select(selectedLocation);
-        viewCustomerId.getSelectionModel().select(selectedCustomer);
     }
 
     /**
@@ -650,7 +664,7 @@ public class LuggageController extends BaseController implements Initializable {
                 listNew();
             } else if (b.getCode().equals(KeyCode.R)) {
                 listRemove();
-            } else if (b.getCode().equals(KeyCode.V)) {
+            } else if (b.getCode().equals(KeyCode.V) || b.getCode().equals(KeyCode.ENTER)) {
                 listView();
             }
         });
@@ -833,38 +847,45 @@ public class LuggageController extends BaseController implements Initializable {
      * Creates the (mouse, keyboard, etc.) event filters for the view page.
      */
     public void viewKeyActions() {
-        viewLocationId.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
-            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+        viewLocationAsText.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE) || evt.getCode().equals(KeyCode.ENTER)) {
                 viewClose();
             }
         });
-        viewCustomerId.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
-            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+        viewCustomerAsText.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE) || evt.getCode().equals(KeyCode.ENTER)) {
                 viewClose();
             }
         });
-        viewStatus.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
-            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+        viewStatusAsText.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE) || evt.getCode().equals(KeyCode.ENTER)) {
                 viewClose();
             }
         });
         viewDate.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
-            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+            if (evt.getCode().equals(KeyCode.ESCAPE) || evt.getCode().equals(KeyCode.ENTER)) {
                 viewClose();
             }
         });
         viewTags.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
-            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+            if (evt.getCode().equals(KeyCode.ESCAPE) || evt.getCode().equals(KeyCode.ENTER)) {
                 viewClose();
             }
         });
         viewNotes.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
-            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+            if (evt.getCode().equals(KeyCode.ESCAPE) || evt.getCode().equals(KeyCode.ENTER)) {
                 viewClose();
             }
         });
-        viewClose.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+        customerOverview.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                viewClose();
+            } else if (evt.getCode().equals(KeyCode.ENTER)) {
+                customerOverview();
+            }
+        });
+        viewClose.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE) || evt.getCode().equals(KeyCode.ENTER)) {
                 viewClose();
             }
         });
@@ -936,6 +957,13 @@ public class LuggageController extends BaseController implements Initializable {
         luggageController.listOnSearch();
 
         editCancel();
+    }
+
+    @FXML
+    public void customerOverview() {
+        Debug.print("Reached end of customerOverview() method.");
+        
+        // TO DO: knop bij luggage items & customers
     }
 
     /**

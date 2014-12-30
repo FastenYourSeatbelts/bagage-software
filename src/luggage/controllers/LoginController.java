@@ -45,7 +45,7 @@ import luggage.database.models.LogModel;
 /**
  * LoginController
  *
- * Controller for login.fxml
+ * Controller for login.fxml and login_help.fxml
  *
  * @package luggage.controllers
  * @author Tijme Gommers
@@ -106,7 +106,7 @@ public class LoginController extends BaseController implements Initializable {
 
         UserModel user = new UserModel("username = ? AND password = ?", params);
         if (!user.exists()) {
-            Debug.logLoginscreenToDatabase("User: \"" + username.getText() + "\" login failed.");
+            Debug.logLoginscreenToDatabase("User \"" + username.getText() + "\" login failed.");
             error.setText("Wrong login, please try again!");
             username.requestFocus();
             return;

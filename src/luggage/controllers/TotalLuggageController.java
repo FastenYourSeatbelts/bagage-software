@@ -54,7 +54,7 @@ import luggage.helpers.StageHelper;
 /**
  * TotalLuggageController
  *
- * Controller for customers/list.fxml
+ * Controller for luggage/total.fxml and luggage/totalview.fxml
  *
  * @package luggage.controllers
  * @author Tijme Gommers
@@ -90,12 +90,24 @@ public class TotalLuggageController extends BaseController implements Initializa
 
     @FXML
     private TextField viewTags;
+    
+    @FXML
+    private ChoiceBox<String> viewStatus;
 
     @FXML
     private ChoiceBox<LocationModel> viewLocationId;
 
     @FXML
     private ChoiceBox<CustomerModel> viewCustomerId;
+    
+    @FXML
+    private TextField viewStatusAsText;
+
+    @FXML
+    private TextField viewLocationAsText;
+
+    @FXML
+    private TextField viewCustomerAsText;
 
     @FXML
     private TextField viewNotes;
@@ -117,22 +129,20 @@ public class TotalLuggageController extends BaseController implements Initializa
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                Debug.print("TOTAL LUGGAGE CONTROLLER-----------------------------------------------------------------");
-
-                if (luggageTableView != null) {
-                    resetTableView("", new String[0]);
-                    listView.disableProperty().bind(luggageTableView.getSelectionModel().selectedItemProperty().isNull());
-                    luggageTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-                }
-
-                if (viewLocationId != null) {
-                    setViewChoiceBoxes();
-                    setViewFields();
-                    keyActions();
-                }
+        Platform.runLater(() -> {
+            Debug.print("TOTAL LUGGAGE CONTROLLER-----------------------------------------------------------------");
+            
+            if (luggageTableView != null) {
+                resetTableView("", new String[0]);
+                listView.disableProperty().bind(luggageTableView.getSelectionModel().selectedItemProperty().isNull());
+                luggageTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+                listKeyActions();
+            }
+            
+            if (viewLocationId != null) {
+                setViewChoiceBoxes();
+                setViewFields();
+                viewKeyActions();
             }
         });
     }
@@ -166,7 +176,7 @@ public class TotalLuggageController extends BaseController implements Initializa
     }
 
     /**
-     * Populates the view Location &amp; Customer ChoiceBoxes.
+     * Populates the view Location, Customer &amp; Status ChoiceBoxes.
      */
     public void setViewChoiceBoxes() {
         // Locations
@@ -185,6 +195,8 @@ public class TotalLuggageController extends BaseController implements Initializa
         }
 
         viewLocationId.setItems(locationData);
+        
+        long startTime = System.nanoTime();
 
         // Customers
         CustomerModel oCustomerModel = new CustomerModel();
@@ -202,22 +214,35 @@ public class TotalLuggageController extends BaseController implements Initializa
         }
 
         viewCustomerId.setItems(customerData);
+        
+        ObservableList<String> statuses = FXCollections.observableArrayList();
+        statuses.add("Missing");
+        statuses.add("Found");
+        statuses.add("Resolved");
+        viewStatus.setItems(statuses);
+
+        long endTime = System.nanoTime();
+        long microseconds = ((endTime - startTime) / 1000);
+        Debug.print("setViewChoiceBoxes() " + " took " + microseconds + " microseconds.");
     }
 
     /**
-     * Populates the view fields with the selected luggage\'s data.
+     * Populates the view fields with the selected Luggage item's data.
      */
     public void setViewFields() {
         LuggageModel luggage = new LuggageModel(MainActivity.viewId);
 
+        viewLocationId.getSelectionModel().select(selectedLocation);
+        viewCustomerId.getSelectionModel().select(selectedCustomer);
+        viewStatus.setValue(luggage.getStatus());
+        viewLocationAsText.setText(selectedLocation.toString());
+        viewCustomerAsText.setText(selectedCustomer.toString());
+        viewStatusAsText.setText(luggage.getStatus());
         viewTags.setText(luggage.getTags());
         viewNotes.setText(luggage.getNotes());
 
         LocalDate date = LocalDate.parse(luggage.getDatetime());
         viewDate.setValue(date);
-
-        viewLocationId.getSelectionModel().select(selectedLocation);
-        viewCustomerId.getSelectionModel().select(selectedCustomer);
     }
 
     /**
@@ -247,18 +272,40 @@ public class TotalLuggageController extends BaseController implements Initializa
     /**
      * Creates the (mouse, keyboard, etc.) event filters for the list view.
      */
-    public void keyActions() {
-//        luggageTableView.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent a) -> {
-//            if (a.getCode().equals(KeyCode.V)) {
-//                listView();
-//            }
-//        });
-        viewLocationId.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+    public void listKeyActions() {
+        luggageTableView.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent a) -> {
+            if (a.getCode().equals(KeyCode.ESCAPE)) {
+                resetTableView("", new String[0]);
+                Debug.print("Refreshed Total Luggage list view.");
+            } else if (a.getCode().equals(KeyCode.V) || (a.getCode().equals(KeyCode.ENTER))) {
+                listView();
+            }
+        });
+        listView.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent a) -> {
+            if (a.getCode().equals(KeyCode.ESCAPE)) {
+                resetTableView("", new String[0]);
+                Debug.print("Refreshed Total Luggage list view.");
+            } else if (a.getCode().equals(KeyCode.V) || a.getCode().equals(KeyCode.ENTER)) {
+                listView();
+            }
+        });
+    }
+    
+    /**
+     * Creates the (mouse, keyboard, etc.) event filters for the view page.
+     */
+    public void viewKeyActions() {
+        viewLocationAsText.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
                 viewClose();
             }
         });
-        viewCustomerId.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+        viewCustomerAsText.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+                viewClose();
+            }
+        });
+        viewStatusAsText.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
                 viewClose();
             }
@@ -284,13 +331,12 @@ public class TotalLuggageController extends BaseController implements Initializa
             }
         });
     }
-
+    
     /**
      * Closes current view.
      */
-    private void viewClose() {
+    public void viewClose() {
         Stage addStage = (Stage) viewClose.getScene().getWindow();
         StageHelper.closeStage(addStage);
     }
-
 }

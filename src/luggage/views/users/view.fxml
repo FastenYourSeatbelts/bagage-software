@@ -7,28 +7,23 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane minWidth="600.0" prefHeight="432.0" prefWidth="600.0" style="-fx-background-color: #BB1D14;" GridPane.columnSpan="2147483647" GridPane.rowSpan="2147483647" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="luggage.controllers.UsersController">
+<AnchorPane style="-fx-background-color: #BB1D14;" GridPane.columnSpan="2147483647" GridPane.rowSpan="2147483647" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="luggage.controllers.UsersController">
    <children>
-      <GridPane minWidth="600.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="10.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="75.0" minWidth="75.0" prefWidth="75.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="78.0" minWidth="75.0" prefWidth="78.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="148.0" minWidth="62.0" prefWidth="62.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="152.0" minWidth="63.0" prefWidth="63.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="99.0" minWidth="62.0" prefWidth="62.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="101.0" minWidth="63.0" prefWidth="63.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="148.0" minWidth="62.0" prefWidth="62.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="152.0" minWidth="63.0" prefWidth="63.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="82.0" minWidth="10.0" prefWidth="30.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="30.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="120.0" minWidth="80.0" prefWidth="80.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="125.0" prefWidth="125.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="125.0" prefWidth="125.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="125.0" prefWidth="125.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="30.0" />
+            <ColumnConstraints />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -37,130 +32,141 @@
             <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Username" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets left="10.0" />
-               </GridPane.margin>
-            </Label>
-            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Address" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="4">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets left="10.0" />
-               </GridPane.margin>
-            </Label>
-            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Postal code" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="5">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets left="10.0" />
-               </GridPane.margin>
-            </Label>
-            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Role" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="7">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets left="10.0" />
-               </GridPane.margin>
-            </Label>
-            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Mobile number" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="9">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets left="10.0" />
-               </GridPane.margin>
-            </Label>
-            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Telephone number" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="8">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets left="10.0" />
-               </GridPane.margin>
-            </Label>
-            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Residence" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="6">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets left="10.0" />
-               </GridPane.margin>
-            </Label>
-            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Gender" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets left="10.0" />
-               </GridPane.margin>
-            </Label>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="10" />
-            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Name" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets left="10.0" />
-               </GridPane.margin>
-            </Label>
-            <Button fx:id="viewClose" alignment="CENTER" cancelButton="true" defaultButton="true" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#viewClose" prefWidth="60.0" text="Close" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.halignment="RIGHT" GridPane.rowIndex="10">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Workplace" textFill="WHITE" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="6">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets right="35.0" />
-               </GridPane.margin>
-            </Label>
-            <TextField fx:id="viewUsername" editable="false" prefHeight="25.0" prefWidth="125.0" promptText="Username" GridPane.columnIndex="3" GridPane.columnSpan="6" GridPane.rowIndex="1" />
-            <TextField fx:id="viewFirstname" editable="false" prefHeight="25.0" prefWidth="125.0" promptText="First name" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="2">
+            <TextField fx:id="viewUsername" editable="false" prefHeight="25.0" prefWidth="125.0" promptText="No username entered" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="1" />
+            <TextField fx:id="viewFirstname" editable="false" prefHeight="25.0" prefWidth="125.0" promptText="No first name entered" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin></TextField>
-            <TextField fx:id="viewPrefix" editable="false" prefHeight="25.0" prefWidth="312.0" promptText="prefix" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="2">
+            <TextField fx:id="viewPrefix" editable="false" promptText="No prefix entered" GridPane.columnIndex="3" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="14.0" right="14.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="viewLastname" editable="false" prefHeight="25.0" prefWidth="312.0" promptText="Last name" GridPane.columnIndex="7" GridPane.columnSpan="2" GridPane.rowIndex="2">
+            <TextField fx:id="viewLastname" editable="false" prefHeight="25.0" prefWidth="312.0" promptText="No last name entered" GridPane.columnIndex="4" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
             </TextField>
-            <ChoiceBox fx:id="viewGender" disable="true" minWidth="150.0" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="3">
+            <ChoiceBox fx:id="viewGender" disable="true" focusTraversable="false" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="3">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ChoiceBox>
-            <TextField fx:id="viewAddress" editable="false" promptText="e.g. Amsterdamseweg 90" GridPane.columnIndex="3" GridPane.columnSpan="6" GridPane.rowIndex="4" />
-            <TextField fx:id="viewPostalcode" editable="false" promptText="e.g. 3892PB" GridPane.columnIndex="3" GridPane.columnSpan="6" GridPane.rowIndex="5" />
-            <TextField fx:id="viewResidence" editable="false" promptText="e.g. Amsterdam" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="6" />
-            <ChoiceBox fx:id="viewWorkplace" disable="true" prefWidth="150.0" GridPane.columnIndex="7" GridPane.columnSpan="3" GridPane.rowIndex="6">
+            <TextField fx:id="viewGenderAsText" editable="false" promptText="No gender chosen" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <ChoiceBox fx:id="viewRole" disable="true" focusTraversable="false" visible="false" GridPane.columnIndex="4" GridPane.rowIndex="3">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ChoiceBox>
+            <TextField fx:id="viewRoleAsText" editable="false" promptText="No role chosen" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+            <TextField fx:id="viewAddress" editable="false" promptText="No address entered" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <TextField fx:id="viewPostalcode" editable="false" promptText="No postal code entered" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+            <TextField fx:id="viewResidence" editable="false" promptText="No residence entered" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <ChoiceBox fx:id="viewWorkplace" disable="true" focusTraversable="false" visible="false" GridPane.columnIndex="4" GridPane.rowIndex="5">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
                <GridPane.margin>
-                  <Insets left="-25.0" />
+                  <Insets />
                </GridPane.margin>
             </ChoiceBox>
-            <ChoiceBox fx:id="viewRole" disable="true" minWidth="150.0" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="7">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ChoiceBox>
-            <TextField fx:id="viewTelephone" editable="false" promptText="e.g. 0031202939190" GridPane.columnIndex="3" GridPane.columnSpan="6" GridPane.rowIndex="8" />
-            <TextField fx:id="viewMobile" editable="false" promptText="e.g. 0031629887377" GridPane.columnIndex="3" GridPane.columnSpan="6" GridPane.rowIndex="9" />
+            <TextField fx:id="viewWorkplaceAsText" editable="false" promptText="No workplace chosen" GridPane.columnIndex="4" GridPane.rowIndex="5">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="viewTelephone" editable="false" promptText="No phone number entered" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+            <TextField fx:id="viewMobile" editable="false" promptText="No mobile number entered" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="8">
+               <children>
+                  <Button fx:id="viewClose" alignment="CENTER" cancelButton="true" defaultButton="true" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#viewClose" prefWidth="70.0" text="Close" textAlignment="CENTER" AnchorPane.rightAnchor="0.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="viewUserActions" layoutX="76.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#viewUserActions" prefWidth="90.0" text="View logs" AnchorPane.rightAnchor="84.0" />
+               </children>
+            </AnchorPane>
+            <Label text="Username" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </Label>
+            <Label text="Name" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </Label>
+            <Label text="Gender" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </Label>
+            <Label text="Role" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="3">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="23.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Address" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="4">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </Label>
+            <Label text="Postal code" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="4">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="23.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Residence" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </Label>
+            <Label text="Workplace" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="5">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="23.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Phone number" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="6">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </Label>
+            <Label text="Mobile number" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="6">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="23.0" />
+               </GridPane.margin>
+            </Label>
          </children>
       </GridPane>
    </children>

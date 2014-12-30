@@ -46,7 +46,7 @@ import luggage.helpers.StageHelper;
 /**
  * LogController
  *
- * Controller for log/list.fxml
+ * Controller for log/list.fxml and log/help.fxml
  *
  * @package luggage.controllers
  * @author
@@ -77,7 +77,7 @@ public class LogController extends BaseController implements Initializable {
     private ObservableList<LogModel> listData = FXCollections.observableArrayList();
 
     /**
-     * Opens the Log list\'s help view.
+     * Opens the Log list's help view.
      */
     @FXML
     public void listHelp() {
@@ -90,31 +90,35 @@ public class LogController extends BaseController implements Initializable {
     @FXML
     public void listOnSearch() {
 
-        String[] keywords = listSearchField.getText().split("\\s+");
+        if (!luggage.controllers.UsersController.viewUserLogParam.equals("")) {
+            viewUserLog();
+        } else {
+            String[] keywords = listSearchField.getText().split("\\s+");
 
-        String[] params = new String[3 * keywords.length];
-        boolean firstColumn = true;
-        String query = "";
+            String[] params = new String[3 * keywords.length];
+            boolean firstColumn = true;
+            String query = "";
 
-        for (int i = 0; i < keywords.length; i++) {
-            if (firstColumn) {
-                params[0 + i] = "%" + keywords[i] + "%";
-                query += "user_id LIKE ?";
-            } else {
-                params[0 + i] = "%" + keywords[i] + "%";
-                query += " OR user_id LIKE ?";
+            for (int i = 0; i < keywords.length; i++) {
+                if (firstColumn) {
+                    params[0 + i] = "%" + keywords[i] + "%";
+                    query += "user_id LIKE ?";
+                } else {
+                    params[0 + i] = "%" + keywords[i] + "%";
+                    query += " OR user_id LIKE ?";
+                }
+
+                params[1 + i] = "%" + keywords[i] + "%";
+                query += " OR type LIKE ?";
+
+                params[2 + i] = "%" + keywords[i] + "%";
+                query += " OR message LIKE ?";
+
+                firstColumn = false;
             }
 
-            params[1 + i] = "%" + keywords[i] + "%";
-            query += " OR type LIKE ?";
-
-            params[2 + i] = "%" + keywords[i] + "%";
-            query += " OR message LIKE ?";
-
-            firstColumn = false;
+            listResetTableView(query, params);
         }
-
-        listResetTableView(query, params);
     }
 
     private ObservableList<LogModel> data = FXCollections.observableArrayList();
@@ -146,9 +150,9 @@ public class LogController extends BaseController implements Initializable {
             if (b.getCode().equals(KeyCode.H)) {
                 listHelp();
             }
-        });    
+        });
     }
-    
+
     /**
      *
      * @param where
@@ -170,6 +174,15 @@ public class LogController extends BaseController implements Initializable {
         listTableViewDate.setCellValueFactory(new PropertyValueFactory("datetime"));
 
         listTableView.setItems(data);
+    }
+
+    /**
+     * Shows the actions given user has performed.
+     */
+    @FXML
+    public void viewUserLog() {
+        listResetTableView("username LIKE ?", UsersController.viewUserLogParam);
+        UsersController.viewUserLogParam = "";
     }
 
 }

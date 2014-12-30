@@ -54,14 +54,13 @@ import org.controlsfx.dialog.Dialogs;
 /**
  * CustomersController
  *
- * Controller for customers/list.fxml Controller for customers/new.fxml
- * Controller for customers/edit.fxml
+ * Controller for customers/list.fxml, customers/new.fxml, customers/edit.fxml,
+ * customers/view.fxml and customers/help.fxml
  *
  * @package luggage.controllers
  * @author Tijme Gommers
  */
 public class CustomersController extends BaseController implements Initializable {
-
     /**
      * LIST ELEMENTS
      */
@@ -99,8 +98,41 @@ public class CustomersController extends BaseController implements Initializable
     private Button listRemove;
 
     /**
-     * ADD ELEMENTS
+     * NEW ELEMENTS
      */
+    @FXML
+    private TextField newFirstname;
+
+    @FXML
+    private TextField newPrefix;
+
+    @FXML
+    private TextField newLastname;
+
+    @FXML
+    private ChoiceBox newGender;
+
+    @FXML
+    private ChoiceBox<InsurerModel> newInsurerId;
+
+    @FXML
+    private TextField newAddress;
+
+    @FXML
+    private TextField newPostalcode;
+
+    @FXML
+    private TextField newResidence;
+
+    @FXML
+    private TextField newEmail;
+
+    @FXML
+    private TextField newTelephone;
+
+    @FXML
+    private TextField newMobile;
+
     @FXML
     private Button newSave;
 
@@ -109,39 +141,6 @@ public class CustomersController extends BaseController implements Initializable
 
     @FXML
     private Button newCancel;
-
-    @FXML
-    private TextField addFirstname;
-
-    @FXML
-    private TextField addPrefix;
-
-    @FXML
-    private TextField addLastname;
-
-    @FXML
-    private ChoiceBox addGender;
-
-    @FXML
-    private ChoiceBox<InsurerModel> addInsurerId;
-
-    @FXML
-    private TextField addAddress;
-
-    @FXML
-    private TextField addPostalcode;
-
-    @FXML
-    private TextField addResidence;
-
-    @FXML
-    private TextField addEmail;
-
-    @FXML
-    private TextField addTelephone;
-
-    @FXML
-    private TextField addMobile;
 
     /**
      * EDIT ELEMENTS
@@ -210,6 +209,12 @@ public class CustomersController extends BaseController implements Initializable
     private ChoiceBox<InsurerModel> viewInsurerId;
 
     @FXML
+    private TextField viewGenderAsText;
+
+    @FXML
+    private TextField viewInsurerAsText;
+
+    @FXML
     private TextField viewAddress;
 
     @FXML
@@ -239,49 +244,44 @@ public class CustomersController extends BaseController implements Initializable
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
+        Platform.runLater(() -> {
+            Debug.print("CUSTOMERS CONTROLLER-----------------------------------------------------------------");
 
-                Debug.print("CUSTOMERS CONTROLLER-----------------------------------------------------------------");
+            // List
+            if (listTableView != null) {
+                listResetTableView("", new String[0]);
 
-                // List
-                if (listTableView != null) {
-                    listResetTableView("", new String[0]);
+                listEdit.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
+                listRemove.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
+                listView.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
+                listTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+                listKeyActions();
+            }
 
-                    listEdit.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
-                    listRemove.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
-                    listView.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
-                    listTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-                    listKeyActions();
-                }
+            // New
+            if (newGender != null && newInsurerId != null) {
+                setNewChoiceBoxes();
+                newKeyActions();
+            }
 
-                // Add
-                if (addGender != null && addInsurerId != null) {
-                    setNewChoiceBoxes();
-                    addKeyActions();
-                }
+            // Edit
+            if (editGender != null && editInsurerId != null) {
+                setEditChoiceBoxes();
+                setEditFields();
+                editKeyActions();
+            }
 
-                // Edit
-                if (editGender != null && editInsurerId != null) {
-                    setEditChoiceBoxes();
-                    setEditFields();
-                    editKeyActions();
-                }
-
-                // View
-                if (viewGender != null && viewInsurerId != null) {
-                    setViewChoiceBoxes();
-                    setViewFields();
-                    viewKeyActions();
-                }
+            // View
+            if (viewGender != null && viewInsurerId != null) {
+                setViewChoiceBoxes();
+                setViewFields();
+                viewKeyActions();
             }
         });
     }
 
     /**
-     * Calls InsurerModel to enable mapping an Insurer ID to the Insurer's
-     * name.
+     * Calls InsurerModel to enable mapping an Insurer ID to the Insurer's name.
      */
     public InsurerModel selectedInsurer;
 
@@ -301,8 +301,10 @@ public class CustomersController extends BaseController implements Initializable
         viewTelephone.setText(customer.getTelephone());
         viewMobile.setText(customer.getMobile());
 
-        viewInsurerId.getSelectionModel().select(selectedInsurer);
-        viewGender.getSelectionModel().select(customer.getGender().toUpperCase());
+        viewGender.getSelectionModel().select(customer.getGender());
+//        viewInsurerId.getSelectionModel().select(selectedInsurer);
+        viewInsurerAsText.setText(selectedInsurer.toString());
+        viewGenderAsText.setText(viewGender.getValue().toString());
     }
 
     /**
@@ -310,9 +312,9 @@ public class CustomersController extends BaseController implements Initializable
      */
     public void setViewChoiceBoxes() {
         viewGender.setItems(FXCollections.observableArrayList(
-                "MALE",
-                "FEMALE",
-                "OTHER"
+                "Male",
+                "Female",
+                "Other"
         ));
 
         InsurerModel insurers = new InsurerModel();
@@ -348,7 +350,7 @@ public class CustomersController extends BaseController implements Initializable
         editMobile.setText(customer.getMobile());
 
         editInsurerId.getSelectionModel().select(selectedInsurer);
-        editGender.getSelectionModel().select(customer.getGender().toUpperCase());
+        editGender.getSelectionModel().select(customer.getGender());
     }
 
     /**
@@ -356,9 +358,9 @@ public class CustomersController extends BaseController implements Initializable
      */
     public void setEditChoiceBoxes() {
         editGender.setItems(FXCollections.observableArrayList(
-                "MALE",
-                "FEMALE",
-                "OTHER"
+                "Male",
+                "Female",
+                "Other"
         ));
 
         InsurerModel insurers = new InsurerModel();
@@ -381,10 +383,10 @@ public class CustomersController extends BaseController implements Initializable
      * Populates the new view's Gender &amp; Insurer ChoiceBoxes.
      */
     public void setNewChoiceBoxes() {
-        addGender.setItems(FXCollections.observableArrayList(
-                "MALE",
-                "FEMALE",
-                "OTHER"
+        newGender.setItems(FXCollections.observableArrayList(
+                "Male",
+                "Female",
+                "Other"
         ));
 
         InsurerModel insurers = new InsurerModel();
@@ -394,7 +396,7 @@ public class CustomersController extends BaseController implements Initializable
             insurerData.add(insurer);
         }
 
-        addInsurerId.setItems(insurerData);
+        newInsurerId.setItems(insurerData);
     }
 
     /**
@@ -463,80 +465,80 @@ public class CustomersController extends BaseController implements Initializable
     }
 
     /**
-     * Creates the (mouse, keyboard, etc.) event filters for the add view.
+     * Creates the (mouse, keyboard, etc.) event filters for the new view.
      */
-    public void addKeyActions() {
-        addFirstname.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+    public void newKeyActions() {
+        newFirstname.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 newCancel();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
                 newSave();
             }
         });
-        addPrefix.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+        newPrefix.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 newCancel();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
                 newSave();
             }
         });
-        addLastname.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+        newLastname.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 newCancel();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
                 newSave();
             }
         });
-        addGender.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+        newGender.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                newGender.show();
+            }
+        });
+        newInsurerId.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                newInsurerId.show();
+            }
+        });
+        newAddress.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 newCancel();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
                 newSave();
             }
         });
-        addInsurerId.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+        newPostalcode.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 newCancel();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
                 newSave();
             }
         });
-        addAddress.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+        newResidence.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 newCancel();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
                 newSave();
             }
         });
-        addPostalcode.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+        newEmail.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 newCancel();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
                 newSave();
             }
         });
-        addResidence.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+        newTelephone.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 newCancel();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
                 newSave();
             }
         });
-        addEmail.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                newCancel();
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                newSave();
-            }
-        });
-        addTelephone.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                newCancel();
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                newSave();
-            }
-        });
-        addMobile.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+        newMobile.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 newCancel();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
@@ -589,18 +591,18 @@ public class CustomersController extends BaseController implements Initializable
                 editSave();
             }
         });
-        editGender.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
-            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+        editGender.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
                 editCancel();
-            } else if (evt.getCode().equals(KeyCode.ENTER)) {
-                editSave();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                editGender.show();
             }
         });
         editInsurerId.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
             if (evt.getCode().equals(KeyCode.ESCAPE)) {
                 editCancel();
             } else if (evt.getCode().equals(KeyCode.ENTER)) {
-                editSave();
+                editInsurerId.show();
             }
         });
         editAddress.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
@@ -685,7 +687,17 @@ public class CustomersController extends BaseController implements Initializable
                 viewClose();
             }
         });
-        viewAddress.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+        viewPrefix.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+                viewClose();
+            }
+        });
+        viewGenderAsText.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+                viewClose();
+            }
+        });
+        viewInsurerAsText.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
                 viewClose();
             }
@@ -870,17 +882,17 @@ public class CustomersController extends BaseController implements Initializable
      * Resets all fields in the new view.
      */
     public void newReset() {
-        addFirstname.setText("");
-        addPrefix.setText("");
-        addLastname.setText("");
-        addAddress.setText("");
-        addPostalcode.setText("");
-        addResidence.setText("");
-        addEmail.setText("");
-        addTelephone.setText("");
-        addMobile.setText("");
-        addGender.setValue(null);
-        addInsurerId.setValue(null);
+        newFirstname.setText("");
+        newPrefix.setText("");
+        newLastname.setText("");
+        newAddress.setText("");
+        newPostalcode.setText("");
+        newResidence.setText("");
+        newEmail.setText("");
+        newTelephone.setText("");
+        newMobile.setText("");
+        newGender.setValue(null);
+        newInsurerId.setValue(null);
     }
 
     /**
@@ -888,84 +900,84 @@ public class CustomersController extends BaseController implements Initializable
      * and if so, writes to database.
      */
     public void newSave() {
-        if (addFirstname.getText().equals("") || addLastname.getText().equals("")) {
+        if (newFirstname.getText().equals("") || newLastname.getText().equals("")) {
             Dialogs.create()
-                    .owner((Stage) addLastname.getScene().getWindow())
+                    .owner((Stage) newLastname.getScene().getWindow())
                     .title("Warning")
                     .masthead("Entry error")
                     .message("Please enter the customer's first and last name.")
                     .showWarning();
             return;
-        } else if (addGender.getSelectionModel().getSelectedItem() == null) {
+        } else if (newGender.getSelectionModel().getSelectedItem() == null) {
             Dialogs.create()
-                    .owner((Stage) addGender.getScene().getWindow())
+                    .owner((Stage) newGender.getScene().getWindow())
                     .title("Warning")
                     .masthead("Selection error")
                     .message("Please enter the gender.")
                     .showWarning();
             return;
-        } else if (addInsurerId.getSelectionModel().getSelectedItem() == null) {
+        } else if (newInsurerId.getSelectionModel().getSelectedItem() == null) {
             Dialogs.create()
-                    .owner((Stage) addInsurerId.getScene().getWindow())
+                    .owner((Stage) newInsurerId.getScene().getWindow())
                     .title("Warning")
                     .masthead("Selection error")
                     .message("Please enter the insurer.")
                     .showWarning();
             return;
-        } else if (addAddress.getText().equals("")) {
+        } else if (newAddress.getText().equals("")) {
             Dialogs.create()
-                    .owner((Stage) addAddress.getScene().getWindow())
+                    .owner((Stage) newAddress.getScene().getWindow())
                     .title("Warning")
                     .masthead("Entry error")
                     .message("Please enter the customer's address.")
                     .showWarning();
             return;
-        } else if (addPostalcode.getText().equals("")) {
+        } else if (newPostalcode.getText().equals("")) {
             Dialogs.create()
-                    .owner((Stage) addPostalcode.getScene().getWindow())
+                    .owner((Stage) newPostalcode.getScene().getWindow())
                     .title("Warning")
                     .masthead("Entry error")
                     .message("Please enter the customer's postal code.")
                     .showWarning();
             return;
-        } else if (addResidence.getText().equals("")) {
+        } else if (newResidence.getText().equals("")) {
             Dialogs.create()
-                    .owner((Stage) addResidence.getScene().getWindow())
+                    .owner((Stage) newResidence.getScene().getWindow())
                     .title("Warning")
                     .masthead("Entry error")
                     .message("Please enter the customer's residence.")
                     .showWarning();
             return;
-        } else if (addEmail.getText().equals("")) {
+        } else if (newEmail.getText().equals("")) {
             Dialogs.create()
-                    .owner((Stage) addEmail.getScene().getWindow())
+                    .owner((Stage) newEmail.getScene().getWindow())
                     .title("Warning")
                     .masthead("Entry error")
                     .message("Please enter the customer's email address.")
                     .showWarning();
             return;
-        } else if (addTelephone.getText().equals("") && addMobile.getText().equals("")) {
+        } else if (newTelephone.getText().equals("") && newMobile.getText().equals("")) {
             Dialogs.create()
-                    .owner((Stage) addTelephone.getScene().getWindow())
+                    .owner((Stage) newTelephone.getScene().getWindow())
                     .title("Warning")
                     .masthead("Entry error")
-                    .message("Please enter the customer's regular telephone number and / or their mobile number.")
+                    .message("Please enter the customer's regular phone number and / or their mobile number.")
                     .showWarning();
             return;
         }
 
         CustomerModel customer = new CustomerModel();
-        customer.setFirstname(addFirstname.getText());
-        customer.setPrefix(addPrefix.getText());
-        customer.setLastname(addLastname.getText());
-        customer.setGender(addGender.getSelectionModel().getSelectedItem().toString());
-        customer.setInsurerId(Integer.toString(addInsurerId.getSelectionModel().getSelectedItem().getId()));
-        customer.setAddress(addAddress.getText());
-        customer.setPostalCode(addPostalcode.getText());
-        customer.setResidence(addResidence.getText());
-        customer.setEmail(addEmail.getText());
-        customer.setTelephone(addTelephone.getText());
-        customer.setMobile(addMobile.getText());
+        customer.setFirstname(newFirstname.getText());
+        customer.setPrefix(newPrefix.getText());
+        customer.setLastname(newLastname.getText());
+        customer.setGender(newGender.getSelectionModel().getSelectedItem().toString());
+        customer.setInsurerId(Integer.toString(newInsurerId.getSelectionModel().getSelectedItem().getId()));
+        customer.setAddress(newAddress.getText());
+        customer.setPostalCode(newPostalcode.getText());
+        customer.setResidence(newResidence.getText());
+        customer.setEmail(newEmail.getText());
+        customer.setTelephone(newTelephone.getText());
+        customer.setMobile(newMobile.getText());
         customer.save();
 
         CustomersController customersController = (CustomersController) StageHelper.callbackController;
@@ -1066,7 +1078,7 @@ public class CustomersController extends BaseController implements Initializable
                     .owner((Stage) editTelephone.getScene().getWindow())
                     .title("Warning")
                     .masthead("Entry error")
-                    .message("Please enter the customer's regular telephone number and / or their mobile number.")
+                    .message("Please enter the customer's regular phone number and / or their mobile number.")
                     .showWarning();
             return;
         }
@@ -1098,5 +1110,4 @@ public class CustomersController extends BaseController implements Initializable
         Stage cancelStage = (Stage) viewClose.getScene().getWindow();
         StageHelper.closeStage(cancelStage);
     }
-
 }

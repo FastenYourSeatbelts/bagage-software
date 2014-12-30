@@ -58,7 +58,6 @@ import luggage.security.Permissions;
  * @author Tijme Gommers
  */
 public class DashboardController extends BaseController implements Initializable {
-
     @FXML
     private TabPane tabs;
 
@@ -115,7 +114,7 @@ public class DashboardController extends BaseController implements Initializable
 
                                 long endTime = System.nanoTime();
                                 long microseconds = ((endTime - startTime) / 1000);
-                                Debug.print("Add tab: " + tabPermission.getView() + " took " + microseconds + " microseconds.");
+                                Debug.print("Adding tab " + tabPermission.getView() + " took " + microseconds + " microseconds.");
                             } catch (IOException ex) {
                                 Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
                             }

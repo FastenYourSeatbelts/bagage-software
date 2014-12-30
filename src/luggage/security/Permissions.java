@@ -193,13 +193,13 @@ public class Permissions {
      */
     public static ArrayList<Permissions.Tab> getPermissions(UserModel user) {
         switch (user.getRole()) {
-            case "moderator":
+            case "Moderator":
                 return MODERATOR_PERMISSIONS;
-            case "super":
+            case "Super":
                 return SUPER_PERMISSIONS;
-            case "employee":
+            case "Employee":
                 return EMPLOYEE_PERMISSIONS;
-            case "manager":
+            case "Manager":
                 return MANAGER_PERMISSIONS;
 //            case "customers":
 //                return CUSTOMERS_PERMISSIONS;

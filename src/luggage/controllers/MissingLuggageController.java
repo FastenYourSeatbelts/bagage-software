@@ -54,7 +54,7 @@ import luggage.helpers.StageHelper;
 /**
  * MissingLuggageController
  *
- * Controller for customers/list.fxml
+ * Controller for luggage/missing.fxml and luggage/missingview.fxml
  *
  * @package luggage.controllers
  * @author Tijme Gommers
@@ -92,10 +92,22 @@ public class MissingLuggageController extends BaseController implements Initiali
     private TextField viewTags;
 
     @FXML
+    private ChoiceBox<String> viewStatus;
+
+    @FXML
     private ChoiceBox<LocationModel> viewLocationId;
 
     @FXML
     private ChoiceBox<CustomerModel> viewCustomerId;
+
+    @FXML
+    private TextField viewStatusAsText;
+
+    @FXML
+    private TextField viewLocationAsText;
+
+    @FXML
+    private TextField viewCustomerAsText;
 
     @FXML
     private TextField viewNotes;
@@ -124,19 +136,16 @@ public class MissingLuggageController extends BaseController implements Initiali
                 Debug.print("MISSING LUGGAGE CONTROLLER-----------------------------------------------------------------");
 
                 if (luggageTableView != null) {
-                    String[] params = new String[1];
-                    params[0] = "missing";
-
-                    resetTableView("status = ?", params);
-
+                    resetTableView("status = ?", "missing");
                     listView.disableProperty().bind(luggageTableView.getSelectionModel().selectedItemProperty().isNull());
                     luggageTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+                    listKeyActions();
                 }
 
                 if (viewLocationId != null) {
                     setViewChoiceBoxes();
                     setViewFields();
-                    keyActions();
+                    viewKeyActions();
                 }
             }
         });
@@ -175,6 +184,8 @@ public class MissingLuggageController extends BaseController implements Initiali
 
         viewLocationId.setItems(locationData);
 
+        long startTime = System.nanoTime();
+
         // Customers
         CustomerModel oCustomerModel = new CustomerModel();
         List<Model> allCustomers = oCustomerModel.findAll();
@@ -191,6 +202,16 @@ public class MissingLuggageController extends BaseController implements Initiali
         }
 
         viewCustomerId.setItems(customerData);
+        
+        ObservableList<String> statuses = FXCollections.observableArrayList();
+        statuses.add("Missing");
+        statuses.add("Found");
+        statuses.add("Resolved");
+        viewStatus.setItems(statuses);
+
+        long endTime = System.nanoTime();
+        long microseconds = ((endTime - startTime) / 1000);
+        Debug.print("setViewChoiceBoxes() " + " took " + microseconds + " microseconds.");
     }
 
     /**
@@ -210,19 +231,22 @@ public class MissingLuggageController extends BaseController implements Initiali
     }
 
     /**
-     * Populates the view fields with the selected missing luggage\'s data.
+     * Populates the view fields with the selected Missing Luggage item's data.
      */
     public void setViewFields() {
         LuggageModel luggage = new LuggageModel(MainActivity.viewId);
 
+        viewLocationId.getSelectionModel().select(selectedLocation);
+        viewCustomerId.getSelectionModel().select(selectedCustomer);
+        viewStatus.setValue(luggage.getStatus());
+        viewLocationAsText.setText(selectedLocation.toString());
+        viewCustomerAsText.setText(selectedCustomer.toString());
+        viewStatusAsText.setText(luggage.getStatus());
         viewTags.setText(luggage.getTags());
         viewNotes.setText(luggage.getNotes());
 
         LocalDate date = LocalDate.parse(luggage.getDatetime());
         viewDate.setValue(date);
-
-        viewLocationId.getSelectionModel().select(selectedLocation);
-        viewCustomerId.getSelectionModel().select(selectedCustomer);
     }
 
     /**
@@ -249,21 +273,43 @@ public class MissingLuggageController extends BaseController implements Initiali
         luggageTableView.setItems(data);
     }
 
-    /**
+/**
      * Creates the (mouse, keyboard, etc.) event filters for the list view.
      */
-    public void keyActions() {
-//        luggageTableView.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent a) -> {
-//            if (a.getCode().equals(KeyCode.V)) {
-//                listView();
-//            }
-//        });
-        viewLocationId.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+    public void listKeyActions() {
+        luggageTableView.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent a) -> {
+            if (a.getCode().equals(KeyCode.ESCAPE)) {
+                resetTableView("status = ?", "missing");
+                Debug.print("Refreshed Found Luggage list view.");
+            } else if (a.getCode().equals(KeyCode.V) || (a.getCode().equals(KeyCode.ENTER))) {
+                listView();
+            }
+        });
+        listView.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent a) -> {
+            if (a.getCode().equals(KeyCode.ESCAPE)) {
+                resetTableView("status = ?", "missing");
+                Debug.print("Refreshed Found Luggage list view.");
+            } else if (a.getCode().equals(KeyCode.V) || a.getCode().equals(KeyCode.ENTER)) {
+                listView();
+            }
+        });
+    }
+    
+    /**
+     * Creates the (mouse, keyboard, etc.) event filters for the view page.
+     */
+    public void viewKeyActions() {
+        viewLocationAsText.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
                 viewClose();
             }
         });
-        viewCustomerId.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+        viewCustomerAsText.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+                viewClose();
+            }
+        });
+        viewStatusAsText.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
                 viewClose();
             }
@@ -289,7 +335,7 @@ public class MissingLuggageController extends BaseController implements Initiali
             }
         });
     }
-
+    
     /**
      * Closes current view.
      */

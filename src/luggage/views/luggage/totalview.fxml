@@ -9,78 +9,90 @@
 
 <AnchorPane minWidth="600.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #BB1D14;" GridPane.columnSpan="2147483647" GridPane.rowSpan="2147483647" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="luggage.controllers.TotalLuggageController">
     <children>
-        <GridPane layoutY="-14.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-14.0">
+        <GridPane layoutY="-14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-14.0">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="10.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="153.0" minWidth="150.0" prefWidth="153.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="125.0" prefWidth="125.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="125.0" prefWidth="125.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="125.0" prefWidth="125.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="82.0" minWidth="10.0" prefWidth="30.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="30.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="80.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="225.0" minWidth="-Infinity" prefWidth="125.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="225.0" minWidth="-Infinity" prefWidth="125.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="225.0" minWidth="-Infinity" prefWidth="125.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="225.0" minWidth="10.0" prefWidth="125.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="30.0" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <ChoiceBox fx:id="viewLocationId" disable="true" minWidth="150.0" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="1" />
-                <ChoiceBox fx:id="viewCustomerId" disable="true" minWidth="150.0" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="2" />
-                <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Location" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                    <font>
-                        <Font size="14.0" />
-                    </font>
-                    <GridPane.margin>
-                        <Insets left="10.0" />
-                    </GridPane.margin>
-                </Label>
-                <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Customer" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                    <font>
-                        <Font size="14.0" />
-                    </font>
-                    <GridPane.margin>
-                        <Insets left="10.0" />
-                    </GridPane.margin>
-                </Label>
-                <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Tags" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                    <font>
-                        <Font size="14.0" />
-                    </font>
-                    <GridPane.margin>
-                        <Insets left="10.0" />
-                    </GridPane.margin>
-                </Label>
-                <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Notes" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                    <font>
-                        <Font size="14.0" />
-                    </font>
-                    <GridPane.margin>
-                        <Insets left="10.0" />
-                    </GridPane.margin>
-                </Label>
-                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="7">
+                <ChoiceBox fx:id="viewLocationId" disable="true" focusTraversable="false" minWidth="-Infinity" prefWidth="268.0" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                <ChoiceBox fx:id="viewCustomerId" disable="true" focusTraversable="false" minWidth="-Infinity" prefWidth="268.0" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                <ChoiceBox fx:id="viewStatus" disable="true" focusTraversable="false" minWidth="-Infinity" prefWidth="268.0" visible="false" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <TextField fx:id="viewLocationAsText" editable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="268.0" promptText="No location chosen" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+            <TextField fx:id="viewCustomerAsText" editable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="268.0" promptText="No customer chosen" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+            <TextField fx:id="viewStatusAsText" editable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="268.0" promptText="No status chosen" GridPane.columnIndex="5" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+            <DatePicker fx:id="viewDate" editable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="268.0" promptText="No date chosen" showWeekNumbers="true" GridPane.columnIndex="5" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                <TextField fx:id="viewTags" editable="false" promptText="No tags entered" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.rowIndex="3" />
+                <TextField fx:id="viewNotes" editable="false" promptText="No notes entered" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.rowIndex="4" />
+                <AnchorPane prefWidth="200.0" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="6">
                     <children>
-                        <Button fx:id="viewClose" alignment="CENTER" cancelButton="true" layoutX="206.0" layoutY="8.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#viewClose" prefWidth="70.0" text="Close" AnchorPane.rightAnchor="0.0">
+                        <Button fx:id="viewClose" alignment="CENTER" cancelButton="true" defaultButton="true" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#viewClose" prefWidth="70.0" text="Close" AnchorPane.rightAnchor="0.0">
                         </Button>
                     </children>
                 </AnchorPane>
-            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="129.0" text="Date" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                <Label alignment="CENTER_RIGHT" text="Location" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                    <GridPane.margin>
+                        <Insets />
+                    </GridPane.margin>
+                </Label>
+                <Label alignment="CENTER_RIGHT" text="Customer" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                    <GridPane.margin>
+                        <Insets />
+                    </GridPane.margin>
+                </Label>
+                <Label alignment="CENTER_RIGHT" text="Status" textFill="WHITE" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                    <GridPane.margin>
+                        <Insets />
+                    </GridPane.margin>
+                </Label>
+            <Label alignment="CENTER_RIGHT" text="Date" textFill="WHITE" GridPane.columnIndex="4" GridPane.rowIndex="2">
                <font>
                   <Font size="14.0" />
                </font>
                <GridPane.margin>
-                  <Insets left="10.0" />
+                  <Insets />
                </GridPane.margin>
             </Label>
-            <DatePicker fx:id="viewDate" editable="false" minWidth="150.0" prefHeight="25.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                <TextField fx:id="viewTags" editable="false" promptText="e.g. blue, purple, big, square" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="4" />
-                <TextField fx:id="viewNotes" editable="false" promptText="e.g. Fragile contents" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="5" />
+                <Label alignment="CENTER_RIGHT" text="Tags" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                    <GridPane.margin>
+                        <Insets />
+                    </GridPane.margin>
+                </Label>
+                <Label alignment="CENTER_RIGHT" text="Notes" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                    <GridPane.margin>
+                        <Insets />
+                    </GridPane.margin>
+                </Label>
             </children>
         </GridPane>
     </children>

@@ -71,7 +71,6 @@ import luggage.helpers.StageHelper;
  * @author Nick + Lars
  */
 public class LuggageGraphController extends BaseController implements Initializable {
-
     @FXML
     private PieChart piechart;
 
@@ -372,7 +371,7 @@ public class LuggageGraphController extends BaseController implements Initializa
                 piechart.setTitle("The share of " + returnLabel(lastSlice) + " is approximately " + (Math.round(dValue) / 100) + "%.");
                 data.getNode().setEffect(shadow);
                 
-                effectName = data.getNode().getEffect().toString().substring(20, data.getNode().getEffect().toString().length() - 8);
+                effectName = data.getNode().getEffect().toString().substring(20, data.getNode().getEffect().toString().length() - 9);
                 Debug.print("Locally loaded CSS files after mouse enter: " + piechart.getStylesheets().toString() + "\nMouse entered '" + lastSlice + "'. Effect '" + effectName + "' enabled.");
             });
         });
