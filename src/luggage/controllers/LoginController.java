@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2014 FastenYourSeatbelts
+ * Copyright (c) 2014-2015 ITopia IS102-5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -48,7 +48,7 @@ import luggage.database.models.LogModel;
  * Controller for login.fxml and login_help.fxml
  *
  * @package luggage.controllers
- * @author Tijme Gommers
+ * @author ITopia IS102-5
  */
 public class LoginController extends BaseController implements Initializable {
 

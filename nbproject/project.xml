@@ -26,11 +26,15 @@
         </libraries>
         <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
             <word>admin</word>
+            <word>Customer'</word>
+            <word>fxml</word>
             <word>Insurer's</word>
             <word>list's</word>
             <word>Location's</word>
             <word>Luggage'</word>
             <word>MainActivity</word>
+            <word>User'</word>
+            <word>view's</word>
         </spellchecker-wordlist>
     </configuration>
 </project>

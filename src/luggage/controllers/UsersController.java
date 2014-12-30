@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2014 FastenYourSeatbelts
+ * Copyright (c) 2014-2015 ITopia IS102-5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,6 +34,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
@@ -43,6 +44,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import static jdk.nashorn.internal.runtime.Context.printStackTrace;
 import luggage.Debug;
 import luggage.MainActivity;
 import luggage.database.models.LocationModel;
@@ -62,7 +64,7 @@ import org.controlsfx.dialog.Dialogs;
  * and users/help.
  *
  * @package luggage.controllers
- * @author Nick
+ * @author ITopia IS102-5
  */
 public class UsersController extends BaseController implements Initializable {
     @FXML
@@ -1246,7 +1248,7 @@ public class UsersController extends BaseController implements Initializable {
     @FXML
     public void viewUserActions() {
         viewUserLogParam = viewUsername.getText();
-        Debug.print(viewUserLogParam);
+        Debug.print("Username dump (viewUserLogParam): \"" + viewUserLogParam + "\"");
         viewClose();
 //        Debug.print(Permissions.PERMISSION_VIEW_LOG.getView());
 //        Permissions.PERMISSION_VIEW_LOG.getView();
@@ -1254,6 +1256,18 @@ public class UsersController extends BaseController implements Initializable {
 //        tabs.getTabs().setTab(Permissions.PERMISSION_VIEW_LOG.getId());
 //        tabs.getSelectionModel().selectNext();
 //        tabs.getSelectionModel().clearAndSelect(3);
+        
+//        Debug.print("Loaded tabPane/tabs prior setSM:" + tabs.toString());
+//        tabs.setSelectionModel((SingleSelectionModel<Tab>) tabs.getTabs());
+//        Debug.print("Loaded tabPane/tabs after setSM:" + tabs.toString());
+//        tabs.getSelectionModel().selectLast();
+//        Debug.print("Loaded tabPane/tabs after getSM.sLast:" + tabs.toString());
+        try {
+        tabs.getSelectionModel().select(1);
+        
+        } catch (NullPointerException n) {
+            printStackTrace(n);
+        }
     }
     
     /**

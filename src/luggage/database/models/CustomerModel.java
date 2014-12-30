@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2014 FastenYourSeatbelts
+ * Copyright (c) 2014-2015 ITopia IS102-5
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -32,7 +32,7 @@ import com.mysql.jdbc.StringUtils;
  * A class that maps the customers table
  *
  * @package luggage.database.models
- * @author Tijme Gommers
+ * @author ITopia IS102-5
  */
 public class CustomerModel extends Model {
 

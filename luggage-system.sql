@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `customers` (
   `firstname` varchar(255) NOT NULL,
   `prefix` varchar(255) NOT NULL,
   `lastname` varchar(255) NOT NULL,
-  `gender` enum('male','female','other') NOT NULL,
+  `gender` enum('Male','Female','Other') NOT NULL,
   `address` varchar(255) NOT NULL,
   `postalcode` varchar(255) NOT NULL,
   `residence` varchar(255) NOT NULL,
@@ -46,26 +46,26 @@ CREATE TABLE IF NOT EXISTS `customers` (
 --
 
 INSERT INTO `customers` (`id`, `insurer_id`, `firstname`, `prefix`, `lastname`, `gender`, `address`, `postalcode`, `residence`, `email`, `telephone`, `mobile`) VALUES
-(1, 4, 'Debbie', '', 'Patton', 'other', '8922 Erat, Rd.', '5057ER', 'Assiniboia', 'Duis@luctusut.ca', '0031895584712', '0031645230425'),
-(2, 2, 'Lance', 'Hadley', 'Hall', 'other', '7529 Facilisis. Rd.', '4748SC', 'Buckie', 'ipsum.ac.mi@libero.com', '0031818260402', '0031614060499'),
-(3, 3, 'Jordan', 'Zorita', 'Orr', 'male', 'P.O. Box 105, 6868 Neque Avenue', '5032CB', 'Grand-Leez', 'dolor.quam@auguemalesuadamalesuada.co.uk', '0031304748315', '0031601815769'),
-(4, 4, 'Ingrid', 'Lamar', 'Klein', 'other', '407-3103 Augue, Street', '9837OG', 'Brussel', 'risus.Nulla@insodaleselit.com', '0031200090700', '0031669465616'),
-(5, 5, 'Julian', 'Lani', 'Frazier', 'male', '8421 Eget, Rd.', '1936VP', 'Itzehoe', 'inceptos.hymenaeos@Duiselementum.co.uk', '0031242760109', '0031602866945'),
-(6, 6, 'Teegan', 'Vielka', 'Mueller', 'other', 'P.O. Box 479, 620 Pharetra St.', '2259TV', 'Minderhout', 'vitae.sodales.nisi@habitantmorbi.ca', '0031209392901', '0031650566695'),
-(7, 1, 'Venus', 'Dante', 'Mcbride', 'male', '523-5505 Phasellus Road', '1943SM', 'Saint-Prime', 'euismod@felis.ca', '0031171973695', '0031685038849'),
-(8, 4, 'Deborah', 'Odysseus', 'Patton', 'other', '8922 Erat, Rd.', '5057ER', 'Assiniboia', 'Duis@luctusut.ca', '0031895584712', '0031645230425'),
-(9, 1, 'Flynn', 'Timothy', 'Mejia', 'other', '773-1526 Ipsum Rd.', '2761RC', 'Ingraj Bazar', 'Pellentesque.habitant.morbi@auguescelerisquemollis.ca', '0031651343513', '0031661874114'),
-(10, 1, 'Mallory', 'Peter', 'Baxter', 'male', '4594 Porttitor Road', '9139XH', 'Harlingen', 'sem@Morbinon.ca', '0031413619116', '0031609225454'),
-(11, 1, 'Rogan', 'Mona', 'Castro', 'female', 'Ap #215-4222 In Rd.', '7832TY', 'Cardigan', 'nunc.sed@libero.co.uk', '0031374712468', '0031614609118'),
-(12, 1, 'Gail', 'Jackson', 'Hensley', 'female', 'P.O. Box 563, 9912 Facilisis, Rd.', '9329JY', 'Stonehaven', 'interdum.libero.dui@Maurisnulla.edu', '0031622046889', '0031699456602'),
-(13, 1, 'Shaeleigh', 'Dorothy', 'Herman', 'other', 'P.O. Box 137, 6370 Eu Road', '7409GG', 'Santa Inês', 'ut.pellentesque@eusemPellentesque.com', '0031669394359', '0031640072016'),
-(14, 1, 'Gray', 'Oliver', 'Bowman', 'female', 'Ap #348-6845 Porta Av.', '1546UW', 'Tay', 'Nullam.scelerisque@risusNunc.org', '0031759477111', '0031663701161'),
-(15, 1, 'Devin', 'Martin', 'Hopkins', 'female', '7207 Mauris Av.', '9721QC', 'Hope', 'Donec@augueeutellus.ca', '0031766976282', '0031661972287'),
-(16, 1, 'Declan', 'Jameson', 'Vazquez', 'other', 'Ap #116-8246 Ornare, Rd.', '5926LN', 'Ilbono', 'ut@egettinciduntdui.edu', '0031293733504', '0031680585004'),
-(17, 1, 'Clementine', 'Brent', 'Kennedy', 'female', 'P.O. Box 929, 2751 Vel Street', '1466VX', 'Pettoranello del Molise', 'lacus.Quisque@tempor.net', '0031805328298', '0031639539508'),
-(18, 1, 'Inga', 'Carter', 'Lewis', 'male', '1122 Eu Road', '4563KO', 'Morhet', 'non.nisi@necmalesuadaut.co.uk', '0031925952709', '0031630654455'),
-(19, 1, 'Demetria', 'Kamal', 'Haney', 'female', 'P.O. Box 417, 5151 Pulvinar Rd.', '1500XT', 'Sennariolo', 'Sed.auctor.odio@tinciduntvehicularisus.edu', '0031833995172', '0031642479403'),
-(20, 1, 'Brennan', 'Jeanette', 'Chase', 'male', 'P.O. Box 581, 6255 Arcu Rd.', '8689JE', 'Rio Verde', 'dis@risus.co.uk', '0031909984855', '0031626108620');
+(1, 4, 'Debbie', '', 'Patton', 'Other', '8922 Erat, Rd.', '5057ER', 'Assiniboia', 'Duis@luctusut.ca', '0031895584712', '0031645230425'),
+(2, 2, 'Lance', 'Hadley', 'Hall', 'Other', '7529 Facilisis. Rd.', '4748SC', 'Buckie', 'ipsum.ac.mi@libero.com', '0031818260402', '0031614060499'),
+(3, 3, 'Jordan', 'Zorita', 'Orr', 'Male', 'P.O. Box 105, 6868 Neque Avenue', '5032CB', 'Grand-Leez', 'dolor.quam@auguemalesuadamalesuada.co.uk', '0031304748315', '0031601815769'),
+(4, 4, 'Ingrid', 'Lamar', 'Klein', 'Other', '407-3103 Augue, Street', '9837OG', 'Brussel', 'risus.Nulla@insodaleselit.com', '0031200090700', '0031669465616'),
+(5, 5, 'Julian', 'Lani', 'Frazier', 'Male', '8421 Eget, Rd.', '1936VP', 'Itzehoe', 'inceptos.hymenaeos@Duiselementum.co.uk', '0031242760109', '0031602866945'),
+(6, 6, 'Teegan', 'Vielka', 'Mueller', 'Other', 'P.O. Box 479, 620 Pharetra St.', '2259TV', 'Minderhout', 'vitae.sodales.nisi@habitantmorbi.ca', '0031209392901', '0031650566695'),
+(7, 1, 'Venus', 'Dante', 'Mcbride', 'Male', '523-5505 Phasellus Road', '1943SM', 'Saint-Prime', 'euismod@felis.ca', '0031171973695', '0031685038849'),
+(8, 4, 'Deborah', 'Odysseus', 'Patton', 'Other', '8922 Erat, Rd.', '5057ER', 'Assiniboia', 'Duis@luctusut.ca', '0031895584712', '0031645230425'),
+(9, 1, 'Flynn', 'Timothy', 'Mejia', 'Other', '773-1526 Ipsum Rd.', '2761RC', 'Ingraj Bazar', 'Pellentesque.habitant.morbi@auguescelerisquemollis.ca', '0031651343513', '0031661874114'),
+(10, 1, 'Mallory', 'Peter', 'Baxter', 'Male', '4594 Porttitor Road', '9139XH', 'Harlingen', 'sem@Morbinon.ca', '0031413619116', '0031609225454'),
+(11, 1, 'Rogan', 'Mona', 'Castro', 'Female', 'Ap #215-4222 In Rd.', '7832TY', 'Cardigan', 'nunc.sed@libero.co.uk', '0031374712468', '0031614609118'),
+(12, 1, 'Gail', 'Jackson', 'Hensley', 'Female', 'P.O. Box 563, 9912 Facilisis, Rd.', '9329JY', 'Stonehaven', 'interdum.libero.dui@Maurisnulla.edu', '0031622046889', '0031699456602'),
+(13, 1, 'Shaeleigh', 'Dorothy', 'Herman', 'Other', 'P.O. Box 137, 6370 Eu Road', '7409GG', 'Santa Inês', 'ut.pellentesque@eusemPellentesque.com', '0031669394359', '0031640072016'),
+(14, 1, 'Gray', 'Oliver', 'Bowman', 'Female', 'Ap #348-6845 Porta Av.', '1546UW', 'Tay', 'Nullam.scelerisque@risusNunc.org', '0031759477111', '0031663701161'),
+(15, 1, 'Devin', 'Martin', 'Hopkins', 'Female', '7207 Mauris Av.', '9721QC', 'Hope', 'Donec@augueeutellus.ca', '0031766976282', '0031661972287'),
+(16, 1, 'Declan', 'Jameson', 'Vazquez', 'Other', 'Ap #116-8246 Ornare, Rd.', '5926LN', 'Ilbono', 'ut@egettinciduntdui.edu', '0031293733504', '0031680585004'),
+(17, 1, 'Clementine', 'Brent', 'Kennedy', 'Female', 'P.O. Box 929, 2751 Vel Street', '1466VX', 'Pettoranello del Molise', 'lacus.Quisque@tempor.net', '0031805328298', '0031639539508'),
+(18, 1, 'Inga', 'Carter', 'Lewis', 'Male', '1122 Eu Road', '4563KO', 'Morhet', 'non.nisi@necmalesuadaut.co.uk', '0031925952709', '0031630654455'),
+(19, 1, 'Demetria', 'Kamal', 'Haney', 'Female', 'P.O. Box 417, 5151 Pulvinar Rd.', '1500XT', 'Sennariolo', 'Sed.auctor.odio@tinciduntvehicularisus.edu', '0031833995172', '0031642479403'),
+(20, 1, 'Brennan', 'Jeanette', 'Chase', 'Male', 'P.O. Box 581, 6255 Arcu Rd.', '8689JE', 'Rio Verde', 'dis@risus.co.uk', '0031909984855', '0031626108620');
 
 -- --------------------------------------------------------
 
@@ -348,8 +348,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   `firstname` varchar(255) NOT NULL,
   `prefix` varchar(255) NOT NULL,
   `lastname` varchar(255) NOT NULL,
-  `role` enum('super','manager','employee','moderator') NOT NULL,
-  `gender` enum('male','female','other') NOT NULL,
+  `role` enum('Super','Manager','Employee','Moderator') NOT NULL,
+  `gender` enum('Male','Female','Other') NOT NULL,
   `location_id` int(11) NOT NULL,
   `address` varchar(255) NOT NULL,
   `postalcode` varchar(255) NOT NULL,
@@ -363,20 +363,30 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `firstname`, `prefix`, `lastname`, `role`, `gender`, `location_id`, `address`, `postalcode`, `residence`, `telephone`, `mobile`) VALUES
-(1, 'Admin', '7a8d0e81b9e73f3e39cbaccfac16097a8c88e6bddf068160946115bfc31ff59e81533b292f5cafd3be42f6980aced7b8791f0738a91717f62f3f542a535c2e51', 'Super', '', 'Admin', 'super', 'male', 8, '', '', '', '', ''),
-(2, 'moderator', 'f4931e96e3376e0351ad57693085bd98543a1760bda7e553321ddb3fc8c374ad5e0d0d7feca20f163fd523c3f7d4978285ff2b49bc4d7913af20e068ece633ba', 'Moderator', '', '', 'moderator', 'male', 16, '', '', '', '', ''),
-(3, 'manager', 'b1d921f725e7f1696e31a09e86ec52debdbe1f826a77d60705a1682cfd70227200ecb5aee3f8d19cd2061be54ea612b4c713a0e17eb68dd88406a4bc9bd270c3', 'Manager', '', '', 'manager', 'male', 1, '', '', '', '', ''),
-(4, 'employee', '3c13b13c0390035b1d4aa3f456cf3fde8ab950056532ce2932581fada8c05fa114ff05c9b9541b73c9dcffa1b5ff76db3c22233975e323565c0af4962988a6af', 'Employee', '', '', 'employee', 'female', 25, '', '', '', '', ''),
-(5, 'Gerrit', '27d10da9b265520f727e13105b08e1adcb36277c3d0a1aaf4d98e21430979aa51616c9070ca37778170b8cdaf5866df7e6065d24e9c87850753fbb7567ca2553', 'Gerrit', 'van de', 'Fabriek', 'employee', 'other', 12, 'Rietveldstraat 12', '1012AB', 'Amstelveen', '0031201234567', '0031612345678'),
-(6, '', '9c1dd9c1e1684575051616be7814f15374bb73a9f7685ebe30969de4975976fac5fa449519fbc54ddcdc43fcf08eabb292523548349b5ce7fbb86b6fa30c1278', 'Super', '', 'User', 'super', 'other', 4, '', '', '', '', ''),
-(7, 'Nick', 'b4f52d6d30415aa25e545b15bdd81a93785581c1fd226b0bfaf36043cf76d7d17f8f5dd43b74e5eb5137586fddfc36535b266bf27bd4eb90b798b033b78dfd09', 'Nick', '', 'Onbekend', 'employee', 'male', 4, 'Abc Straat 21', '1050AB', 'Amsterdam', '003167123456', '003167123456'),
-(8, 'Tijme', 'd824e9f681ab297e7a1cb42260c6241d3a0dcb9ede2a1daa5c8b853b223d9274acf969d84a08d3912ffeb0d46a25325d4a3af862d0ce6a5d84f84033621c6537', 'Tijme', '', 'Daar', 'manager', 'male', 16, 'Blabla 12', '6592SD', 'Dordrecht', '0049201234466', '0049201234466'),
-(9, 'Gerda', 'b9ac1d13d07c61ed07baec88b5aa7193635ca83d9a31b1bf2bd8cc8d96a915f6649bcb3644c3290a123620f5da55731348618ed293aa08463d94ec2ba136f534', 'Gerda', '', 'Balal', 'moderator', 'female', 14, 'Amsterdamseweg 20', '1132AD', 'Hoofddorp', '001221324567', '001221324567'),
-(10, 'Jasper', 'e515b7af26b997c94375a4775f864a0119d99dc9c06f49c5893de471b5ad3328cfd00a49b36544ca966c340957a493b20c447adb08ed058186e079e861d63bfd', 'Jasper', '', 'Wkdlsflkwe', 'manager', 'male', 26, 'Hierdaar 3', '5465DF', 'Belgrado', '0012345678974', '0012345678974'),
-(11, 'Lars', 'c2b659794a5c1d72ee02d95220fb2e3e0508b2b6f50def959bd9eee69a24ccfa5c4ddd2d059943eade0b9d6b4e346bc867c2dc14d48dd62fc32827f4aee04862', 'Lars', 'de', 'Vries', 'moderator', 'male', 18, 'Blabalbal 132', '1023DF', 'Amsterdam', '003145678943', '003145678943'),
-(12, 'Ali', '02e03ddba23ecb5d872ff5784fe5383c44a171cd371087d0cf80c6cc3c1a182d68d22a75f62615bf39d4edcabffdd808c57f928e4fb82a49ddafc2485bd350ea', 'Ali', 'de', 'Geeuw', 'manager', 'male', 37, 'Amsterdamstraat 124', '8822VD', 'Groningen', '003198374252', '003198374252'),
-(13, 'Derp', '38da7d98bc0e173b0767b5baa8880738e0b62603a7c2e08f729adac3f6f0796dd95d9d66925bbd3976410fc9104a894a20f7c633bf1be3b497ca2363976e8ede', 'Derp', '', '', 'employee', 'other', 17, 'Derp 1', '1000DP', 'Derp', '003121318232', '003121318232'),
-(14, 'At login screen', '38da1d98bc0e173b0767b5baa8880738e0b62603a7c2e08f729adac3f6f0796dd95d8d66925bbd397641dfc9104a894a20f7c6338f1be3b497cb24139b6f8d4e', 'Derp', '', '', 'employee', 'other', 17, 'Derp 1', '1000DP', 'Derp', '003121318232', '003121318232');
+(1, 'Admin', '7a8d0e81b9e73f3e39cbaccfac16097a8c88e6bddf068160946115bfc31ff59e81533b292f5cafd3be42f6980aced7b8791f0738a91717f62f3f542a535c2e51', 'Super', '', 'Admin', 'Super', 'Male', 8, 'Rootlane', '1000AB', 'Root', '0', '0'),
+(2, 'moderator', 'f4931e96e3376e0351ad57693085bd98543a1760bda7e553321ddb3fc8c374ad5e0d0d7feca20f163fd523c3f7d4978285ff2b49bc4d7913af20e068ece633ba', 'Moderator', '', '', 'Moderator', 'Male', 16, 'Lahn 1', '1000AB', 'Dubai', '0', '0'),
+(3, 'Manager', 'b1d921f725e7f1696e31a09e86ec52debdbe1f826a77d60705a1682cfd70227200ecb5aee3f8d19cd2061be54ea612b4c713a0e17eb68dd88406a4bc9bd270c3', 'Manager', '', '', 'Manager', 'Male', 1, '21 Street', '1000AB', 'Dubai', '0', '0'),
+(4, 'Employee', '3c13b13c0390035b1d4aa3f456cf3fde8ab950056532ce2932581fada8c05fa114ff05c9b9541b73c9dcffa1b5ff76db3c22233975e323565c0af4962988a6af', 'Employee', '', '', 'Employee', 'Female', 25, 'Straat 1', '1000AB', 'Brussels', '0', '0'),
+(5, 'Gerrit', '27d10da9b265520f727e13105b08e1adcb36277c3d0a1aaf4d98e21430979aa51616c9070ca37778170b8cdaf5866df7e6065d24e9c87850753fbb7567ca2553', 'Gerrit', 'van de', 'Fabriek', 'Employee', 'Other', 12, 'Rietveldstraat 12', '1012AB', 'Amstelveen', '0031201234567', '0031612345678'),
+(6, '', '9c1dd9c1e1684575051616be7814f15374bb73a9f7685ebe30969de4975976fac5fa449519fbc54ddcdc43fcf08eabb292523548349b5ce7fbb86b6fa30c1278', 'Super', '', 'User', 'Super', 'Other', 4, 'Rootstrasse', '1000AB', 'Root', '0', '0'),
+(7, 'Nick', 'b4f52d6d30415aa25e545b15bdd81a93785581c1fd226b0bfaf36043cf76d7d17f8f5dd43b74e5eb5137586fddfc36535b266bf27bd4eb90b798b033b78dfd09', 'Nick', '', 'Onbekend', 'Super', 'Male', 4, 'Abc Straat 21', '1050AB', 'Amsterdam', '003167123456', '003167123456'),
+(8, 'Tijme', 'd824e9f681ab297e7a1cb42260c6241d3a0dcb9ede2a1daa5c8b853b223d9274acf969d84a08d3912ffeb0d46a25325d4a3af862d0ce6a5d84f84033621c6537', 'Tijme', '', 'Daar', 'Manager', 'Male', 16, 'Blabla 12', '6592SD', 'Dordrecht', '0049201234466', '0049201234466'),
+(9, 'Gerda', 'b9ac1d13d07c61ed07baec88b5aa7193635ca83d9a31b1bf2bd8cc8d96a915f6649bcb3644c3290a123620f5da55731348618ed293aa08463d94ec2ba136f534', 'Gerda', '', 'Balal', 'Moderator', 'Female', 14, 'Amsterdamseweg 20', '1132AD', 'Hoofddorp', '001221324567', '001221324567'),
+(10, 'Jasper', 'e515b7af26b997c94375a4775f864a0119d99dc9c06f49c5893de471b5ad3328cfd00a49b36544ca966c340957a493b20c447adb08ed058186e079e861d63bfd', 'Jasper', '', 'Hier', 'Manager', 'Male', 26, 'Hierdaar 3', '5465DF', 'Belgrado', '0012345678974', '0012345678974'),
+(11, 'Lars', 'c2b659794a5c1d72ee02d95220fb2e3e0508b2b6f50def959bd9eee69a24ccfa5c4ddd2d059943eade0b9d6b4e346bc867c2dc14d48dd62fc32827f4aee04862', 'Lars', 'de', 'Vries', 'Moderator', 'Male', 18, 'Blabalbal 132', '1023DF', 'Amsterdam', '003145678943', '003145678943'),
+(12, 'Ali', '02e03ddba23ecb5d872ff5784fe5383c44a171cd371087d0cf80c6cc3c1a182d68d22a75f62615bf39d4edcabffdd808c57f928e4fb82a49ddafc2485bd350ea', 'Ali', 'de', 'Geeuw', 'Manager', 'Male', 37, 'Amsterdamstraat 124', '8822VD', 'Groningen', '003198374252', '003198374252'),
+(13, 'Derp', '38da7d98bc0e173b0767b5baa8880738e0b62603a7c2e08f729adac3f6f0796dd95d9d66925bbd3976410fc9104a894a20f7c633bf1be3b497ca2363976e8ede', 'Derp', '', '', 'Employee', 'Other', 17, 'Derp 1', '1000DP', 'Derp', '003121318232', '003121318232'),
+(14, 'At login screen', '38da1d98bc0e173b0767b5baa8880738e0b62603a7c2e08f729adac3f6f0796dd95d8d66925bbd397641dfc9104a894a20f7c6338f1be3b497cb24139b6f8d4e', 'Derp', '', '', 'Employee', 'Other', 17, 'Derp 1', '1000DP', 'Derp', '003121318232', '003121318232'),
+(15, 'Customers', '6c39e5abfce7ea660088e1ef27e39018b9e988101272f78a3bf67e191e5e1ccebbe1aa9fcf8f8364906721cba98236d47e4659d54235d0da0770feec58df6acf', 'Customers', '', 'Tab', 'customers', 'Other', 14, 'A', '1000AB', 'Dubai', '001221324567', '001221324567'),
+(16, 'Luggage', 'a39a63ca1707eccec220a918b6d323f7b9a7c2fba61a9ed7d0542c51f8cef338698ba4e5467d1e157b36c9b467afd9d92b6243485a620b8bad6b6b084fc0cfc4', 'Luggage', '', 'Tab', 'luggage', 'Other', 14, 'A', '1000AB', 'Dubai', '001221324567', '001221324567'),
+(17, 'Total', '5b24606b6be78003d1710dffc81bcbc1af83009ae0399498c52381e23213e9f6981b0390b1cdcd8192382f433479a589a088827278c4047bee1a8efcafde54f4', 'Total', '', 'Tab', 'total', 'Other', 14, 'A', '1000AB', 'Dubai', '001221324567', '001221324567'),
+(18, 'Graph', '8ea0fe3563813fe307271854876e8d41cd2bb284d4ded5bb575705fa6620421ce51aa889f77326cf21c14dbab8b9d9ea5f874993b54f09b7cec615457ead25d0', 'Graph', '', 'Tab', 'graph', 'Other', 14, 'A', '1000AB', 'Dubai', '001221324567', '001221324567'),
+(19, 'Missing', 'bad25144cb38c415203971ce9d918872a7719edd2caeb1b07e3502ae1c57d77085b0df9dd63fbe20b16405b6a88172a3b3fa49844c6de60b5712b8bc34fe2ae8', 'Missing', '', 'Tab', 'Found', 'Other', 14, 'A', '1000AB', 'Dubai', '001221324567', '001221324567'),
+(20, 'Found', '2d38f8b439d3eb80ddb8df39069b6be69fde62a3087c819bf732c5ab1a88f0faa290b651bc13778ad84180a87533f665a0fa07f577edfc67c5055492a7e0d6ea', 'Found', '', 'Tab', 'Missing', 'Other', 14, 'A', '1000AB', 'Dubai', '001221324567', '001221324567'),
+(21, 'Resolved', '316cd929689aab3d5c914689e6d62a7ae5b3b64d6da021c5331bf5d10828d2c9b68dadf9abf24bdfc137fcd6611d6288e0d92667cd1db8e478439eac7769c561', 'Resolved', '', 'Tab', 'Resolved', 'Other', 14, 'A', '1000AB', 'Dubai', '001221324567', '001221324567'),
+(22, 'Users', '657628fb8363438074dd5ccc9f19bc14bccae292ba339b91acd7527c47227413689e2634fa2e1dd675de07b6c3fc0e074ccc75f86d3241bdd48c9be531d21ee9', 'Users', '', 'Tab', 'users', 'Other', 14, 'A', '1000AB', 'Dubai', '001221324567', '001221324567'),
+(23, 'Log', 'ba474872a81e359dc5a82b85e8558c7ce591c5140f31d5283062d709907ba11e155d828be23bba1ea868fcdfb3736ab262ea641ed5d9c56f5c7e77cee6b3d2fd', 'Log', '', 'Tab', 'log', 'Other', 14, 'A', '1000AB', 'Dubai', '001221324567', '001221324567');
+
 
 --
 -- Indexes for dumped tables
@@ -451,7 +461,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=24;
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=24;
 --
 -- Constraints for dumped tables
 --
