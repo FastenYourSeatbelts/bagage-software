@@ -76,6 +76,9 @@ public class LuggageGraphController extends BaseController implements Initializa
 
     @FXML
     private Button listHelp;
+    
+    @FXML
+    public Button saveAsPng;
 
     @FXML
     private Button viewClose;
@@ -250,6 +253,8 @@ public class LuggageGraphController extends BaseController implements Initializa
      * Saves snapshot of pie chart as image.
      */
     public void saveAsPng() {
+        // Disable the button until method ends
+        saveAsPng.setDisable(true);
         // Starts off with reading the given dates
         DateFormat dateFormatFull = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss");
         DateFormat dateFormatShort = new SimpleDateFormat("yyyy-MM-dd");
@@ -306,10 +311,11 @@ public class LuggageGraphController extends BaseController implements Initializa
         } catch (IOException io) {
             Logger.getLogger(LuggageGraphController.class.getName()).log(Level.SEVERE, null, io);
         }
+        saveAsPng.setDisable(false);
         Debug.print("Reached end of saveAsPng() method.");
     }
 
-    // Disabled until I fix other export for extensions other than PNG
+    // Disabled until I fix export for extensions other than PNG
 //    private String returnExtension(String file) {
 //        if (file.endsWith(".png")) {
 //            return "PNG";
