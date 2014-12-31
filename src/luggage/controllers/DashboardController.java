@@ -58,6 +58,7 @@ import luggage.security.Permissions;
  * @author ITopia IS102-5
  */
 public class DashboardController extends BaseController implements Initializable {
+
     @FXML
     private TabPane tabs;
 
@@ -99,10 +100,14 @@ public class DashboardController extends BaseController implements Initializable
 
                     Tab newTab = new Tab(tabPermission.getText());
                     newTab.setId(tabPermission.getId());
-					
-					if(tabPermission.getId().equals("view_log")) {
-						MainActivity.logTab = newTab;
-					}
+
+                    if (tabPermission.getId().equals("view_log")) {
+                        MainActivity.logTab = newTab;
+                    }
+                    
+                    if (tabPermission.getId().equals("manage_luggage")) {
+                        MainActivity.luggageTab = newTab;
+                    }
 
                     Platform.runLater(new Runnable() {
                         @Override
@@ -112,7 +117,7 @@ public class DashboardController extends BaseController implements Initializable
 
                                 FXMLLoader oFXMLLoader = new FXMLLoader();
                                 Parent primaryLoader = (Parent) oFXMLLoader.load(this.getClass().getResource("/luggage/views/" + tabPermission.getView() + ".fxml").openStream());
-								BaseController ctrl = oFXMLLoader.getController();
+                                BaseController ctrl = oFXMLLoader.getController();
                                 newTab.setContent(primaryLoader);
 
                                 tabs.getTabs().add(newTab);
@@ -126,14 +131,10 @@ public class DashboardController extends BaseController implements Initializable
                         }
                     });
                 }
-				
-				MainActivity.tabs = tabs;
-
+                MainActivity.tabs = tabs;
                 return null;
             }
-
         };
-
         new Thread(task).start();
     }
 

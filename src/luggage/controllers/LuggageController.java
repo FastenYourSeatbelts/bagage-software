@@ -25,9 +25,15 @@
 package luggage.controllers;
 
 import java.net.URL;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -36,6 +42,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -43,8 +50,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import static jdk.nashorn.internal.runtime.Context.printStackTrace;
 import luggage.Debug;
 import luggage.MainActivity;
+import static luggage.database.DatabaseHelper.oConnection;
 import luggage.database.models.CustomerModel;
 import luggage.database.models.LocationModel;
 import luggage.database.models.LogModel;
@@ -65,6 +74,7 @@ import org.controlsfx.dialog.Dialogs;
  * @author ITopia IS102-5
  */
 public class LuggageController extends BaseController implements Initializable {
+
     /**
      * LIST ELEMENTS
      */
@@ -169,12 +179,9 @@ public class LuggageController extends BaseController implements Initializable {
      */
     @FXML
     private Button viewClose;
-    
-    @FXML
-    private Button customerOverview;
 
     @FXML
-    private TextField viewTags;
+    private Button customerOverview;
 
     @FXML
     private ChoiceBox<String> viewStatus;
@@ -184,6 +191,12 @@ public class LuggageController extends BaseController implements Initializable {
 
     @FXML
     private ChoiceBox<CustomerModel> viewCustomerId;
+
+    @FXML
+    private DatePicker viewDate;
+
+    @FXML
+    private Label luggageNotif;
 
     @FXML
     private TextField viewStatusAsText;
@@ -198,7 +211,10 @@ public class LuggageController extends BaseController implements Initializable {
     private TextField viewNotes;
 
     @FXML
-    private DatePicker viewDate;
+    private TextField viewTags;
+
+    @FXML
+    public String customerIdHolder;
 
     private ObservableList<LuggageModel> listData = FXCollections.observableArrayList();
 
@@ -215,10 +231,16 @@ public class LuggageController extends BaseController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        MainActivity.viewCustomerOverviewParamCallback = new Runnable() {
+            @Override
+            public void run() {
+                customerOverview();
+            }
+        };
+
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-
                 Debug.print("LUGGAGE CONTROLLER-----------------------------------------------------------------");
 
                 // List
@@ -381,7 +403,7 @@ public class LuggageController extends BaseController implements Initializable {
 
         long endTime = System.nanoTime();
         long microseconds = ((endTime - startTime) / 1000);
-        Debug.print("Luggage setViewChoiceBoxes() " + " took " + microseconds + " microseconds.");
+        Debug.print("Luggage setViewChoiceBoxes()" + " took " + microseconds + " microseconds.");
     }
 
     /**
@@ -584,6 +606,11 @@ public class LuggageController extends BaseController implements Initializable {
         }
 
         LuggageModel luggage = new LuggageModel();
+        try {
+            luggage.setCustomerId(Integer.toString(newCustomerId.getSelectionModel().getSelectedItem().getId()));
+        } catch (NullPointerException n) {
+            printStackTrace(n);
+        }
         luggage.setLocationId(Integer.toString(newLocationId.getSelectionModel().getSelectedItem().getId()));
 
         luggage.setDatetime(newDate.getValue() + " 00:00:00");
@@ -620,13 +647,21 @@ public class LuggageController extends BaseController implements Initializable {
      * Populates the view fields with the selected Luggage item's data.
      */
     public void setViewFields() {
+        customerOverview.setDisable(true);
         LuggageModel luggage = new LuggageModel(MainActivity.viewId);
 
         viewLocationId.getSelectionModel().select(selectedLocation);
-        viewCustomerId.getSelectionModel().select(selectedCustomer);
         viewStatus.setValue(luggage.getStatus());
         viewLocationAsText.setText(selectedLocation.toString());
-        viewCustomerAsText.setText(selectedCustomer.toString());
+        try {
+            viewCustomerId.getSelectionModel().select(selectedCustomer);
+            viewCustomerAsText.setText(selectedCustomer.toString());
+            customerOverview.setDisable(false);
+            customerIdHolder = Integer.toString(selectedCustomer.getId());
+            Debug.print("customerIdHolder: " + customerIdHolder);
+        } catch (NullPointerException n) {
+            printStackTrace(n);
+        }
         viewStatusAsText.setText(luggage.getStatus());
         viewTags.setText(luggage.getTags());
         viewNotes.setText(luggage.getNotes());
@@ -639,22 +674,6 @@ public class LuggageController extends BaseController implements Initializable {
      * Creates the (mouse, keyboard, etc.) event filters for the list view.
      */
     public void listKeyActions() {
-        listNew.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                listResetTableView("", new String[0]);
-                listSearchField.setText("");
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                listNew();
-            }
-        });
-        listHelp.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                listResetTableView("", new String[0]);
-                listSearchField.setText("");
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                listHelp();
-            }
-        });
         listTableView.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.E)) {
                 listEdit();
@@ -666,44 +685,15 @@ public class LuggageController extends BaseController implements Initializable {
                 listRemove();
             } else if (b.getCode().equals(KeyCode.V) || b.getCode().equals(KeyCode.ENTER)) {
                 listView();
+            } else if (b.getCode().equals(KeyCode.ESCAPE)) {
+                listOnSearch();
             }
         });
         listSearchField.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 listResetTableView("", new String[0]);
                 listSearchField.setText("");
-            }
-        });
-        listEdit.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                listResetTableView("", new String[0]);
-                listSearchField.setText("");
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                listEdit();
-            }
-        });
-        listExportToPdf.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                listResetTableView("", new String[0]);
-                listSearchField.setText("");
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                listExportToPdf();
-            }
-        });
-        listView.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                listResetTableView("", new String[0]);
-                listSearchField.setText("");
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                listView();
-            }
-        });
-        listRemove.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                listResetTableView("", new String[0]);
-                listSearchField.setText("");
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                listRemove();
+                clearNotif();
             }
         });
     }
@@ -944,6 +934,11 @@ public class LuggageController extends BaseController implements Initializable {
         }
 
         LuggageModel luggage = new LuggageModel(MainActivity.editId);
+        try {
+            luggage.setCustomerId(Integer.toString(editCustomerId.getSelectionModel().getSelectedItem().getId()));
+        } catch (NullPointerException n) {
+            printStackTrace(n);
+        }
         luggage.setLocationId(Integer.toString(editLocationId.getSelectionModel().getSelectedItem().getId()));
 
         luggage.setDatetime(editDate.getValue() + " 00:00:00");
@@ -959,11 +954,56 @@ public class LuggageController extends BaseController implements Initializable {
         editCancel();
     }
 
+    /**
+     * Shows the Luggage items belonging to the Customer that are known to the
+     * system.
+     */
     @FXML
     public void customerOverview() {
-        Debug.print("Reached end of customerOverview() method.");
+        listResetTableView("customer_id LIKE ?", Integer.toString(MainActivity.viewCustomerOverviewParam));
+        Debug.print("Customer id dump (viewCustomerOverviewParam): \"" + MainActivity.viewCustomerOverviewParam + "\"");
+        MainActivity.viewCustomerOverviewParam = 0;
+        Debug.print("Reached end of customerOverview() method (LuggageController).");
+    }
+
+    @FXML
+    public void customerOverviewViaLuggage() {
+        LuggageController luggageController = (LuggageController) StageHelper.callbackController;
+        luggageController.listResetTableView("customer_id LIKE ?", customerIdHolder);
+        viewClose();
+
+//        try {
+////                pollDatabase = oConnection.prepareStatement("SELECT COUNT(*) as RowCount FROM luggage WHERE customer_id LIKE ?");
+////                pollDatabase.setString(1, customerIdHolder);
         
-        // TO DO: knop bij luggage items & customers
+//            Statement pollDatabase = oConnection.createStatement();
+//            ResultSet resultsCount = pollDatabase.executeQuery("SELECT COUNT(*) as RowCount FROM luggage WHERE customer_id LIKE " + customerIdHolder + ";");
+//            resultsCount.next();
+//            resultsCount.getInt(1);
+//            printNotif("Search results: " + String.valueOf(resultsCount) + " Press escape to cancel search.");
+//        } catch (SQLException ex) {
+//            Logger.getLogger(LuggageController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+
+        Debug.print("Reached end of customerOverviewViaLuggage() method (LuggageController).");
+    }
+
+    /**
+     * Clears the notification label.
+     */
+    @FXML
+    private void clearNotif() {
+        luggageNotif.setText("");
+    }
+
+    /**
+     * Prints given parameter as notification label.
+     *
+     * @param notif
+     */
+    @FXML
+    private void printNotif(String notif) {
+        luggageNotif.setText(notif);
     }
 
     /**

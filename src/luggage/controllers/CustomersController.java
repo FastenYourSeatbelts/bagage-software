@@ -34,6 +34,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -61,6 +62,9 @@ import org.controlsfx.dialog.Dialogs;
  * @author ITopia IS102-5
  */
 public class CustomersController extends BaseController implements Initializable {
+
+    public TabPane tabs;
+
     /**
      * LIST ELEMENTS
      */
@@ -192,6 +196,9 @@ public class CustomersController extends BaseController implements Initializable
      */
     @FXML
     private Button viewClose;
+
+    @FXML
+    private Button customerOverview;
 
     @FXML
     private TextField viewFirstname;
@@ -403,22 +410,6 @@ public class CustomersController extends BaseController implements Initializable
      * Creates the (mouse, keyboard, etc.) event filters for the list view.
      */
     public void listKeyActions() {
-        listNew.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                listResetTableView("", new String[0]);
-                listSearchField.setText("");
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                listNew();
-            }
-        });
-        listHelp.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                listResetTableView("", new String[0]);
-                listSearchField.setText("");
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                listHelp();
-            }
-        });
         listTableView.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.E)) {
                 listEdit();
@@ -430,30 +421,6 @@ public class CustomersController extends BaseController implements Initializable
                 listRemove();
             } else if (b.getCode().equals(KeyCode.V)) {
                 listView();
-            }
-        });
-        listEdit.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                listResetTableView("", new String[0]);
-                listSearchField.setText("");
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                listEdit();
-            }
-        });
-        listView.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                listResetTableView("", new String[0]);
-                listSearchField.setText("");
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                listView();
-            }
-        });
-        listRemove.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                listResetTableView("", new String[0]);
-                listSearchField.setText("");
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                listRemove();
             }
         });
         listSearchField.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
@@ -673,63 +640,87 @@ public class CustomersController extends BaseController implements Initializable
      */
     public void viewKeyActions() {
         viewFirstname.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
                 viewClose();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                viewCustomerLuggage();
             }
         });
         viewPrefix.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
                 viewClose();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                viewCustomerLuggage();
             }
         });
         viewLastname.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
                 viewClose();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                viewCustomerLuggage();
             }
         });
         viewPrefix.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
                 viewClose();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                viewCustomerLuggage();
             }
         });
         viewGenderAsText.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
                 viewClose();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                viewCustomerLuggage();
             }
         });
         viewInsurerAsText.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
                 viewClose();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                viewCustomerLuggage();
             }
         });
         viewPostalcode.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
                 viewClose();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                viewCustomerLuggage();
             }
         });
         viewResidence.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
                 viewClose();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                viewCustomerLuggage();
             }
         });
         viewEmail.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
                 viewClose();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                viewCustomerLuggage();
             }
         });
         viewTelephone.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
                 viewClose();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                viewCustomerLuggage();
             }
         });
         viewMobile.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
                 viewClose();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                viewCustomerLuggage();
             }
         });
         viewClose.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
                 viewClose();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                viewCustomerLuggage();
             }
         });
     }
@@ -1101,6 +1092,20 @@ public class CustomersController extends BaseController implements Initializable
         customersController.listOnSearch();
 
         editCancel();
+    }
+
+    /**
+     * Shows the luggage items belonging to Customer that are known to the
+     * system.
+     */
+    @FXML
+    public void viewCustomerLuggage() {
+        MainActivity.setViewCustomerOverviewParam(MainActivity.viewId);
+        Debug.print("Customer name dump (viewFirstname viewPrefix viewLastname;): \"" + viewFirstname.getText() + " " + viewPrefix.getText() + " " + viewLastname.getText() + "\"");
+        viewClose();
+
+        MainActivity.tabs.getSelectionModel().select(MainActivity.luggageTab);
+        Debug.print("Reached end of viewCustomerLuggage() method (CustomersController).");
     }
 
     /**

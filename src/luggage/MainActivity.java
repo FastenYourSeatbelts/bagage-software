@@ -49,35 +49,71 @@ import javafx.stage.Stage;
 public class MainActivity extends Application {
 
     /**
+     *
      */
     public static int editId;
 
     /**
+     *
      */
     public static int viewId;
-	
-	/**
-	 */
-	public static TabPane tabs;
-	
-	/**
-	 */
-	public static Tab logTab;
-    
-	
-	/**
-	 */
+
+    /**
+     *
+     */
+    public static TabPane tabs;
+
+    /**
+     *
+     */
+    public static Tab logTab;
+
+    /**
+     *
+     */
+    public static Tab luggageTab;
+
+    /**
+     *
+     */
     public static int viewUserLogParam;
-	
-	public static Runnable viewUserLogParamCallback;
-	
-	public static void setViewUserLogParam(int user) {
-		viewUserLogParam = user;
-		if(viewUserLogParamCallback != null)
-		{
-			viewUserLogParamCallback.run();
-		}
-	}
+
+    /**
+     *
+     */
+    public static int viewCustomerOverviewParam;
+
+    /**
+     *
+     */
+    public static Runnable viewUserLogParamCallback;
+
+    /**
+     *
+     */
+    public static Runnable viewCustomerOverviewParamCallback;
+
+    /**
+     *
+     * @param user
+     */
+    public static void setViewUserLogParam(int user) {
+        viewUserLogParam = user;
+        if (viewUserLogParamCallback != null) {
+            viewUserLogParamCallback.run();
+        }
+    }
+    
+    /**
+     *
+     * @param customer
+     */
+    public static void setViewCustomerOverviewParam(int customer) {
+        viewCustomerOverviewParam = customer;
+        if (viewCustomerOverviewParamCallback != null) {
+            viewCustomerOverviewParamCallback.run();
+        }
+    }
 
     /**
      * Called on application run.

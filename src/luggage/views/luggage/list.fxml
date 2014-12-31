@@ -10,12 +10,12 @@
 
 <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="luggage.controllers.LuggageController">
     <children>
-        <Button fx:id="listNew" layoutX="14.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#listNew" prefHeight="26.0" prefWidth="70.0" text="New" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+        <Button fx:id="listNew" focusTraversable="false" layoutX="14.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#listNew" prefHeight="26.0" prefWidth="70.0" text="New" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
             <font>
                 <Font size="12.0" />
             </font>
         </Button>
-      <Button fx:id="listHelp" layoutX="560.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#listHelp" prefHeight="26.0" prefWidth="70.0" text="Help" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="14.0">
+      <Button fx:id="listHelp" focusTraversable="false" layoutX="560.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#listHelp" prefHeight="26.0" prefWidth="70.0" text="Help" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="14.0">
          <font>
             <Font size="12.0" />
          </font>
@@ -33,21 +33,26 @@
                 <TableColumn fx:id="listTableViewTags" prefWidth="200.0" text="Tags" />
             </columns>
         </TableView>
-        <Button fx:id="listEdit" layoutX="25.0" layoutY="466.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#listEdit" prefHeight="26.0" prefWidth="70.0" text="Edit" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0">
+        <Button fx:id="listEdit" focusTraversable="false" layoutX="25.0" layoutY="466.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#listEdit" prefHeight="26.0" prefWidth="70.0" text="Edit" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0">
             <font>
                 <Font size="12.0" />
             </font>
         </Button>
-        <Button fx:id="listView" layoutX="98.0" layoutY="466.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#listView" prefHeight="26.0" prefWidth="70.0" text="View" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="91.0">
+        <Button fx:id="listView" focusTraversable="false" layoutX="98.0" layoutY="466.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#listView" prefHeight="26.0" prefWidth="70.0" text="View" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="91.0">
             <font>
                 <Font size="12.0" />
             </font>
         </Button>
-      <Button fx:id="listExportToPdf" layoutX="169.0" layoutY="467.0" mnemonicParsing="false" onMouseClicked="#listExportToPdf" text="Export to PDF" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="170.0" />
-        <Button fx:id="listRemove" layoutX="721.0" layoutY="460.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#listRemove" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #BB1A1D;" text="Remove" textFill="WHITE" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
+      <Button fx:id="listExportToPdf" focusTraversable="false" layoutX="169.0" layoutY="467.0" mnemonicParsing="false" onMouseClicked="#listExportToPdf" text="Export to PDF" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="170.0" />
+        <Button fx:id="listRemove" focusTraversable="false" layoutX="721.0" layoutY="460.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#listRemove" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #BB1A1D;" text="Remove" textFill="WHITE" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
             <font>
                 <Font size="12.0" />
             </font>
         </Button>
+      <Label fx:id="luggageNotif" focusTraversable="false" layoutX="104.0" layoutY="19.0" AnchorPane.leftAnchor="98.0">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

@@ -39,6 +39,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import luggage.Debug;
 import luggage.MainActivity;
 import luggage.database.models.LogModel;
 import luggage.database.models.Model;
@@ -132,13 +133,14 @@ public class LogController extends BaseController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-		
-		MainActivity.viewUserLogParamCallback = new Runnable() {
-			@Override
-			public void run() {
-				viewUserLog();
-			}
-		};
+        Debug.print("LOG CONTROLLER-----------------------------------------------------------------");
+
+        MainActivity.viewUserLogParamCallback = new Runnable() {
+            @Override
+            public void run() {
+                viewUserLog();
+            }
+        };
 
         Platform.runLater(new Runnable() {
             @Override
@@ -189,8 +191,10 @@ public class LogController extends BaseController implements Initializable {
      */
     @FXML
     public void viewUserLog() {
-        listResetTableView("user_id LIKE ?", new Integer(MainActivity.viewUserLogParam).toString());
+        listResetTableView("user_id LIKE ?", Integer.toString(MainActivity.viewUserLogParam));
+        Debug.print("User id dump (viewUserLogParam): \"" + MainActivity.viewUserLogParam + "\"");
         MainActivity.viewUserLogParam = 0;
+        Debug.print("Reached end of viewUserLog() method (LogController).");
     }
 
 }

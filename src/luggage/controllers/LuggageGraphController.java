@@ -93,7 +93,7 @@ public class LuggageGraphController extends BaseController implements Initializa
     private CheckBox showResolved;
 
     @FXML
-    private Label printNotif;
+    private Label graphNotif;
 
     @FXML
     private Stage stage;
@@ -343,8 +343,9 @@ public class LuggageGraphController extends BaseController implements Initializa
     /**
      * Clears the notification label.
      */
-    public void clearNotif() {
-        printNotif.setText("");
+    @FXML
+    private void clearNotif() {
+        graphNotif.setText("");
     }
 
     /**
@@ -352,8 +353,9 @@ public class LuggageGraphController extends BaseController implements Initializa
      *
      * @param notif
      */
-    public void printNotif(String notif) {
-        printNotif.setText(notif);
+    @FXML
+    private void printNotif(String notif) {
+        graphNotif.setText(notif);
     }
 
 //    private void watchTheDate(SimpleDateFormat start, SimpleDateFormat end) {}

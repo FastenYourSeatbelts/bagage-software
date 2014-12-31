@@ -84,7 +84,7 @@ public class LoginController extends BaseController implements Initializable {
     }
 
     /**
-     * Opens the login page\'s help view.
+     * Opens the login page's help view.
      */
     @FXML
     public void listHelp() {
@@ -94,7 +94,7 @@ public class LoginController extends BaseController implements Initializable {
 
     /**
      * Called on enter in username or password field or when the user clicks on
-     * the login button Handles the login for the user
+     * the login button Handles the login for the user.
      *
      * @param event
      */
@@ -120,7 +120,7 @@ public class LoginController extends BaseController implements Initializable {
     }
 
     /**
-     * Called on controller start
+     * Called on controller start.
      *
      * @param url
      * @param rb
