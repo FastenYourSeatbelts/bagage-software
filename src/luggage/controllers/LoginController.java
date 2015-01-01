@@ -82,7 +82,7 @@ public class LoginController extends BaseController implements Initializable {
     private void onKeyPress() {
         error.setText("");
     }
-
+    
     /**
      * Opens the login page's help view.
      */
@@ -90,7 +90,6 @@ public class LoginController extends BaseController implements Initializable {
     public void listHelp() {
         StageHelper.addStage("login_help", this, false, true);
     }
-   
 
     /**
      * Called on enter in username or password field or when the user clicks on

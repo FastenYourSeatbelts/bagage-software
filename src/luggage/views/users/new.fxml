@@ -46,7 +46,7 @@
                </GridPane.margin></PasswordField>
             
                 <TextField fx:id="newFirstname" prefHeight="25.0" prefWidth="125.0" promptText="First name" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                <TextField fx:id="newPrefix" opacity="0.8" promptText="prefix" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                <TextField fx:id="newPrefix" opacity="0.6" promptText="prefix" GridPane.columnIndex="3" GridPane.rowIndex="3">
                     <GridPane.margin>
                         <Insets left="14.0" right="14.0" />
                     </GridPane.margin>
@@ -81,7 +81,7 @@
                 </ChoiceBox>
             
                 <TextField fx:id="newTelephone" promptText="e.g. 0031201234567" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-                <TextField fx:id="newMobile" opacity="0.8" promptText="e.g. 0031612345678" GridPane.columnIndex="4" GridPane.rowIndex="7" />
+                <TextField fx:id="newMobile" opacity="0.6" promptText="e.g. 0031612345678" GridPane.columnIndex="4" GridPane.rowIndex="7" />
                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="9">
                     <children>
                         <Button fx:id="newSave" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="47.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#newSave" prefWidth="70.0" text="Save" AnchorPane.rightAnchor="168.0">

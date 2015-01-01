@@ -25,15 +25,9 @@
 package luggage.controllers;
 
 import java.net.URL;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -53,12 +47,12 @@ import javafx.stage.Stage;
 import static jdk.nashorn.internal.runtime.Context.printStackTrace;
 import luggage.Debug;
 import luggage.MainActivity;
-import static luggage.database.DatabaseHelper.oConnection;
 import luggage.database.models.CustomerModel;
 import luggage.database.models.LocationModel;
 import luggage.database.models.LogModel;
 import luggage.database.models.LuggageModel;
 import luggage.database.models.Model;
+import luggage.database.models.UserModel;
 import luggage.helpers.StageHelper;
 import org.controlsfx.control.action.Action;
 import org.controlsfx.dialog.Dialog;
@@ -658,7 +652,8 @@ public class LuggageController extends BaseController implements Initializable {
             viewCustomerAsText.setText(selectedCustomer.toString());
             customerOverview.setDisable(false);
             customerIdHolder = Integer.toString(selectedCustomer.getId());
-            Debug.print("customerIdHolder: " + customerIdHolder);
+            MainActivity.searchedName = selectedCustomer.getFullname();
+            Debug.print("Viewing customer " + MainActivity.searchedName + " (" + customerIdHolder + ")");
         } catch (NullPointerException n) {
             printStackTrace(n);
         }
@@ -960,9 +955,11 @@ public class LuggageController extends BaseController implements Initializable {
      */
     @FXML
     public void customerOverview() {
+        Debug.print("LUGGAGE CONTROLLER-----------------------------------------------------------------");
         listResetTableView("customer_id LIKE ?", Integer.toString(MainActivity.viewCustomerOverviewParam));
-        Debug.print("Customer id dump (viewCustomerOverviewParam): \"" + MainActivity.viewCustomerOverviewParam + "\"");
+        printNotif("Searched for " + MainActivity.searchedName + ". Click here to cancel search or use search box.");
         MainActivity.viewCustomerOverviewParam = 0;
+        MainActivity.searchedName = "";
         Debug.print("Reached end of customerOverview() method (LuggageController).");
     }
 
@@ -970,21 +967,11 @@ public class LuggageController extends BaseController implements Initializable {
     public void customerOverviewViaLuggage() {
         LuggageController luggageController = (LuggageController) StageHelper.callbackController;
         luggageController.listResetTableView("customer_id LIKE ?", customerIdHolder);
+        Debug.print("MainActivity.searchedName: " + MainActivity.searchedName);
         viewClose();
-
-//        try {
-////                pollDatabase = oConnection.prepareStatement("SELECT COUNT(*) as RowCount FROM luggage WHERE customer_id LIKE ?");
-////                pollDatabase.setString(1, customerIdHolder);
-        
-//            Statement pollDatabase = oConnection.createStatement();
-//            ResultSet resultsCount = pollDatabase.executeQuery("SELECT COUNT(*) as RowCount FROM luggage WHERE customer_id LIKE " + customerIdHolder + ";");
-//            resultsCount.next();
-//            resultsCount.getInt(1);
-//            printNotif("Search results: " + String.valueOf(resultsCount) + " Press escape to cancel search.");
-//        } catch (SQLException ex) {
-//            Logger.getLogger(LuggageController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-
+        luggageController.printNotif("Searched for " + MainActivity.searchedName + ". Click here to cancel search or use search box.");
+        customerIdHolder = "";
+        MainActivity.searchedName = "";
         Debug.print("Reached end of customerOverviewViaLuggage() method (LuggageController).");
     }
 
@@ -1004,6 +991,12 @@ public class LuggageController extends BaseController implements Initializable {
     @FXML
     private void printNotif(String notif) {
         luggageNotif.setText(notif);
+    }
+    
+    @FXML
+    private void clearSearch() {
+        listOnSearch();
+        clearNotif();
     }
 
     /**

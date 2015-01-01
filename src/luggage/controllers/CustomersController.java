@@ -47,6 +47,7 @@ import luggage.MainActivity;
 import luggage.database.models.CustomerModel;
 import luggage.database.models.InsurerModel;
 import luggage.database.models.Model;
+import luggage.database.models.UserModel;
 import luggage.helpers.StageHelper;
 import org.controlsfx.control.action.Action;
 import org.controlsfx.dialog.Dialog;
@@ -312,6 +313,8 @@ public class CustomersController extends BaseController implements Initializable
 //        viewInsurerId.getSelectionModel().select(selectedInsurer);
         viewInsurerAsText.setText(selectedInsurer.toString());
         viewGenderAsText.setText(viewGender.getValue().toString());
+        
+        MainActivity.searchedName = customer.getFullname();
     }
 
     /**
@@ -1101,7 +1104,8 @@ public class CustomersController extends BaseController implements Initializable
     @FXML
     public void viewCustomerLuggage() {
         MainActivity.setViewCustomerOverviewParam(MainActivity.viewId);
-        Debug.print("Customer name dump (viewFirstname viewPrefix viewLastname;): \"" + viewFirstname.getText() + " " + viewPrefix.getText() + " " + viewLastname.getText() + "\"");
+//        viewFirstname.getText() + " " + viewPrefix.getText() + " " + viewLastname.getText();
+        Debug.print("Customer name dump (viewFirstname viewPrefix viewLastname;): \"" + MainActivity.searchedName + "\"");
         viewClose();
 
         MainActivity.tabs.getSelectionModel().select(MainActivity.luggageTab);

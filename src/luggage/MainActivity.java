@@ -76,6 +76,11 @@ public class MainActivity extends Application {
     /**
      *
      */
+    public static String searchedName;
+
+    /**
+     *
+     */
     public static int viewUserLogParam;
 
     /**
