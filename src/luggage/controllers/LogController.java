@@ -83,7 +83,7 @@ public class LogController extends BaseController implements Initializable {
      */
     @FXML
     public void listHelp() {
-        StageHelper.addStage("customers/help", this, false, true);
+        StageHelper.addStage("log/help", this, false, true);
     }
 
     /**
