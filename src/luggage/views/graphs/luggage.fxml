@@ -31,7 +31,7 @@
             </Label>
             <CheckBox fx:id="showResolved" layoutX="31.0" layoutY="157.0" mnemonicParsing="false" onMousePressed="#clearNotif" selected="true" text="Show resolved cases" AnchorPane.leftAnchor="31.0" AnchorPane.topAnchor="157.0" />
             <Button fx:id="saveAsPng" focusTraversable="false" layoutX="31.0" layoutY="245.0" mnemonicParsing="false" onMouseClicked="#saveAsPng" onMousePressed="#clearNotif" text="Save as image" AnchorPane.leftAnchor="31.0" AnchorPane.topAnchor="197.0" />
-            <Label fx:id="graphNotif" focusTraversable="false" layoutX="33.0" layoutY="289.0" onMousePressed="#clearNotif" AnchorPane.topAnchor="237.0">
+            <Label fx:id="printNotif" focusTraversable="false" layoutX="33.0" layoutY="289.0" onMousePressed="#clearNotif" AnchorPane.topAnchor="237.0">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>

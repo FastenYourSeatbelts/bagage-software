@@ -50,5 +50,10 @@
                 <ColorAdjust />
             </effect>
         </Button>
+      <Label fx:id="printNotif" focusTraversable="false" layoutX="116.0" layoutY="13.0" onMousePressed="#clearSearch" prefHeight="28.0" style="-fx-background-color: FFFFFF;" AnchorPane.leftAnchor="98.0" AnchorPane.topAnchor="13.0">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

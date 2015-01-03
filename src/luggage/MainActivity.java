@@ -24,6 +24,8 @@
 package luggage;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import luggage.database.DatabaseHelper;
@@ -51,6 +53,21 @@ public class MainActivity extends Application {
     /**
      *
      */
+    public static boolean firstStart;
+
+    /**
+     *
+     */
+    public static DateFormat dateFormatFull = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+    /**
+     *
+     */
+    public static DateFormat dateFormatShort = new SimpleDateFormat("yyyy-MM-dd");
+
+    /**
+     *
+     */
     public static int editId;
 
     /**
@@ -66,6 +83,11 @@ public class MainActivity extends Application {
     /**
      *
      */
+    public static Tab customersTab;
+
+    /**
+     *
+     */
     public static Tab logTab;
 
     /**
@@ -76,12 +98,27 @@ public class MainActivity extends Application {
     /**
      *
      */
-    public static String searchedName;
+    public static Tab usersTab;
+
+    /**
+     *
+     */
+    public static String searchTerm;
+
+    /**
+     *
+     */
+    public static String customerIdHolder;
 
     /**
      *
      */
     public static int viewUserLogParam;
+
+    /**
+     *
+     */
+    public static int viewCustomerParam;
 
     /**
      *
@@ -92,6 +129,11 @@ public class MainActivity extends Application {
      *
      */
     public static Runnable viewUserLogParamCallback;
+
+    /**
+     *
+     */
+    public static Runnable viewCustomerParamCallback;
 
     /**
      *
@@ -108,7 +150,18 @@ public class MainActivity extends Application {
             viewUserLogParamCallback.run();
         }
     }
-    
+
+    /**
+     *
+     * @param customer
+     */
+    public static void setViewCustomerParam(int customer) {
+        viewCustomerParam = customer;
+        if (viewCustomerParamCallback != null) {
+            viewCustomerParamCallback.run();
+        }
+    }
+
     /**
      *
      * @param customer
@@ -152,6 +205,8 @@ public class MainActivity extends Application {
      */
     public void startMainStage() {
         try {
+            firstStart = true;
+
             FXMLLoader primaryLoader = new FXMLLoader(this.getClass().getResource("/luggage/views/login.fxml"));
             Parent root = null;
             root = (Parent) primaryLoader.load();

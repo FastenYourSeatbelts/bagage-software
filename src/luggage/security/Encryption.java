@@ -30,7 +30,7 @@ import luggage.AppConfig;
 /**
  * Encryption
  *
- * Helps encryptingp passwords
+ * Securely encrypts passwords.
  *
  * @package luggage.security
  * @author ITopia IS102-5
@@ -38,7 +38,7 @@ import luggage.AppConfig;
 public class Encryption {
 
     /**
-     * Hash a string
+     * Hashes a given password with a secure hash algorithm.
      *
      * @param password
      * @return hashed text

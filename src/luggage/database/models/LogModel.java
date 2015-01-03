@@ -81,7 +81,7 @@ public class LogModel extends Model {
 
     /**
      *
-     * @return logmodel
+     * @return LogModel
      */
     @Override
     protected Model getModel() {
@@ -143,7 +143,7 @@ public class LogModel extends Model {
     }
 
     /**
-     * Return the location_id of the current row
+     * Return the user_id of the current row
      *
      * @return
      */
@@ -156,7 +156,7 @@ public class LogModel extends Model {
     }
 
     /**
-     * Return the LocationModel of the current row
+     * Return the UserModel of the current row
      *
      * @return UserModel
      */
@@ -165,7 +165,7 @@ public class LogModel extends Model {
     }
 
     /**
-     * Return the location name of the current row
+     * Return the username of the current row
      *
      * @return username
      */
@@ -174,7 +174,7 @@ public class LogModel extends Model {
     }
 
     /**
-     * Set the location_id of the current row
+     * Set the user_id of the current row
      *
      * @param user_id
      */
