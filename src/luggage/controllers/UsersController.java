@@ -39,6 +39,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -105,6 +106,9 @@ public class UsersController extends BaseController implements Initializable {
 
     @FXML
     private Button listRemove;
+    
+    @FXML
+    private Label printNotif;
 
     /**
      * NEW ELEMENTS
@@ -385,7 +389,7 @@ public class UsersController extends BaseController implements Initializable {
         viewWorkplace.setItems(workplaceData);
     }
 
-    public void setNewChoiceBox() {
+    private void setNewChoiceBox() {
         newGender.setItems(FXCollections.observableArrayList(
                 "Male",
                 "Female",
@@ -410,7 +414,7 @@ public class UsersController extends BaseController implements Initializable {
         newWorkplace.setItems(workplaceData);
     }
 
-    public void setEditFields() {
+    private void setEditFields() {
         UserModel user = new UserModel(MainActivity.editId);
 
         currentUsername = user.getUsername();
@@ -432,7 +436,7 @@ public class UsersController extends BaseController implements Initializable {
     /**
      * Creates the (mouse, keyboard, etc.) event filters for the list view.
      */
-    public void listKeyActions() {
+    private void listKeyActions() {
         listTableView.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.E)) {
                 listEdit();
@@ -450,6 +454,7 @@ public class UsersController extends BaseController implements Initializable {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 listResetTableView("", new String[0]);
                 listSearchField.setText("");
+                clearNotif();
             }
         });
     }
@@ -457,7 +462,7 @@ public class UsersController extends BaseController implements Initializable {
     /**
      * Creates the (mouse, keyboard, etc.) event filters for the new view.
      */
-    public void newKeyActions() {
+    private void newKeyActions() {
         newUsername.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 newCancel();
@@ -581,7 +586,7 @@ public class UsersController extends BaseController implements Initializable {
     /**
      * Creates the (mouse, keyboard, etc.) event filters for the edit view.
      */
-    public void editKeyActions() {
+    private void editKeyActions() {
         editUsername.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
             if (evt.getCode().equals(KeyCode.ESCAPE)) {
                 editCancel();
@@ -704,7 +709,7 @@ public class UsersController extends BaseController implements Initializable {
     /**
      * Creates the (mouse, keyboard, etc.) event filters for the view page.
      */
-    public void viewKeyActions() {
+    private void viewKeyActions() {
         viewUsername.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 viewClose();
@@ -835,7 +840,9 @@ public class UsersController extends BaseController implements Initializable {
     }
 
     /**
-     *
+     * Populates the list (TableView) with the provided query as parameter
+     * (searching the database).
+     * 
      * @param where
      * @param params
      */
@@ -860,7 +867,7 @@ public class UsersController extends BaseController implements Initializable {
      * Opens the 'New User' view.
      */
     @FXML
-    public void listNew() {
+    private void listNew() {
         StageHelper.addPopup("users/new", this, false, true);
     }
 
@@ -868,7 +875,7 @@ public class UsersController extends BaseController implements Initializable {
      * Opens the Users list's help view.
      */
     @FXML
-    public void listHelp() {
+    private void listHelp() {
         StageHelper.addStage("users/help", this, false, true);
     }
 
@@ -876,7 +883,7 @@ public class UsersController extends BaseController implements Initializable {
      * Opens the User edit view for the selected customer.
      */
     @FXML
-    public void listEdit() {
+    private void listEdit() {
         UserModel user = (UserModel) listTableView.getSelectionModel().getSelectedItem();
 
         if (user == null) {
@@ -892,7 +899,7 @@ public class UsersController extends BaseController implements Initializable {
      * Triggers a confirmation dialog for removing the selected user.
      */
     @FXML
-    public void listRemove() {
+    private void listRemove() {
         Stage removeStage = (Stage) listTableView.getScene().getWindow();
 
         Action response = Dialogs.create().owner(removeStage)
@@ -930,12 +937,12 @@ public class UsersController extends BaseController implements Initializable {
 
     }
 
-    public void newCancel() {
+    private void newCancel() {
         Stage addStage = (Stage) newCancel.getScene().getWindow();
         StageHelper.closeStage(addStage);
     }
 
-    public void newReset() {
+    private void newReset() {
         newPassword.setText("");
         newPasswordRepeat.setText("");
         newUsername.setText("");
@@ -952,7 +959,7 @@ public class UsersController extends BaseController implements Initializable {
         newWorkplace.setValue(null);
     }
 
-    public void newSave() {
+    private void newSave() {
         boolean duplicateUsername = false;
         try {
             PreparedStatement pollDatabase;
@@ -1087,9 +1094,17 @@ public class UsersController extends BaseController implements Initializable {
     }
 
     /**
+     * Cancels editing a User, does not change saved data.
+     */
+    private void editCancel() {
+        Stage cancelStage = (Stage) editCancel.getScene().getWindow();
+        StageHelper.closeStage(cancelStage);
+    }
+    
+    /**
      * Resets all fields in the edit view.
      */
-    public void editReset() {
+    private void editReset() {
         editUsername.setText("");
         editPassword.setText("");
         editPasswordRepeat.setText("");
@@ -1274,18 +1289,37 @@ public class UsersController extends BaseController implements Initializable {
     }
 
     /**
+     * Prints given parameter as notification label.
+
+     * @param notif
+     */
+    @FXML
+    private void printNotif(String notif) {
+        printNotif.setText(notif);
+    }
+    
+    /**
+     * Clears the notification label.
+     */
+    @FXML
+    private void clearNotif() {
+        printNotif.setText("");
+    }
+    
+    /**
+     * Clears the notification label.
+     */
+    @FXML
+    private void clearSearch() {
+        listOnSearch();
+        clearNotif();
+    }
+
+    /**
      * Closes current view.
      */
     public void viewClose() {
         Stage cancelStage = (Stage) viewClose.getScene().getWindow();
-        StageHelper.closeStage(cancelStage);
-    }
-
-    /**
-     * Cancels editing a User, does not change saved data.
-     */
-    public void editCancel() {
-        Stage cancelStage = (Stage) editCancel.getScene().getWindow();
         StageHelper.closeStage(cancelStage);
     }
 }

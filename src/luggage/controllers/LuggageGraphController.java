@@ -27,8 +27,6 @@ package luggage.controllers;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
@@ -60,6 +58,7 @@ import luggage.database.models.LogModel;
 import luggage.database.models.LuggageModel;
 import luggage.database.models.Model;
 import luggage.Debug;
+import luggage.MainActivity;
 import luggage.helpers.StageHelper;
 
 /**
@@ -93,7 +92,7 @@ public class LuggageGraphController extends BaseController implements Initializa
     private CheckBox showResolved;
 
     @FXML
-    private Label graphNotif;
+    private Label printNotif;
 
     @FXML
     private Stage stage;
@@ -256,14 +255,12 @@ public class LuggageGraphController extends BaseController implements Initializa
         // Disable the button until method ends
         saveAsPng.setDisable(true);
         // Starts off with reading the given dates
-        DateFormat dateFormatFull = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss");
-        DateFormat dateFormatShort = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
         String dateStart = start.getValue().toString();
         String dateEnd;
 
         if (end.getValue() == null) {
-            dateEnd = dateFormatShort.format(date);
+            dateEnd = MainActivity.dateFormatShort.format(date);
         } else {
             dateEnd = end.getValue().toString();
         }
@@ -285,7 +282,7 @@ public class LuggageGraphController extends BaseController implements Initializa
         chooser.setTitle("Save Pie Chart As");
         chooser.setInitialDirectory(new File(System.getProperty("user.home")));
         Debug.print("Initial Directory poll after set: " + chooser.getInitialDirectory());
-        chooser.setInitialFileName("Pie chart exported on " + dateFormatFull.format(date) + " of period " + dateStart + " - " + dateEnd);
+        chooser.setInitialFileName("Pie chart exported on " + MainActivity.dateFormatFull.format(date) + " of period " + dateStart + " - " + dateEnd);
 //        chooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("PNG", "*.png")); // This doesn't even work?
         chooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("PNG", "*.png"));
@@ -345,7 +342,7 @@ public class LuggageGraphController extends BaseController implements Initializa
      */
     @FXML
     private void clearNotif() {
-        graphNotif.setText("");
+        printNotif.setText("");
     }
 
     /**
@@ -355,10 +352,9 @@ public class LuggageGraphController extends BaseController implements Initializa
      */
     @FXML
     private void printNotif(String notif) {
-        graphNotif.setText(notif);
+        printNotif.setText(notif);
     }
 
-//    private void watchTheDate(SimpleDateFormat start, SimpleDateFormat end) {}
     /**
      * Does magic when the mouse hovers over a pie slice
      */
@@ -460,6 +456,7 @@ public class LuggageGraphController extends BaseController implements Initializa
     /**
      * Closes current view.
      */
+    @FXML
     private void viewClose() {
         Stage cancelStage = (Stage) viewClose.getScene().getWindow();
         StageHelper.closeStage(cancelStage);

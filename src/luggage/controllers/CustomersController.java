@@ -34,6 +34,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -47,7 +48,6 @@ import luggage.MainActivity;
 import luggage.database.models.CustomerModel;
 import luggage.database.models.InsurerModel;
 import luggage.database.models.Model;
-import luggage.database.models.UserModel;
 import luggage.helpers.StageHelper;
 import org.controlsfx.control.action.Action;
 import org.controlsfx.dialog.Dialog;
@@ -70,9 +70,6 @@ public class CustomersController extends BaseController implements Initializable
      * LIST ELEMENTS
      */
     @FXML
-    private Button listHelp;
-
-    @FXML
     private TableView listTableView;
 
     @FXML
@@ -88,19 +85,25 @@ public class CustomersController extends BaseController implements Initializable
     private TableColumn listTableViewEmail;
 
     @FXML
-    private TextField listSearchField;
+    private Button listEdit;
+
+    @FXML
+    private Button listHelp;
 
     @FXML
     private Button listNew;
 
     @FXML
-    private Button listEdit;
+    private Button listRemove;
 
     @FXML
     private Button listView;
 
     @FXML
-    private Button listRemove;
+    private Label printNotif;
+
+    @FXML
+    private TextField listSearchField;
 
     /**
      * NEW ELEMENTS
@@ -202,6 +205,12 @@ public class CustomersController extends BaseController implements Initializable
     private Button customerOverview;
 
     @FXML
+    private ChoiceBox viewGender;
+
+    @FXML
+    private ChoiceBox<InsurerModel> viewInsurerId;
+
+    @FXML
     private TextField viewFirstname;
 
     @FXML
@@ -209,12 +218,6 @@ public class CustomersController extends BaseController implements Initializable
 
     @FXML
     private TextField viewLastname;
-
-    @FXML
-    private ChoiceBox viewGender;
-
-    @FXML
-    private ChoiceBox<InsurerModel> viewInsurerId;
 
     @FXML
     private TextField viewGenderAsText;
@@ -252,38 +255,48 @@ public class CustomersController extends BaseController implements Initializable
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Platform.runLater(() -> {
-            Debug.print("CUSTOMERS CONTROLLER-----------------------------------------------------------------");
-
-            // List
-            if (listTableView != null) {
-                listResetTableView("", new String[0]);
-
-                listEdit.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
-                listRemove.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
-                listView.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
-                listTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-                listKeyActions();
+        MainActivity.viewCustomerParamCallback = new Runnable() {
+            @Override
+            public void run() {
+                customerDetails();
             }
+        };
 
-            // New
-            if (newGender != null && newInsurerId != null) {
-                setNewChoiceBoxes();
-                newKeyActions();
-            }
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                Debug.print("CUSTOMERS CONTROLLER-----------------------------------------------------------------");
 
-            // Edit
-            if (editGender != null && editInsurerId != null) {
-                setEditChoiceBoxes();
-                setEditFields();
-                editKeyActions();
-            }
+                // List
+                if (listTableView != null) {
+                    listResetTableView("", new String[0]);
 
-            // View
-            if (viewGender != null && viewInsurerId != null) {
-                setViewChoiceBoxes();
-                setViewFields();
-                viewKeyActions();
+                    listEdit.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
+                    listRemove.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
+                    listView.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
+                    listTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+                    listKeyActions();
+                }
+
+                // New
+                if (newGender != null && newInsurerId != null) {
+                    setNewChoiceBoxes();
+                    newKeyActions();
+                }
+
+                // Edit
+                if (editGender != null && editInsurerId != null) {
+                    setEditChoiceBoxes();
+                    setEditFields();
+                    editKeyActions();
+                }
+
+                // View
+                if (viewGender != null && viewInsurerId != null) {
+                    setViewChoiceBoxes();
+                    setViewFields();
+                    viewKeyActions();
+                }
             }
         });
     }
@@ -313,8 +326,10 @@ public class CustomersController extends BaseController implements Initializable
 //        viewInsurerId.getSelectionModel().select(selectedInsurer);
         viewInsurerAsText.setText(selectedInsurer.toString());
         viewGenderAsText.setText(viewGender.getValue().toString());
-        
-        MainActivity.searchedName = customer.getFullname();
+
+        MainActivity.customerIdHolder = Integer.toString(customer.getId());
+        MainActivity.searchTerm = customer.getFullname();
+        Debug.print("Customer name: \"" + MainActivity.searchTerm + "\"");
     }
 
     /**
@@ -430,6 +445,7 @@ public class CustomersController extends BaseController implements Initializable
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 listResetTableView("", new String[0]);
                 listSearchField.setText("");
+                clearNotif();
             }
         });
     }
@@ -729,7 +745,8 @@ public class CustomersController extends BaseController implements Initializable
     }
 
     /**
-     * Populates the list (TableView) with the provided parameters (query).
+     * Populates the list (TableView) with the provided query as parameter
+     * (searching the database).
      *
      * @param where
      * @param params
@@ -1098,18 +1115,58 @@ public class CustomersController extends BaseController implements Initializable
     }
 
     /**
+     * Shows the Customer's personal details. Receiver for vewCustomer(),
+     * LuggageController.
+     */
+    @FXML
+    public void customerDetails() {
+        Debug.print("CUSTOMERS CONTROLLER-----------------------------------------------------------------");
+        listResetTableView("id LIKE ?", Integer.toString(MainActivity.viewCustomerParam));
+        printNotif("Searched \"" + MainActivity.searchTerm + "\". Click here to reset or use the search. ");
+        MainActivity.viewCustomerParam = 0;
+        MainActivity.customerIdHolder = "";
+        MainActivity.searchTerm = "";
+        Debug.print("Reached end of customerDetails() method (CustomersController).");
+    }
+
+    /**
      * Shows the luggage items belonging to Customer that are known to the
-     * system.
+     * system. Initiator to customerOverview(), LuggageController.
      */
     @FXML
     public void viewCustomerLuggage() {
-        MainActivity.setViewCustomerOverviewParam(MainActivity.viewId);
-//        viewFirstname.getText() + " " + viewPrefix.getText() + " " + viewLastname.getText();
-        Debug.print("Customer name dump (viewFirstname viewPrefix viewLastname;): \"" + MainActivity.searchedName + "\"");
+        MainActivity.setViewCustomerOverviewParam(Integer.parseInt(MainActivity.customerIdHolder));
         viewClose();
 
         MainActivity.tabs.getSelectionModel().select(MainActivity.luggageTab);
         Debug.print("Reached end of viewCustomerLuggage() method (CustomersController).");
+    }
+
+    /**
+     * Prints given parameter as notification label.
+     *
+     * @param notif
+     */
+    @FXML
+    private void printNotif(String notif) {
+        printNotif.setText(notif);
+    }
+
+    /**
+     * Clears the notification label.
+     */
+    @FXML
+    private void clearNotif() {
+        printNotif.setText("");
+    }
+
+    /**
+     * Clears the notification label.
+     */
+    @FXML
+    private void clearSearch() {
+        listOnSearch();
+        clearNotif();
     }
 
     /**

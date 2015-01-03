@@ -52,7 +52,6 @@ import luggage.database.models.LocationModel;
 import luggage.database.models.LogModel;
 import luggage.database.models.LuggageModel;
 import luggage.database.models.Model;
-import luggage.database.models.UserModel;
 import luggage.helpers.StageHelper;
 import org.controlsfx.control.action.Action;
 import org.controlsfx.dialog.Dialog;
@@ -88,46 +87,46 @@ public class LuggageController extends BaseController implements Initializable {
     private TableColumn listTableViewDate;
 
     @FXML
-    private TextField listSearchField;
-
-    @FXML
-    private Button listNew;
-
-    @FXML
     private Button listEdit;
 
     @FXML
-    private Button listView;
-
-    @FXML
-    private Button listRemove;
+    private Button listExportToPdf;
 
     @FXML
     private Button listHelp;
 
     @FXML
-    private Button listExportToPdf;
+    private Button listNew;
+
+    @FXML
+    private Button listRemove;
+
+    @FXML
+    private Button listView;
+
+    @FXML
+    private TextField listSearchField;
 
     /**
      * NEW ELEMENTS
      */
     @FXML
-    private Button newSave;
+    private Button newCancel;
 
     @FXML
     private Button newReset;
 
     @FXML
-    private Button newCancel;
+    private Button newSave;
 
     @FXML
-    private TextField newTags;
-
-    @FXML
-    private ChoiceBox<LocationModel> newLocationId;
+    private DatePicker newDate;
 
     @FXML
     private ChoiceBox<CustomerModel> newCustomerId;
+
+    @FXML
+    private ChoiceBox<LocationModel> newLocationId;
 
     @FXML
     private ChoiceBox<String> newStatus;
@@ -136,28 +135,28 @@ public class LuggageController extends BaseController implements Initializable {
     private TextField newNotes;
 
     @FXML
-    private DatePicker newDate;
+    private TextField newTags;
 
     /**
      * EDIT ELEMENTS
      */
     @FXML
-    private Button editSave;
+    private Button editCancel;
 
     @FXML
     private Button editReset;
 
     @FXML
-    private Button editCancel;
+    private Button editSave;
 
     @FXML
-    private TextField editTags;
-
-    @FXML
-    private ChoiceBox<LocationModel> editLocationId;
+    private DatePicker editDate;
 
     @FXML
     private ChoiceBox<CustomerModel> editCustomerId;
+
+    @FXML
+    private ChoiceBox<LocationModel> editLocationId;
 
     @FXML
     private ChoiceBox<String> editStatus;
@@ -166,13 +165,16 @@ public class LuggageController extends BaseController implements Initializable {
     private TextField editNotes;
 
     @FXML
-    private DatePicker editDate;
+    private TextField editTags;
 
     /**
      * VIEW ELEMENTS
      */
     @FXML
     private Button viewClose;
+
+    @FXML
+    private Button viewCustomer;
 
     @FXML
     private Button customerOverview;
@@ -190,7 +192,7 @@ public class LuggageController extends BaseController implements Initializable {
     private DatePicker viewDate;
 
     @FXML
-    private Label luggageNotif;
+    private Label printNotif;
 
     @FXML
     private TextField viewStatusAsText;
@@ -206,9 +208,6 @@ public class LuggageController extends BaseController implements Initializable {
 
     @FXML
     private TextField viewTags;
-
-    @FXML
-    public String customerIdHolder;
 
     private ObservableList<LuggageModel> listData = FXCollections.observableArrayList();
 
@@ -424,10 +423,10 @@ public class LuggageController extends BaseController implements Initializable {
             params[1 + i] = "%" + keywords[i] + "%";
             query += " OR tags LIKE ?";
 
-            params[1 + i] = "%" + keywords[i] + "%";
+            params[2 + i] = "%" + keywords[i] + "%";
             query += " OR status LIKE ?";
 
-            params[2 + i] = "%" + keywords[i] + "%";
+            params[3 + i] = "%" + keywords[i] + "%";
             query += " OR datetime LIKE ?";
 
             firstColumn = false;
@@ -651,9 +650,10 @@ public class LuggageController extends BaseController implements Initializable {
             viewCustomerId.getSelectionModel().select(selectedCustomer);
             viewCustomerAsText.setText(selectedCustomer.toString());
             customerOverview.setDisable(false);
-            customerIdHolder = Integer.toString(selectedCustomer.getId());
-            MainActivity.searchedName = selectedCustomer.getFullname();
-            Debug.print("Viewing customer " + MainActivity.searchedName + " (" + customerIdHolder + ")");
+            viewCustomer.setDisable(false);
+            MainActivity.customerIdHolder = Integer.toString(selectedCustomer.getId());
+            MainActivity.searchTerm = selectedCustomer.getFullname();
+            Debug.print("Viewing customer " + MainActivity.searchTerm + " (" + MainActivity.customerIdHolder + ")");
         } catch (NullPointerException n) {
             printStackTrace(n);
         }
@@ -950,37 +950,47 @@ public class LuggageController extends BaseController implements Initializable {
     }
 
     /**
-     * Shows the Luggage items belonging to the Customer that are known to the
+     * Shows the Luggage items belonging to the Customer, that are known to the
      * system.
+     */
+    @FXML
+    public void customerOverviewViaLuggage() {
+        LuggageController luggageController = (LuggageController) StageHelper.callbackController;
+        luggageController.listResetTableView("customer_id LIKE ?", MainActivity.customerIdHolder);
+        Debug.print("MainActivity.searchTerm: " + MainActivity.searchTerm);
+        viewClose();
+        luggageController.printNotif("Searched \"" + MainActivity.searchTerm + "\". Click here to reset or use the search. ");
+        MainActivity.customerIdHolder = "";
+        MainActivity.searchTerm = "";
+        Debug.print("Reached end of customerOverviewViaLuggage() method (LuggageController).");
+    }
+
+    /**
+     * Shows the Luggage items belonging to the Customer, that are known to the
+     * system. Receiver for viewCustomerLuggage(), origin CustomersController.
      */
     @FXML
     public void customerOverview() {
         Debug.print("LUGGAGE CONTROLLER-----------------------------------------------------------------");
         listResetTableView("customer_id LIKE ?", Integer.toString(MainActivity.viewCustomerOverviewParam));
-        printNotif("Searched for " + MainActivity.searchedName + ". Click here to cancel search or use search box.");
+        printNotif("Searched \"" + MainActivity.searchTerm + "\". Click here to reset or use the search. ");
         MainActivity.viewCustomerOverviewParam = 0;
-        MainActivity.searchedName = "";
+        MainActivity.customerIdHolder = "";
+        MainActivity.searchTerm = "";
         Debug.print("Reached end of customerOverview() method (LuggageController).");
     }
 
-    @FXML
-    public void customerOverviewViaLuggage() {
-        LuggageController luggageController = (LuggageController) StageHelper.callbackController;
-        luggageController.listResetTableView("customer_id LIKE ?", customerIdHolder);
-        Debug.print("MainActivity.searchedName: " + MainActivity.searchedName);
-        viewClose();
-        luggageController.printNotif("Searched for " + MainActivity.searchedName + ". Click here to cancel search or use search box.");
-        customerIdHolder = "";
-        MainActivity.searchedName = "";
-        Debug.print("Reached end of customerOverviewViaLuggage() method (LuggageController).");
-    }
-
     /**
-     * Clears the notification label.
+     * Shows the Customer's personal details. Initiator to customerDetails(),
+     * CustomersController.
      */
     @FXML
-    private void clearNotif() {
-        luggageNotif.setText("");
+    public void viewCustomer() {
+        MainActivity.setViewCustomerParam(Integer.parseInt(MainActivity.customerIdHolder));
+        viewClose();
+
+        MainActivity.tabs.getSelectionModel().select(MainActivity.customersTab);
+        Debug.print("Reached end of viewCustomer() method (LuggageController).");
     }
 
     /**
@@ -990,9 +1000,20 @@ public class LuggageController extends BaseController implements Initializable {
      */
     @FXML
     private void printNotif(String notif) {
-        luggageNotif.setText(notif);
+        printNotif.setText(notif);
     }
-    
+
+    /**
+     * Clears the notification label.
+     */
+    @FXML
+    private void clearNotif() {
+        printNotif.setText("");
+    }
+
+    /**
+     * Clears the notification label.
+     */
     @FXML
     private void clearSearch() {
         listOnSearch();

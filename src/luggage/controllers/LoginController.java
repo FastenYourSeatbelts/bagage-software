@@ -29,6 +29,7 @@ import luggage.helpers.StageHelper;
 import luggage.security.Authentication;
 import luggage.security.Encryption;
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -40,6 +41,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import luggage.AppConfig;
 import luggage.Debug;
+import luggage.MainActivity;
 import luggage.database.models.LogModel;
 
 /**
@@ -53,36 +55,41 @@ import luggage.database.models.LogModel;
 public class LoginController extends BaseController implements Initializable {
 
     @FXML
-    private Button listHelp;
+    private Button exit;
 
     @FXML
-    private TextField username;
+    private Button help;
 
     @FXML
-    private PasswordField password;
+    private Button login;
 
     @FXML
-    private Label error;
+    private Button viewClose;
 
     @FXML
     private Label copyright;
 
     @FXML
-    private Button login;
-    
+    private Label error;
+
     @FXML
-    private Button viewClose;
-    
+    private PasswordField password;
+
     @FXML
-    private void exit() {
-        System.exit(0);
-    }
+    private TextField username;
 
     @FXML
     private void onKeyPress() {
         error.setText("");
     }
-    
+
+    @FXML
+    private void exit() {
+        System.out.println("User " + closed + " the application.");
+        System.exit(0);
+    }
+    private String closed = "exited";
+
     /**
      * Opens the login page's help view.
      */
@@ -110,6 +117,8 @@ public class LoginController extends BaseController implements Initializable {
             username.requestFocus();
             return;
         }
+        Date date = new Date();
+        Debug.print("User session start: " + MainActivity.dateFormatFull.format(date));
 
         Authentication.setCurrentUser(user);
         Stage loginStage = (Stage) username.getScene().getWindow();
@@ -126,14 +135,71 @@ public class LoginController extends BaseController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        System.out.println("");
+        if (MainActivity.firstStart) {
+            debugInfo();
+        }
+        osDependable();
         Debug.print("LOGIN CONTROLLER-----------------------------------------------------------------");
         copyright.setText(AppConfig.ApplicationCopyRight);
     }
 
     /**
+     * Posts readable system information.
+     */
+    public void debugInfo() {
+        Date date = new Date();
+
+        Debug.print("DEBUG INFO START-----------------------------------------------------------------"
+                + "\nApplication session start: " + MainActivity.dateFormatFull.format(date)
+                + "\nSystem properties:"
+                + "\njava.version:\t\t\t" + System.getProperty("java.version")
+                + "\njava.vendor:\t\t\t" + System.getProperty("java.vendor")
+                + "\njava.vendor.url:\t\t" + System.getProperty("java.vendor.url")
+                + "\njava.home:\t\t\t" + System.getProperty("java.home")
+                + "\njava.vm.specification.version:\t" + System.getProperty("java.vm.specification.version")
+                + "\njava.vm.specification.vendor:\t" + System.getProperty("java.vm.specification.vendor")
+                + "\njava.vm.specification.name:\t" + System.getProperty("java.vm.specification.name")
+                + "\njava.vm.version:\t\t" + System.getProperty("java.vm.version")
+                + "\njava.vm.vendor:\t\t\t" + System.getProperty("java.vm.vendor")
+                + "\njava.vm.name:\t\t\t" + System.getProperty("java.vm.name")
+                + "\njava.specification.version:\t" + System.getProperty("java.specification.version")
+                + "\njava.specification.vendor:\t" + System.getProperty("java.specification.vendor")
+                + "\njava.specification.name:\t" + System.getProperty("java.specification.name")
+                + "\njava.class.version:\t\t" + System.getProperty("java.class.version")
+                + "\njava.class.path:\t\t" + System.getProperty("java.class.path")
+                + "\njava.library.path:\t\t" + System.getProperty("java.library.path")
+                + "\njava.io.tmpdir:\t\t\t" + System.getProperty("java.io.tmpdir")
+                + "\njava.compiler:\t\t\t" + System.getProperty("java.compiler")
+                + "\njava.ext.dirs:\t\t\t" + System.getProperty("java.ext.dirs")
+                + "\nos.name:\t\t\t" + System.getProperty("os.name")
+                + "\nos.arch:\t\t\t" + System.getProperty("os.arch")
+                + "\nos.version:\t\t\t" + System.getProperty("os.version")
+                + "\nfile.separator:\t\t\t" + System.getProperty("file.separator")
+                + "\npath.separator:\t\t\t" + System.getProperty("path.separator")
+                + "\nuser.name:\t\t\t" + System.getProperty("user.name")
+                + "\nuser.home:\t\t\t" + System.getProperty("user.home")
+                + "\nuser.dir:\t\t\t" + System.getProperty("user.dir"));
+        MainActivity.firstStart = false;
+    }
+
+    /**
+     * Makes non-fundamental changes based on OS. For now merely sets native
+     * terminology.
+     */
+    private void osDependable() {
+        final String os = System.getProperty("os.name");
+        closed = "exited";
+        if (!os.contains("Windows")) {
+            closed = "quit";
+            exit.setText("Quit");
+        }
+    }
+
+    /**
      * Closes current view.
      */
-    public void viewClose() {
+    private void viewClose() {
         Stage addStage = (Stage) viewClose.getScene().getWindow();
         StageHelper.closeStage(addStage);
     }

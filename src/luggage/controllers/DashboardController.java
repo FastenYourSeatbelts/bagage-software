@@ -26,6 +26,7 @@ package luggage.controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -104,9 +105,17 @@ public class DashboardController extends BaseController implements Initializable
                     if (tabPermission.getId().equals("view_log")) {
                         MainActivity.logTab = newTab;
                     }
-                    
+
                     if (tabPermission.getId().equals("manage_luggage")) {
                         MainActivity.luggageTab = newTab;
+                    }
+
+                    if (tabPermission.getId().equals("manager_users")) {
+                        MainActivity.usersTab = newTab;
+                    }
+                    
+                    if (tabPermission.getId().equals("manage_customers")) {
+                        MainActivity.customersTab = newTab;
                     }
 
                     Platform.runLater(new Runnable() {
@@ -146,6 +155,9 @@ public class DashboardController extends BaseController implements Initializable
     @FXML
     private void logout(ActionEvent event) {
         Debug.logToDatabase(LogModel.TYPE_INFO, "User succesfully logged out.");
+        Date date = new Date();
+        Debug.print("User session end: " + MainActivity.dateFormatFull.format(date));
+
         Authentication.logout();
         Stage currentStage = (Stage) logout.getScene().getWindow();
         StageHelper.replaceStage(currentStage, "login", this);
