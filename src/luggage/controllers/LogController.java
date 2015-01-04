@@ -75,8 +75,8 @@ public class LogController extends BaseController implements Initializable {
     private Button listHelp;
 
     @FXML
-    private Button userViaLog;
-    
+    private Button viewUser;
+
     @FXML
     private Label printNotif;
 
@@ -99,8 +99,8 @@ public class LogController extends BaseController implements Initializable {
     @FXML
     public void listOnSearch() {
 
-        if (MainActivity.viewUserLogParam != 0) {
-            viewUserLog();
+        if (MainActivity.viewLogsParam != 0) {
+            viewLogs();
         } else {
             String[] keywords = listSearchField.getText().split("\\s+");
 
@@ -142,17 +142,17 @@ public class LogController extends BaseController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         Debug.print("LOG CONTROLLER-----------------------------------------------------------------");
 
-        MainActivity.viewUserLogParamCallback = new Runnable() {
+        MainActivity.viewLogsParamCallback = new Runnable() {
             @Override
             public void run() {
-                viewUserLog();
+                viewLogs();
             }
         };
 
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                userViaLog.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
+                viewUser.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
                 listOnSearch();
                 listTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
                 keyActions();
@@ -225,13 +225,17 @@ public class LogController extends BaseController implements Initializable {
 //            }
 //        });
     /**
-     * Shows the actions a given user has performed.
+     * Shows the actions the user has performed. Receiver for viewUserActions(),
+     * origin UsersController.
      */
     @FXML
-    public void viewUserLog() {
-        listResetTableView("user_id LIKE ?", Integer.toString(MainActivity.viewUserLogParam));
-        Debug.print("User id dump (viewUserLogParam): \"" + MainActivity.viewUserLogParam + "\"");
-        MainActivity.viewUserLogParam = 0;
+    public void viewLogs() {
+        Debug.print("LOG CONTROLLER-----------------------------------------------------------------"
+                + "\nInteger.toString(MainActivity.viewLogsParam): " + Integer.toString(MainActivity.viewLogsParam));
+        listResetTableView("user_id LIKE ?", Integer.toString(MainActivity.viewLogsParam));
+        printNotif("Searched \"" + MainActivity.searchTerm + "\". Click here to reset or use the search. ");
+        MainActivity.viewLogsParam = 0;
+        MainActivity.searchTerm = "";
         Debug.print("Reached end of viewUserLog() method (LogController).");
     }
 
@@ -239,29 +243,29 @@ public class LogController extends BaseController implements Initializable {
      * Shows the user details for the selected user.
      */
     @FXML
-    public void userViaLog() {
+    public void viewUser() {
 //        MainActivity.searchTerm = listTableView.getSelectionModel().getSelectedItem().getValue();
 
         int rowIndex = listTableView.getSelectionModel().getSelectedIndex();
         ObservableList rowList = (ObservableList) listTableViewEmployee.getCellValueFactory();
         int value = Integer.parseInt(rowList.get(0).toString());
-        MainActivity.setViewUserLogParam(value);
+        MainActivity.setViewLogsParam(value);
 
-        Debug.print("User id dump (viewUserLogParam): \"" + MainActivity.viewUserLogParam + "\"");
+        Debug.print("User id dump (viewUserLogParam): \"" + MainActivity.viewLogsParam + "\"");
         MainActivity.tabs.getSelectionModel().select(MainActivity.usersTab);
         Debug.print("Reached end of userViaLog() method (LogController).");
     }
 
     /**
      * Prints given parameter as notification label.
-
+     *
      * @param notif
      */
     @FXML
     private void printNotif(String notif) {
         printNotif.setText(notif);
     }
-    
+
     /**
      * Clears the notification label.
      */
@@ -269,7 +273,7 @@ public class LogController extends BaseController implements Initializable {
     private void clearNotif() {
         printNotif.setText("");
     }
-    
+
     /**
      * Clears the notification label.
      */

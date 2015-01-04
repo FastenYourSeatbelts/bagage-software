@@ -78,6 +78,8 @@ public class LoginController extends BaseController implements Initializable {
     @FXML
     private TextField username;
 
+    private String appSessionStart;
+    
     @FXML
     private void onKeyPress() {
         error.setText("");
@@ -86,6 +88,8 @@ public class LoginController extends BaseController implements Initializable {
     @FXML
     private void exit() {
         System.out.println("User " + closed + " the application.");
+        Date date = new Date();
+Debug.print("Application session ended. Session length: " + appSessionStart + " - " + MainActivity.dateFormatFull.format(date));
         System.exit(0);
     }
     private String closed = "exited";
@@ -118,7 +122,8 @@ public class LoginController extends BaseController implements Initializable {
             return;
         }
         Date date = new Date();
-        Debug.print("User session start: " + MainActivity.dateFormatFull.format(date));
+        MainActivity.userSessionStart = MainActivity.dateFormatFull.format(date);
+        Debug.print("User session start: " + MainActivity.userSessionStart);
 
         Authentication.setCurrentUser(user);
         Stage loginStage = (Stage) username.getScene().getWindow();
@@ -149,9 +154,9 @@ public class LoginController extends BaseController implements Initializable {
      */
     public void debugInfo() {
         Date date = new Date();
-
+        appSessionStart = MainActivity.dateFormatFull.format(date);
         Debug.print("DEBUG INFO START-----------------------------------------------------------------"
-                + "\nApplication session start: " + MainActivity.dateFormatFull.format(date)
+                + "\nApplication session start: " + appSessionStart
                 + "\nSystem properties:"
                 + "\njava.version:\t\t\t" + System.getProperty("java.version")
                 + "\njava.vendor:\t\t\t" + System.getProperty("java.vendor")

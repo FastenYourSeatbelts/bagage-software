@@ -58,7 +58,7 @@ public class MainActivity extends Application {
     /**
      *
      */
-    public static DateFormat dateFormatFull = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    public static DateFormat dateFormatFull = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss");
 
     /**
      *
@@ -78,17 +78,23 @@ public class MainActivity extends Application {
     /**
      *
      */
+    public static int customerIdHolder;
+
+    /**
+     *
+     */
+    public static String searchTerm;
+
+    public static String userSessionStart;
+    /**
+     *
+     */
     public static TabPane tabs;
 
     /**
      *
      */
     public static Tab customersTab;
-
-    /**
-     *
-     */
-    public static Tab logTab;
 
     /**
      *
@@ -103,17 +109,29 @@ public class MainActivity extends Application {
     /**
      *
      */
-    public static String searchTerm;
+    public static Tab logTab;
 
     /**
      *
      */
-    public static String customerIdHolder;
+    public static int viewLuggageParam;
 
     /**
      *
      */
-    public static int viewUserLogParam;
+    public static Runnable viewLuggageParamCallback;
+
+    /**
+     *
+     * @param luggage
+     */
+    public static void setViewLuggageParam(int luggage) {
+        viewLuggageParam = luggage;
+        Debug.print("Setting viewLuggageParam: " + viewLuggageParam);
+        if (viewLuggageParamCallback != null) {
+            viewLuggageParamCallback.run();
+        }
+    }
 
     /**
      *
@@ -123,33 +141,7 @@ public class MainActivity extends Application {
     /**
      *
      */
-    public static int viewCustomerOverviewParam;
-
-    /**
-     *
-     */
-    public static Runnable viewUserLogParamCallback;
-
-    /**
-     *
-     */
     public static Runnable viewCustomerParamCallback;
-
-    /**
-     *
-     */
-    public static Runnable viewCustomerOverviewParamCallback;
-
-    /**
-     *
-     * @param user
-     */
-    public static void setViewUserLogParam(int user) {
-        viewUserLogParam = user;
-        if (viewUserLogParamCallback != null) {
-            viewUserLogParamCallback.run();
-        }
-    }
 
     /**
      *
@@ -157,6 +149,7 @@ public class MainActivity extends Application {
      */
     public static void setViewCustomerParam(int customer) {
         viewCustomerParam = customer;
+        Debug.print("Setting viewCustomerParam: " + viewCustomerParam);
         if (viewCustomerParamCallback != null) {
             viewCustomerParamCallback.run();
         }
@@ -164,12 +157,43 @@ public class MainActivity extends Application {
 
     /**
      *
-     * @param customer
      */
-    public static void setViewCustomerOverviewParam(int customer) {
-        viewCustomerOverviewParam = customer;
-        if (viewCustomerOverviewParamCallback != null) {
-            viewCustomerOverviewParamCallback.run();
+    public static int viewLogsParam;
+
+    /**
+     *
+     */
+    public static Runnable viewLogsParamCallback;
+
+    /**
+     *
+     * @param user
+     */
+    public static void setViewLogsParam(int user) {
+        viewLogsParam = user;
+        if (viewLogsParamCallback != null) {
+            viewLogsParamCallback.run();
+        }
+    }
+
+    /**
+     *
+     */
+    public static int viewUserParam;
+
+    /**
+     *
+     */
+    public static Runnable viewUserParamCallback;
+
+    /**
+     *
+     * @param user
+     */
+    public static void setViewUserParam(int user) {
+        viewLogsParam = user;
+        if (viewLogsParamCallback != null) {
+            viewLogsParamCallback.run();
         }
     }
 

@@ -177,7 +177,7 @@ public class LuggageController extends BaseController implements Initializable {
     private Button viewCustomer;
 
     @FXML
-    private Button customerOverview;
+    private Button viewAllOfThisCustomersLuggage;
 
     @FXML
     private ChoiceBox<String> viewStatus;
@@ -224,10 +224,10 @@ public class LuggageController extends BaseController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        MainActivity.viewCustomerOverviewParamCallback = new Runnable() {
+        MainActivity.viewLuggageParamCallback = new Runnable() {
             @Override
             public void run() {
-                customerOverview();
+                viewCustomersLuggage();
             }
         };
 
@@ -640,7 +640,7 @@ public class LuggageController extends BaseController implements Initializable {
      * Populates the view fields with the selected Luggage item's data.
      */
     public void setViewFields() {
-        customerOverview.setDisable(true);
+        viewAllOfThisCustomersLuggage.setDisable(true);
         LuggageModel luggage = new LuggageModel(MainActivity.viewId);
 
         viewLocationId.getSelectionModel().select(selectedLocation);
@@ -649,11 +649,13 @@ public class LuggageController extends BaseController implements Initializable {
         try {
             viewCustomerId.getSelectionModel().select(selectedCustomer);
             viewCustomerAsText.setText(selectedCustomer.toString());
-            customerOverview.setDisable(false);
+            
+            viewAllOfThisCustomersLuggage.setDisable(false);
             viewCustomer.setDisable(false);
-            MainActivity.customerIdHolder = Integer.toString(selectedCustomer.getId());
+            
+            MainActivity.customerIdHolder = selectedCustomer.getId();
             MainActivity.searchTerm = selectedCustomer.getFullname();
-            Debug.print("Viewing customer " + MainActivity.searchTerm + " (" + MainActivity.customerIdHolder + ")");
+            Debug.print("LuggageController setting: " + MainActivity.searchTerm + " (" + MainActivity.customerIdHolder + ")");
         } catch (NullPointerException n) {
             printStackTrace(n);
         }
@@ -663,6 +665,79 @@ public class LuggageController extends BaseController implements Initializable {
 
         LocalDate date = LocalDate.parse(luggage.getDatetime());
         viewDate.setValue(date);
+    }
+
+    /**
+     * Cancels editing a Luggage item, does not change saved data.
+     */
+    public void editCancel() {
+        Stage addStage = (Stage) editCancel.getScene().getWindow();
+        StageHelper.closeStage(addStage);
+    }
+
+    /**
+     * Resets all fields in the edit view.
+     */
+    public void editReset() {
+        editTags.setText("");
+        editNotes.setText("");
+        editLocationId.setValue(null);
+        editCustomerId.setValue(null);
+        editStatus.setValue(null);
+        editDate.setValue(null);
+    }
+
+    /**
+     * Handles saving changes to an existing Luggage item. Checks if all
+     * necessary fields are filled and if so, writes to database, overwriting
+     * existing data for selected Customer.
+     */
+    public void editSave() {
+        if (editLocationId.getSelectionModel().getSelectedItem() == null) {
+            Dialogs.create()
+                    .owner((Stage) editLocationId.getScene().getWindow())
+                    .title("Warning")
+                    .masthead("Selection error")
+                    .message("Please select the location of the luggage or where to ship it to.")
+                    .showWarning();
+            return;
+        } else if (editStatus.getSelectionModel().getSelectedItem() == null) {
+            Dialogs.create()
+                    .owner((Stage) editStatus.getScene().getWindow())
+                    .title("Warning")
+                    .masthead("Selection error")
+                    .message("Please select the status for the luggage item.")
+                    .showWarning();
+            return;
+        } else if (editDate.getValue() == null) {
+            Dialogs.create()
+                    .owner((Stage) editDate.getScene().getWindow())
+                    .title("Warning")
+                    .masthead("Date format error")
+                    .message("Please enter or select the correct date for the luggage item.")
+                    .showWarning();
+            return;
+        }
+
+        LuggageModel luggage = new LuggageModel(MainActivity.editId);
+        try {
+            luggage.setCustomerId(Integer.toString(editCustomerId.getSelectionModel().getSelectedItem().getId()));
+        } catch (NullPointerException n) {
+            printStackTrace(n);
+        }
+        luggage.setLocationId(Integer.toString(editLocationId.getSelectionModel().getSelectedItem().getId()));
+
+        luggage.setDatetime(editDate.getValue() + " 00:00:00");
+
+        luggage.setTags(editTags.getText());
+        luggage.setNotes(editNotes.getText());
+        luggage.setStatus(editStatus.getValue());
+        luggage.save();
+
+        LuggageController luggageController = (LuggageController) StageHelper.callbackController;
+        luggageController.listOnSearch();
+
+        editCancel();
     }
 
     /**
@@ -862,11 +937,11 @@ public class LuggageController extends BaseController implements Initializable {
                 viewClose();
             }
         });
-        customerOverview.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+        viewAllOfThisCustomersLuggage.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
             if (evt.getCode().equals(KeyCode.ESCAPE)) {
                 viewClose();
             } else if (evt.getCode().equals(KeyCode.ENTER)) {
-                customerOverview();
+                viewCustomersLuggage();
             }
         });
         viewClose.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
@@ -877,116 +952,46 @@ public class LuggageController extends BaseController implements Initializable {
     }
 
     /**
-     * Cancels editing a Luggage item, does not change saved data.
-     */
-    public void editCancel() {
-        Stage addStage = (Stage) editCancel.getScene().getWindow();
-        StageHelper.closeStage(addStage);
-    }
-
-    /**
-     * Resets all fields in the edit view.
-     */
-    public void editReset() {
-        editTags.setText("");
-        editNotes.setText("");
-        editLocationId.setValue(null);
-        editCustomerId.setValue(null);
-        editStatus.setValue(null);
-        editDate.setValue(null);
-    }
-
-    /**
-     * Handles saving changes to an existing Luggage item. Checks if all
-     * necessary fields are filled and if so, writes to database, overwriting
-     * existing data for selected Customer.
-     */
-    public void editSave() {
-        if (editLocationId.getSelectionModel().getSelectedItem() == null) {
-            Dialogs.create()
-                    .owner((Stage) editLocationId.getScene().getWindow())
-                    .title("Warning")
-                    .masthead("Selection error")
-                    .message("Please select the location of the luggage or where to ship it to.")
-                    .showWarning();
-            return;
-        } else if (editStatus.getSelectionModel().getSelectedItem() == null) {
-            Dialogs.create()
-                    .owner((Stage) editStatus.getScene().getWindow())
-                    .title("Warning")
-                    .masthead("Selection error")
-                    .message("Please select the status for the luggage item.")
-                    .showWarning();
-            return;
-        } else if (editDate.getValue() == null) {
-            Dialogs.create()
-                    .owner((Stage) editDate.getScene().getWindow())
-                    .title("Warning")
-                    .masthead("Date format error")
-                    .message("Please enter or select the correct date for the luggage item.")
-                    .showWarning();
-            return;
-        }
-
-        LuggageModel luggage = new LuggageModel(MainActivity.editId);
-        try {
-            luggage.setCustomerId(Integer.toString(editCustomerId.getSelectionModel().getSelectedItem().getId()));
-        } catch (NullPointerException n) {
-            printStackTrace(n);
-        }
-        luggage.setLocationId(Integer.toString(editLocationId.getSelectionModel().getSelectedItem().getId()));
-
-        luggage.setDatetime(editDate.getValue() + " 00:00:00");
-
-        luggage.setTags(editTags.getText());
-        luggage.setNotes(editNotes.getText());
-        luggage.setStatus(editStatus.getValue());
-        luggage.save();
-
-        LuggageController luggageController = (LuggageController) StageHelper.callbackController;
-        luggageController.listOnSearch();
-
-        editCancel();
-    }
-
-    /**
-     * Shows the Luggage items belonging to the Customer, that are known to the
+     * Shows all Luggage items belonging to the Customer, that are known to the
      * system.
      */
     @FXML
-    public void customerOverviewViaLuggage() {
+    public void viewAllOfThisCustomersLuggage() {
         LuggageController luggageController = (LuggageController) StageHelper.callbackController;
-        luggageController.listResetTableView("customer_id LIKE ?", MainActivity.customerIdHolder);
-        Debug.print("MainActivity.searchTerm: " + MainActivity.searchTerm);
+        luggageController.listResetTableView("customer_id LIKE ?", Integer.toString(MainActivity.customerIdHolder));
+//        Debug.print("MainActivity.searchTerm: " + MainActivity.searchTerm);
+        MainActivity.customerIdHolder = 0;
         viewClose();
         luggageController.printNotif("Searched \"" + MainActivity.searchTerm + "\". Click here to reset or use the search. ");
-        MainActivity.customerIdHolder = "";
         MainActivity.searchTerm = "";
-        Debug.print("Reached end of customerOverviewViaLuggage() method (LuggageController).");
+        Debug.print("Reached end of viewAllOfThisCustomersLuggage() method (LuggageController).");
     }
 
     /**
      * Shows the Luggage items belonging to the Customer, that are known to the
-     * system. Receiver for viewCustomerLuggage(), origin CustomersController.
+     * system. Receiver for viewCustomersLuggage(), origin CustomersController.
      */
     @FXML
-    public void customerOverview() {
-        Debug.print("LUGGAGE CONTROLLER-----------------------------------------------------------------");
-        listResetTableView("customer_id LIKE ?", Integer.toString(MainActivity.viewCustomerOverviewParam));
+    public void viewCustomersLuggage() {
+        Debug.print("LUGGAGE CONTROLLER-----------------------------------------------------------------"
+                + "\nInteger.toString(MainActivity.viewId): " + Integer.toString(MainActivity.viewId));
+//                + "\nInteger.toString(MainActivity.viewLuggageParam): " + Integer.toString(MainActivity.viewLuggageParam));
+//        listResetTableView("customer_id LIKE ?", Integer.toString(MainActivity.viewLuggageParam));
+        listResetTableView("customer_id LIKE ?", Integer.toString(MainActivity.viewId));
         printNotif("Searched \"" + MainActivity.searchTerm + "\". Click here to reset or use the search. ");
-        MainActivity.viewCustomerOverviewParam = 0;
-        MainActivity.customerIdHolder = "";
+//        MainActivity.viewLuggageParam = 0;
         MainActivity.searchTerm = "";
-        Debug.print("Reached end of customerOverview() method (LuggageController).");
+        Debug.print("Reached end of viewCustomersLuggage() method (LuggageController).");
     }
 
     /**
-     * Shows the Customer's personal details. Initiator to customerDetails(),
-     * CustomersController.
+     * Shows the Customer's personal details. Initiator to viewCustomer(),
+     * target CustomersController.
      */
     @FXML
     public void viewCustomer() {
-        MainActivity.setViewCustomerParam(Integer.parseInt(MainActivity.customerIdHolder));
+        MainActivity.setViewCustomerParam(MainActivity.customerIdHolder);
+        MainActivity.customerIdHolder = 0;
         viewClose();
 
         MainActivity.tabs.getSelectionModel().select(MainActivity.customersTab);

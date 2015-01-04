@@ -43,8 +43,8 @@
                     <children>
                         <Button fx:id="viewClose" alignment="CENTER" cancelButton="true" defaultButton="true" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#viewClose" prefWidth="70.0" text="Close" AnchorPane.rightAnchor="0.0">
                         </Button>
-                  <Button fx:id="customerOverview" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#customerOverviewViaLuggage" prefWidth="140.0" text="Customer overview" AnchorPane.rightAnchor="84.0" />
-                  <Button fx:id="viewCustomer" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#viewCustomer" prefWidth="140.0" text="View customer" AnchorPane.rightAnchor="238.0" />
+                  <Button fx:id="viewAllOfThisCustomersLuggage" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#viewAllOfThisCustomersLuggage" prefWidth="140.0" text="Customer's luggage" AnchorPane.rightAnchor="84.0" />
+                  <Button fx:id="viewCustomer" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#viewCustomer" prefWidth="112.0" text="View customer" AnchorPane.rightAnchor="238.0" />
                     </children>
                 </AnchorPane>
                 <Label alignment="CENTER_RIGHT" text="Location" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">

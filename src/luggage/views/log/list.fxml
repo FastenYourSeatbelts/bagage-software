@@ -33,7 +33,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Button fx:id="userViaLog" layoutX="7.0" layoutY="466.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#userViaLog" prefHeight="26.0" prefWidth="84.0" text="View User" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0">
+      <Button fx:id="viewUser" layoutX="7.0" layoutY="466.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#viewUser" prefHeight="26.0" prefWidth="84.0" text="View User" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0">
          <font>
             <Font size="12.0" />
          </font>

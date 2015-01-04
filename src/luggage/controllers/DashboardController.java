@@ -156,7 +156,7 @@ public class DashboardController extends BaseController implements Initializable
     private void logout(ActionEvent event) {
         Debug.logToDatabase(LogModel.TYPE_INFO, "User succesfully logged out.");
         Date date = new Date();
-        Debug.print("User session end: " + MainActivity.dateFormatFull.format(date));
+        Debug.print("User session ended. Session length: " + MainActivity.userSessionStart + " - " + MainActivity.dateFormatFull.format(date));
 
         Authentication.logout();
         Stage currentStage = (Stage) logout.getScene().getWindow();

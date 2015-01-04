@@ -70,12 +70,13 @@ import luggage.helpers.StageHelper;
  * @author ITopia IS102-5
  */
 public class LuggageGraphController extends BaseController implements Initializable {
+
     @FXML
     private PieChart piechart;
 
     @FXML
     private Button listHelp;
-    
+
     @FXML
     public Button saveAsPng;
 
@@ -132,7 +133,7 @@ public class LuggageGraphController extends BaseController implements Initializa
      */
     @FXML
     public void updateChart() {
-
+        saveAsPng.setDisable(true);
         String dateQuery = "";
 
         if (this.start.getValue() != null && this.end.getValue() != null) {
@@ -154,11 +155,13 @@ public class LuggageGraphController extends BaseController implements Initializa
             Debug.print("For some reason, either start or end is null. Method will continue.");
         } else if (start.getValue().compareTo(end.getValue()) > 0) {
             printNotif("The start date may not occur after the end date!");
+            saveAsPng.setDisable(true);
             Debug.print("User is an idiot: searched from " + start.getValue() + " to " + end.getValue());
             return;
         } else {
             Debug.print("Date is not null. Start: " + start.getValue() + " & End: " + end.getValue());
         }
+        saveAsPng.setDisable(false);
 //        } catch (NullPointerException n) {
 //            Logger.getLogger(LuggageGraphController.class.getName()).log(Level.SEVERE, null, n);
 //        }
@@ -374,7 +377,7 @@ public class LuggageGraphController extends BaseController implements Initializa
                 piechart.getStylesheets().add("/resources/stylesheets/title" + returnCssFilePath(lastSlice) + ".css");
                 piechart.setTitle("The share of " + returnLabel(lastSlice) + " is approximately " + (Math.round(dValue) / 100) + "%.");
                 data.getNode().setEffect(shadow);
-                
+
                 effectName = data.getNode().getEffect().toString().substring(20, data.getNode().getEffect().toString().length() - 9);
                 Debug.print("Locally loaded CSS files after mouse enter: " + piechart.getStylesheets().toString() + "\nMouse entered '" + lastSlice + "'. Effect '" + effectName + "' enabled.");
             });

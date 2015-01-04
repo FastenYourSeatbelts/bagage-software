@@ -202,7 +202,7 @@ public class CustomersController extends BaseController implements Initializable
     private Button viewClose;
 
     @FXML
-    private Button customerOverview;
+    private Button viewCustomersLuggage;
 
     @FXML
     private ChoiceBox viewGender;
@@ -258,7 +258,7 @@ public class CustomersController extends BaseController implements Initializable
         MainActivity.viewCustomerParamCallback = new Runnable() {
             @Override
             public void run() {
-                customerDetails();
+                viewCustomer();
             }
         };
 
@@ -327,9 +327,9 @@ public class CustomersController extends BaseController implements Initializable
         viewInsurerAsText.setText(selectedInsurer.toString());
         viewGenderAsText.setText(viewGender.getValue().toString());
 
-        MainActivity.customerIdHolder = Integer.toString(customer.getId());
+        MainActivity.customerIdHolder = customer.getId();
         MainActivity.searchTerm = customer.getFullname();
-        Debug.print("Customer name: \"" + MainActivity.searchTerm + "\"");
+        Debug.print("CustomersController setting: " + MainActivity.searchTerm + " (" + MainActivity.customerIdHolder + ")");
     }
 
     /**
@@ -422,326 +422,6 @@ public class CustomersController extends BaseController implements Initializable
         }
 
         newInsurerId.setItems(insurerData);
-    }
-
-    /**
-     * Creates the (mouse, keyboard, etc.) event filters for the list view.
-     */
-    public void listKeyActions() {
-        listTableView.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.E)) {
-                listEdit();
-            } else if (b.getCode().equals(KeyCode.H)) {
-                listHelp();
-            } else if (b.getCode().equals(KeyCode.N)) {
-                listNew();
-            } else if (b.getCode().equals(KeyCode.R)) {
-                listRemove();
-            } else if (b.getCode().equals(KeyCode.V)) {
-                listView();
-            }
-        });
-        listSearchField.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                listResetTableView("", new String[0]);
-                listSearchField.setText("");
-                clearNotif();
-            }
-        });
-    }
-
-    /**
-     * Creates the (mouse, keyboard, etc.) event filters for the new view.
-     */
-    public void newKeyActions() {
-        newFirstname.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                newCancel();
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                newSave();
-            }
-        });
-        newPrefix.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                newCancel();
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                newSave();
-            }
-        });
-        newLastname.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                newCancel();
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                newSave();
-            }
-        });
-        newGender.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                newCancel();
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                newGender.show();
-            }
-        });
-        newInsurerId.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                newCancel();
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                newInsurerId.show();
-            }
-        });
-        newAddress.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                newCancel();
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                newSave();
-            }
-        });
-        newPostalcode.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                newCancel();
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                newSave();
-            }
-        });
-        newResidence.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                newCancel();
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                newSave();
-            }
-        });
-        newEmail.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                newCancel();
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                newSave();
-            }
-        });
-        newTelephone.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                newCancel();
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                newSave();
-            }
-        });
-        newMobile.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                newCancel();
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                newSave();
-            }
-        });
-        newSave.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                newCancel();
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                newSave();
-            }
-        });
-        newReset.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                newCancel();
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                newReset();
-            }
-        });
-        newCancel.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
-                newCancel();
-            }
-        });
-    }
-
-    /**
-     * Creates the (mouse, keyboard, etc.) event filters for the edit view.
-     */
-    public void editKeyActions() {
-        editFirstname.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
-            if (evt.getCode().equals(KeyCode.ESCAPE)) {
-                editCancel();
-            } else if (evt.getCode().equals(KeyCode.ENTER)) {
-                editSave();
-            }
-        });
-        editPrefix.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
-            if (evt.getCode().equals(KeyCode.ESCAPE)) {
-                editCancel();
-            } else if (evt.getCode().equals(KeyCode.ENTER)) {
-                editSave();
-            }
-        });
-        editLastname.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
-            if (evt.getCode().equals(KeyCode.ESCAPE)) {
-                editCancel();
-            } else if (evt.getCode().equals(KeyCode.ENTER)) {
-                editSave();
-            }
-        });
-        editGender.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                editCancel();
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                editGender.show();
-            }
-        });
-        editInsurerId.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
-            if (evt.getCode().equals(KeyCode.ESCAPE)) {
-                editCancel();
-            } else if (evt.getCode().equals(KeyCode.ENTER)) {
-                editInsurerId.show();
-            }
-        });
-        editAddress.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
-            if (evt.getCode().equals(KeyCode.ESCAPE)) {
-                editCancel();
-            } else if (evt.getCode().equals(KeyCode.ENTER)) {
-                editSave();
-            }
-        });
-        editPostalcode.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
-            if (evt.getCode().equals(KeyCode.ESCAPE)) {
-                editCancel();
-            } else if (evt.getCode().equals(KeyCode.ENTER)) {
-                editSave();
-            }
-        });
-        editResidence.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
-            if (evt.getCode().equals(KeyCode.ESCAPE)) {
-                editCancel();
-            } else if (evt.getCode().equals(KeyCode.ENTER)) {
-                editSave();
-            }
-        });
-        editEmail.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
-            if (evt.getCode().equals(KeyCode.ESCAPE)) {
-                editCancel();
-            } else if (evt.getCode().equals(KeyCode.ENTER)) {
-                editSave();
-            }
-        });
-        editTelephone.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
-            if (evt.getCode().equals(KeyCode.ESCAPE)) {
-                editCancel();
-            } else if (evt.getCode().equals(KeyCode.ENTER)) {
-                editSave();
-            }
-        });
-        editMobile.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
-            if (evt.getCode().equals(KeyCode.ESCAPE)) {
-                editCancel();
-            } else if (evt.getCode().equals(KeyCode.ENTER)) {
-                editSave();
-            }
-        });
-        editSave.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
-            if (evt.getCode().equals(KeyCode.ESCAPE)) {
-                editCancel();
-            } else if (evt.getCode().equals(KeyCode.ENTER)) {
-                editSave();
-            }
-        });
-        editReset.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
-            if (evt.getCode().equals(KeyCode.ESCAPE)) {
-                editCancel();
-            } else if (evt.getCode().equals(KeyCode.ENTER)) {
-                editReset();
-            }
-        });
-        editCancel.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
-            if (evt.getCode().equals(KeyCode.ESCAPE) || evt.getCode().equals(KeyCode.ENTER)) {
-                editCancel();
-            }
-        });
-    }
-
-    /**
-     * Creates the (mouse, keyboard, etc.) event filters for the view page.
-     */
-    public void viewKeyActions() {
-        viewFirstname.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                viewClose();
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                viewCustomerLuggage();
-            }
-        });
-        viewPrefix.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                viewClose();
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                viewCustomerLuggage();
-            }
-        });
-        viewLastname.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                viewClose();
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                viewCustomerLuggage();
-            }
-        });
-        viewPrefix.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                viewClose();
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                viewCustomerLuggage();
-            }
-        });
-        viewGenderAsText.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                viewClose();
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                viewCustomerLuggage();
-            }
-        });
-        viewInsurerAsText.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                viewClose();
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                viewCustomerLuggage();
-            }
-        });
-        viewPostalcode.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                viewClose();
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                viewCustomerLuggage();
-            }
-        });
-        viewResidence.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                viewClose();
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                viewCustomerLuggage();
-            }
-        });
-        viewEmail.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                viewClose();
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                viewCustomerLuggage();
-            }
-        });
-        viewTelephone.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                viewClose();
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                viewCustomerLuggage();
-            }
-        });
-        viewMobile.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                viewClose();
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                viewCustomerLuggage();
-            }
-        });
-        viewClose.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                viewClose();
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                viewCustomerLuggage();
-            }
-        });
     }
 
     /**
@@ -1115,31 +795,353 @@ public class CustomersController extends BaseController implements Initializable
     }
 
     /**
-     * Shows the Customer's personal details. Receiver for vewCustomer(),
-     * LuggageController.
+     * Creates the (mouse, keyboard, etc.) event filters for the list view.
      */
-    @FXML
-    public void customerDetails() {
-        Debug.print("CUSTOMERS CONTROLLER-----------------------------------------------------------------");
-        listResetTableView("id LIKE ?", Integer.toString(MainActivity.viewCustomerParam));
-        printNotif("Searched \"" + MainActivity.searchTerm + "\". Click here to reset or use the search. ");
-        MainActivity.viewCustomerParam = 0;
-        MainActivity.customerIdHolder = "";
-        MainActivity.searchTerm = "";
-        Debug.print("Reached end of customerDetails() method (CustomersController).");
+    public void listKeyActions() {
+        listTableView.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.E)) {
+                listEdit();
+            } else if (b.getCode().equals(KeyCode.H)) {
+                listHelp();
+            } else if (b.getCode().equals(KeyCode.N)) {
+                listNew();
+            } else if (b.getCode().equals(KeyCode.R)) {
+                listRemove();
+            } else if (b.getCode().equals(KeyCode.V)) {
+                listView();
+            }
+        });
+        listSearchField.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                listResetTableView("", new String[0]);
+                listSearchField.setText("");
+                clearNotif();
+            }
+        });
     }
 
     /**
-     * Shows the luggage items belonging to Customer that are known to the
-     * system. Initiator to customerOverview(), LuggageController.
+     * Creates the (mouse, keyboard, etc.) event filters for the new view.
+     */
+    public void newKeyActions() {
+        newFirstname.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                newSave();
+            }
+        });
+        newPrefix.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                newSave();
+            }
+        });
+        newLastname.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                newSave();
+            }
+        });
+        newGender.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                newGender.show();
+            }
+        });
+        newInsurerId.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                newInsurerId.show();
+            }
+        });
+        newAddress.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                newSave();
+            }
+        });
+        newPostalcode.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                newSave();
+            }
+        });
+        newResidence.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                newSave();
+            }
+        });
+        newEmail.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                newSave();
+            }
+        });
+        newTelephone.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                newSave();
+            }
+        });
+        newMobile.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                newSave();
+            }
+        });
+        newSave.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                newSave();
+            }
+        });
+        newReset.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                newReset();
+            }
+        });
+        newCancel.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+                newCancel();
+            }
+        });
+    }
+
+    /**
+     * Creates the (mouse, keyboard, etc.) event filters for the edit view.
+     */
+    public void editKeyActions() {
+        editFirstname.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                editCancel();
+            } else if (evt.getCode().equals(KeyCode.ENTER)) {
+                editSave();
+            }
+        });
+        editPrefix.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                editCancel();
+            } else if (evt.getCode().equals(KeyCode.ENTER)) {
+                editSave();
+            }
+        });
+        editLastname.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                editCancel();
+            } else if (evt.getCode().equals(KeyCode.ENTER)) {
+                editSave();
+            }
+        });
+        editGender.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                editCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                editGender.show();
+            }
+        });
+        editInsurerId.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                editCancel();
+            } else if (evt.getCode().equals(KeyCode.ENTER)) {
+                editInsurerId.show();
+            }
+        });
+        editAddress.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                editCancel();
+            } else if (evt.getCode().equals(KeyCode.ENTER)) {
+                editSave();
+            }
+        });
+        editPostalcode.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                editCancel();
+            } else if (evt.getCode().equals(KeyCode.ENTER)) {
+                editSave();
+            }
+        });
+        editResidence.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                editCancel();
+            } else if (evt.getCode().equals(KeyCode.ENTER)) {
+                editSave();
+            }
+        });
+        editEmail.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                editCancel();
+            } else if (evt.getCode().equals(KeyCode.ENTER)) {
+                editSave();
+            }
+        });
+        editTelephone.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                editCancel();
+            } else if (evt.getCode().equals(KeyCode.ENTER)) {
+                editSave();
+            }
+        });
+        editMobile.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                editCancel();
+            } else if (evt.getCode().equals(KeyCode.ENTER)) {
+                editSave();
+            }
+        });
+        editSave.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                editCancel();
+            } else if (evt.getCode().equals(KeyCode.ENTER)) {
+                editSave();
+            }
+        });
+        editReset.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                editCancel();
+            } else if (evt.getCode().equals(KeyCode.ENTER)) {
+                editReset();
+            }
+        });
+        editCancel.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE) || evt.getCode().equals(KeyCode.ENTER)) {
+                editCancel();
+            }
+        });
+    }
+
+    /**
+     * Creates the (mouse, keyboard, etc.) event filters for the view page.
+     */
+    public void viewKeyActions() {
+        viewFirstname.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                viewClose();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                viewCustomersLuggage();
+            }
+        });
+        viewPrefix.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                viewClose();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                viewCustomersLuggage();
+            }
+        });
+        viewLastname.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                viewClose();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                viewCustomersLuggage();
+            }
+        });
+        viewPrefix.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                viewClose();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                viewCustomersLuggage();
+            }
+        });
+        viewGenderAsText.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                viewClose();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                viewCustomersLuggage();
+            }
+        });
+        viewInsurerAsText.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                viewClose();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                viewCustomersLuggage();
+            }
+        });
+        viewPostalcode.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                viewClose();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                viewCustomersLuggage();
+            }
+        });
+        viewResidence.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                viewClose();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                viewCustomersLuggage();
+            }
+        });
+        viewEmail.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                viewClose();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                viewCustomersLuggage();
+            }
+        });
+        viewTelephone.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                viewClose();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                viewCustomersLuggage();
+            }
+        });
+        viewMobile.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                viewClose();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                viewCustomersLuggage();
+            }
+        });
+        viewClose.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                viewClose();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                viewCustomersLuggage();
+            }
+        });
+    }
+
+    /**
+     * Shows the Customer's personal details. Receiver for viewCustomer(),
+     * origin LuggageController.
      */
     @FXML
-    public void viewCustomerLuggage() {
-        MainActivity.setViewCustomerOverviewParam(Integer.parseInt(MainActivity.customerIdHolder));
+    public void viewCustomer() {
+        Debug.print("CUSTOMERS CONTROLLER-----------------------------------------------------------------"
+                + "\nInteger.toString(MainActivity.viewCustomerParam): " + Integer.toString(MainActivity.viewCustomerParam));
+        listResetTableView("id LIKE ?", Integer.toString(MainActivity.viewCustomerParam));
+        printNotif("Searched \"" + MainActivity.searchTerm + "\". Click here to reset or use the search. ");
+//        MainActivity.viewCustomerParam = 0;
+        MainActivity.searchTerm = "";
+        Debug.print("Reached end of viewCustomer() method (CustomersController).");
+    }
+
+    /**
+     * Shows the luggage items belonging to Customer, that are known to the
+     * system. Initiator to viewCustomersLuggage(), target LuggageController.
+     */
+    @FXML
+    public void viewCustomersLuggage() {
+//        MainActivity.setViewLuggageParam(MainActivity.customerIdHolder);
+        MainActivity.setViewLuggageParam(MainActivity.viewId);
+//        MainActivity.customerIdHolder = 0;
         viewClose();
 
         MainActivity.tabs.getSelectionModel().select(MainActivity.luggageTab);
-        Debug.print("Reached end of viewCustomerLuggage() method (CustomersController).");
+        Debug.print("Reached end of viewCustomersLuggage() method (CustomersController).");
     }
 
     /**

@@ -50,7 +50,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import luggage.Debug;
 import luggage.MainActivity;
-import luggage.database.DatabaseHelper;
 import static luggage.database.DatabaseHelper.oConnection;
 import luggage.database.models.LocationModel;
 import luggage.database.models.UserModel;
@@ -106,7 +105,7 @@ public class UsersController extends BaseController implements Initializable {
 
     @FXML
     private Button listRemove;
-    
+
     @FXML
     private Label printNotif;
 
@@ -714,91 +713,91 @@ public class UsersController extends BaseController implements Initializable {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 viewClose();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
-                viewUserActions();
+                viewLogs();
             }
         });
         viewFirstname.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 viewClose();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
-                viewUserActions();
+                viewLogs();
             }
         });
         viewPrefix.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 viewClose();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
-                viewUserActions();
+                viewLogs();
             }
         });
         viewLastname.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 viewClose();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
-                viewUserActions();
+                viewLogs();
             }
         });
         viewAddress.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 viewClose();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
-                viewUserActions();
+                viewLogs();
             }
         });
         viewPostalcode.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 viewClose();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
-                viewUserActions();
+                viewLogs();
             }
         });
         viewResidence.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 viewClose();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
-                viewUserActions();
+                viewLogs();
             }
         });
         viewTelephone.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 viewClose();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
-                viewUserActions();
+                viewLogs();
             }
         });
         viewMobile.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 viewClose();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
-                viewUserActions();
+                viewLogs();
             }
         });
         viewGenderAsText.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 viewClose();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
-                viewUserActions();
+                viewLogs();
             }
         });
         viewRoleAsText.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 viewClose();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
-                viewUserActions();
+                viewLogs();
             }
         });
         viewWorkplaceAsText.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 viewClose();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
-                viewUserActions();
+                viewLogs();
             }
         });
         viewClose.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 viewClose();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
-                viewUserActions();
+                viewLogs();
             }
         });
     }
@@ -842,7 +841,7 @@ public class UsersController extends BaseController implements Initializable {
     /**
      * Populates the list (TableView) with the provided query as parameter
      * (searching the database).
-     * 
+     *
      * @param where
      * @param params
      */
@@ -1100,7 +1099,7 @@ public class UsersController extends BaseController implements Initializable {
         Stage cancelStage = (Stage) editCancel.getScene().getWindow();
         StageHelper.closeStage(cancelStage);
     }
-    
+
     /**
      * Resets all fields in the edit view.
      */
@@ -1141,7 +1140,7 @@ public class UsersController extends BaseController implements Initializable {
                 Logger.getLogger(UsersController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        Debug.print("editUsername: "+ editUsername.getText() + " & currentUsername: " + currentUsername + "= duplicateUsername:" + duplicateUsername);
+        Debug.print("editUsername: " + editUsername.getText() + " & currentUsername: " + currentUsername + "= duplicateUsername:" + duplicateUsername);
 
         if (editUsername.getText().equals("") || duplicateUsername) {
             Dialogs.create()
@@ -1257,6 +1256,7 @@ public class UsersController extends BaseController implements Initializable {
     public void setViewFields() {
         UserModel user = new UserModel(MainActivity.viewId);
 
+        MainActivity.searchTerm = user.getUsername();
         viewUsername.setText(user.getUsername());
         viewFirstname.setText(user.getFirstname());
         viewPrefix.setText(user.getPrefix());
@@ -1273,15 +1273,17 @@ public class UsersController extends BaseController implements Initializable {
         viewGenderAsText.setText((user.getGender()));
         viewRoleAsText.setText(user.getRole());
         viewWorkplaceAsText.setText(selectedWorkplace.toString());
+
     }
 
     /**
-     * Shows the actions selected User has performed.
+     * Shows the actions the User has performed. Initiator to viewUserLog(),
+     * target LogController.
      */
     @FXML
-    public void viewUserActions() {
-        MainActivity.setViewUserLogParam(MainActivity.viewId);
-        Debug.print("Username dump (viewUsername;): \"" + viewUsername.getText() + "\"");
+    public void viewLogs() {
+        MainActivity.setViewLogsParam(MainActivity.viewId);
+        Debug.print("UsersController setting: " + MainActivity.searchTerm + " (" + MainActivity.viewLogsParam + ")");
         viewClose();
 
         MainActivity.tabs.getSelectionModel().select(MainActivity.logTab);
@@ -1290,14 +1292,14 @@ public class UsersController extends BaseController implements Initializable {
 
     /**
      * Prints given parameter as notification label.
-
+     *
      * @param notif
      */
     @FXML
     private void printNotif(String notif) {
         printNotif.setText(notif);
     }
-    
+
     /**
      * Clears the notification label.
      */
@@ -1305,7 +1307,7 @@ public class UsersController extends BaseController implements Initializable {
     private void clearNotif() {
         printNotif.setText("");
     }
-    
+
     /**
      * Clears the notification label.
      */
