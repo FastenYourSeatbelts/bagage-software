@@ -936,11 +936,13 @@ public class UsersController extends BaseController implements Initializable {
 
     }
 
+    @FXML
     private void newCancel() {
         Stage addStage = (Stage) newCancel.getScene().getWindow();
         StageHelper.closeStage(addStage);
     }
 
+    @FXML
     private void newReset() {
         newPassword.setText("");
         newPasswordRepeat.setText("");
@@ -958,6 +960,7 @@ public class UsersController extends BaseController implements Initializable {
         newWorkplace.setValue(null);
     }
 
+    @FXML
     private void newSave() {
         boolean duplicateUsername = false;
         try {
@@ -1095,6 +1098,7 @@ public class UsersController extends BaseController implements Initializable {
     /**
      * Cancels editing a User, does not change saved data.
      */
+    @FXML
     private void editCancel() {
         Stage cancelStage = (Stage) editCancel.getScene().getWindow();
         StageHelper.closeStage(cancelStage);
@@ -1103,6 +1107,7 @@ public class UsersController extends BaseController implements Initializable {
     /**
      * Resets all fields in the edit view.
      */
+    @FXML
     private void editReset() {
         editUsername.setText("");
         editPassword.setText("");
@@ -1125,7 +1130,8 @@ public class UsersController extends BaseController implements Initializable {
      * fields are filled and if so, writes to database, overwriting existing
      * data for selected Customer.
      */
-    public void editSave() {
+    @FXML
+    private void editSave() {
         boolean duplicateUsername = false;
         if (!editUsername.getText().equals(currentUsername)) {
             try {
