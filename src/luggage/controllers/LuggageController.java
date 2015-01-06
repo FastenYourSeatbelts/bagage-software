@@ -519,11 +519,6 @@ public class LuggageController extends BaseController implements Initializable {
 
     @FXML
     public void listExportToPdf() throws IOException, COSVisitorException {
-        LuggageModel luggage = (LuggageModel) listTableView.getSelectionModel().getSelectedItem();
-
-        if (luggage == null) {
-            return;
-        }
         // Create a document and add a page to it
         PDDocument document = new PDDocument();
         PDPage page = new PDPage();
@@ -535,11 +530,29 @@ public class LuggageController extends BaseController implements Initializable {
         // Start a new content stream which will "hold" the to be created content
         PDPageContentStream contentStream = new PDPageContentStream(document, page);
         
-        // Define a text content stream using the selected font, moving the cursor and drawing the text "Hello World"
+        // Define a text content stream using the selected font
         contentStream.beginText();
         contentStream.setFont(font, 12);
-        contentStream.moveTextPositionByAmount(100, 700);
-        contentStream.drawString(mlg);
+        contentStream.moveTextPositionByAmount(100, 100);
+        contentStream.drawString("Corendon");
+        contentStream.endText();
+        
+        contentStream.beginText();
+        contentStream.setFont(font, 12);
+        contentStream.moveTextPositionByAmount(100, 200);
+        contentStream.drawString("Customer name:");
+        contentStream.endText();
+        
+        contentStream.beginText();
+        contentStream.setFont(font, 12);
+        contentStream.moveTextPositionByAmount(100, 300);
+        contentStream.drawString("Luggage Id");
+        contentStream.endText();
+        
+        contentStream.beginText();
+        contentStream.setFont(font, 12);
+        contentStream.moveTextPositionByAmount(100, 400);
+        contentStream.drawString("Location");
         contentStream.endText();
 
         // Make sure that the content stream is closed:
@@ -548,10 +561,8 @@ public class LuggageController extends BaseController implements Initializable {
         // Save the results and ensure that the document is properly closed:
         document.save("Bon.pdf");
         document.close();
-        
-        System.out.println("Ayy ik doe iets");
+
         Debug.logToDatabase(LogModel.TYPE_INFO, "/*eenIdentifier + */" + "exported as PDF file.");
-        StageHelper.addStage("luggage/view", this, false, true);
     }
 
     /**
