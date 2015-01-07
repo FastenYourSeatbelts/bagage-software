@@ -39,12 +39,10 @@
             <DatePicker fx:id="viewDate" editable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="268.0" promptText="No date chosen" showWeekNumbers="true" GridPane.columnIndex="5" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
                 <TextField fx:id="viewTags" editable="false" promptText="No tags entered" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.rowIndex="3" />
                 <TextField fx:id="viewNotes" editable="false" promptText="No notes entered" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.rowIndex="4" />
-                <AnchorPane prefWidth="400.0" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.rowIndex="6">
+                <AnchorPane prefWidth="100.0" GridPane.columnIndex="5" GridPane.rowIndex="6">
                     <children>
                         <Button fx:id="viewClose" alignment="CENTER" cancelButton="true" defaultButton="true" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#viewClose" prefWidth="70.0" text="Close" AnchorPane.rightAnchor="0.0">
                         </Button>
-                  <Button fx:id="viewAllOfThisCustomersLuggage" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#viewAllOfThisCustomersLuggage" prefWidth="140.0" text="Customer's luggage" AnchorPane.rightAnchor="84.0" />
-                  <Button fx:id="viewCustomer" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#viewCustomer" prefWidth="112.0" text="View customer" AnchorPane.rightAnchor="238.0" />
                     </children>
                 </AnchorPane>
                 <Label alignment="CENTER_RIGHT" text="Location" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">

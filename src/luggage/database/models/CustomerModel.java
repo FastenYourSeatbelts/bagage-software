@@ -245,6 +245,24 @@ public class CustomerModel extends Model {
     }
 
     /**
+     * Return the holiday address of the current row
+     *
+     * @return
+     */
+    public String getAddress2() {
+        return row.get("address2");
+    }
+
+    /**
+     * Set the holiday address of the current row
+     *
+     * @param address
+     */
+    public void setAddress2(String address) {
+        row.put("address2", address);
+    }
+
+    /**
      * Return the postal code of the current row
      *
      * @return
@@ -256,10 +274,28 @@ public class CustomerModel extends Model {
     /**
      * Set the postal code of the current row
      *
-     * @param postalCode
+     * @param postalCode2
      */
-    public void setPostalCode(String postalCode) {
-        row.put("postalcode", postalCode);
+    public void setPostalCode(String postalCode2) {
+        row.put("postalcode", postalCode2);
+    }
+
+    /**
+     * Return the holiday postal code of the current row
+     *
+     * @return
+     */
+    public String getPostalCode2() {
+        return row.get("postalcode2");
+    }
+
+    /**
+     * Set the holiday postal code of the current row
+     *
+     * @param postalCode2
+     */
+    public void setPostalCode2(String postalCode2) {
+        row.put("postalcode2", postalCode2);
     }
 
     /**
@@ -278,6 +314,24 @@ public class CustomerModel extends Model {
      */
     public void setResidence(String residence) {
         row.put("residence", residence);
+    }
+
+    /**
+     * Return the holiday residence of the current row
+     *
+     * @return
+     */
+    public String getResidence2() {
+        return row.get("residence2");
+    }
+
+    /**
+     * Set the holiday residence of the current row
+     *
+     * @param residence2
+     */
+    public void setResidence2(String residence2) {
+        row.put("residence2", residence2);
     }
 
     /**

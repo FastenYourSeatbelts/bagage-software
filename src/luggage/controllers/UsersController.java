@@ -439,7 +439,7 @@ public class UsersController extends BaseController implements Initializable {
         listTableView.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.E)) {
                 listEdit();
-            } else if (b.getCode().equals(KeyCode.H)) {
+            } else if (b.getCode().equals(KeyCode.H) || b.getCode().equals(KeyCode.F1)) {
                 listHelp();
             } else if (b.getCode().equals(KeyCode.N)) {
                 listNew();

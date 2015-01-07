@@ -174,12 +174,6 @@ public class LuggageController extends BaseController implements Initializable {
     private Button viewClose;
 
     @FXML
-    private Button viewCustomer;
-
-    @FXML
-    private Button viewAllOfThisCustomersLuggage;
-
-    @FXML
     private ChoiceBox<String> viewStatus;
 
     @FXML
@@ -224,13 +218,6 @@ public class LuggageController extends BaseController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        MainActivity.viewLuggageParamCallback = new Runnable() {
-            @Override
-            public void run() {
-                viewCustomersLuggage();
-            }
-        };
-
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -640,7 +627,6 @@ public class LuggageController extends BaseController implements Initializable {
      * Populates the view fields with the selected Luggage item's data.
      */
     public void setViewFields() {
-        viewAllOfThisCustomersLuggage.setDisable(true);
         LuggageModel luggage = new LuggageModel(MainActivity.viewId);
 
         viewLocationId.getSelectionModel().select(selectedLocation);
@@ -649,13 +635,10 @@ public class LuggageController extends BaseController implements Initializable {
         try {
             viewCustomerId.getSelectionModel().select(selectedCustomer);
             viewCustomerAsText.setText(selectedCustomer.toString());
-            
-            viewAllOfThisCustomersLuggage.setDisable(false);
-            viewCustomer.setDisable(false);
-            
-            MainActivity.customerIdHolder = selectedCustomer.getId();
+                        
             MainActivity.searchTerm = selectedCustomer.getFullname();
-            Debug.print("LuggageController setting: " + MainActivity.searchTerm + " (" + MainActivity.customerIdHolder + ")");
+            Debug.print("LuggageController setting: " + MainActivity.searchTerm);
+            
         } catch (NullPointerException n) {
             printStackTrace(n);
         }
@@ -747,7 +730,7 @@ public class LuggageController extends BaseController implements Initializable {
         listTableView.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.E)) {
                 listEdit();
-            } else if (b.getCode().equals(KeyCode.H)) {
+            } else if (b.getCode().equals(KeyCode.H) || b.getCode().equals(KeyCode.F1)) {
                 listHelp();
             } else if (b.getCode().equals(KeyCode.N)) {
                 listNew();
@@ -937,65 +920,11 @@ public class LuggageController extends BaseController implements Initializable {
                 viewClose();
             }
         });
-        viewAllOfThisCustomersLuggage.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
-            if (evt.getCode().equals(KeyCode.ESCAPE)) {
-                viewClose();
-            } else if (evt.getCode().equals(KeyCode.ENTER)) {
-                viewCustomersLuggage();
-            }
-        });
         viewClose.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
             if (evt.getCode().equals(KeyCode.ESCAPE) || evt.getCode().equals(KeyCode.ENTER)) {
                 viewClose();
             }
         });
-    }
-
-    /**
-     * Shows all Luggage items belonging to the Customer, that are known to the
-     * system.
-     */
-    @FXML
-    public void viewAllOfThisCustomersLuggage() {
-        LuggageController luggageController = (LuggageController) StageHelper.callbackController;
-        luggageController.listResetTableView("customer_id LIKE ?", Integer.toString(MainActivity.customerIdHolder));
-//        Debug.print("MainActivity.searchTerm: " + MainActivity.searchTerm);
-        MainActivity.customerIdHolder = 0;
-        viewClose();
-        luggageController.printNotif("Searched \"" + MainActivity.searchTerm + "\". Click here to reset or use the search. ");
-        MainActivity.searchTerm = "";
-        Debug.print("Reached end of viewAllOfThisCustomersLuggage() method (LuggageController).");
-    }
-
-    /**
-     * Shows the Luggage items belonging to the Customer, that are known to the
-     * system. Receiver for viewCustomersLuggage(), origin CustomersController.
-     */
-    @FXML
-    public void viewCustomersLuggage() {
-        Debug.print("LUGGAGE CONTROLLER-----------------------------------------------------------------"
-                + "\nInteger.toString(MainActivity.viewId): " + Integer.toString(MainActivity.viewId));
-//                + "\nInteger.toString(MainActivity.viewLuggageParam): " + Integer.toString(MainActivity.viewLuggageParam));
-//        listResetTableView("customer_id LIKE ?", Integer.toString(MainActivity.viewLuggageParam));
-        listResetTableView("customer_id LIKE ?", Integer.toString(MainActivity.viewId));
-        printNotif("Searched \"" + MainActivity.searchTerm + "\". Click here to reset or use the search. ");
-//        MainActivity.viewLuggageParam = 0;
-        MainActivity.searchTerm = "";
-        Debug.print("Reached end of viewCustomersLuggage() method (LuggageController).");
-    }
-
-    /**
-     * Shows the Customer's personal details. Initiator to viewCustomer(),
-     * target CustomersController.
-     */
-    @FXML
-    public void viewCustomer() {
-        MainActivity.setViewCustomerParam(MainActivity.customerIdHolder);
-        MainActivity.customerIdHolder = 0;
-        viewClose();
-
-        MainActivity.tabs.getSelectionModel().select(MainActivity.customersTab);
-        Debug.print("Reached end of viewCustomer() method (LuggageController).");
     }
 
     /**

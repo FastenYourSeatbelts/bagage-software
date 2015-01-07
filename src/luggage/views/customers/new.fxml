@@ -27,6 +27,8 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
@@ -52,9 +54,12 @@
             <TextField fx:id="newAddress" promptText="e.g. Amsterdamseweg 90" GridPane.columnIndex="2" GridPane.rowIndex="3" />
             <TextField fx:id="newPostalcode" promptText="e.g. 1000AB" GridPane.columnIndex="4" GridPane.rowIndex="3" />
             <TextField fx:id="newResidence" promptText="e.g. Amsterdam" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <TextField fx:id="newEmail" promptText="e.g. name@example.com" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-            <TextField fx:id="newTelephone" promptText="e.g. 0031201234567" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-            <TextField fx:id="newMobile" promptText="e.g. 0031612345678" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+            <TextField fx:id="newAddress2" opacity="0.6" promptText="e.g. Amsterdamseweg 90" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <TextField fx:id="newPostalcode2" opacity="0.6" promptText="e.g. 1000AB" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+            <TextField fx:id="newResidence2" opacity="0.6" promptText="e.g. Amsterdam" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+            <TextField fx:id="newEmail" promptText="e.g. name@example.com" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+            <TextField fx:id="newTelephone" promptText="e.g. 0031201234567" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+            <TextField fx:id="newMobile" opacity="0.6" promptText="e.g. 0031612345678" GridPane.columnIndex="4" GridPane.rowIndex="7" />
             
             <Label text="Name" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                <font>
@@ -80,31 +85,12 @@
                   <Insets left="23.0" />
                </GridPane.margin>
             </Label>
-            <Label text="Address" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3">
+            <Label text="Address" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <font>
                   <Font size="14.0" />
                </font>
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin>
             </Label>
-            <Label text="Postal code" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="3">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets left="23.0" />
-               </GridPane.margin>
-            </Label>
-            <Label text="Residence" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="4">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin>
-            </Label>
-            <Label text="Email address" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="4">
+            <Label text="Postal code" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="3">
                <font>
                   <Font size="14.0" />
                </font>
@@ -112,15 +98,12 @@
                   <Insets left="23.0" />
                </GridPane.margin>
             </Label>
-            <Label text="Mobile number" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="5">
+            <Label text="Residence" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <font>
                   <Font size="14.0" />
                </font>
-               <GridPane.margin>
-                  <Insets left="23.0" />
-               </GridPane.margin>
             </Label>
-            <Label text="Phone number" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5">
+            <Label text="Holiday address" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5">
                <font>
                   <Font size="14.0" />
                </font>
@@ -128,7 +111,47 @@
                   <Insets />
                </GridPane.margin>
             </Label>
-            <AnchorPane prefWidth="200.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="7">
+            <Label text="Holiday postal" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="5">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="23.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Holiday residence" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="6">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </Label>
+            <Label text="Email address" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="6">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="23.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Mobile number" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="7">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="23.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Phone number" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="7">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </Label>
+            <AnchorPane prefWidth="200.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="9">
                <children>
                   <Button fx:id="newSave" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#newSave" prefWidth="70.0" text="Save" AnchorPane.rightAnchor="168.0">
                   </Button>

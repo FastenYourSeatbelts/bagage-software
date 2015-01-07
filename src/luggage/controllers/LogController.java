@@ -152,7 +152,6 @@ public class LogController extends BaseController implements Initializable {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                viewUser.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
                 listOnSearch();
                 listTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
                 keyActions();
@@ -165,7 +164,7 @@ public class LogController extends BaseController implements Initializable {
      */
     public void keyActions() {
         listTableView.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.H)) {
+            if (b.getCode().equals(KeyCode.H) || b.getCode().equals(KeyCode.F1)) {
                 listHelp();
             }
         });
@@ -201,29 +200,6 @@ public class LogController extends BaseController implements Initializable {
         listTableView.setItems(data);
     }
 
-//    tableview.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
-//            @Override
-//            public void changed(ObservableValue observableValue, Object oldValue, Object newValue) {
-//                //Check whether item is selected and set value of selected item to Label
-//                if (tableview.getSelectionModel().getSelectedItem() != null) {
-//                    TableView.TableViewSelectionModel selectionModel = tableview.getSelectionModel();
-//                    ObservableList selectedCells = selectionModel.getSelectedCells();
-//
-//                    TablePosition tablePosition = (TablePosition) selectedCells.get(0);
-//
-//
-//                    tablePosition.getTableView().getSelectionModel().getTableView().getId();
-//                    //gives you selected cell value..
-//                    Object newValueds;
-//                    Object GetSinglevalue = tablePosition.getTableColumn().getCellData(newValueds);
-//
-//                    getbothvalue = tableview.getSelectionModel().getSelectedItem().toString();
-//                //gives you first column value..
-//                    Finalvaluetablerow = getbothvalue.toString().split(",")[0].substring(1);
-//                    System.out.println("The First column value of row.." + Finalvaluetablerow);
-//                }
-//            }
-//        });
     /**
      * Shows the actions the user has performed. Receiver for viewUserActions(),
      * origin UsersController.
@@ -232,28 +208,14 @@ public class LogController extends BaseController implements Initializable {
     public void viewLogs() {
         Debug.print("LOG CONTROLLER-----------------------------------------------------------------"
                 + "\nInteger.toString(MainActivity.viewLogsParam): " + Integer.toString(MainActivity.viewLogsParam));
+        listResetTableView("", new String[0]);
+        listSearchField.setText("");
+
         listResetTableView("user_id LIKE ?", Integer.toString(MainActivity.viewLogsParam));
         printNotif("Searched \"" + MainActivity.searchTerm + "\". Click here to reset or use the search. ");
         MainActivity.viewLogsParam = 0;
         MainActivity.searchTerm = "";
         Debug.print("Reached end of viewUserLog() method (LogController).");
-    }
-
-    /**
-     * Shows the user details for the selected user.
-     */
-    @FXML
-    public void viewUser() {
-//        MainActivity.searchTerm = listTableView.getSelectionModel().getSelectedItem().getValue();
-
-        int rowIndex = listTableView.getSelectionModel().getSelectedIndex();
-        ObservableList rowList = (ObservableList) listTableViewEmployee.getCellValueFactory();
-        int value = Integer.parseInt(rowList.get(0).toString());
-        MainActivity.setViewLogsParam(value);
-
-        Debug.print("User id dump (viewUserLogParam): \"" + MainActivity.viewLogsParam + "\"");
-        MainActivity.tabs.getSelectionModel().select(MainActivity.usersTab);
-        Debug.print("Reached end of userViaLog() method (LogController).");
     }
 
     /**

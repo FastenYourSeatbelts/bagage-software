@@ -38,6 +38,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import luggage.AppConfig;
 import luggage.Debug;
@@ -78,8 +80,6 @@ public class LoginController extends BaseController implements Initializable {
     @FXML
     private TextField username;
 
-    private String appSessionStart;
-    
     @FXML
     private void onKeyPress() {
         error.setText("");
@@ -89,7 +89,7 @@ public class LoginController extends BaseController implements Initializable {
     private void exit() {
         System.out.println("User " + closed + " the application.");
         Date date = new Date();
-Debug.print("Application session ended. Session length: " + appSessionStart + " - " + MainActivity.dateFormatFull.format(date));
+        Debug.print("Application session ended. Session length: " + MainActivity.appSessionStart + " - " + MainActivity.dateFormatFull.format(date));
         System.exit(0);
     }
     private String closed = "exited";
@@ -154,9 +154,9 @@ Debug.print("Application session ended. Session length: " + appSessionStart + " 
      */
     public void debugInfo() {
         Date date = new Date();
-        appSessionStart = MainActivity.dateFormatFull.format(date);
+        MainActivity.appSessionStart = MainActivity.dateFormatFull.format(date);
         Debug.print("DEBUG INFO START-----------------------------------------------------------------"
-                + "\nApplication session start: " + appSessionStart
+                + "\nApplication session start: " + MainActivity.appSessionStart
                 + "\nSystem properties:"
                 + "\njava.version:\t\t\t" + System.getProperty("java.version")
                 + "\njava.vendor:\t\t\t" + System.getProperty("java.vendor")
@@ -188,10 +188,16 @@ Debug.print("Application session ended. Session length: " + appSessionStart + " 
         MainActivity.firstStart = false;
     }
 
-    /**
-     * Makes non-fundamental changes based on OS. For now merely sets native
-     * terminology.
-     */
+//    public void keyActions() {
+//        listTableView.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+//            if (b.getCode().equals(KeyCode.F1)) {
+//                listHelp();
+//            }
+//        });
+        /**
+         * Makes non-fundamental changes based on OS. For now merely sets native
+         * terminology.
+         */
     private void osDependable() {
         final String os = System.getProperty("os.name");
         closed = "exited";

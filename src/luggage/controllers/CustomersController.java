@@ -35,13 +35,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import luggage.Debug;
 import luggage.MainActivity;
@@ -64,11 +64,12 @@ import org.controlsfx.dialog.Dialogs;
  */
 public class CustomersController extends BaseController implements Initializable {
 
-    public TabPane tabs;
-
     /**
      * LIST ELEMENTS
      */
+    @FXML
+    private AnchorPane listGeneral;
+
     @FXML
     private TableView listTableView;
 
@@ -133,6 +134,15 @@ public class CustomersController extends BaseController implements Initializable
     private TextField newResidence;
 
     @FXML
+    private TextField newAddress2;
+
+    @FXML
+    private TextField newPostalcode2;
+
+    @FXML
+    private TextField newResidence2;
+
+    @FXML
     private TextField newEmail;
 
     @FXML
@@ -187,6 +197,15 @@ public class CustomersController extends BaseController implements Initializable
     private TextField editResidence;
 
     @FXML
+    private TextField editAddress2;
+
+    @FXML
+    private TextField editPostalcode2;
+
+    @FXML
+    private TextField editResidence2;
+
+    @FXML
     private TextField editEmail;
 
     @FXML
@@ -235,6 +254,15 @@ public class CustomersController extends BaseController implements Initializable
     private TextField viewResidence;
 
     @FXML
+    private TextField viewAddress2;
+
+    @FXML
+    private TextField viewPostalcode2;
+
+    @FXML
+    private TextField viewResidence2;
+
+    @FXML
     private TextField viewEmail;
 
     @FXML
@@ -255,12 +283,6 @@ public class CustomersController extends BaseController implements Initializable
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        MainActivity.viewCustomerParamCallback = new Runnable() {
-            @Override
-            public void run() {
-                viewCustomer();
-            }
-        };
 
         Platform.runLater(new Runnable() {
             @Override
@@ -318,6 +340,9 @@ public class CustomersController extends BaseController implements Initializable
         viewAddress.setText(customer.getAddress());
         viewPostalcode.setText(customer.getPostalCode());
         viewResidence.setText(customer.getResidence());
+        viewAddress2.setText(customer.getAddress2());
+        viewPostalcode2.setText(customer.getPostalCode2());
+        viewResidence2.setText(customer.getResidence2());
         viewEmail.setText(customer.getEmail());
         viewTelephone.setText(customer.getTelephone());
         viewMobile.setText(customer.getMobile());
@@ -326,10 +351,6 @@ public class CustomersController extends BaseController implements Initializable
 //        viewInsurerId.getSelectionModel().select(selectedInsurer);
         viewInsurerAsText.setText(selectedInsurer.toString());
         viewGenderAsText.setText(viewGender.getValue().toString());
-
-        MainActivity.customerIdHolder = customer.getId();
-        MainActivity.searchTerm = customer.getFullname();
-        Debug.print("CustomersController setting: " + MainActivity.searchTerm + " (" + MainActivity.customerIdHolder + ")");
     }
 
     /**
@@ -370,6 +391,9 @@ public class CustomersController extends BaseController implements Initializable
         editAddress.setText(customer.getAddress());
         editPostalcode.setText(customer.getPostalCode());
         editResidence.setText(customer.getResidence());
+        editAddress2.setText(customer.getAddress2());
+        editPostalcode2.setText(customer.getPostalCode2());
+        editResidence2.setText(customer.getResidence2());
         editEmail.setText(customer.getEmail());
         editTelephone.setText(customer.getTelephone());
         editMobile.setText(customer.getMobile());
@@ -564,7 +588,8 @@ public class CustomersController extends BaseController implements Initializable
     /**
      * Handles canceling and closing the new view.
      */
-    public void newCancel() {
+    @FXML
+    private void newCancel() {
         Stage addStage = (Stage) newCancel.getScene().getWindow();
         StageHelper.closeStage(addStage);
     }
@@ -572,13 +597,17 @@ public class CustomersController extends BaseController implements Initializable
     /**
      * Resets all fields in the new view.
      */
-    public void newReset() {
+    @FXML
+    private void newReset() {
         newFirstname.setText("");
         newPrefix.setText("");
         newLastname.setText("");
         newAddress.setText("");
         newPostalcode.setText("");
         newResidence.setText("");
+        newAddress2.setText("");
+        newPostalcode2.setText("");
+        newResidence2.setText("");
         newEmail.setText("");
         newTelephone.setText("");
         newMobile.setText("");
@@ -590,7 +619,8 @@ public class CustomersController extends BaseController implements Initializable
      * Handles saving a new Customer. Checks if all necessary fields are given
      * and if so, writes to database.
      */
-    public void newSave() {
+    @FXML
+    private void newSave() {
         if (newFirstname.getText().equals("") || newLastname.getText().equals("")) {
             Dialogs.create()
                     .owner((Stage) newLastname.getScene().getWindow())
@@ -647,12 +677,12 @@ public class CustomersController extends BaseController implements Initializable
                     .message("Please enter the customer's email address.")
                     .showWarning();
             return;
-        } else if (newTelephone.getText().equals("") && newMobile.getText().equals("")) {
+        } else if (newTelephone.getText().equals("")) {
             Dialogs.create()
                     .owner((Stage) newTelephone.getScene().getWindow())
                     .title("Warning")
                     .masthead("Entry error")
-                    .message("Please enter the customer's regular phone number and / or their mobile number.")
+                    .message("Please enter at least one phone number in the first text box for the customer.")
                     .showWarning();
             return;
         }
@@ -666,6 +696,9 @@ public class CustomersController extends BaseController implements Initializable
         customer.setAddress(newAddress.getText());
         customer.setPostalCode(newPostalcode.getText());
         customer.setResidence(newResidence.getText());
+        customer.setAddress2(newAddress2.getText());
+        customer.setPostalCode2(newPostalcode2.getText());
+        customer.setResidence2(newResidence2.getText());
         customer.setEmail(newEmail.getText());
         customer.setTelephone(newTelephone.getText());
         customer.setMobile(newMobile.getText());
@@ -680,7 +713,8 @@ public class CustomersController extends BaseController implements Initializable
     /**
      * Cancels editing a Customer, does not change saved data.
      */
-    public void editCancel() {
+    @FXML
+    private void editCancel() {
         Stage cancelStage = (Stage) editCancel.getScene().getWindow();
         StageHelper.closeStage(cancelStage);
     }
@@ -688,13 +722,17 @@ public class CustomersController extends BaseController implements Initializable
     /**
      * Resets all fields in the edit view.
      */
-    public void editReset() {
+    @FXML
+    private void editReset() {
         editFirstname.setText("");
         editPrefix.setText("");
         editLastname.setText("");
         editAddress.setText("");
         editPostalcode.setText("");
         editResidence.setText("");
+        editAddress2.setText("");
+        editPostalcode2.setText("");
+        editResidence2.setText("");
         editEmail.setText("");
         editTelephone.setText("");
         editMobile.setText("");
@@ -707,7 +745,8 @@ public class CustomersController extends BaseController implements Initializable
      * fields are filled and if so, writes to database, overwriting existing
      * data for selected Customer.
      */
-    public void editSave() {
+    @FXML
+    private void editSave() {
         if (editFirstname.getText().equals("") || editLastname.getText().equals("")) {
             Dialogs.create()
                     .owner((Stage) editLastname.getScene().getWindow())
@@ -764,12 +803,12 @@ public class CustomersController extends BaseController implements Initializable
                     .message("Please enter the customer's email address.")
                     .showWarning();
             return;
-        } else if (editTelephone.getText().equals("") && editMobile.getText().equals("")) {
+        } else if (editTelephone.getText().equals("")) {
             Dialogs.create()
                     .owner((Stage) editTelephone.getScene().getWindow())
                     .title("Warning")
                     .masthead("Entry error")
-                    .message("Please enter the customer's regular phone number and / or their mobile number.")
+                    .message("Please enter at least one phone number in the first text box for the customer.")
                     .showWarning();
             return;
         }
@@ -783,6 +822,9 @@ public class CustomersController extends BaseController implements Initializable
         customer.setAddress(editAddress.getText());
         customer.setPostalCode(editPostalcode.getText());
         customer.setResidence(editResidence.getText());
+        customer.setAddress2(editAddress2.getText());
+        customer.setPostalCode2(editPostalcode2.getText());
+        customer.setResidence2(editResidence2.getText());
         customer.setEmail(editEmail.getText());
         customer.setTelephone(editTelephone.getText());
         customer.setMobile(editMobile.getText());
@@ -797,18 +839,24 @@ public class CustomersController extends BaseController implements Initializable
     /**
      * Creates the (mouse, keyboard, etc.) event filters for the list view.
      */
-    public void listKeyActions() {
-        listTableView.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.E)) {
-                listEdit();
-            } else if (b.getCode().equals(KeyCode.H)) {
-                listHelp();
-            } else if (b.getCode().equals(KeyCode.N)) {
+    @FXML
+    private void listKeyActions() {
+        listGeneral.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.A)) {
                 listNew();
-            } else if (b.getCode().equals(KeyCode.R)) {
-                listRemove();
+            }
+        });
+        listTableView.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.N)) {
+                listNew();
+            } else if (b.getCode().equals(KeyCode.H) || b.getCode().equals(KeyCode.F1)) {
+                listHelp();
+            } else if (b.getCode().equals(KeyCode.E)) {
+                listEdit();
             } else if (b.getCode().equals(KeyCode.V)) {
                 listView();
+            } else if (b.getCode().equals(KeyCode.R)) {
+                listRemove();
             }
         });
         listSearchField.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
@@ -1029,119 +1077,65 @@ public class CustomersController extends BaseController implements Initializable
      */
     public void viewKeyActions() {
         viewFirstname.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
+            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
                 viewClose();
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                viewCustomersLuggage();
             }
         });
         viewPrefix.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
+            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
                 viewClose();
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                viewCustomersLuggage();
             }
         });
         viewLastname.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
+            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
                 viewClose();
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                viewCustomersLuggage();
-            }
-        });
-        viewPrefix.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
-                viewClose();
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                viewCustomersLuggage();
             }
         });
         viewGenderAsText.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
+            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
                 viewClose();
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                viewCustomersLuggage();
             }
         });
         viewInsurerAsText.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
+            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
                 viewClose();
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                viewCustomersLuggage();
+            }
+        });
+        viewAddress.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+                viewClose();
             }
         });
         viewPostalcode.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
+            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
                 viewClose();
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                viewCustomersLuggage();
             }
         });
         viewResidence.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
+            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
                 viewClose();
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                viewCustomersLuggage();
             }
         });
         viewEmail.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
+            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
                 viewClose();
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                viewCustomersLuggage();
             }
         });
         viewTelephone.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
+            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
                 viewClose();
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                viewCustomersLuggage();
             }
         });
         viewMobile.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
+            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
                 viewClose();
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                viewCustomersLuggage();
             }
         });
         viewClose.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.ESCAPE)) {
+            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
                 viewClose();
-            } else if (b.getCode().equals(KeyCode.ENTER)) {
-                viewCustomersLuggage();
             }
         });
-    }
-
-    /**
-     * Shows the Customer's personal details. Receiver for viewCustomer(),
-     * origin LuggageController.
-     */
-    @FXML
-    public void viewCustomer() {
-        Debug.print("CUSTOMERS CONTROLLER-----------------------------------------------------------------"
-                + "\nInteger.toString(MainActivity.viewCustomerParam): " + Integer.toString(MainActivity.viewCustomerParam));
-        listResetTableView("id LIKE ?", Integer.toString(MainActivity.viewCustomerParam));
-        printNotif("Searched \"" + MainActivity.searchTerm + "\". Click here to reset or use the search. ");
-//        MainActivity.viewCustomerParam = 0;
-        MainActivity.searchTerm = "";
-        Debug.print("Reached end of viewCustomer() method (CustomersController).");
-    }
-
-    /**
-     * Shows the luggage items belonging to Customer, that are known to the
-     * system. Initiator to viewCustomersLuggage(), target LuggageController.
-     */
-    @FXML
-    public void viewCustomersLuggage() {
-//        MainActivity.setViewLuggageParam(MainActivity.customerIdHolder);
-        MainActivity.setViewLuggageParam(MainActivity.viewId);
-//        MainActivity.customerIdHolder = 0;
-        viewClose();
-
-        MainActivity.tabs.getSelectionModel().select(MainActivity.luggageTab);
-        Debug.print("Reached end of viewCustomersLuggage() method (CustomersController).");
     }
 
     /**

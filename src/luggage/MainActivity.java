@@ -85,29 +85,33 @@ public class MainActivity extends Application {
      */
     public static String searchTerm;
 
+    /**
+     * Variable for storing the datetime of when the application was launched.
+     */
+    public static String appSessionStart;
+
+    /**
+     * Variable for storing the datetime of when the user logged in.
+     */
     public static String userSessionStart;
+    
     /**
      *
      */
     public static TabPane tabs;
 
     /**
-     *
-     */
-    public static Tab customersTab;
-
-    /**
-     *
+     * The Luggage tab (manage_luggage).
      */
     public static Tab luggageTab;
 
     /**
-     *
+     * The Users tab (manage_users).
      */
     public static Tab usersTab;
 
     /**
-     *
+     *  The Log tab
      */
     public static Tab logTab;
 
@@ -130,28 +134,6 @@ public class MainActivity extends Application {
         Debug.print("Setting viewLuggageParam: " + viewLuggageParam);
         if (viewLuggageParamCallback != null) {
             viewLuggageParamCallback.run();
-        }
-    }
-
-    /**
-     *
-     */
-    public static int viewCustomerParam;
-
-    /**
-     *
-     */
-    public static Runnable viewCustomerParamCallback;
-
-    /**
-     *
-     * @param customer
-     */
-    public static void setViewCustomerParam(int customer) {
-        viewCustomerParam = customer;
-        Debug.print("Setting viewCustomerParam: " + viewCustomerParam);
-        if (viewCustomerParamCallback != null) {
-            viewCustomerParamCallback.run();
         }
     }
 

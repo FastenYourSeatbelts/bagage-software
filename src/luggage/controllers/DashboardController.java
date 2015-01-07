@@ -67,7 +67,7 @@ public class DashboardController extends BaseController implements Initializable
     private Button logout;
 
     @FXML
-    private Label fullname;
+    private Label currentUser;
 
     /**
      * Called on controller start.
@@ -78,7 +78,7 @@ public class DashboardController extends BaseController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         Debug.print("DASHBOARD CONTROLLER-----------------------------------------------------------------");
-        fullname.setText(Authentication.getCurrentUser().getFullname());
+        currentUser.setText(Authentication.getCurrentUser().getFullname() + " (" + Authentication.getCurrentUser().getRole() + ")");
 
         addTabs();
     }
@@ -113,10 +113,6 @@ public class DashboardController extends BaseController implements Initializable
                     if (tabPermission.getId().equals("manager_users")) {
                         MainActivity.usersTab = newTab;
                     }
-                    
-                    if (tabPermission.getId().equals("manage_customers")) {
-                        MainActivity.customersTab = newTab;
-                    }
 
                     Platform.runLater(new Runnable() {
                         @Override
@@ -145,6 +141,10 @@ public class DashboardController extends BaseController implements Initializable
             }
         };
         new Thread(task).start();
+    }
+    
+    public void viewCurrentUser() {
+        
     }
 
     /**

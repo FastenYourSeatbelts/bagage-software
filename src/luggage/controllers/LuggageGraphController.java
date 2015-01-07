@@ -133,6 +133,7 @@ public class LuggageGraphController extends BaseController implements Initializa
      */
     @FXML
     public void updateChart() {
+        showResolved.setDisable(true);
         saveAsPng.setDisable(true);
         String dateQuery = "";
 
@@ -155,12 +156,14 @@ public class LuggageGraphController extends BaseController implements Initializa
             Debug.print("For some reason, either start or end is null. Method will continue.");
         } else if (start.getValue().compareTo(end.getValue()) > 0) {
             printNotif("The start date may not occur after the end date!");
+            showResolved.setDisable(true);
             saveAsPng.setDisable(true);
             Debug.print("User is an idiot: searched from " + start.getValue() + " to " + end.getValue());
             return;
         } else {
             Debug.print("Date is not null. Start: " + start.getValue() + " & End: " + end.getValue());
         }
+        showResolved.setDisable(false);
         saveAsPng.setDisable(false);
 //        } catch (NullPointerException n) {
 //            Logger.getLogger(LuggageGraphController.class.getName()).log(Level.SEVERE, null, n);
