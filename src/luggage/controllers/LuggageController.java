@@ -24,6 +24,7 @@
  */
 package luggage.controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
@@ -53,6 +54,12 @@ import luggage.database.models.LogModel;
 import luggage.database.models.LuggageModel;
 import luggage.database.models.Model;
 import luggage.helpers.StageHelper;
+import org.apache.pdfbox.exceptions.COSVisitorException;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.edit.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDFont;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.controlsfx.control.action.Action;
 import org.controlsfx.dialog.Dialog;
 import org.controlsfx.dialog.Dialogs;
@@ -202,6 +209,7 @@ public class LuggageController extends BaseController implements Initializable {
 
     @FXML
     private TextField viewTags;
+    public String mlg = "holy shit";
 
     private ObservableList<LuggageModel> listData = FXCollections.observableArrayList();
 
@@ -497,18 +505,51 @@ public class LuggageController extends BaseController implements Initializable {
     }
 
     @FXML
-    public void listExportToPdf() {
-        LuggageModel luggage = (LuggageModel) listTableView.getSelectionModel().getSelectedItem();
+    public void listExportToPdf() throws IOException, COSVisitorException {
+        // Create a document and add a page to it
+        PDDocument document = new PDDocument();
+        PDPage page = new PDPage();
+        document.addPage(page);
 
-        if (luggage == null) {
-            return;
-        }
+        // Create a new font object selecting one of the PDF base fonts
+        PDFont font = PDType1Font.HELVETICA_BOLD;
 
-        MainActivity.viewId = luggage.getId();
-        //Jasper is de beste
-        System.out.println("Ayy ik doe iets");
+        // Start a new content stream which will "hold" the to be created content
+        PDPageContentStream contentStream = new PDPageContentStream(document, page);
+        
+        // Define a text content stream using the selected font
+        contentStream.beginText();
+        contentStream.setFont(font, 12);
+        contentStream.moveTextPositionByAmount(100, 100);
+        contentStream.drawString("Corendon");
+        contentStream.endText();
+        
+        contentStream.beginText();
+        contentStream.setFont(font, 12);
+        contentStream.moveTextPositionByAmount(100, 200);
+        contentStream.drawString("Customer name:");
+        contentStream.endText();
+        
+        contentStream.beginText();
+        contentStream.setFont(font, 12);
+        contentStream.moveTextPositionByAmount(100, 300);
+        contentStream.drawString("Luggage Id");
+        contentStream.endText();
+        
+        contentStream.beginText();
+        contentStream.setFont(font, 12);
+        contentStream.moveTextPositionByAmount(100, 400);
+        contentStream.drawString("Location");
+        contentStream.endText();
+
+        // Make sure that the content stream is closed:
+        contentStream.close();
+
+        // Save the results and ensure that the document is properly closed:
+        document.save("Bon.pdf");
+        document.close();
+
         Debug.logToDatabase(LogModel.TYPE_INFO, "/*eenIdentifier + */" + "exported as PDF file.");
-        StageHelper.addStage("luggage/view", this, false, true);
     }
 
     /**
