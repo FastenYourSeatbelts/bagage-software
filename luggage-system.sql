@@ -36,36 +36,39 @@ CREATE TABLE IF NOT EXISTS `customers` (
   `address` varchar(255) NOT NULL,
   `postalcode` varchar(255) NOT NULL,
   `residence` varchar(255) NOT NULL,
+  `address2` varchar(255),
+  `postalcode2` varchar(255),
+  `residence2` varchar(255),
   `email` varchar(255) NOT NULL,
   `telephone` varchar(255) NOT NULL,
-  `mobile` varchar(255) NOT NULL
+  `mobile` varchar(255)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
 -- Dumping data for table `customers`
 --
 
-INSERT INTO `customers` (`id`, `insurer_id`, `firstname`, `prefix`, `lastname`, `gender`, `address`, `postalcode`, `residence`, `email`, `telephone`, `mobile`) VALUES
-(1, 4, 'Debbie', '', 'Patton', 'Other', '8922 Erat, Rd.', '5057ER', 'Assiniboia', 'Duis@luctusut.ca', '0031895584712', '0031645230425'),
-(2, 2, 'Lance', 'Hadley', 'Hall', 'Other', '7529 Facilisis. Rd.', '4748SC', 'Buckie', 'ipsum.ac.mi@libero.com', '0031818260402', '0031614060499'),
-(3, 3, 'Jordan', 'Zorita', 'Orr', 'Male', 'P.O. Box 105, 6868 Neque Avenue', '5032CB', 'Grand-Leez', 'dolor.quam@auguemalesuadamalesuada.co.uk', '0031304748315', '0031601815769'),
-(4, 4, 'Ingrid', 'Lamar', 'Klein', 'Other', '407-3103 Augue, Street', '9837OG', 'Brussel', 'risus.Nulla@insodaleselit.com', '0031200090700', '0031669465616'),
-(5, 5, 'Julian', 'Lani', 'Frazier', 'Male', '8421 Eget, Rd.', '1936VP', 'Itzehoe', 'inceptos.hymenaeos@Duiselementum.co.uk', '0031242760109', '0031602866945'),
-(6, 6, 'Teegan', 'Vielka', 'Mueller', 'Other', 'P.O. Box 479, 620 Pharetra St.', '2259TV', 'Minderhout', 'vitae.sodales.nisi@habitantmorbi.ca', '0031209392901', '0031650566695'),
-(7, 1, 'Venus', 'Dante', 'Mcbride', 'Male', '523-5505 Phasellus Road', '1943SM', 'Saint-Prime', 'euismod@felis.ca', '0031171973695', '0031685038849'),
-(8, 4, 'Deborah', 'Odysseus', 'Patton', 'Other', '8922 Erat, Rd.', '5057ER', 'Assiniboia', 'Duis@luctusut.ca', '0031895584712', '0031645230425'),
-(9, 1, 'Flynn', 'Timothy', 'Mejia', 'Other', '773-1526 Ipsum Rd.', '2761RC', 'Ingraj Bazar', 'Pellentesque.habitant.morbi@auguescelerisquemollis.ca', '0031651343513', '0031661874114'),
-(10, 1, 'Mallory', 'Peter', 'Baxter', 'Male', '4594 Porttitor Road', '9139XH', 'Harlingen', 'sem@Morbinon.ca', '0031413619116', '0031609225454'),
-(11, 1, 'Rogan', 'Mona', 'Castro', 'Female', 'Ap #215-4222 In Rd.', '7832TY', 'Cardigan', 'nunc.sed@libero.co.uk', '0031374712468', '0031614609118'),
-(12, 1, 'Gail', 'Jackson', 'Hensley', 'Female', 'P.O. Box 563, 9912 Facilisis, Rd.', '9329JY', 'Stonehaven', 'interdum.libero.dui@Maurisnulla.edu', '0031622046889', '0031699456602'),
-(13, 1, 'Shaeleigh', 'Dorothy', 'Herman', 'Other', 'P.O. Box 137, 6370 Eu Road', '7409GG', 'Santa Inês', 'ut.pellentesque@eusemPellentesque.com', '0031669394359', '0031640072016'),
-(14, 1, 'Gray', 'Oliver', 'Bowman', 'Female', 'Ap #348-6845 Porta Av.', '1546UW', 'Tay', 'Nullam.scelerisque@risusNunc.org', '0031759477111', '0031663701161'),
-(15, 1, 'Devin', 'Martin', 'Hopkins', 'Female', '7207 Mauris Av.', '9721QC', 'Hope', 'Donec@augueeutellus.ca', '0031766976282', '0031661972287'),
-(16, 1, 'Declan', 'Jameson', 'Vazquez', 'Other', 'Ap #116-8246 Ornare, Rd.', '5926LN', 'Ilbono', 'ut@egettinciduntdui.edu', '0031293733504', '0031680585004'),
-(17, 1, 'Clementine', 'Brent', 'Kennedy', 'Female', 'P.O. Box 929, 2751 Vel Street', '1466VX', 'Pettoranello del Molise', 'lacus.Quisque@tempor.net', '0031805328298', '0031639539508'),
-(18, 1, 'Inga', 'Carter', 'Lewis', 'Male', '1122 Eu Road', '4563KO', 'Morhet', 'non.nisi@necmalesuadaut.co.uk', '0031925952709', '0031630654455'),
-(19, 1, 'Demetria', 'Kamal', 'Haney', 'Female', 'P.O. Box 417, 5151 Pulvinar Rd.', '1500XT', 'Sennariolo', 'Sed.auctor.odio@tinciduntvehicularisus.edu', '0031833995172', '0031642479403'),
-(20, 1, 'Brennan', 'Jeanette', 'Chase', 'Male', 'P.O. Box 581, 6255 Arcu Rd.', '8689JE', 'Rio Verde', 'dis@risus.co.uk', '0031909984855', '0031626108620');
+INSERT INTO `customers` (`id`, `insurer_id`, `firstname`, `prefix`, `lastname`, `gender`, `address`, `postalcode`, `residence`, `address2`, `postalcode2`, `residence2`, `email`, `telephone`, `mobile`) VALUES
+(1, 4, 'Debbie', '', 'Patton', 'Other', '8922 Erat, Rd.', '5057ER', 'Assiniboia', '', '', '', 'Duis@luctusut.ca', '0031895584712', '0031645230425'),
+(2, 2, 'Lance', 'Hadley', 'Hall', 'Other', '7529 Facilisis. Rd.', '4748SC', 'Buckie', '', '', '', 'ipsum.ac.mi@libero.com', '0031818260402', '0031614060499'),
+(3, 3, 'Jordan', 'Zorita', 'Orr', 'Male', 'P.O. Box 105, 6868 Neque Avenue', '5032CB', 'Grand-Leez', '', '', '', 'dolor.quam@auguemalesuadamalesuada.co.uk', '0031304748315', '0031601815769'),
+(4, 4, 'Ingrid', 'Lamar', 'Klein', 'Other', '407-3103 Augue, Street', '9837OG', 'Brussel', '', '', '', 'risus.Nulla@insodaleselit.com', '0031200090700', '0031669465616'),
+(5, 5, 'Julian', 'Lani', 'Frazier', 'Male', '8421 Eget, Rd.', '1936VP', 'Itzehoe', '', '', '', 'inceptos.hymenaeos@Duiselementum.co.uk', '0031242760109', '0031602866945'),
+(6, 6, 'Teegan', 'Vielka', 'Mueller', 'Other', 'P.O. Box 479, 620 Pharetra St.', '2259TV', 'Minderhout', '', '', '', 'vitae.sodales.nisi@habitantmorbi.ca', '0031209392901', '0031650566695'),
+(7, 1, 'Venus', 'Dante', 'Mcbride', 'Male', '523-5505 Phasellus Road', '1943SM', 'Saint-Prime', '', '', '', 'euismod@felis.ca', '0031171973695', '0031685038849'),
+(8, 4, 'Deborah', 'Odysseus', 'Patton', 'Other', '8922 Erat, Rd.', '5057ER', 'Assiniboia', '', '', '', 'Duis@luctusut.ca', '0031895584712', '0031645230425'),
+(9, 1, 'Flynn', 'Timothy', 'Mejia', 'Other', '773-1526 Ipsum Rd.', '2761RC', 'Ingraj Bazar', '', '', '', 'Pellentesque.habitant.morbi@auguescelerisquemollis.ca', '0031651343513', '0031661874114'),
+(10, 1, 'Mallory', 'Peter', 'Baxter', 'Male', '4594 Porttitor Road', '9139XH', 'Harlingen', '', '', '', 'sem@Morbinon.ca', '0031413619116', '0031609225454'),
+(11, 1, 'Rogan', 'Mona', 'Castro', 'Female', 'Ap #215-4222 In Rd.', '7832TY', 'Cardigan', '', '', '', 'nunc.sed@libero.co.uk', '0031374712468', '0031614609118'),
+(12, 1, 'Gail', 'Jackson', 'Hensley', 'Female', 'P.O. Box 563, 9912 Facilisis, Rd.', '9329JY', 'Stonehaven', '', '', '', 'interdum.libero.dui@Maurisnulla.edu', '0031622046889', '0031699456602'),
+(13, 1, 'Shaeleigh', 'Dorothy', 'Herman', 'Other', 'P.O. Box 137, 6370 Eu Road', '7409GG', 'Santa Inês', '', '', '', 'ut.pellentesque@eusemPellentesque.com', '0031669394359', '0031640072016'),
+(14, 1, 'Gray', 'Oliver', 'Bowman', 'Female', 'Ap #348-6845 Porta Av.', '1546UW', 'Tay', '', '', '', 'Nullam.scelerisque@risusNunc.org', '0031759477111', '0031663701161'),
+(15, 1, 'Devin', 'Martin', 'Hopkins', 'Female', '7207 Mauris Av.', '9721QC', 'Hope', '', '', '', 'Donec@augueeutellus.ca', '0031766976282', '0031661972287'),
+(16, 1, 'Declan', 'Jameson', 'Vazquez', 'Other', 'Ap #116-8246 Ornare, Rd.', '5926LN', 'Ilbono', '', '', '', 'ut@egettinciduntdui.edu', '0031293733504', '0031680585004'),
+(17, 1, 'Clementine', 'Brent', 'Kennedy', 'Female', 'P.O. Box 929, 2751 Vel Street', '1466VX', 'Pettoranello del Molise', '', '', '', 'lacus.Quisque@tempor.net', '0031805328298', '0031639539508'),
+(18, 1, 'Inga', 'Carter', 'Lewis', 'Male', '1122 Eu Road', '4563KO', 'Morhet', '', '', '', 'non.nisi@necmalesuadaut.co.uk', '0031925952709', '0031630654455'),
+(19, 1, 'Demetria', 'Kamal', 'Haney', 'Female', 'P.O. Box 417, 5151 Pulvinar Rd.', '1500XT', 'Sennariolo', '', '', '', 'Sed.auctor.odio@tinciduntvehicularisus.edu', '0031833995172', '0031642479403'),
+(20, 1, 'Brennan', 'Jeanette', 'Chase', 'Male', 'P.O. Box 581, 6255 Arcu Rd.', '8689JE', 'Rio Verde', '', '', '', 'dis@risus.co.uk', '0031909984855', '0031626108620');
 
 -- --------------------------------------------------------
 
@@ -355,7 +358,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `postalcode` varchar(255) NOT NULL,
   `residence` varchar(255) NOT NULL,
   `telephone` varchar(255) NOT NULL,
-  `mobile` varchar(255) NOT NULL
+  `mobile` varchar(255)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
@@ -368,7 +371,7 @@ INSERT INTO `users` (`id`, `username`, `password`, `firstname`, `prefix`, `lastn
 (3, 'Manager', 'b1d921f725e7f1696e31a09e86ec52debdbe1f826a77d60705a1682cfd70227200ecb5aee3f8d19cd2061be54ea612b4c713a0e17eb68dd88406a4bc9bd270c3', 'Manager', '', '', 'Manager', 'Male', 1, '21 Street', '1000AB', 'Dubai', '0', '0'),
 (4, 'Employee', '3c13b13c0390035b1d4aa3f456cf3fde8ab950056532ce2932581fada8c05fa114ff05c9b9541b73c9dcffa1b5ff76db3c22233975e323565c0af4962988a6af', 'Employee', '', '', 'Employee', 'Female', 25, 'Straat 1', '1000AB', 'Brussels', '0', '0'),
 (5, 'Gerrit', '27d10da9b265520f727e13105b08e1adcb36277c3d0a1aaf4d98e21430979aa51616c9070ca37778170b8cdaf5866df7e6065d24e9c87850753fbb7567ca2553', 'Gerrit', 'van de', 'Fabriek', 'Employee', 'Other', 12, 'Rietveldstraat 12', '1012AB', 'Amstelveen', '0031201234567', '0031612345678'),
-(6, '', '9c1dd9c1e1684575051616be7814f15374bb73a9f7685ebe30969de4975976fac5fa449519fbc54ddcdc43fcf08eabb292523548349b5ce7fbb86b6fa30c1278', 'Super', '', 'User', 'Super', 'Other', 4, 'Rootstrasse', '1000AB', 'Root', '0', '0'),
+(6, 'Test', '9c1dd9c1e1684575051616be7814f15374bb73a9f7685ebe30969de4975976fac5fa449519fbc54ddcdc43fcf08eabb292523548349b5ce7fbb86b6fa30c1278', 'Super', '', 'Test', 'Super', 'Other', 4, 'Rootstrasse', '1000AB', 'Root', '0', '0'),
 (7, 'Nick', 'b4f52d6d30415aa25e545b15bdd81a93785581c1fd226b0bfaf36043cf76d7d17f8f5dd43b74e5eb5137586fddfc36535b266bf27bd4eb90b798b033b78dfd09', 'Nick', '', 'Onbekend', 'Super', 'Male', 4, 'Abc Straat 21', '1050AB', 'Amsterdam', '003167123456', '003167123456'),
 (8, 'Tijme', 'd824e9f681ab297e7a1cb42260c6241d3a0dcb9ede2a1daa5c8b853b223d9274acf969d84a08d3912ffeb0d46a25325d4a3af862d0ce6a5d84f84033621c6537', 'Tijme', '', 'Daar', 'Manager', 'Male', 16, 'Blabla 12', '6592SD', 'Dordrecht', '0049201234466', '0049201234466'),
 (9, 'Gerda', 'b9ac1d13d07c61ed07baec88b5aa7193635ca83d9a31b1bf2bd8cc8d96a915f6649bcb3644c3290a123620f5da55731348618ed293aa08463d94ec2ba136f534', 'Gerda', '', 'Balal', 'Moderator', 'Female', 14, 'Amsterdamseweg 20', '1132AD', 'Hoofddorp', '001221324567', '001221324567'),
@@ -482,7 +485,7 @@ ADD CONSTRAINT `log_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON
 -- Constraints for table `luggage`
 --
 ALTER TABLE `luggage`
-ADD CONSTRAINT `luggage_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `luggage_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
 ADD CONSTRAINT `luggage_ibfk_2` FOREIGN KEY (`location_id`) REFERENCES `locations` (`id`) ON UPDATE CASCADE;
 
 --
