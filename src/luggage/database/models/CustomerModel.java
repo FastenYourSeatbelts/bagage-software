@@ -31,11 +31,14 @@ import com.mysql.jdbc.StringUtils;
  *
  * A class that maps the customers table
  *
- * @package luggage.database.models
+ * Package: luggage.database.models
  * @author ITopia IS102-5
  */
 public class CustomerModel extends Model {
 
+    /**
+     *
+     */
     public CustomerModel() {
 
     }

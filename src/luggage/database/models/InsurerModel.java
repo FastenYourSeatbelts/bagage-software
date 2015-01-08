@@ -29,11 +29,14 @@ package luggage.database.models;
  *
  * A class that maps the insurers table
  *
- * @package luggage.database.models
+ * Package: luggage.database.models
  * @author ITopia IS102-5
  */
 public class InsurerModel extends Model {
 
+    /**
+     *
+     */
     public InsurerModel() {
 
     }

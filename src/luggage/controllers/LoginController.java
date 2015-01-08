@@ -40,6 +40,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import luggage.AppConfig;
 import luggage.Debug;
@@ -51,40 +52,77 @@ import luggage.database.models.LogModel;
  *
  * Controller for login.fxml and login_help.fxml
  *
- * @package luggage.controllers
+ * Package: luggage.controllers
+ *
  * @author ITopia IS102-5
  */
 public class LoginController extends BaseController implements Initializable {
 
+    /**
+     *
+     */
+    @FXML
+    private AnchorPane helpGeneral;
+
+    /**
+     *
+     */
     @FXML
     private Button exit;
 
+    /**
+     *
+     */
     @FXML
     private Button help;
 
+    /**
+     *
+     */
     @FXML
     private Button login;
 
+    /**
+     *
+     */
     @FXML
     private Button viewClose;
 
+    /**
+     *
+     */
     @FXML
     private Label copyright;
 
+    /**
+     *
+     */
     @FXML
     private Label error;
 
+    /**
+     *
+     */
     @FXML
     private PasswordField password;
 
+    /**
+     *
+     */
     @FXML
     private TextField username;
 
+    /**
+     *
+     */
     @FXML
     private void onKeyPress() {
         error.setText("");
     }
 
+    /**
+     *
+     */
     @FXML
     private void exit() {
         System.out.println("User " + closed + " the application.");
@@ -92,6 +130,10 @@ public class LoginController extends BaseController implements Initializable {
         Debug.print("Application session ended. Session length: " + MainActivity.appSessionStart + " - " + MainActivity.dateFormatFull.format(date));
         System.exit(0);
     }
+
+    /**
+     *
+     */
     private String closed = "exited";
 
     /**
@@ -147,6 +189,12 @@ public class LoginController extends BaseController implements Initializable {
         osDependable();
         Debug.print("LOGIN CONTROLLER-----------------------------------------------------------------");
         copyright.setText(AppConfig.ApplicationCopyRight);
+        keyActions();
+
+        // Help
+        if (helpGeneral != null) {
+            helpKeyAction();
+        }
     }
 
     /**
@@ -188,16 +236,37 @@ public class LoginController extends BaseController implements Initializable {
         MainActivity.firstStart = false;
     }
 
-//    public void keyActions() {
-//        listTableView.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-//            if (b.getCode().equals(KeyCode.F1)) {
-//                listHelp();
-//            }
-//        });
-        /**
-         * Makes non-fundamental changes based on OS. For now merely sets native
-         * terminology.
-         */
+    @FXML
+    private void keyActions() {
+        username.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.F1)) {
+                Debug.print("hij komt langs username");
+                listHelp();
+            }
+        });
+        password.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.F1)) {
+                listHelp();
+            }
+        });
+    }
+
+    /**
+     * Creates the event filter for the help view.
+     */
+    @FXML
+    private void helpKeyAction() {
+        helpGeneral.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                viewClose();
+            }
+        });
+    }
+
+    /**
+     * Makes non-fundamental changes based on OS. For now merely sets native
+     * terminology.
+     */
     private void osDependable() {
         final String os = System.getProperty("os.name");
         closed = "exited";

@@ -40,6 +40,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import luggage.Debug;
 import luggage.MainActivity;
 import luggage.database.models.LogModel;
@@ -51,38 +53,80 @@ import luggage.helpers.StageHelper;
  *
  * Controller for log/list.fxml and log/help.fxml
  *
- * @package luggage.controllers
+ * Package: luggage.controllers
  * @author ITopia IS102-5
  */
 public class LogController extends BaseController implements Initializable {
 
+    /**
+     *
+     */
     @FXML
     private TableView listTableView;
 
+    /**
+     *
+     */
     @FXML
     private TableColumn listTableViewEmployee;
 
+    /**
+     *
+     */
     @FXML
     private TableColumn listTableViewType;
 
+    /**
+     *
+     */
     @FXML
     private TableColumn listTableViewMessage;
 
+    /**
+     *
+     */
     @FXML
     private TableColumn listTableViewDate;
 
+    /**
+     *
+     */
+    @FXML
+    private AnchorPane helpGeneral;
+
+    /**
+     *
+     */
     @FXML
     private Button listHelp;
 
+    /**
+     *
+     */
+    @FXML
+    private Button viewClose;
+
+    /**
+     *
+     */
     @FXML
     private Button viewUser;
 
+    /**
+     *
+     */
     @FXML
     private Label printNotif;
 
+    /**
+     *
+     */
     @FXML
     private TextField listSearchField;
 
+    /**
+     *
+     */
     private ObservableList<LogModel> listData = FXCollections.observableArrayList();
 
     /**
@@ -162,7 +206,7 @@ public class LogController extends BaseController implements Initializable {
     /**
      * Creates the (mouse, keyboard, etc.) event filters for the list view.
      */
-    public void keyActions() {
+    private void keyActions() {
         listTableView.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.H) || b.getCode().equals(KeyCode.F1)) {
                 listHelp();
@@ -173,6 +217,18 @@ public class LogController extends BaseController implements Initializable {
                 listResetTableView("", new String[0]);
                 listSearchField.setText("");
                 clearNotif();
+            }
+        });
+    }
+
+    /**
+     * Creates the event filter for the help view.
+     */
+    @FXML
+    private void helpKeyAction() {
+        helpGeneral.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                viewClose();
             }
         });
     }
@@ -243,5 +299,13 @@ public class LogController extends BaseController implements Initializable {
     private void clearSearch() {
         listOnSearch();
         clearNotif();
+    }
+
+    /**
+     * Closes current view.
+     */
+    public void viewClose() {
+        Stage cancelStage = (Stage) viewClose.getScene().getWindow();
+        StageHelper.closeStage(cancelStage);
     }
 }

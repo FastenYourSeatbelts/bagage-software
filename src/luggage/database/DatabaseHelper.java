@@ -37,7 +37,7 @@ import luggage.Debug;
  *
  * This class manages the database connection
  *
- * @package luggage.database
+ * Package: luggage.database
  * @author ITopia IS102-5
  */
 public class DatabaseHelper {

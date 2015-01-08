@@ -29,17 +29,29 @@ package luggage.database.models;
  *
  * A class that maps the luggage table
  *
- * @package luggage.database.models
+ * Package: luggage.database.models
  * @author ITopia IS102-5
  */
 public class LuggageModel extends Model {
 
+    /**
+     *
+     */
     public static final String STATUS_MISSING = "Missing";
 
+    /**
+     *
+     */
     public static final String STATUS_FOUND = "Found";
 
+    /**
+     *
+     */
     public static final String STATUS_RESOLVED = "Resolved";
 
+    /**
+     *
+     */
     public LuggageModel() {
 
     }

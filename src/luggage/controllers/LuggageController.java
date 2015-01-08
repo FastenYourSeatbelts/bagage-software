@@ -44,6 +44,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import static jdk.nashorn.internal.runtime.Context.printStackTrace;
 import luggage.Debug;
@@ -70,7 +71,8 @@ import org.controlsfx.dialog.Dialogs;
  * Controller for luggage/list.fxml, luggage/new, luggage/edit, luggage/view,
  * and luggage/help.
  *
- * @package luggage.controllers
+ * Package: luggage.controllers
+ *
  * @author ITopia IS102-5
  */
 public class LuggageController extends BaseController implements Initializable {
@@ -78,6 +80,9 @@ public class LuggageController extends BaseController implements Initializable {
     /**
      * LIST ELEMENTS
      */
+    @FXML
+    private AnchorPane helpGeneral;
+
     @FXML
     private TableView listTableView;
 
@@ -261,6 +266,11 @@ public class LuggageController extends BaseController implements Initializable {
                     setViewChoiceBoxes();
                     setViewFields();
                     viewKeyActions();
+                }
+
+                // Help
+                if (helpGeneral != null) {
+                    helpKeyAction();
                 }
             }
         });
@@ -516,26 +526,26 @@ public class LuggageController extends BaseController implements Initializable {
 
         // Start a new content stream which will "hold" the to be created content
         PDPageContentStream contentStream = new PDPageContentStream(document, page);
-        
+
         // Define a text content stream using the selected font
         contentStream.beginText();
         contentStream.setFont(font, 12);
         contentStream.moveTextPositionByAmount(100, 100);
         contentStream.drawString("Corendon");
         contentStream.endText();
-        
+
         contentStream.beginText();
         contentStream.setFont(font, 12);
         contentStream.moveTextPositionByAmount(100, 200);
         contentStream.drawString("Customer name:");
         contentStream.endText();
-        
+
         contentStream.beginText();
         contentStream.setFont(font, 12);
         contentStream.moveTextPositionByAmount(100, 300);
         contentStream.drawString("Luggage Id");
         contentStream.endText();
-        
+
         contentStream.beginText();
         contentStream.setFont(font, 12);
         contentStream.moveTextPositionByAmount(100, 400);
@@ -676,10 +686,10 @@ public class LuggageController extends BaseController implements Initializable {
         try {
             viewCustomerId.getSelectionModel().select(selectedCustomer);
             viewCustomerAsText.setText(selectedCustomer.toString());
-                        
+
             MainActivity.searchTerm = selectedCustomer.getFullname();
             Debug.print("LuggageController setting: " + MainActivity.searchTerm);
-            
+
         } catch (NullPointerException n) {
             printStackTrace(n);
         }
@@ -788,6 +798,18 @@ public class LuggageController extends BaseController implements Initializable {
                 listResetTableView("", new String[0]);
                 listSearchField.setText("");
                 clearNotif();
+            }
+        });
+    }
+
+    /**
+     * Creates the event filter for the help view.
+     */
+    @FXML
+    private void helpKeyAction() {
+        helpGeneral.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                viewClose();
             }
         });
     }

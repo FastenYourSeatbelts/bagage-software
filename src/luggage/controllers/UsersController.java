@@ -47,6 +47,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import luggage.Debug;
 import luggage.MainActivity;
@@ -66,12 +67,21 @@ import org.controlsfx.dialog.Dialogs;
  * Controller for users/list.fxml, users/new.fxml, users/edit, users/view, and
  * users/help.
  *
- * @package luggage.controllers
+ * Package: luggage.controllers
  * @author ITopia IS102-5
  */
 public class UsersController extends BaseController implements Initializable {
 
+    /**
+     *
+     */
     public TabPane tabs;
+
+    /**
+     *
+     */
+    @FXML
+    private AnchorPane helpGeneral;
 
     /**
      * LIST ELEMENTS
@@ -79,200 +89,387 @@ public class UsersController extends BaseController implements Initializable {
     @FXML
     private TableView listTableView;
 
+    /**
+     *
+     */
     @FXML
     private TableColumn listTableViewUsername;
 
+    /**
+     *
+     */
     @FXML
     private TableColumn listTableViewName;
 
+    /**
+     *
+     */
     @FXML
     private TableColumn listTableViewRole;
 
+    /**
+     *
+     */
     @FXML
     private TextField listSearchField;
 
+    /**
+     *
+     */
     @FXML
     private Button listNew;
 
+    /**
+     *
+     */
     @FXML
     private Button listHelp;
 
+    /**
+     *
+     */
     @FXML
     private Button listEdit;
 
+    /**
+     *
+     */
     @FXML
     private Button listView;
 
+    /**
+     *
+     */
     @FXML
     private Button listRemove;
 
+    /**
+     *
+     */
     @FXML
     private Label printNotif;
 
+    // NEW ELEMENTS
+
     /**
-     * NEW ELEMENTS
+     *
      */
     @FXML
     private TextField newAddress;
 
+    /**
+     *
+     */
     @FXML
     private TextField newPostalcode;
 
+    /**
+     *
+     */
     @FXML
     private TextField newResidence;
 
+    /**
+     *
+     */
     @FXML
     private ChoiceBox<LocationModel> newWorkplace;
 
+    /**
+     *
+     */
     @FXML
     private ChoiceBox newRole;
 
+    /**
+     *
+     */
     @FXML
     private TextField newTelephone;
 
+    /**
+     *
+     */
     @FXML
     private TextField newMobile;
 
+    /**
+     *
+     */
     @FXML
     private TextField newFirstname;
 
+    /**
+     *
+     */
     @FXML
     private TextField newPrefix;
 
+    /**
+     *
+     */
     @FXML
     private TextField newLastname;
 
+    /**
+     *
+     */
     @FXML
     private ChoiceBox newGender;
 
+    /**
+     *
+     */
     @FXML
     private TextField newUsername;
 
+    /**
+     *
+     */
     @FXML
     private TextField newPassword;
 
+    /**
+     *
+     */
     @FXML
     private TextField newPasswordRepeat;
 
+    /**
+     *
+     */
     @FXML
     private Button newSave;
 
+    /**
+     *
+     */
     @FXML
     private Button newReset;
 
+    /**
+     *
+     */
     @FXML
     private Button newCancel;
 
+    
+    // EDIT ELEMENTS
+     
     /**
-     * EDIT ELEMENTS
+     *
      */
     @FXML
     private TextField editFirstname;
 
+    /**
+     *
+     */
     @FXML
     private TextField editPrefix;
 
+    /**
+     *
+     */
     @FXML
     private TextField editLastname;
 
+    /**
+     *
+     */
     @FXML
     private TextField editUsername;
 
+    /**
+     *
+     */
     @FXML
     private TextField editPassword;
 
+    /**
+     *
+     */
     @FXML
     private TextField editPasswordRepeat;
 
+    /**
+     *
+     */
     @FXML
     private TextField editAddress;
 
+    /**
+     *
+     */
     @FXML
     private TextField editPostalcode;
 
+    /**
+     *
+     */
     @FXML
     private TextField editResidence;
 
+    /**
+     *
+     */
     @FXML
     private TextField editTelephone;
 
+    /**
+     *
+     */
     @FXML
     private TextField editMobile;
 
+    /**
+     *
+     */
     @FXML
     private ChoiceBox editGender;
 
+    /**
+     *
+     */
     @FXML
     private ChoiceBox editRole;
 
+    /**
+     *
+     */
     @FXML
     private ChoiceBox<LocationModel> editWorkplace;
 
+    /**
+     *
+     */
     @FXML
     private Button editSave;
 
+    /**
+     *
+     */
     @FXML
     private Button editReset;
 
+    /**
+     *
+     */
     @FXML
     private Button editCancel;
 
+    /**
+     *
+     */
     @FXML
     private String currentUsername;
 
+    // VIEW ELEMENTS
+
     /**
-     * VIEW ELEMENTS
+     * 
      */
     @FXML
     private TextField viewUsername;
 
+    /**
+     *
+     */
     @FXML
     private TextField viewFirstname;
 
+    /**
+     *
+     */
     @FXML
     private TextField viewPrefix;
 
+    /**
+     *
+     */
     @FXML
     private TextField viewLastname;
 
+    /**
+     *
+     */
     @FXML
     private TextField viewAddress;
 
+    /**
+     *
+     */
     @FXML
     private TextField viewPostalcode;
 
+    /**
+     *
+     */
     @FXML
     private TextField viewResidence;
 
+    /**
+     *
+     */
     @FXML
     private TextField viewTelephone;
 
+    /**
+     *
+     */
     @FXML
     private TextField viewMobile;
 
+    /**
+     *
+     */
     @FXML
     private ChoiceBox viewRole;
 
+    /**
+     *
+     */
     @FXML
     private ChoiceBox viewGender;
 
+    /**
+     *
+     */
     @FXML
     private ChoiceBox viewWorkplace;
 
+    /**
+     *
+     */
     @FXML
     private TextField viewGenderAsText;
 
+    /**
+     *
+     */
     @FXML
     private TextField viewRoleAsText;
 
+    /**
+     *
+     */
     @FXML
     private TextField viewWorkplaceAsText;
 
+    /**
+     *
+     */
     @FXML
     private Button viewClose;
 
+    /**
+     *
+     */
     private ObservableList<UserModel> listData = FXCollections.observableArrayList();
 
+    /**
+     *
+     */
     private final ObservableList<LocationModel> workplaceData = FXCollections.observableArrayList();
 
     /**
@@ -353,7 +550,11 @@ public class UsersController extends BaseController implements Initializable {
                     setViewFields();
                     viewKeyActions();
                 }
-
+                
+                // Help
+                if (helpGeneral != null) {
+                    helpKeyAction();
+                }
             }
         });
     }
@@ -454,6 +655,18 @@ public class UsersController extends BaseController implements Initializable {
                 listResetTableView("", new String[0]);
                 listSearchField.setText("");
                 clearNotif();
+            }
+        });
+    }
+
+    /**
+     * Creates the event filter for the help view.
+     */
+    @FXML
+    private void helpKeyAction() {
+        helpGeneral.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                viewClose();
             }
         });
     }

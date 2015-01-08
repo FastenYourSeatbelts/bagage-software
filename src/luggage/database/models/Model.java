@@ -41,19 +41,37 @@ import luggage.Debug;
  *
  * A super class for all the models containing default model functions
  *
- * @package luggage.database.models
+ * Package: luggage.database.models
  * @author ITopia IS102-5
  */
 abstract public class Model {
 
+    /**
+     *
+     * @return
+     */
     protected abstract String getTable();
 
+    /**
+     *
+     * @return
+     */
     protected abstract Model getModel();
 
+    /**
+     *
+     * @return
+     */
     protected abstract String getOrderBy();
 
+    /**
+     *
+     */
     protected HashMap<String, String> row = new HashMap<String, String>();
 
+    /**
+     *
+     */
     public Model() {
 
     }
@@ -125,6 +143,10 @@ abstract public class Model {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Model> findAll() {
         return findAll("", new String[0]);
     }
