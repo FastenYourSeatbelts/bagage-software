@@ -516,7 +516,7 @@ public class LuggageController extends BaseController implements Initializable {
 
         // Start a new content stream which will "hold" the to be created content
         PDPageContentStream contentStream = new PDPageContentStream(document, page);
-        
+
         // Define a text content stream using the selected font
         contentStream.beginText();
         contentStream.setFont(font, 12);
@@ -526,22 +526,16 @@ public class LuggageController extends BaseController implements Initializable {
         
         contentStream.beginText();
         contentStream.setFont(font, 12);
-        contentStream.moveTextPositionByAmount(100, 200);
-        contentStream.drawString("Customer name:");
+        contentStream.moveTextPositionByAmount(0, 48);
+        contentStream.drawString("Corendon");
         contentStream.endText();
-        
+       
         contentStream.beginText();
         contentStream.setFont(font, 12);
-        contentStream.moveTextPositionByAmount(100, 300);
-        contentStream.drawString("Luggage Id");
+        contentStream.moveTextPositionByAmount(0, 48);
+        contentStream.drawString("Corendon");
         contentStream.endText();
         
-        contentStream.beginText();
-        contentStream.setFont(font, 12);
-        contentStream.moveTextPositionByAmount(100, 400);
-        contentStream.drawString("Location");
-        contentStream.endText();
-
         // Make sure that the content stream is closed:
         contentStream.close();
 
@@ -549,6 +543,17 @@ public class LuggageController extends BaseController implements Initializable {
         document.save("Bon.pdf");
         document.close();
 
+        Stage exportPdf = (Stage) listTableView.getScene().getWindow();
+        
+        //Show a warning that the data has been exported to a PDF
+        Action response = Dialogs.create().owner(exportPdf)
+                .title("Export to PDF")
+                //.masthead("Are you sure you want to delete this item? 2")
+                .message("The data has been exported to a PDF file")
+                .actions(Dialog.ACTION_OK)
+                .showWarning();
+        
+        //Log the action so that it is viewable in the log
         Debug.logToDatabase(LogModel.TYPE_INFO, "/*eenIdentifier + */" + "exported as PDF file.");
     }
 
