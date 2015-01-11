@@ -50,14 +50,17 @@ import static jdk.nashorn.internal.runtime.Context.printStackTrace;
 import luggage.Debug;
 import luggage.MainActivity;
 import luggage.database.models.CustomerModel;
+import luggage.database.models.InsurerModel;
 import luggage.database.models.LocationModel;
 import luggage.database.models.LogModel;
 import luggage.database.models.LuggageModel;
 import luggage.database.models.Model;
+import luggage.database.models.UserModel;
 import luggage.helpers.StageHelper;
 import org.apache.pdfbox.exceptions.COSVisitorException;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.edit.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
@@ -518,43 +521,73 @@ public class LuggageController extends BaseController implements Initializable {
     public void listExportToPdf() throws IOException, COSVisitorException {
         // Create a document and add a page to it
         PDDocument document = new PDDocument();
-        PDPage page = new PDPage();
+        PDPage page = new PDPage(PDPage.PAGE_SIZE_A5);
         document.addPage(page);
 
         // Create a new font object selecting one of the PDF base fonts
         PDFont font = PDType1Font.HELVETICA_BOLD;
 
         // Start a new content stream which will "hold" the to be created content
-        PDPageContentStream contentStream = new PDPageContentStream(document, page);
+        PDPageContentStream pdf = new PDPageContentStream(document, page);
+       
+        PDRectangle rect = page.getMediaBox();
+        
+        int line = 0;
+        
+         LuggageModel luggage = (LuggageModel) listTableView.getSelectionModel().getSelectedItem();
+         
+         
 
         // Define a text content stream using the selected font
-        contentStream.beginText();
-        contentStream.setFont(font, 12);
-        contentStream.moveTextPositionByAmount(100, 100);
-        contentStream.drawString("Corendon");
-        contentStream.endText();
-
-        contentStream.beginText();
-        contentStream.setFont(font, 12);
-        contentStream.moveTextPositionByAmount(0, 48);
-        contentStream.drawString("Corendon");
-        contentStream.endText();
+        pdf.beginText();
+        pdf.setFont(font, 12);
+        pdf.moveTextPositionByAmount(25, rect.getHeight() - 50 *(++line));
+        pdf.drawString("Customer Name:        " + luggage.getCustomerName());
+        pdf.endText();
+                    
        
-        contentStream.beginText();
-        contentStream.setFont(font, 12);
-        contentStream.moveTextPositionByAmount(0, 48);
-        contentStream.drawString("Corendon");
-        contentStream.endText();
+        
+        
+
+        pdf.beginText();
+        pdf.setFont(font, 12);
+        pdf.moveTextPositionByAmount(25, rect.getHeight() - 50*(++line));
+        pdf.drawString("Insurer Name:    ");
+        pdf.endText();
+        
+        pdf.beginText();
+        pdf.setFont(font, 12);
+        pdf.moveTextPositionByAmount(25, rect.getHeight() - 50*(++line));
+        pdf.drawString("Luggage Description:    " + luggage.getTags());
+        pdf.endText();
+        
+        pdf.beginText();
+        pdf.setFont(font, 12);
+        pdf.moveTextPositionByAmount(25, rect.getHeight() - 50*(++line));
+        pdf.drawString("Employee Name:      "  );
+        pdf.endText();
+        
+        pdf.beginText();
+        pdf.setFont(font, 12);
+        pdf.moveTextPositionByAmount(25, rect.getHeight() - 50*(++line));
+        pdf.drawString("Employee Signature:");
+        pdf.endText();
+        
+        pdf.beginText();
+        pdf.setFont(font, 12);
+        pdf.moveTextPositionByAmount(200, rect.getHeight() - 50*(line));
+        pdf.drawString("Customer Signature:");
+        pdf.endText();
         
         // Make sure that the content stream is closed:
-        contentStream.close();
+        pdf.close();
 
         // Save the results and ensure that the document is properly closed:
         document.save("Bon.pdf");
         document.close();
 
         Stage exportPdf = (Stage) listTableView.getScene().getWindow();
-        
+
         //Show a warning that the data has been exported to a PDF
         Action response = Dialogs.create().owner(exportPdf)
                 .title("Export to PDF")
@@ -562,7 +595,7 @@ public class LuggageController extends BaseController implements Initializable {
                 .message("The data has been exported to a PDF file")
                 .actions(Dialog.ACTION_OK)
                 .showWarning();
-        
+
         //Log the action so that it is viewable in the log
         Debug.logToDatabase(LogModel.TYPE_INFO, "/*eenIdentifier + */" + "exported as PDF file.");
     }
