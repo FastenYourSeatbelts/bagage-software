@@ -27,6 +27,7 @@ package luggage.controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -57,6 +58,7 @@ import luggage.database.models.LuggageModel;
 import luggage.database.models.Model;
 import luggage.database.models.UserModel;
 import luggage.helpers.StageHelper;
+import luggage.security.Authentication;
 import org.apache.pdfbox.exceptions.COSVisitorException;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -534,7 +536,7 @@ public class LuggageController extends BaseController implements Initializable {
         
         int line = 0;
         
-         LuggageModel luggage = (LuggageModel) listTableView.getSelectionModel().getSelectedItem();
+        LuggageModel luggage = (LuggageModel) listTableView.getSelectionModel().getSelectedItem();
          
          
 
@@ -542,7 +544,7 @@ public class LuggageController extends BaseController implements Initializable {
         pdf.beginText();
         pdf.setFont(font, 12);
         pdf.moveTextPositionByAmount(25, rect.getHeight() - 50 *(++line));
-        pdf.drawString("Customer Name:        " + luggage.getCustomerName());
+        pdf.drawString("Customer Name:\t\t" + luggage.getCustomerName());
         pdf.endText();
                     
        
@@ -552,19 +554,19 @@ public class LuggageController extends BaseController implements Initializable {
         pdf.beginText();
         pdf.setFont(font, 12);
         pdf.moveTextPositionByAmount(25, rect.getHeight() - 50*(++line));
-        pdf.drawString("Insurer Name:    ");
+        pdf.drawString("Insurer Name:\t\t" );
         pdf.endText();
         
         pdf.beginText();
         pdf.setFont(font, 12);
         pdf.moveTextPositionByAmount(25, rect.getHeight() - 50*(++line));
-        pdf.drawString("Luggage Description:    " + luggage.getTags());
+        pdf.drawString("Luggage Description:\t\t" + luggage.getTags());
         pdf.endText();
         
         pdf.beginText();
         pdf.setFont(font, 12);
         pdf.moveTextPositionByAmount(25, rect.getHeight() - 50*(++line));
-        pdf.drawString("Employee Name:      "  );
+        pdf.drawString("Employee Name:\t\t"  + Authentication.getCurrentUser().getFullname());
         pdf.endText();
         
         pdf.beginText();
@@ -583,7 +585,7 @@ public class LuggageController extends BaseController implements Initializable {
         pdf.close();
 
         // Save the results and ensure that the document is properly closed:
-        document.save("Bon.pdf");
+        document.save("Receipt.pdf");
         document.close();
 
         Stage exportPdf = (Stage) listTableView.getScene().getWindow();
@@ -597,7 +599,7 @@ public class LuggageController extends BaseController implements Initializable {
                 .showWarning();
 
         //Log the action so that it is viewable in the log
-        Debug.logToDatabase(LogModel.TYPE_INFO, "/*eenIdentifier + */" + "exported as PDF file.");
+        Debug.logToDatabase(LogModel.TYPE_INFO, "Receipt of " + " exported as PDF file.");
     }
 
     /**
