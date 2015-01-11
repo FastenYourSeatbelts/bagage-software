@@ -531,56 +531,51 @@ public class LuggageController extends BaseController implements Initializable {
 
         // Start a new content stream which will "hold" the to be created content
         PDPageContentStream pdf = new PDPageContentStream(document, page);
-       
+
         PDRectangle rect = page.getMediaBox();
-        
+
         int line = 0;
-        
+
         LuggageModel luggage = (LuggageModel) listTableView.getSelectionModel().getSelectedItem();
-         
-         
 
         // Define a text content stream using the selected font
         pdf.beginText();
         pdf.setFont(font, 12);
-        pdf.moveTextPositionByAmount(25, rect.getHeight() - 50 *(++line));
+        pdf.moveTextPositionByAmount(25, rect.getHeight() - 50 * (++line));
         pdf.drawString("Customer Name:\t\t" + luggage.getCustomerName());
         pdf.endText();
-                    
-       
-        
-        
 
         pdf.beginText();
         pdf.setFont(font, 12);
-        pdf.moveTextPositionByAmount(25, rect.getHeight() - 50*(++line));
-        pdf.drawString("Insurer Name:\t\t" );
+        pdf.moveTextPositionByAmount(25, rect.getHeight() - 50 * (++line));
+        luggage.getCustomer().getInsurerName();
+        pdf.drawString("Insurer Name:\t \t" + luggage.getCustomer().getInsurerName());
         pdf.endText();
-        
+
         pdf.beginText();
         pdf.setFont(font, 12);
-        pdf.moveTextPositionByAmount(25, rect.getHeight() - 50*(++line));
+        pdf.moveTextPositionByAmount(25, rect.getHeight() - 50 * (++line));
         pdf.drawString("Luggage Description:\t\t" + luggage.getTags());
         pdf.endText();
-        
+
         pdf.beginText();
         pdf.setFont(font, 12);
-        pdf.moveTextPositionByAmount(25, rect.getHeight() - 50*(++line));
-        pdf.drawString("Employee Name:\t\t"  + Authentication.getCurrentUser().getFullname());
+        pdf.moveTextPositionByAmount(25, rect.getHeight() - 50 * (++line));
+        pdf.drawString("Employee Name:\t\t" + Authentication.getCurrentUser().getFullname());
         pdf.endText();
-        
+
         pdf.beginText();
         pdf.setFont(font, 12);
-        pdf.moveTextPositionByAmount(25, rect.getHeight() - 50*(++line));
+        pdf.moveTextPositionByAmount(25, rect.getHeight() - 50 * (++line));
         pdf.drawString("Employee Signature:");
         pdf.endText();
-        
+
         pdf.beginText();
         pdf.setFont(font, 12);
-        pdf.moveTextPositionByAmount(200, rect.getHeight() - 50*(line));
+        pdf.moveTextPositionByAmount(200, rect.getHeight() - 50 * (line));
         pdf.drawString("Customer Signature:");
         pdf.endText();
-        
+
         // Make sure that the content stream is closed:
         pdf.close();
 
