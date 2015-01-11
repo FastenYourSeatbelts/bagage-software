@@ -38,7 +38,7 @@
             </children>
         </AnchorPane>
         <Button fx:id="listHelp" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#listHelp" prefHeight="26.0" prefWidth="70.0" text="Help" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
-        <GridPane prefHeight="439.0" prefWidth="562.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+        <GridPane fx:id="chartHolder" opacity="0.9" prefHeight="439.0" prefWidth="562.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -48,7 +48,7 @@
             </rowConstraints>
             <children>
                 <PieChart id="piechart" fx:id="piechart" labelLineLength="25.0" onMousePressed="#clearNotif" opacity="0.9" startAngle="90.0" title="Hover over the pie slices for more information." />
-                <BarChart id="barchart" fx:id="barchart" onMousePressed="#clearNotif" opacity="0.9" GridPane.columnIndex="1">  
+                <BarChart id="barchart" fx:id="barchart" legendVisible="false" onMousePressed="#clearNotif" opacity="0.9" GridPane.columnIndex="1">  
                     <xAxis>  
                         <CategoryAxis side="BOTTOM" />  
                     </xAxis>  
