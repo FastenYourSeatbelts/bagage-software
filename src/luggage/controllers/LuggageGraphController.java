@@ -27,8 +27,12 @@ package luggage.controllers;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -40,7 +44,11 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.SnapshotParameters;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
@@ -83,6 +91,12 @@ public class LuggageGraphController extends BaseController implements Initializa
      */
     @FXML
     private PieChart piechart;
+	
+	/**
+	 * 
+	 */
+	@FXML
+	private BarChart barchart;
 
     /**
      *
@@ -145,9 +159,9 @@ public class LuggageGraphController extends BaseController implements Initializa
         if (piechart != null) {
             piechart.visibleProperty().set(true);
             end.setValue(LocalDate.now());
-            start.setValue(LocalDate.parse("2011-01-01"));
+            start.setValue(LocalDate.parse("2014-01-01"));
             initialTitle();
-            updateChart();
+            //updateChart();
             KeyActions();
 
             // Help
@@ -176,16 +190,15 @@ public class LuggageGraphController extends BaseController implements Initializa
         saveAsPng.setDisable(true);
         String dateQuery = "";
 
-        if (this.start.getValue() != null && this.end.getValue() != null) {
-            String sStart = this.start.getValue().toString() + " 00:00:00";
-            String sEnd = this.end.getValue().toString() + " 00:00:00";
-
+        if (start.getValue() != null && end.getValue() != null) {
+            String sStart = start.getValue().toString() + " 00:00:00";
+            String sEnd = end.getValue().toString() + " 00:00:00";
             dateQuery = "AND datetime BETWEEN '" + sStart + "' AND '" + sEnd + "'";
-        } else if (this.start.getValue() != null) {
-            String sStart = this.start.getValue().toString() + " 00:00:00";
+        } else if (start.getValue() != null) {
+            String sStart = start.getValue().toString() + " 00:00:00";
             dateQuery = "AND datetime > '" + sStart + "'";
-        } else if (this.end.getValue() != null) {
-            String sEnd = this.end.getValue().toString() + " 00:00:00";
+        } else if (end.getValue() != null) {
+            String sEnd = end.getValue().toString() + " 00:00:00";
             dateQuery = "AND datetime < '" + sEnd + "'";
         }
 
@@ -287,6 +300,8 @@ public class LuggageGraphController extends BaseController implements Initializa
         hoverNotif();
         clearNotif();
         Debug.print("Reached end of updateChart() method.");
+		
+		updateBarChart();
     }
 
     /**
@@ -310,12 +325,12 @@ public class LuggageGraphController extends BaseController implements Initializa
         if (piechart.getTitle().startsWith("Hover")) {
             piechart.setTitle("\n" + dateStart + " - " + dateEnd);
         }
-        Debug.print("Locally loaded CSS files prior to snapshot: " + piechart.getStylesheets().toString());
+       // Debug.print("Locally loaded CSS files prior to snapshot: " + piechart.getStylesheets().toString());
         piechart.getStylesheets().add("/resources/stylesheets/chartonexport.css");
-        Debug.print("Locally loaded CSS files after add: " + piechart.getStylesheets().toString());
+       // Debug.print("Locally loaded CSS files after add: " + piechart.getStylesheets().toString());
         WritableImage image = piechart.snapshot(new SnapshotParameters(), null);
         piechart.getStylesheets().remove("/resources/stylesheets/chartonexport.css");
-        Debug.print("Locally loaded CSS files after remove: " + piechart.getStylesheets().toString());
+       // Debug.print("Locally loaded CSS files after remove: " + piechart.getStylesheets().toString());
         initialTitle();
 
         // File chooser area
@@ -383,7 +398,7 @@ public class LuggageGraphController extends BaseController implements Initializa
             data.getNode().addEventHandler(MouseEvent.MOUSE_ENTERED, (MouseEvent e) -> {
                 lastSlice = returnLabel(data.getName());
                 Double dValue = data.getPieValue() / total * 10000;
-                Debug.print("Locally loaded CSS files prior to mouse enter: " + piechart.getStylesheets().toString());
+                //Debug.print("Locally loaded CSS files prior to mouse enter: " + piechart.getStylesheets().toString());
 
                 piechart.getStylesheets().clear();
                 piechart.getStylesheets().add("/resources/stylesheets/title" + returnCssFilePath(lastSlice) + ".css");
@@ -391,7 +406,7 @@ public class LuggageGraphController extends BaseController implements Initializa
                 data.getNode().setEffect(shadow);
 
                 effectName = data.getNode().getEffect().toString().substring(20, data.getNode().getEffect().toString().length() - 9);
-                Debug.print("Locally loaded CSS files after mouse enter: " + piechart.getStylesheets().toString() + "\nMouse entered '" + lastSlice + "'. Effect '" + effectName + "' enabled.");
+               // Debug.print("Locally loaded CSS files after mouse enter: " + piechart.getStylesheets().toString() + "\nMouse entered '" + lastSlice + "'. Effect '" + effectName + "' enabled.");
             });
         });
 
@@ -401,8 +416,8 @@ public class LuggageGraphController extends BaseController implements Initializa
                 piechart.getStylesheets().remove("/resources/stylesheets/title" + returnCssFilePath(lastSlice) + ".css");
                 initialTitle();
                 data.getNode().setEffect(null);
-                Debug.print("Mouse exited  '" + lastSlice + "'. Effect '" + effectName + "' disabled.");
-                Debug.print("Locally loaded CSS files after mouse exit: " + piechart.getStylesheets().toString());
+                //Debug.print("Mouse exited  '" + lastSlice + "'. Effect '" + effectName + "' disabled.");
+               // Debug.print("Locally loaded CSS files after mouse exit: " + piechart.getStylesheets().toString());
             });
         });
     }
@@ -488,4 +503,85 @@ public class LuggageGraphController extends BaseController implements Initializa
         Stage cancelStage = (Stage) viewClose.getScene().getWindow();
         StageHelper.closeStage(cancelStage);
     }
+	
+	private void updateBarChart() {
+		String dateQuery = "";
+		
+		LocalDate startDate = LocalDate.parse("2014-01-01");
+		LocalDate endDate = LocalDate.now();
+		
+        if (this.start.getValue() != null && this.end.getValue() != null) {
+			startDate = start.getValue();
+			endDate = end.getValue();
+        } else if (this.start.getValue() != null) {
+			startDate = start.getValue();
+        } else if (this.end.getValue() != null) {
+			endDate = end.getValue();
+        }
+		
+		Calendar startCalendar = new GregorianCalendar();
+		startCalendar.setTime(Date.from(startDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+		Calendar endCalendar = new GregorianCalendar();
+		endCalendar.setTime(Date.from(endDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+
+		int diffYear = endCalendar.get(Calendar.YEAR) - startCalendar.get(Calendar.YEAR);
+		int diffMonth = diffYear * 12 + endCalendar.get(Calendar.MONTH) - startCalendar.get(Calendar.MONTH);
+		if(diffMonth < 1)
+			diffMonth = 1;
+		
+		Date startDateForEach = Date.from(startDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		Calendar myDate = Calendar.getInstance();
+		myDate.setTime(startDateForEach);
+		
+		XYChart.Series series1 = new XYChart.Series();
+		series1.setName("Found");
+
+		XYChart.Series series2 = new XYChart.Series();
+		series2.setName("Missing");
+
+		XYChart.Series series3 = new XYChart.Series();
+		series3.setName("Resolved");
+		
+		barchart.getData().clear();
+		for (int i = 0; i < diffMonth; i++) 
+		{
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String sStart = format.format(myDate.getTime());
+			
+			myDate.add(Calendar.MONTH, 1);
+			
+			SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String sEnd = format2.format(myDate.getTime());
+					
+				//String sStart = this.start.getValue().toString() + " 00:00:00";
+				//String sEnd = this.end.getValue().toString() + " 00:00:00";
+			dateQuery = "AND datetime BETWEEN '" + sStart + "' AND '" + sEnd + "'";
+			
+			LuggageModel luggage = new LuggageModel();
+
+			// Query time
+			String[] foundParams = new String[1];
+			foundParams[0] = "Found";
+			List<Model> found = luggage.findAll("status = ? " + dateQuery, foundParams);
+
+			String[] missingParams = new String[1];
+			missingParams[0] = "Missing";
+			List<Model> missing = luggage.findAll("status = ? " + dateQuery, missingParams);
+
+			String[] resolvedParams = new String[1];
+			resolvedParams[0] = "Resolved";
+			List<Model> resolved = luggage.findAll("status = ? " + dateQuery, resolvedParams);
+			
+			String dateZooi = myDate.get(Calendar.YEAR) + "/" + (myDate.get(Calendar.MONTH) + 1);
+			
+			series1.getData().add(new XYChart.Data(dateZooi, found.size()));
+			
+			series2.getData().add(new XYChart.Data(dateZooi, missing.size()));
+
+			series3.getData().add(new XYChart.Data(dateZooi, resolved.size()));
+
+		}
+		
+		barchart.getData().addAll(series1, series2, series3);
+	}
 }
