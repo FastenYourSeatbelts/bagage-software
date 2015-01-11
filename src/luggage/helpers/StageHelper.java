@@ -41,13 +41,21 @@ import luggage.controllers.BaseController;
  *
  * Makes creating and updating stages & scenes easier
  *
- * @package luggage.helpers
+ * Package: luggage.helpers
  * @author ITopia IS102-5
  */
 public class StageHelper {
 
+    /**
+     *
+     */
     public static BaseController callbackController;
 
+    /**
+     *
+     * @param sNewStage
+     * @param oCurrentClass
+     */
     public static void addPopup(String sNewStage, BaseController oCurrentClass) {
         StageHelper.addPopup(sNewStage, oCurrentClass, true, false);
     }

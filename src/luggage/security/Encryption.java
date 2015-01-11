@@ -32,7 +32,7 @@ import luggage.AppConfig;
  *
  * Securely encrypts passwords.
  *
- * @package luggage.security
+ * Package: luggage.security
  * @author ITopia IS102-5
  */
 public class Encryption {

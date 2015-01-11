@@ -29,17 +29,29 @@ package luggage.database.models;
  *
  * A class that maps the log table
  *
- * @package luggage.database.models
+ * Package: luggage.database.models
  * @author ITopia IS102-5
  */
 public class LogModel extends Model {
 
+    /**
+     *
+     */
     public static final String TYPE_INFO = "info";
 
+    /**
+     *
+     */
     public static final String TYPE_WARNING = "warning";
 
+    /**
+     *
+     */
     public static final String TYPE_ERROR = "error";
 
+    /**
+     *
+     */
     public LogModel() {
 
     }

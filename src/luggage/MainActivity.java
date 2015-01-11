@@ -45,7 +45,7 @@ import javafx.stage.Stage;
  *
  * Main activity for the application
  *
- * @package luggage
+ * Package: luggage
  * @author ITopia IS102-5
  */
 public class MainActivity extends Application {

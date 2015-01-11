@@ -33,18 +33,54 @@ import luggage.database.models.UserModel;
  */
 public class Permissions {
 
+    /**
+     *
+     */
     public static final Permissions.Tab PERMISSION_MANAGE_CUSTOMERS = new Permissions.Tab("manage_customers", "Customers", "customers/list");
+
+    /**
+     *
+     */
     public static final Permissions.Tab PERMISSION_MANAGE_LUGGAGE = new Permissions.Tab("manage_luggage", "Luggage", "luggage/list");
+
+    /**
+     *
+     */
     public static final Permissions.Tab PERMISSION_MANAGE_USERS = new Permissions.Tab("manage_users", "Users", "users/list");
 
+    /**
+     *
+     */
     public static final Permissions.Tab PERMISSION_VIEW_TOTAL_LUGGAGE = new Permissions.Tab("view_total_luggage", "Total luggage", "luggage/total");
+
+    /**
+     *
+     */
     public static final Permissions.Tab PERMISSION_VIEW_MISSING_LUGGAGE = new Permissions.Tab("view_missing_luggage", "Missing luggage", "luggage/missing");
+
+    /**
+     *
+     */
     public static final Permissions.Tab PERMISSION_VIEW_FOUND_LUGGAGE = new Permissions.Tab("view_found_luggage", "Found luggage", "luggage/found");
+
+    /**
+     *
+     */
     public static final Permissions.Tab PERMISSION_VIEW_RESOLVED_LUGGAGE = new Permissions.Tab("view_resolved_luggage", "Resolved luggage", "luggage/resolved");
 
+    /**
+     *
+     */
     public static final Permissions.Tab PERMISSION_VIEW_GRAPH_LUGGAGE = new Permissions.Tab("view_graph_luggage", "Luggage graph", "graphs/luggage");
+
+    /**
+     *
+     */
     public static final Permissions.Tab PERMISSION_VIEW_LOG = new Permissions.Tab("view_log", "Logs", "log/list");
 
+    /**
+     *
+     */
     public static class Tab {
 
         /**
@@ -88,14 +124,26 @@ public class Permissions {
             return view;
         }
 
+        /**
+         *
+         */
         public String id;
 
+        /**
+         *
+         */
         public String text;
 
+        /**
+         *
+         */
         public String view;
 
     }
 
+    /**
+     *
+     */
     public static final ArrayList<Permissions.Tab> MANAGER_PERMISSIONS = new ArrayList<Permissions.Tab>(Arrays.asList(
             new Permissions.Tab[]{
                 PERMISSION_VIEW_GRAPH_LUGGAGE,
@@ -107,6 +155,9 @@ public class Permissions {
             }
     ));
 
+    /**
+     *
+     */
     public static final ArrayList<Permissions.Tab> EMPLOYEE_PERMISSIONS = new ArrayList<Permissions.Tab>(Arrays.asList(
             new Permissions.Tab[]{
                 PERMISSION_MANAGE_CUSTOMERS,
@@ -114,6 +165,9 @@ public class Permissions {
             }
     ));
 
+    /**
+     *
+     */
     public static final ArrayList<Permissions.Tab> MODERATOR_PERMISSIONS = new ArrayList<Permissions.Tab>(Arrays.asList(
             new Permissions.Tab[]{
                 PERMISSION_MANAGE_CUSTOMERS,
@@ -126,6 +180,9 @@ public class Permissions {
             }
     ));
 
+    /**
+     *
+     */
     public static final ArrayList<Permissions.Tab> SUPER_PERMISSIONS = new ArrayList<Permissions.Tab>(Arrays.asList(
             new Permissions.Tab[]{
                 PERMISSION_MANAGE_CUSTOMERS,

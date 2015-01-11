@@ -50,6 +50,7 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import static javafx.scene.paint.Color.BLUE;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -66,35 +67,68 @@ import luggage.helpers.StageHelper;
  *
  * Controller for graphs/luggage.fxml
  *
- * @package luggage.controllers
+ * Package: luggage.controllers
  * @author ITopia IS102-5
  */
 public class LuggageGraphController extends BaseController implements Initializable {
 
+    /**
+     *
+     */
+    @FXML
+    private AnchorPane helpGeneral;
+
+    /**
+     *
+     */
     @FXML
     private PieChart piechart;
 
+    /**
+     *
+     */
     @FXML
     private Button listHelp;
 
+    /**
+     *
+     */
     @FXML
-    public Button saveAsPng;
+    private Button saveAsPng;
 
+    /**
+     *
+     */
     @FXML
     private Button viewClose;
 
+    /**
+     *
+     */
     @FXML
     private DatePicker start;
 
+    /**
+     *
+     */
     @FXML
     private DatePicker end;
 
+    /**
+     *
+     */
     @FXML
     private CheckBox showResolved;
 
+    /**
+     *
+     */
     @FXML
     private Label printNotif;
 
+    /**
+     *
+     */
     @FXML
     private Stage stage;
 
@@ -115,6 +149,11 @@ public class LuggageGraphController extends BaseController implements Initializa
             initialTitle();
             updateChart();
             KeyActions();
+
+            // Help
+            if (helpGeneral != null) {
+                helpKeyAction();
+            }
         }
     }
 
@@ -122,7 +161,7 @@ public class LuggageGraphController extends BaseController implements Initializa
      * Opens the Graph's help view.
      */
     @FXML
-    public void listHelp() {
+    private void listHelp() {
         StageHelper.addStage("graphs/help", this, false, true);
     }
 
@@ -151,7 +190,6 @@ public class LuggageGraphController extends BaseController implements Initializa
         }
 
         // Catches null dates
-//        try {
         if (start.getValue() == null || end.getValue() == null) {
             Debug.print("For some reason, either start or end is null. Method will continue.");
         } else if (start.getValue().compareTo(end.getValue()) > 0) {
@@ -165,9 +203,6 @@ public class LuggageGraphController extends BaseController implements Initializa
         }
         showResolved.setDisable(false);
         saveAsPng.setDisable(false);
-//        } catch (NullPointerException n) {
-//            Logger.getLogger(LuggageGraphController.class.getName()).log(Level.SEVERE, null, n);
-//        }
 
         LuggageModel luggage = new LuggageModel();
 
@@ -289,18 +324,10 @@ public class LuggageGraphController extends BaseController implements Initializa
         chooser.setInitialDirectory(new File(System.getProperty("user.home")));
         Debug.print("Initial Directory poll after set: " + chooser.getInitialDirectory());
         chooser.setInitialFileName("Pie chart exported on " + MainActivity.dateFormatFull.format(date) + " of period " + dateStart + " - " + dateEnd);
-//        chooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("PNG", "*.png")); // This doesn't even work?
         chooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("PNG", "*.png"));
-//                new FileChooser.ExtensionFilter("bmp", "*.bmp"),
-//                new FileChooser.ExtensionFilter("gif", "*.gif"),
-//                new FileChooser.ExtensionFilter("jpg", "*.jpg"),
-//                new FileChooser.ExtensionFilter("pdf", "*.pdf"),
-//                new FileChooser.ExtensionFilter("tiff", "*.tiff"));
         File file = chooser.showSaveDialog(stage);
         String extension = "PNG";
-//        extension = returnExtension(file.toString().toLowerCase());
-//        Debug.print("Extension: " + extension);
 
         try {
             if (file == null) {
@@ -318,24 +345,6 @@ public class LuggageGraphController extends BaseController implements Initializa
         Debug.print("Reached end of saveAsPng() method.");
     }
 
-    // Disabled until I fix export for extensions other than PNG
-//    private String returnExtension(String file) {
-//        if (file.endsWith(".png")) {
-//            return "PNG";
-//        } else if (file.endsWith(".bmp")) {
-//            return "BMP";
-//        } else if (file.endsWith(".gif")) {
-//            return "GIF";
-//        } else if (file.endsWith(".jpg")) {
-//            return "JPEG";
-//        } else if (file.endsWith(".pdf")) {
-//            return "PDF";
-//        } else if (file.endsWith(".tiff")) {
-//            return "TIFF";
-//        } else {
-//            return "png";
-//        }
-//    }
     /**
      * Sets the initial title.
      */
@@ -453,8 +462,20 @@ public class LuggageGraphController extends BaseController implements Initializa
             }
         });
         listHelp.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
-            if (evt.getCode().equals(KeyCode.ENTER)) {
+            if (evt.getCode().equals(KeyCode.F1) || evt.getCode().equals(KeyCode.ENTER)) {
                 listHelp();
+            }
+        });
+    }
+
+    /**
+     * Creates the event filter for the help view.
+     */
+    @FXML
+    private void helpKeyAction() {
+        helpGeneral.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                viewClose();
             }
         });
     }

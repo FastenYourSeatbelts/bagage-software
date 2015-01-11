@@ -29,11 +29,14 @@ package luggage.database.models;
  *
  * A class that maps the locations table
  *
- * @package luggage.database.models
+ * Package: luggage.database.models
  * @author ITopia IS102-5
  */
 public class LocationModel extends Model {
 
+    /**
+     *
+     */
     public LocationModel() {
 
     }

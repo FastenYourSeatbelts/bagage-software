@@ -32,7 +32,7 @@ import luggage.security.Permissions;
  *
  * A class that maps the users table.
  *
- * @package luggage.database.models
+ * Package: luggage.database.models
  * @author ITopia IS102-5
  */
 public class UserModel extends Model {

@@ -56,29 +56,50 @@ import luggage.helpers.StageHelper;
  *
  * Controller for luggage/total.fxml and luggage/totalview.fxml
  *
- * @package luggage.controllers
+ * Package: luggage.controllers
  * @author ITopia IS102-5
  */
 public class TotalLuggageController extends BaseController implements Initializable {
 
+    /**
+     *
+     */
     @FXML
     private TableView luggageTableView;
 
+    /**
+     *
+     */
     @FXML
     private TableColumn tableViewId;
 
+    /**
+     *
+     */
     @FXML
     private TableColumn tableViewStatus;
 
+    /**
+     *
+     */
     @FXML
     private TableColumn tableViewTags;
 
+    /**
+     *
+     */
     @FXML
     private TableColumn tableViewDate;
 
+    /**
+     *
+     */
     @FXML
     private TableColumn tableViewNotes;
 
+    /**
+     *
+     */
     @FXML
     private Button listView;
 
@@ -88,37 +109,73 @@ public class TotalLuggageController extends BaseController implements Initializa
     @FXML
     private Button viewClose;
 
+    /**
+     *
+     */
     @FXML
     private TextField viewTags;
     
+    /**
+     *
+     */
     @FXML
     private ChoiceBox<String> viewStatus;
 
+    /**
+     *
+     */
     @FXML
     private ChoiceBox<LocationModel> viewLocationId;
 
+    /**
+     *
+     */
     @FXML
     private ChoiceBox<CustomerModel> viewCustomerId;
     
+    /**
+     *
+     */
     @FXML
     private TextField viewStatusAsText;
 
+    /**
+     *
+     */
     @FXML
     private TextField viewLocationAsText;
 
+    /**
+     *
+     */
     @FXML
     private TextField viewCustomerAsText;
 
+    /**
+     *
+     */
     @FXML
     private TextField viewNotes;
 
+    /**
+     *
+     */
     @FXML
     private DatePicker viewDate;
 
+    /**
+     *
+     */
     private ObservableList<LuggageModel> data = FXCollections.observableArrayList();
 
+    /**
+     *
+     */
     private final ObservableList<LocationModel> locationData = FXCollections.observableArrayList();
 
+    /**
+     *
+     */
     private final ObservableList<CustomerModel> customerData = FXCollections.observableArrayList();
 
     /**

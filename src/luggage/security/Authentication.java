@@ -30,7 +30,7 @@ import luggage.database.models.UserModel;
  *
  * Authentication class for the current user
  *
- * @package luggage.security
+ * Package: luggage.security
  * @author ITopia IS102-5
  */
 public class Authentication {

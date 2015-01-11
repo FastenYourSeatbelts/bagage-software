@@ -59,7 +59,8 @@ import org.controlsfx.dialog.Dialogs;
  * Controller for customers/list.fxml, customers/new.fxml, customers/edit.fxml,
  * customers/view.fxml and customers/help.fxml
  *
- * @package luggage.controllers
+ * Package: luggage.controllers
+ *
  * @author ITopia IS102-5
  */
 public class CustomersController extends BaseController implements Initializable {
@@ -70,39 +71,81 @@ public class CustomersController extends BaseController implements Initializable
     @FXML
     private AnchorPane listGeneral;
 
+    /**
+     *
+     */
+    @FXML
+    private AnchorPane helpGeneral;
+
+    /**
+     *
+     */
     @FXML
     private TableView listTableView;
 
+    /**
+     *
+     */
     @FXML
     private TableColumn listTableViewName;
 
+    /**
+     *
+     */
     @FXML
     private TableColumn listTableViewAddress;
 
+    /**
+     *
+     */
     @FXML
     private TableColumn listTableViewPhone;
 
+    /**
+     *
+     */
     @FXML
     private TableColumn listTableViewEmail;
 
+    /**
+     *
+     */
     @FXML
     private Button listEdit;
 
+    /**
+     *
+     */
     @FXML
     private Button listHelp;
 
+    /**
+     *
+     */
     @FXML
     private Button listNew;
 
+    /**
+     *
+     */
     @FXML
     private Button listRemove;
 
+    /**
+     *
+     */
     @FXML
     private Button listView;
 
+    /**
+     *
+     */
     @FXML
     private Label printNotif;
 
+    /**
+     *
+     */
     @FXML
     private TextField listSearchField;
 
@@ -112,51 +155,99 @@ public class CustomersController extends BaseController implements Initializable
     @FXML
     private TextField newFirstname;
 
+    /**
+     *
+     */
     @FXML
     private TextField newPrefix;
 
+    /**
+     *
+     */
     @FXML
     private TextField newLastname;
 
+    /**
+     *
+     */
     @FXML
     private ChoiceBox newGender;
 
+    /**
+     *
+     */
     @FXML
     private ChoiceBox<InsurerModel> newInsurerId;
 
+    /**
+     *
+     */
     @FXML
     private TextField newAddress;
 
+    /**
+     *
+     */
     @FXML
     private TextField newPostalcode;
 
+    /**
+     *
+     */
     @FXML
     private TextField newResidence;
 
+    /**
+     *
+     */
     @FXML
     private TextField newAddress2;
 
+    /**
+     *
+     */
     @FXML
     private TextField newPostalcode2;
 
+    /**
+     *
+     */
     @FXML
     private TextField newResidence2;
 
+    /**
+     *
+     */
     @FXML
     private TextField newEmail;
 
+    /**
+     *
+     */
     @FXML
     private TextField newTelephone;
 
+    /**
+     *
+     */
     @FXML
     private TextField newMobile;
 
+    /**
+     *
+     */
     @FXML
     private Button newSave;
 
+    /**
+     *
+     */
     @FXML
     private Button newReset;
 
+    /**
+     *
+     */
     @FXML
     private Button newCancel;
 
@@ -166,51 +257,99 @@ public class CustomersController extends BaseController implements Initializable
     @FXML
     private Button editSave;
 
+    /**
+     *
+     */
     @FXML
     private Button editReset;
 
+    /**
+     *
+     */
     @FXML
     private Button editCancel;
 
+    /**
+     *
+     */
     @FXML
     private TextField editFirstname;
 
+    /**
+     *
+     */
     @FXML
     private TextField editPrefix;
 
+    /**
+     *
+     */
     @FXML
     private TextField editLastname;
 
+    /**
+     *
+     */
     @FXML
     private ChoiceBox editGender;
 
+    /**
+     *
+     */
     @FXML
     private ChoiceBox<InsurerModel> editInsurerId;
 
+    /**
+     *
+     */
     @FXML
     private TextField editAddress;
 
+    /**
+     *
+     */
     @FXML
     private TextField editPostalcode;
 
+    /**
+     *
+     */
     @FXML
     private TextField editResidence;
 
+    /**
+     *
+     */
     @FXML
     private TextField editAddress2;
 
+    /**
+     *
+     */
     @FXML
     private TextField editPostalcode2;
 
+    /**
+     *
+     */
     @FXML
     private TextField editResidence2;
 
+    /**
+     *
+     */
     @FXML
     private TextField editEmail;
 
+    /**
+     *
+     */
     @FXML
     private TextField editTelephone;
 
+    /**
+     *
+     */
     @FXML
     private TextField editMobile;
 
@@ -220,59 +359,116 @@ public class CustomersController extends BaseController implements Initializable
     @FXML
     private Button viewClose;
 
+    /**
+     *
+     */
     @FXML
     private Button viewCustomersLuggage;
 
+    /**
+     *
+     */
     @FXML
     private ChoiceBox viewGender;
 
+    /**
+     *
+     */
     @FXML
     private ChoiceBox<InsurerModel> viewInsurerId;
 
+    /**
+     *
+     */
     @FXML
     private TextField viewFirstname;
 
+    /**
+     *
+     */
     @FXML
     private TextField viewPrefix;
 
+    /**
+     *
+     */
     @FXML
     private TextField viewLastname;
 
+    /**
+     *
+     */
     @FXML
     private TextField viewGenderAsText;
 
+    /**
+     *
+     */
     @FXML
     private TextField viewInsurerAsText;
 
+    /**
+     *
+     */
     @FXML
     private TextField viewAddress;
 
+    /**
+     *
+     */
     @FXML
     private TextField viewPostalcode;
 
+    /**
+     *
+     */
     @FXML
     private TextField viewResidence;
 
+    /**
+     *
+     */
     @FXML
     private TextField viewAddress2;
 
+    /**
+     *
+     */
     @FXML
     private TextField viewPostalcode2;
 
+    /**
+     *
+     */
     @FXML
     private TextField viewResidence2;
 
+    /**
+     *
+     */
     @FXML
     private TextField viewEmail;
 
+    /**
+     *
+     */
     @FXML
     private TextField viewTelephone;
 
+    /**
+     *
+     */
     @FXML
     private TextField viewMobile;
 
+    /**
+     *
+     */
     private ObservableList<CustomerModel> listData = FXCollections.observableArrayList();
 
+    /**
+     *
+     */
     private final ObservableList<InsurerModel> insurerData = FXCollections.observableArrayList();
 
     /**
@@ -318,6 +514,11 @@ public class CustomersController extends BaseController implements Initializable
                     setViewChoiceBoxes();
                     setViewFields();
                     viewKeyActions();
+                }
+
+                // Help
+                if (helpGeneral != null) {
+                    helpKeyAction();
                 }
             }
         });
@@ -842,14 +1043,14 @@ public class CustomersController extends BaseController implements Initializable
     @FXML
     private void listKeyActions() {
         listGeneral.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
-            if (b.getCode().equals(KeyCode.A)) {
-                listNew();
+            if (b.getCode().equals(KeyCode.F1)) {
+                listHelp();
             }
         });
         listTableView.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.N)) {
                 listNew();
-            } else if (b.getCode().equals(KeyCode.H) || b.getCode().equals(KeyCode.F1)) {
+            } else if (b.getCode().equals(KeyCode.H)) {
                 listHelp();
             } else if (b.getCode().equals(KeyCode.E)) {
                 listEdit();
@@ -864,6 +1065,19 @@ public class CustomersController extends BaseController implements Initializable
                 listResetTableView("", new String[0]);
                 listSearchField.setText("");
                 clearNotif();
+            }
+        });
+    }
+
+    /**
+     * Creates the event filter for the help view.
+     */
+    @FXML
+    private void helpKeyAction() {
+
+        helpGeneral.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                viewClose();
             }
         });
     }
@@ -922,6 +1136,27 @@ public class CustomersController extends BaseController implements Initializable
             }
         });
         newResidence.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                newSave();
+            }
+        });
+        newAddress2.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                newSave();
+            }
+        });
+        newPostalcode2.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                newCancel();
+            } else if (b.getCode().equals(KeyCode.ENTER)) {
+                newSave();
+            }
+        });
+        newResidence2.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE)) {
                 newCancel();
             } else if (b.getCode().equals(KeyCode.ENTER)) {
@@ -1030,6 +1265,27 @@ public class CustomersController extends BaseController implements Initializable
                 editSave();
             }
         });
+        editAddress2.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                editCancel();
+            } else if (evt.getCode().equals(KeyCode.ENTER)) {
+                editSave();
+            }
+        });
+        editPostalcode2.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                editCancel();
+            } else if (evt.getCode().equals(KeyCode.ENTER)) {
+                editSave();
+            }
+        });
+        editResidence2.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
+            if (evt.getCode().equals(KeyCode.ESCAPE)) {
+                editCancel();
+            } else if (evt.getCode().equals(KeyCode.ENTER)) {
+                editSave();
+            }
+        });
         editEmail.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent evt) -> {
             if (evt.getCode().equals(KeyCode.ESCAPE)) {
                 editCancel();
@@ -1112,6 +1368,21 @@ public class CustomersController extends BaseController implements Initializable
             }
         });
         viewResidence.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+                viewClose();
+            }
+        });
+        viewAddress2.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+                viewClose();
+            }
+        });
+        viewPostalcode2.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
+                viewClose();
+            }
+        });
+        viewResidence2.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
             if (b.getCode().equals(KeyCode.ESCAPE) || b.getCode().equals(KeyCode.ENTER)) {
                 viewClose();
             }

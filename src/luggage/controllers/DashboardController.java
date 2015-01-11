@@ -55,7 +55,7 @@ import luggage.security.Permissions;
  *
  * Controller for dashboard.fxml
  *
- * @package luggage.controllers
+ * Package: luggage.controllers
  * @author ITopia IS102-5
  */
 public class DashboardController extends BaseController implements Initializable {
