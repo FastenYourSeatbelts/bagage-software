@@ -77,9 +77,13 @@
     -fx-background-insets: 0;
 }
 
-/* Custom colors for yummy pie chart slices. */
+/* Custom colors for yummy pie chart slices and bar graph. */
 .default-color0.chart-pie { -fx-pie-color: turquoise; }
 .default-color1.chart-pie { -fx-pie-color: steelblue; }
 .default-color2.chart-pie { -fx-pie-color: blue; }
+
+.default-color0.chart-bar { -fx-bar-fill: turquoise; }
+.default-color1.chart-bar { -fx-bar-fill: steelblue; }
+.default-color2.chart-bar { -fx-bar-fill: blue; }
 
 .chart-title { -fx-text-fill: black; }

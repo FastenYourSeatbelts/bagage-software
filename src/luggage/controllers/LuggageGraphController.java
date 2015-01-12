@@ -59,6 +59,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import static javafx.scene.paint.Color.BLUE;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -76,6 +77,7 @@ import luggage.helpers.StageHelper;
  * Controller for graphs/luggage.fxml
  *
  * Package: luggage.controllers
+ *
  * @author ITopia IS102-5
  */
 public class LuggageGraphController extends BaseController implements Initializable {
@@ -90,13 +92,19 @@ public class LuggageGraphController extends BaseController implements Initializa
      *
      */
     @FXML
+    private GridPane chartHolder;
+
+    /**
+     *
+     */
+    @FXML
     private PieChart piechart;
-	
-	/**
-	 * 
-	 */
-	@FXML
-	private BarChart barchart;
+
+    /**
+     *
+     */
+    @FXML
+    private BarChart barchart;
 
     /**
      *
@@ -206,7 +214,7 @@ public class LuggageGraphController extends BaseController implements Initializa
         if (start.getValue() == null || end.getValue() == null) {
             Debug.print("For some reason, either start or end is null. Method will continue.");
         } else if (start.getValue().compareTo(end.getValue()) > 0) {
-            printNotif("The start date may not occur after the end date!");
+            printNotif("Start date may not occur after end date!");
             showResolved.setDisable(true);
             saveAsPng.setDisable(true);
             Debug.print("User is an idiot: searched from " + start.getValue() + " to " + end.getValue());
@@ -300,8 +308,8 @@ public class LuggageGraphController extends BaseController implements Initializa
         hoverNotif();
         clearNotif();
         Debug.print("Reached end of updateChart() method.");
-		
-		updateBarChart();
+
+        updateBarChart();
     }
 
     /**
@@ -325,12 +333,12 @@ public class LuggageGraphController extends BaseController implements Initializa
         if (piechart.getTitle().startsWith("Hover")) {
             piechart.setTitle("\n" + dateStart + " - " + dateEnd);
         }
-       // Debug.print("Locally loaded CSS files prior to snapshot: " + piechart.getStylesheets().toString());
-        piechart.getStylesheets().add("/resources/stylesheets/chartonexport.css");
-       // Debug.print("Locally loaded CSS files after add: " + piechart.getStylesheets().toString());
-        WritableImage image = piechart.snapshot(new SnapshotParameters(), null);
-        piechart.getStylesheets().remove("/resources/stylesheets/chartonexport.css");
-       // Debug.print("Locally loaded CSS files after remove: " + piechart.getStylesheets().toString());
+        // Debug.print("Locally loaded CSS files prior to snapshot: " + piechart.getStylesheets().toString());
+        chartHolder.getStylesheets().add("/resources/stylesheets/chartonexport.css");
+        // Debug.print("Locally loaded CSS files after add: " + piechart.getStylesheets().toString());
+        WritableImage image = chartHolder.snapshot(new SnapshotParameters(), null);
+        chartHolder.getStylesheets().remove("/resources/stylesheets/chartonexport.css");
+        // Debug.print("Locally loaded CSS files after remove: " + piechart.getStylesheets().toString());
         initialTitle();
 
         // File chooser area
@@ -406,7 +414,7 @@ public class LuggageGraphController extends BaseController implements Initializa
                 data.getNode().setEffect(shadow);
 
                 effectName = data.getNode().getEffect().toString().substring(20, data.getNode().getEffect().toString().length() - 9);
-               // Debug.print("Locally loaded CSS files after mouse enter: " + piechart.getStylesheets().toString() + "\nMouse entered '" + lastSlice + "'. Effect '" + effectName + "' enabled.");
+                // Debug.print("Locally loaded CSS files after mouse enter: " + piechart.getStylesheets().toString() + "\nMouse entered '" + lastSlice + "'. Effect '" + effectName + "' enabled.");
             });
         });
 
@@ -417,7 +425,7 @@ public class LuggageGraphController extends BaseController implements Initializa
                 initialTitle();
                 data.getNode().setEffect(null);
                 //Debug.print("Mouse exited  '" + lastSlice + "'. Effect '" + effectName + "' disabled.");
-               // Debug.print("Locally loaded CSS files after mouse exit: " + piechart.getStylesheets().toString());
+                // Debug.print("Locally loaded CSS files after mouse exit: " + piechart.getStylesheets().toString());
             });
         });
     }
@@ -503,22 +511,22 @@ public class LuggageGraphController extends BaseController implements Initializa
         Stage cancelStage = (Stage) viewClose.getScene().getWindow();
         StageHelper.closeStage(cancelStage);
     }
-	
-	private void updateBarChart() {
-		String dateQuery = "";
-		
-		LocalDate startDate = LocalDate.parse("2014-01-01");
-		LocalDate endDate = LocalDate.now();
-		
+
+    private void updateBarChart() {
+        String dateQuery = "";
+
+        LocalDate startDate = LocalDate.parse("2014-01-01");
+        LocalDate endDate = LocalDate.now();
+
         if (this.start.getValue() != null && this.end.getValue() != null) {
-			startDate = start.getValue();
-			endDate = end.getValue();
+            startDate = start.getValue();
+            endDate = end.getValue();
         } else if (this.start.getValue() != null) {
-			startDate = start.getValue();
+            startDate = start.getValue();
         } else if (this.end.getValue() != null) {
-			endDate = end.getValue();
+            endDate = end.getValue();
         }
-		
+
 		Calendar startCalendar = new GregorianCalendar();
 		startCalendar.setTime(Date.from(startDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
 		Calendar endCalendar = new GregorianCalendar();
@@ -578,4 +586,5 @@ public class LuggageGraphController extends BaseController implements Initializa
 		}
 		
 	}
+
 }
