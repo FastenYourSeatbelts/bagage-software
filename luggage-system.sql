@@ -336,7 +336,26 @@ INSERT INTO `luggage` (`id`, `customer_id`, `location_id`, `removed`, `status`, 
 (20, 9, 9, 0, 'Resolved', 'Blue coat, brand: Odin', '', '2011-10-08 00:00:00'),
 (21, 11, 9, 0, 'Resolved', 'Gray wheelchair', '', '2010-10-08 00:00:00'),
 (22, 10, 9, 0, 'Resolved', 'Purple backpack', '', '2010-10-08 00:00:00'),
-(23, 12, 9, 0, 'Resolved', 'Black backpack', '', '2010-10-08 00:00:00');
+(23, 12, 9, 0, 'Resolved', 'Black backpack', '', '2010-10-08 00:00:00'),
+(24, 15, 4, 0, 'Missing', 'Brown suitcase, missing tag', 'Contains laptop', '2014-12-10 12:00:00'),
+(25, 16, 12, 0, 'Found', 'Blue', '', '2014-12-17 12:00:00'),
+(26, 14, 23, 0, 'Missing', 'Pink Helly Kitty bag', '', '2014-12-04 12:00:00'),
+(27, 13, 13, 0, 'Found', 'Black large suitcase, Samsonite', '', '2014-06-19 12:00:00'),
+(28, 12, 9, 0, 'Resolved', 'Wheelchair, brand: Mark', 'Foldable', '2014-10-08 12:00:00'),
+(29, 11, 23, 0, 'Missing', 'Pink backpack, locks on the zippers, many stickers', 'Contains glass object', '2014-12-02 12:00:00'),
+(30, 1, 9, 0, 'Resolved', 'Plastic backpack on wheels', '', '2014-10-08 12:00:00'),
+(31, 3, 9, 0, 'Resolved', 'Luggage', '', '2014-10-08 12:00:00'),
+(32, NULL, 9, 0, 'Resolved', 'Gray suitcase', '', '2014-10-08 12:00:00'),
+(33, 4, 9, 0, 'Resolved', 'Blue backpack', '', '2014-10-08 12:00:00'),
+(34, 5, 9, 0, 'Resolved', 'Suitcase, tiny, pink', '', '2014-10-08 12:00:00'),
+(35, 6, 9, 0, 'Resolved', 'Gray suitcase', '', '2014-10-08 12:00:00'),
+(36, 7, 9, 0, 'Resolved', 'Green suitcase', '', '2014-10-08 12:00:00'),
+(37, 8, 9, 0, 'Resolved', 'Laptop suitcase', '', '2014-10-08 12:00:00'),
+(38, 9, 9, 0, 'Resolved', 'Blue coat, brand: Odin', '', '2014-10-08 12:00:00'),
+(39, 11, 9, 0, 'Resolved', 'Gray wheelchair', '', '2014-10-08 12:00:00'),
+(40, 10, 9, 0, 'Resolved', 'Purple backpack', '', '2014-10-08 12:00:00'),
+(41, 12, 9, 0, 'Resolved', 'Black backpack', '', '2014-10-08 12:00:00'),
+(42, NULL, 1, 0, 'Found', '', '', '2014-01-07 12:00:00');
 
 -- --------------------------------------------------------
 
@@ -373,22 +392,13 @@ INSERT INTO `users` (`id`, `username`, `password`, `firstname`, `prefix`, `lastn
 (5, 'Gerrit', '27d10da9b265520f727e13105b08e1adcb36277c3d0a1aaf4d98e21430979aa51616c9070ca37778170b8cdaf5866df7e6065d24e9c87850753fbb7567ca2553', 'Gerrit', 'van de', 'Fabriek', 'Employee', 'Other', 12, 'Rietveldstraat 12', '1012AB', 'Amstelveen', '0031201234567', '0031612345678'),
 (6, 'Test', '9c1dd9c1e1684575051616be7814f15374bb73a9f7685ebe30969de4975976fac5fa449519fbc54ddcdc43fcf08eabb292523548349b5ce7fbb86b6fa30c1278', 'Super', '', 'Test', 'Super', 'Other', 4, 'Rootstrasse', '1000AB', 'Root', '0', '0'),
 (7, 'Nick', 'b4f52d6d30415aa25e545b15bdd81a93785581c1fd226b0bfaf36043cf76d7d17f8f5dd43b74e5eb5137586fddfc36535b266bf27bd4eb90b798b033b78dfd09', 'Nick', '', 'Onbekend', 'Super', 'Male', 4, 'Abc Straat 21', '1050AB', 'Amsterdam', '003167123456', '003167123456'),
-(8, 'Tijme', 'd824e9f681ab297e7a1cb42260c6241d3a0dcb9ede2a1daa5c8b853b223d9274acf969d84a08d3912ffeb0d46a25325d4a3af862d0ce6a5d84f84033621c6537', 'Tijme', '', 'Daar', 'Manager', 'Male', 16, 'Blabla 12', '6592SD', 'Dordrecht', '0049201234466', '0049201234466'),
+(8, 'Tijme', 'd824e9f681ab297e7a1cb42260c6241d3a0dcb9ede2a1daa5c8b853b223d9274acf969d84a08d3912ffeb0d46a25325d4a3af862d0ce6a5d84f84033621c6537', 'Tijme', '', 'Daar', 'Employee', 'Male', 16, 'Blabla 12', '6592SD', 'Dordrecht', '0049201234466', '0049201234466'),
 (9, 'Gerda', 'b9ac1d13d07c61ed07baec88b5aa7193635ca83d9a31b1bf2bd8cc8d96a915f6649bcb3644c3290a123620f5da55731348618ed293aa08463d94ec2ba136f534', 'Gerda', '', 'Balal', 'Moderator', 'Female', 14, 'Amsterdamseweg 20', '1132AD', 'Hoofddorp', '001221324567', '001221324567'),
 (10, 'Jasper', 'e515b7af26b997c94375a4775f864a0119d99dc9c06f49c5893de471b5ad3328cfd00a49b36544ca966c340957a493b20c447adb08ed058186e079e861d63bfd', 'Jasper', '', 'Hier', 'Manager', 'Male', 26, 'Hierdaar 3', '5465DF', 'Belgrado', '0012345678974', '0012345678974'),
 (11, 'Lars', 'c2b659794a5c1d72ee02d95220fb2e3e0508b2b6f50def959bd9eee69a24ccfa5c4ddd2d059943eade0b9d6b4e346bc867c2dc14d48dd62fc32827f4aee04862', 'Lars', 'de', 'Vries', 'Moderator', 'Male', 18, 'Blabalbal 132', '1023DF', 'Amsterdam', '003145678943', '003145678943'),
 (12, 'Ali', '02e03ddba23ecb5d872ff5784fe5383c44a171cd371087d0cf80c6cc3c1a182d68d22a75f62615bf39d4edcabffdd808c57f928e4fb82a49ddafc2485bd350ea', 'Ali', 'de', 'Geeuw', 'Manager', 'Male', 37, 'Amsterdamstraat 124', '8822VD', 'Groningen', '003198374252', '003198374252'),
 (13, 'Derp', '38da7d98bc0e173b0767b5baa8880738e0b62603a7c2e08f729adac3f6f0796dd95d9d66925bbd3976410fc9104a894a20f7c633bf1be3b497ca2363976e8ede', 'Derp', '', '', 'Employee', 'Other', 17, 'Derp 1', '1000DP', 'Derp', '003121318232', '003121318232'),
-(14, 'At login screen', '38da1d98bc0e173b0767b5baa8880738e0b62603a7c2e08f729adac3f6f0796dd95d8d66925bbd397641dfc9104a894a20f7c6338f1be3b497cb24139b6f8d4e', 'Derp', '', '', 'Employee', 'Other', 17, 'Derp 1', '1000DP', 'Derp', '003121318232', '003121318232'),
-(15, 'Customers', '6c39e5abfce7ea660088e1ef27e39018b9e988101272f78a3bf67e191e5e1ccebbe1aa9fcf8f8364906721cba98236d47e4659d54235d0da0770feec58df6acf', 'Customers', '', 'Tab', 'customers', 'Other', 14, 'A', '1000AB', 'Dubai', '001221324567', '001221324567'),
-(16, 'Luggage', 'a39a63ca1707eccec220a918b6d323f7b9a7c2fba61a9ed7d0542c51f8cef338698ba4e5467d1e157b36c9b467afd9d92b6243485a620b8bad6b6b084fc0cfc4', 'Luggage', '', 'Tab', 'luggage', 'Other', 14, 'A', '1000AB', 'Dubai', '001221324567', '001221324567'),
-(17, 'Total', '5b24606b6be78003d1710dffc81bcbc1af83009ae0399498c52381e23213e9f6981b0390b1cdcd8192382f433479a589a088827278c4047bee1a8efcafde54f4', 'Total', '', 'Tab', 'total', 'Other', 14, 'A', '1000AB', 'Dubai', '001221324567', '001221324567'),
-(18, 'Graph', '8ea0fe3563813fe307271854876e8d41cd2bb284d4ded5bb575705fa6620421ce51aa889f77326cf21c14dbab8b9d9ea5f874993b54f09b7cec615457ead25d0', 'Graph', '', 'Tab', 'graph', 'Other', 14, 'A', '1000AB', 'Dubai', '001221324567', '001221324567'),
-(19, 'Missing', 'bad25144cb38c415203971ce9d918872a7719edd2caeb1b07e3502ae1c57d77085b0df9dd63fbe20b16405b6a88172a3b3fa49844c6de60b5712b8bc34fe2ae8', 'Missing', '', 'Tab', 'Found', 'Other', 14, 'A', '1000AB', 'Dubai', '001221324567', '001221324567'),
-(20, 'Found', '2d38f8b439d3eb80ddb8df39069b6be69fde62a3087c819bf732c5ab1a88f0faa290b651bc13778ad84180a87533f665a0fa07f577edfc67c5055492a7e0d6ea', 'Found', '', 'Tab', 'Missing', 'Other', 14, 'A', '1000AB', 'Dubai', '001221324567', '001221324567'),
-(21, 'Resolved', '316cd929689aab3d5c914689e6d62a7ae5b3b64d6da021c5331bf5d10828d2c9b68dadf9abf24bdfc137fcd6611d6288e0d92667cd1db8e478439eac7769c561', 'Resolved', '', 'Tab', 'Resolved', 'Other', 14, 'A', '1000AB', 'Dubai', '001221324567', '001221324567'),
-(22, 'Users', '657628fb8363438074dd5ccc9f19bc14bccae292ba339b91acd7527c47227413689e2634fa2e1dd675de07b6c3fc0e074ccc75f86d3241bdd48c9be531d21ee9', 'Users', '', 'Tab', 'users', 'Other', 14, 'A', '1000AB', 'Dubai', '001221324567', '001221324567'),
-(23, 'Log', 'ba474872a81e359dc5a82b85e8558c7ce591c5140f31d5283062d709907ba11e155d828be23bba1ea868fcdfb3736ab262ea641ed5d9c56f5c7e77cee6b3d2fd', 'Log', '', 'Tab', 'log', 'Other', 14, 'A', '1000AB', 'Dubai', '001221324567', '001221324567');
+(14, 'At login screen', '38da1d98bc0e173b0767b5baa8880738e0b62603a7c2e08f729adac3f6f0796dd95d8d66925bbd397641dfc9104a894a20f7c6338f1be3b497cb24139b6f8d4e', 'Derp', '', '', 'Employee', 'Other', 17, 'Derp 1', '1000DP', 'Derp', '003121318232', '003121318232');;
 
 
 --
@@ -459,7 +469,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=125;
 -- AUTO_INCREMENT for table `luggage`
 --
 ALTER TABLE `luggage`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=24;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=43;
 --
 -- AUTO_INCREMENT for table `users`
 --
