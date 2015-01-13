@@ -86,141 +86,259 @@ import org.controlsfx.dialog.Dialogs;
  */
 public class LuggageController extends BaseController implements Initializable {
 
+    // LIST ELEMENTS
     /**
-     * LIST ELEMENTS
+     *
      */
     @FXML
     private AnchorPane helpGeneral;
 
+    /**
+     *
+     */
     @FXML
     private TableView listTableView;
 
+    /**
+     *
+     */
     @FXML
     private TableColumn listTableViewId;
 
+    /**
+     *
+     */
     @FXML
     private TableColumn listTableViewStatus;
 
+    /**
+     *
+     */
     @FXML
     private TableColumn listTableViewTags;
 
+    /**
+     *
+     */
     @FXML
     private TableColumn listTableViewDate;
 
+    /**
+     *
+     */
     @FXML
     private Button listEdit;
 
+    /**
+     *
+     */
     @FXML
     private Button listExportAsPdf;
 
+    /**
+     *
+     */
     @FXML
     private Button listHelp;
 
+    /**
+     *
+     */
     @FXML
     private Button listNew;
 
+    /**
+     *
+     */
     @FXML
     private Button listRemove;
 
+    /**
+     *
+     */
     @FXML
     private Button listView;
 
+    /**
+     *
+     */
+    @FXML
+    private Label printNotif;
+
+    /**
+     *
+     */
     @FXML
     private TextField listSearchField;
 
+    // NEW ELEMENTS
     /**
-     * NEW ELEMENTS
+     *
      */
     @FXML
     private Button newCancel;
 
+    /**
+     *
+     */
     @FXML
     private Button newReset;
 
+    /**
+     *
+     */
     @FXML
     private Button newSave;
 
+    /**
+     *
+     */
     @FXML
     private DatePicker newDate;
 
+    /**
+     *
+     */
     @FXML
     private ChoiceBox<CustomerModel> newCustomerId;
 
+    /**
+     *
+     */
     @FXML
     private ChoiceBox<LocationModel> newLocationId;
 
+    /**
+     *
+     */
     @FXML
     private ChoiceBox<String> newStatus;
 
+    /**
+     *
+     */
     @FXML
     private TextField newNotes;
 
+    /**
+     *
+     */
     @FXML
     private TextField newTags;
 
+    // EDIT ELEMENTS
     /**
-     * EDIT ELEMENTS
+     *
      */
     @FXML
     private Button editCancel;
 
+    /**
+     *
+     */
     @FXML
     private Button editReset;
 
+    /**
+     *
+     */
     @FXML
     private Button editSave;
 
+    /**
+     *
+     */
     @FXML
     private DatePicker editDate;
 
+    /**
+     *
+     */
     @FXML
     private ChoiceBox<CustomerModel> editCustomerId;
 
+    /**
+     *
+     */
     @FXML
     private ChoiceBox<LocationModel> editLocationId;
 
+    /**
+     *
+     */
     @FXML
     private ChoiceBox<String> editStatus;
 
+    /**
+     *
+     */
     @FXML
     private TextField editNotes;
 
+    /**
+     *
+     */
     @FXML
     private TextField editTags;
 
+    // VIEW ELEMENTS
     /**
-     * VIEW ELEMENTS
+     *
      */
     @FXML
     private Button viewClose;
 
+    /**
+     *
+     */
     @FXML
     private ChoiceBox<String> viewStatus;
 
+    /**
+     *
+     */
     @FXML
     private ChoiceBox<LocationModel> viewLocationId;
 
+    /**
+     *
+     */
     @FXML
     private ChoiceBox<CustomerModel> viewCustomerId;
 
+    /**
+     *
+     */
     @FXML
     private DatePicker viewDate;
 
-    @FXML
-    private Label printNotif;
-
+    /**
+     *
+     */
     @FXML
     private TextField viewStatusAsText;
 
+    /**
+     *
+     */
     @FXML
     private TextField viewLocationAsText;
 
+    /**
+     *
+     */
     @FXML
     private TextField viewCustomerAsText;
 
+    /**
+     *
+     */
     @FXML
     private TextField viewNotes;
 
+    /**
+     *
+     */
     @FXML
     private TextField viewTags;
 
@@ -230,10 +348,19 @@ public class LuggageController extends BaseController implements Initializable {
     @FXML
     private Stage stage;
 
+    /**
+     *
+     */
     private ObservableList<LuggageModel> listData = FXCollections.observableArrayList();
 
+    /**
+     *
+     */
     private final ObservableList<LocationModel> locationData = FXCollections.observableArrayList();
 
+    /**
+     *
+     */
     private final ObservableList<CustomerModel> customerData = FXCollections.observableArrayList();
 
     /**
@@ -760,7 +887,7 @@ public class LuggageController extends BaseController implements Initializable {
         }
     }
 
-    // Method for list concat of long string for printpdf method
+    // Future to do: Method for list concat of long string for printpdf method
     /**
      *
      * @param where

@@ -36,6 +36,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -43,6 +44,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import static jdk.nashorn.internal.runtime.Context.printStackTrace;
 import luggage.Debug;
 import luggage.MainActivity;
 import luggage.database.models.CustomerModel;
@@ -57,10 +59,12 @@ import luggage.helpers.StageHelper;
  * Controller for luggage/resolved.fxml and luggage/resolvedview.fxml
  *
  * Package: luggage.controllers
+ *
  * @author ITopia IS102-5
  */
 public class ResolvedLuggageController extends BaseController implements Initializable {
 
+    // LIST ELEMENTS
     /**
      *
      */
@@ -104,7 +108,20 @@ public class ResolvedLuggageController extends BaseController implements Initial
     private Button listView;
 
     /**
-     * VIEW ELEMENTS
+     *
+     */
+    @FXML
+    private Label printNotif;
+
+    /**
+     *
+     */
+    @FXML
+    private TextField listSearchField;
+
+    // VIEW ELEMENTS
+    /**
+     *
      */
     @FXML
     private Button viewClose;
@@ -259,7 +276,7 @@ public class ResolvedLuggageController extends BaseController implements Initial
         }
 
         viewCustomerId.setItems(customerData);
-        
+
         ObservableList<String> statuses = FXCollections.observableArrayList();
         statuses.add("Missing");
         statuses.add("Found");
@@ -297,7 +314,11 @@ public class ResolvedLuggageController extends BaseController implements Initial
         viewCustomerId.getSelectionModel().select(selectedCustomer);
         viewStatus.setValue(luggage.getStatus());
         viewLocationAsText.setText(selectedLocation.toString());
-        viewCustomerAsText.setText(selectedCustomer.toString());
+        try {
+            viewCustomerAsText.setText(selectedCustomer.toString());
+        } catch (NullPointerException n) {
+            printStackTrace(n);
+        }
         viewStatusAsText.setText(luggage.getStatus());
         viewTags.setText(luggage.getTags());
         viewNotes.setText(luggage.getNotes());
@@ -331,6 +352,51 @@ public class ResolvedLuggageController extends BaseController implements Initial
     }
 
     /**
+     * Handles the search field functionality.
+     */
+    @FXML
+    protected void listOnSearch() {
+
+        String[] keywords = listSearchField.getText().split("\\s+");
+
+        String[] params = new String[4 * keywords.length];
+        boolean firstColumn = true;
+        String query = "";
+
+        for (int i = 0; i < keywords.length; i++) {
+            if (firstColumn) {
+                params[0 + i] = "%" + keywords[i] + "%";
+                query += "id LIKE ?";
+            } else {
+                params[0 + i] = "%" + keywords[i] + "%";
+                query += " OR id LIKE ?";
+            }
+
+            params[1 + i] = "%" + keywords[i] + "%";
+            query += " OR tags LIKE ?";
+
+            params[2 + i] = "%" + keywords[i] + "%";
+            query += " OR status LIKE ?";
+
+            params[3 + i] = "%" + keywords[i] + "%";
+            query += " OR datetime LIKE ?";
+
+            firstColumn = false;
+        }
+
+        resetTableView(query, params);
+        clearNotif();
+    }
+
+    /**
+     * Clears the notification label.
+     */
+    @FXML
+    private void clearNotif() {
+        printNotif.setText("");
+    }
+
+    /**
      * Creates the (mouse, keyboard, etc.) event filters for the list view.
      */
     public void listKeyActions() {
@@ -350,8 +416,15 @@ public class ResolvedLuggageController extends BaseController implements Initial
                 listView();
             }
         });
+        listSearchField.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent b) -> {
+            if (b.getCode().equals(KeyCode.ESCAPE)) {
+                resetTableView("", new String[0]);
+                listSearchField.setText("");
+                clearNotif();
+            }
+        });
     }
-    
+
     /**
      * Creates the (mouse, keyboard, etc.) event filters for the view page.
      */
