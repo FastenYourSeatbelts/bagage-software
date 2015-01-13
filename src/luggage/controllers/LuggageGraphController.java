@@ -538,6 +538,15 @@ public class LuggageGraphController extends BaseController implements Initializa
 		Date startDateForEach = Date.from(startDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
 		Calendar myDate = Calendar.getInstance();
 		myDate.setTime(startDateForEach);
+			
+		XYChart.Series series1 = new XYChart.Series();
+		series1.setName("Found");
+
+		XYChart.Series series2 = new XYChart.Series();
+		series2.setName("Missing");
+
+		XYChart.Series series3 = new XYChart.Series();
+		series3.setName("Resolved");
 
 		barchart.getData().clear();
 		for (int i = 0; i < diffMonth; i++) 
@@ -571,17 +580,15 @@ public class LuggageGraphController extends BaseController implements Initializa
 			
 			String dateZooi = myDate.get(Calendar.YEAR) + "/" + (myDate.get(Calendar.MONTH) + 1);
 			
-			XYChart.Series series3 = new XYChart.Series();
-			series3.setName(dateZooi);
+			series1.getData().add(new XYChart.Data(dateZooi, found.size()));
 			
-			series3.getData().add(new XYChart.Data("Found", found.size()));
-			
-			series3.getData().add(new XYChart.Data("Missing", missing.size()));
+			series2.getData().add(new XYChart.Data(dateZooi, missing.size()));
 
-			series3.getData().add(new XYChart.Data("Resolved", resolved.size()));
+			series3.getData().add(new XYChart.Data(dateZooi, resolved.size()));
 
-			barchart.getData().add(series3);
 		}
+		
+		barchart.getData().addAll(series1, series2, series3);
 		
 	}
 
