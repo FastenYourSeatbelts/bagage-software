@@ -24,12 +24,17 @@
  */
 package luggage.controllers;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -46,17 +51,16 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import static jdk.nashorn.internal.runtime.Context.printStackTrace;
 import luggage.Debug;
 import luggage.MainActivity;
 import luggage.database.models.CustomerModel;
-import luggage.database.models.InsurerModel;
 import luggage.database.models.LocationModel;
 import luggage.database.models.LogModel;
 import luggage.database.models.LuggageModel;
 import luggage.database.models.Model;
-import luggage.database.models.UserModel;
 import luggage.helpers.StageHelper;
 import luggage.security.Authentication;
 import org.apache.pdfbox.exceptions.COSVisitorException;
@@ -107,7 +111,7 @@ public class LuggageController extends BaseController implements Initializable {
     private Button listEdit;
 
     @FXML
-    private Button listExportToPdf;
+    private Button listExportAsPdf;
 
     @FXML
     private Button listHelp;
@@ -219,7 +223,12 @@ public class LuggageController extends BaseController implements Initializable {
 
     @FXML
     private TextField viewTags;
-    public String mlg = "holy shit";
+
+    /**
+     *
+     */
+    @FXML
+    private Stage stage;
 
     private ObservableList<LuggageModel> listData = FXCollections.observableArrayList();
 
@@ -248,7 +257,7 @@ public class LuggageController extends BaseController implements Initializable {
                     listEdit.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
                     listRemove.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
                     listView.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
-                    listExportToPdf.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
+                    listExportAsPdf.disableProperty().bind(listTableView.getSelectionModel().selectedItemProperty().isNull());
                     listTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
                     listKeyActions();
                 }
@@ -443,6 +452,7 @@ public class LuggageController extends BaseController implements Initializable {
         }
 
         listResetTableView(query, params);
+        clearNotif();
     }
 
     /**
@@ -520,83 +530,237 @@ public class LuggageController extends BaseController implements Initializable {
     }
 
     @FXML
-    public void listExportToPdf() throws IOException, COSVisitorException {
-        // Create a document and add a page to it
-        PDDocument document = new PDDocument();
-        PDPage page = new PDPage(PDPage.PAGE_SIZE_A5);
-        document.addPage(page);
+    public void listExportAsPdf() throws IOException, COSVisitorException {
+        try ( // Create a document and add a page to it
+                PDDocument document = new PDDocument()) {
+            PDPage page = new PDPage(PDPage.PAGE_SIZE_A5);
+            document.addPage(page);
+            Date date = new Date();
+            // Create a new font object selecting one of the PDF base fonts
+            PDFont bold = PDType1Font.HELVETICA_BOLD;
+            PDFont regular = PDType1Font.HELVETICA;
+            PDFont oblique = PDType1Font.HELVETICA_OBLIQUE;
+            PDFont logo = PDType1Font.HELVETICA_BOLD_OBLIQUE;
+            // Start a new content stream which will "hold" the to be created content
+            PDPageContentStream pdf = new PDPageContentStream(document, page);
+            PDRectangle rect = page.getMediaBox();
+            int textFontSize = 12, dotsFontSize = 6, line = 0, xStart = 25, xColumnTwo = 180, ySpacing = 30;
+            LuggageModel luggage = (LuggageModel) listTableView.getSelectionModel().getSelectedItem();
+            float width = rect.getWidth() - 225;
+            String customerName = "Customer unknown", insurerName = "Insurer unknown", description = "No description", notes = "No notes";
+            if (!String.valueOf(luggage.getCustomerName()).equals("") && luggage.getCustomerName() != null && !String.valueOf(luggage.getCustomerName()).equals("null null")) {
+                customerName = luggage.getCustomerName();
+            }
+            if (!String.valueOf(luggage.getCustomer().getInsurerName()).equals("") && luggage.getCustomer().getInsurerName() != null) {
+                insurerName = luggage.getCustomer().getInsurerName();
+            }
+            if (!String.valueOf(luggage.getTags()).equals("") && luggage.getTags() != null) {
+                description = luggage.getTags();
+            }
+            if (!String.valueOf(luggage.getNotes()).equals("") && luggage.getNotes() != null) {
+                notes = luggage.getNotes();
+            }
+            // Define a text content stream using the selected fonts
+            pdf.beginText();
+            pdf.setFont(logo, 48);
+            pdf.moveTextPositionByAmount(20, rect.getHeight() - 50 * (++line));
+            pdf.drawString("Corendon");
+            pdf.setFont(oblique, textFontSize);
+            pdf.moveTextPositionByAmount(240, 0);
+            pdf.drawString("Receipt");
+            pdf.endText();
+            line++;
+            pdf.beginText();
+            pdf.setFont(bold, 12);
+            pdf.moveTextPositionByAmount(xStart, rect.getHeight() - ySpacing * (++line));
+            pdf.drawString("Customer name:");
+            pdf.setFont(regular, textFontSize);
+            pdf.moveTextPositionByAmount(xColumnTwo, 0);
+            pdf.drawString(customerName);
+            pdf.endText();
+            pdf.beginText();
+            pdf.setFont(bold, textFontSize);
+            pdf.moveTextPositionByAmount(xStart, rect.getHeight() - ySpacing * (++line));
+            pdf.drawString("Insurer name:");
+            pdf.setFont(regular, 12);
+            pdf.moveTextPositionByAmount(xColumnTwo, 0);
+            pdf.drawString(insurerName);
+            pdf.endText();
+            pdf.beginText();
+            pdf.setFont(bold, textFontSize);
+            pdf.moveTextPositionByAmount(xStart, rect.getHeight() - ySpacing * (++line));
+            pdf.drawString("Luggage item:");
+            pdf.setFont(regular, textFontSize);
+            pdf.moveTextPositionByAmount(xColumnTwo, 0);
+            pdf.drawString(luggage.getId() + " (" + luggage.getStatus() + ")");
+            pdf.endText();
+            pdf.beginText();
+            pdf.setFont(bold, textFontSize);
+            pdf.moveTextPositionByAmount(xStart, rect.getHeight() - ySpacing * (++line));
+            pdf.drawString("Last update:");
+            pdf.setFont(regular, textFontSize);
+            pdf.moveTextPositionByAmount(xColumnTwo, 0);
+            pdf.drawString(luggage.getDatetime());
+            pdf.endText();
+            pdf.beginText();
+            pdf.setFont(bold, textFontSize);
+            pdf.moveTextPositionByAmount(xStart, rect.getHeight() - ySpacing * (++line));
+            pdf.drawString("Luggage description:");
+            pdf.endText();
+            if (!String.valueOf(description).equals("No description")) {
+                List<String> lines = new ArrayList<>();
+                int lastSpace = -1;
+                while (description.length() > 0 && lines.size() < 3) {
+                    int spaceIndex = description.indexOf(' ', lastSpace + 1);
+                    if (spaceIndex < 0) {
+                        lines.add(description);
+                        description = "";
+                    } else {
+                        String subString = description.substring(0, spaceIndex);
+                        float size = textFontSize * regular.getStringWidth(subString) / 1000;
+                        if (size > width) {
+                            if (lastSpace < 0) // A word is longer than the line... draw it anyway
+                            {
+                                lastSpace = spaceIndex;
+                            }
+                            subString = description.substring(0, lastSpace);
+                            lines.add(subString);
+                            description = description.substring(lastSpace).trim();
+                            lastSpace = -1;
+                        } else {
+                            lastSpace = spaceIndex;
+                        }
+                    }
+                }
+                line--;
+                for (String draw : lines) {
+                    pdf.beginText();
+                    pdf.setFont(regular, textFontSize);
+                    pdf.moveTextPositionByAmount(xStart + xColumnTwo, rect.getHeight() - ySpacing * (++line));
+                    pdf.drawString(draw);
+                    pdf.endText();
+                }
 
-        // Create a new font object selecting one of the PDF base fonts
-        PDFont font = PDType1Font.HELVETICA_BOLD;
-
-        // Start a new content stream which will "hold" the to be created content
-        PDPageContentStream pdf = new PDPageContentStream(document, page);
-
-        PDRectangle rect = page.getMediaBox();
-
-        int line = 0;
-
-        LuggageModel luggage = (LuggageModel) listTableView.getSelectionModel().getSelectedItem();
-
-        // Define a text content stream using the selected font
-        pdf.beginText();
-        pdf.setFont(font, 12);
-        pdf.moveTextPositionByAmount(25, rect.getHeight() - 50 * (++line));
-        pdf.drawString("Customer Name:\t\t" + luggage.getCustomerName());
-        pdf.endText();
-
-        pdf.beginText();
-        pdf.setFont(font, 12);
-        pdf.moveTextPositionByAmount(25, rect.getHeight() - 50 * (++line));
-        luggage.getCustomer().getInsurerName();
-        pdf.drawString("Insurer Name:\t \t" + luggage.getCustomer().getInsurerName());
-        pdf.endText();
-
-        pdf.beginText();
-        pdf.setFont(font, 12);
-        pdf.moveTextPositionByAmount(25, rect.getHeight() - 50 * (++line));
-        pdf.drawString("Luggage Description:\t\t" + luggage.getTags());
-        pdf.endText();
-
-        pdf.beginText();
-        pdf.setFont(font, 12);
-        pdf.moveTextPositionByAmount(25, rect.getHeight() - 50 * (++line));
-        pdf.drawString("Employee Name:\t\t" + Authentication.getCurrentUser().getFullname());
-        pdf.endText();
-
-        pdf.beginText();
-        pdf.setFont(font, 12);
-        pdf.moveTextPositionByAmount(25, rect.getHeight() - 50 * (++line));
-        pdf.drawString("Employee Signature:");
-        pdf.endText();
-
-        pdf.beginText();
-        pdf.setFont(font, 12);
-        pdf.moveTextPositionByAmount(200, rect.getHeight() - 50 * (line));
-        pdf.drawString("Customer Signature:");
-        pdf.endText();
-
-        // Make sure that the content stream is closed:
-        pdf.close();
-
-        // Save the results and ensure that the document is properly closed:
-        document.save("Receipt.pdf");
-        document.close();
-
-        Stage exportPdf = (Stage) listTableView.getScene().getWindow();
-
-        //Show a warning that the data has been exported to a PDF
-        Action response = Dialogs.create().owner(exportPdf)
-                .title("Export to PDF")
-                //.masthead("Are you sure you want to delete this item? 2")
-                .message("The data has been exported to a PDF file")
-                .actions(Dialog.ACTION_OK)
-                .showWarning();
-
-        //Log the action so that it is viewable in the log
-        Debug.logToDatabase(LogModel.TYPE_INFO, "Receipt of " + " exported as PDF file.");
+            } else {
+                pdf.beginText();
+                pdf.setFont(regular, textFontSize);
+                pdf.moveTextPositionByAmount(xStart + xColumnTwo, rect.getHeight() - ySpacing * (line));
+                pdf.drawString(description);
+                pdf.endText();
+            }
+            pdf.beginText();
+            pdf.setFont(bold, textFontSize);
+            pdf.moveTextPositionByAmount(xStart, rect.getHeight() - ySpacing * (++line));
+            pdf.drawString("Luggage notes:");
+            pdf.endText();
+            if (!String.valueOf(notes).equals("No notes")) {
+                List<String> lines = new ArrayList<>();
+                int lastSpace = -1;
+                while (notes.length() > 0 && lines.size() < 3) {
+                    int spaceIndex = notes.indexOf(' ', lastSpace + 1);
+                    if (spaceIndex < 0) {
+                        lines.add(notes);
+                        notes = "";
+                    } else {
+                        String subString = notes.substring(0, spaceIndex);
+                        float size = textFontSize * regular.getStringWidth(subString) / 1000;
+                        if (size > width) {
+                            if (lastSpace < 0) // A word is longer than the line... draw it anyway
+                            {
+                                lastSpace = spaceIndex;
+                            }
+                            subString = notes.substring(0, lastSpace);
+                            lines.add(subString);
+                            notes = notes.substring(lastSpace).trim();
+                            lastSpace = -1;
+                        } else {
+                            lastSpace = spaceIndex;
+                        }
+                    }
+                }
+                line--;
+                for (String draw : lines) {
+                    pdf.beginText();
+                    pdf.setFont(regular, textFontSize);
+                    pdf.moveTextPositionByAmount(xStart + xColumnTwo, rect.getHeight() - ySpacing * (++line));
+                    pdf.drawString(draw);
+                    pdf.endText();
+                }
+            } else {
+                pdf.beginText();
+                pdf.setFont(regular, textFontSize);
+                pdf.moveTextPositionByAmount(xStart + xColumnTwo, rect.getHeight() - ySpacing * (line));
+                pdf.drawString(notes);
+                pdf.endText();
+            }
+            line = line + 2;
+            pdf.beginText();
+            pdf.setFont(bold, textFontSize);
+            pdf.moveTextPositionByAmount(xStart, rect.getHeight() - ySpacing * (++line));
+            pdf.drawString("Date & time:");
+            pdf.setFont(regular, textFontSize);
+            pdf.moveTextPositionByAmount(xColumnTwo, 0);
+            pdf.drawString(MainActivity.dateFormatFull.format(date));
+            pdf.endText();
+            pdf.beginText();
+            pdf.setFont(bold, textFontSize);
+            pdf.moveTextPositionByAmount(xStart, rect.getHeight() - ySpacing * (++line));
+            pdf.drawString("Corendon location:");
+            pdf.setFont(regular, textFontSize);
+            pdf.moveTextPositionByAmount(xColumnTwo, 0);
+            pdf.drawString(Authentication.getCurrentUser().getLocationName());
+            pdf.endText();
+            pdf.beginText();
+            pdf.setFont(bold, textFontSize);
+            pdf.moveTextPositionByAmount(xStart, rect.getHeight() - ySpacing * (++line));
+            pdf.drawString("Customer Signature");
+            pdf.setFont(bold, textFontSize);
+            pdf.moveTextPositionByAmount(xColumnTwo, 0);
+            pdf.drawString("Employee Signature");
+            pdf.endText();
+            pdf.beginText();
+            pdf.setFont(oblique, textFontSize);
+            pdf.moveTextPositionByAmount(xStart, rect.getHeight() - ySpacing * (++line));
+            pdf.drawString(customerName);
+            pdf.setFont(oblique, textFontSize);
+            pdf.moveTextPositionByAmount(xColumnTwo, 0);
+            pdf.drawString(Authentication.getCurrentUser().getFullname() + " (" + Authentication.getCurrentUser().getId() + ")");
+            pdf.endText();
+            pdf.beginText();
+            pdf.setFont(bold, dotsFontSize);
+            pdf.moveTextPositionByAmount(xStart, rect.getHeight() - ySpacing * (++line));
+            pdf.drawString("........................................................................");
+            pdf.setFont(bold, dotsFontSize);
+            pdf.moveTextPositionByAmount(xColumnTwo, 0);
+            pdf.drawString("........................................................................");
+            pdf.endText();
+            // Make sure that the content stream is closed:
+            pdf.close();
+            // Save the results and ensure that the document is properly closed:
+            FileChooser chooser = new FileChooser();
+            chooser.setTitle("Save Luggage Item As");
+            chooser.setInitialDirectory(new File(System.getProperty("user.home")));
+            Debug.print("Initial Directory poll after set: " + chooser.getInitialDirectory());
+            chooser.setInitialFileName("Receipt exported on " + MainActivity.dateFormatFull.format(date) + ".pdf");
+            chooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF", "*.pdf"));
+            File file = chooser.showSaveDialog(stage);
+            try {
+                if (file == null) {
+                    printNotif("Luggage item export canceled.");
+                    Debug.print("Luggage item export canceled by user.");
+                } else {
+                    FileOutputStream fOut = new FileOutputStream(file);
+                    document.save(fOut);
+                    printNotif("Luggage item successfully exported!");
+                    Debug.logToDatabase(LogModel.TYPE_INFO, "Receipt of luggage item " + luggage.getId() + " exported as PDF file.");
+                }
+            } catch (IOException io) {
+                Logger.getLogger(LuggageGraphController.class.getName()).log(Level.SEVERE, null, io);
+            }
+        }
     }
 
+    // Method for list concat of long string for printpdf method
     /**
      *
      * @param where
@@ -820,6 +984,12 @@ public class LuggageController extends BaseController implements Initializable {
                 listHelp();
             } else if (b.getCode().equals(KeyCode.N)) {
                 listNew();
+            } else if (b.getCode().equals(KeyCode.P)) {
+                try {
+                    listExportAsPdf();
+                } catch (IOException | COSVisitorException ex) {
+                    Logger.getLogger(LuggageController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             } else if (b.getCode().equals(KeyCode.R)) {
                 listRemove();
             } else if (b.getCode().equals(KeyCode.V) || b.getCode().equals(KeyCode.ENTER)) {
