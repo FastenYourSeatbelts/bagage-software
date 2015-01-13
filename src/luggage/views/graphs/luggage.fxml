@@ -50,10 +50,10 @@
                 <PieChart id="piechart" fx:id="piechart" labelLineLength="25.0" onMousePressed="#clearNotif" opacity="0.9" startAngle="90.0" title="Hover over the pie slices for more information." />
                 <BarChart id="barchart" fx:id="barchart" legendVisible="false" onMousePressed="#clearNotif" opacity="0.9" GridPane.columnIndex="1">  
                     <xAxis>  
-                        <CategoryAxis side="BOTTOM" />  
+                        <CategoryAxis side="BOTTOM"  />  
                     </xAxis>  
                     <yAxis>  
-                        <NumberAxis side="LEFT" />  
+                        <NumberAxis side="LEFT" tickUnit="1"  />  
                     </yAxis>  
                 </BarChart>
             </children>

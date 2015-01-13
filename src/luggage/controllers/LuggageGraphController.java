@@ -525,69 +525,64 @@ public class LuggageGraphController extends BaseController implements Initializa
             endDate = end.getValue();
         }
 
-        Calendar startCalendar = new GregorianCalendar();
-        startCalendar.setTime(Date.from(startDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
-        Calendar endCalendar = new GregorianCalendar();
-        endCalendar.setTime(Date.from(endDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+		Calendar startCalendar = new GregorianCalendar();
+		startCalendar.setTime(Date.from(startDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+		Calendar endCalendar = new GregorianCalendar();
+		endCalendar.setTime(Date.from(endDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
 
-        int diffYear = endCalendar.get(Calendar.YEAR) - startCalendar.get(Calendar.YEAR);
-        int diffMonth = diffYear * 12 + endCalendar.get(Calendar.MONTH) - startCalendar.get(Calendar.MONTH);
-        if (diffMonth < 1) {
-            diffMonth = 1;
-        }
+		int diffYear = endCalendar.get(Calendar.YEAR) - startCalendar.get(Calendar.YEAR);
+		int diffMonth = diffYear * 12 + endCalendar.get(Calendar.MONTH) - startCalendar.get(Calendar.MONTH);
+		if(diffMonth < 1)
+			diffMonth = 1;
+		
+		Date startDateForEach = Date.from(startDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		Calendar myDate = Calendar.getInstance();
+		myDate.setTime(startDateForEach);
 
-        Date startDateForEach = Date.from(startDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        Calendar myDate = Calendar.getInstance();
-        myDate.setTime(startDateForEach);
+		barchart.getData().clear();
+		for (int i = 0; i < diffMonth; i++) 
+		{
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String sStart = format.format(myDate.getTime());
+			
+			myDate.add(Calendar.MONTH, 1);
+			
+			SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String sEnd = format2.format(myDate.getTime());
+					
+				//String sStart = this.start.getValue().toString() + " 00:00:00";
+				//String sEnd = this.end.getValue().toString() + " 00:00:00";
+			dateQuery = "AND datetime BETWEEN '" + sStart + "' AND '" + sEnd + "'";
+			
+			LuggageModel luggage = new LuggageModel();
 
-        XYChart.Series series1 = new XYChart.Series();
-        series1.setName("Found");
+			// Query time
+			String[] foundParams = new String[1];
+			foundParams[0] = "Found";
+			List<Model> found = luggage.findAll("status = ? " + dateQuery, foundParams);
 
-        XYChart.Series series2 = new XYChart.Series();
-        series2.setName("Missing");
+			String[] missingParams = new String[1];
+			missingParams[0] = "Missing";
+			List<Model> missing = luggage.findAll("status = ? " + dateQuery, missingParams);
 
-        XYChart.Series series3 = new XYChart.Series();
-        series3.setName("Resolved");
+			String[] resolvedParams = new String[1];
+			resolvedParams[0] = "Resolved";
+			List<Model> resolved = luggage.findAll("status = ? " + dateQuery, resolvedParams);
+			
+			String dateZooi = myDate.get(Calendar.YEAR) + "/" + (myDate.get(Calendar.MONTH) + 1);
+			
+			XYChart.Series series3 = new XYChart.Series();
+			series3.setName(dateZooi);
+			
+			series3.getData().add(new XYChart.Data("Found", found.size()));
+			
+			series3.getData().add(new XYChart.Data("Missing", missing.size()));
 
-        barchart.getData().clear();
-        for (int i = 0; i < diffMonth; i++) {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String sStart = format.format(myDate.getTime());
+			series3.getData().add(new XYChart.Data("Resolved", resolved.size()));
 
-            myDate.add(Calendar.MONTH, 1);
+			barchart.getData().add(series3);
+		}
+		
+	}
 
-            SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String sEnd = format2.format(myDate.getTime());
-
-            //String sStart = this.start.getValue().toString() + " 00:00:00";
-            //String sEnd = this.end.getValue().toString() + " 00:00:00";
-            dateQuery = "AND datetime BETWEEN '" + sStart + "' AND '" + sEnd + "'";
-
-            LuggageModel luggage = new LuggageModel();
-
-            // Query time
-            String[] foundParams = new String[1];
-            foundParams[0] = "Found";
-            List<Model> found = luggage.findAll("status = ? " + dateQuery, foundParams);
-
-            String[] missingParams = new String[1];
-            missingParams[0] = "Missing";
-            List<Model> missing = luggage.findAll("status = ? " + dateQuery, missingParams);
-
-            String[] resolvedParams = new String[1];
-            resolvedParams[0] = "Resolved";
-            List<Model> resolved = luggage.findAll("status = ? " + dateQuery, resolvedParams);
-
-            String dateZooi = myDate.get(Calendar.YEAR) + "/" + (myDate.get(Calendar.MONTH) + 1);
-
-            series1.getData().add(new XYChart.Data(dateZooi, found.size()));
-
-            series2.getData().add(new XYChart.Data(dateZooi, missing.size()));
-
-            series3.getData().add(new XYChart.Data(dateZooi, resolved.size()));
-
-        }
-
-        barchart.getData().addAll(series1, series2, series3);
-    }
 }
