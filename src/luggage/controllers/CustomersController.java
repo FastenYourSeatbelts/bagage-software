@@ -668,7 +668,7 @@ public class CustomersController extends BaseController implements Initializable
 
         listTableViewName.setCellValueFactory(new PropertyValueFactory("fullname"));
         listTableViewAddress.setCellValueFactory(new PropertyValueFactory("address"));
-        listTableViewPhone.setCellValueFactory(new PropertyValueFactory("mobile"));
+        listTableViewPhone.setCellValueFactory(new PropertyValueFactory("telephone"));
         listTableViewEmail.setCellValueFactory(new PropertyValueFactory("email"));
 
         listTableView.setItems(listData);
