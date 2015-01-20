@@ -397,6 +397,15 @@ public class ResolvedLuggageController extends BaseController implements Initial
     }
 
     /**
+     * Clears the notification label.
+     */
+    @FXML
+    private void clearSearch() {
+        listOnSearch();
+        clearNotif();
+    }
+
+    /**
      * Creates the (mouse, keyboard, etc.) event filters for the list view.
      */
     public void listKeyActions() {

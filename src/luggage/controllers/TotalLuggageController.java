@@ -393,6 +393,15 @@ public class TotalLuggageController extends BaseController implements Initializa
     }
 
     /**
+     * Clears the notification label.
+     */
+    @FXML
+    private void clearSearch() {
+        listOnSearch();
+        clearNotif();
+    }
+
+    /**
      * Creates the (mouse, keyboard, etc.) event filters for the list view.
      */
     public void listKeyActions() {
